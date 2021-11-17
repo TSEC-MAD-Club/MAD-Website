@@ -14,3 +14,111 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.main-1{
+background-color: black;
+/* height:80vh; */
+}
+
+.main-2{
+  background-color: #191A19;
+  padding:70px;
+
+ 
+  }
+
+.text{
+  color:white;
+  font-size: 35px;
+  padding:80px 120px  20px;
+}
+
+
+.buttons{
+padding: 10px 20px;
+margin: 10px;
+
+
+}
+
+
+
+
+
+
+/* tabs */
+
+
+.nav{
+  background-color: #336683;
+  padding: 25px;
+}
+
+.nav-tabs {
+  border-bottom: none !important;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  color: #336683 !important;
+  background-color: #a4d6ef !important;
+  border-color: transparent transparent #f3f3f3;
+}
+#tabs .nav-tabs .nav-link {
+  border: 1px solid transparent;
+  color: #eee;
+  font-size: 20px;
+  background-color: #336683;
+  border: 1px solid #a4d6ef;
+  color: #a4d6ef;
+}
+
+.nav-item {
+  border-radius: 0 !important;
+}
+
+.nav-item:last-child {
+  border-top-right-radius: .5rem !important;
+  border-bottom-right-radius: .5rem !important;
+}
+
+.nav-item:first-child {
+  border-top-left-radius: .5rem !important;
+  border-bottom-left-radius: .5rem !important;
+}
+
+.nav-tabs .nav-link.active{
+ background-color: #a4d6ef !important; 
+}
+
+.button-box{
+  margin-left:100px;
+  margin-bottom:50px;
+ 
+
+  
+
+
+}
+.laptop-pic{
+position: relative;
+top:170px!important;
+left:20px !important;
+
+
+
+}
+
+
+.head-line{
+  font-size:40px;
+  color:#113CFC;
+
+}
+.cont{
+  padding:20px;
+  position: relative;
+  top:40px;
+  right:50px;
+  margin-bottom: 60px;;
+
+}
