@@ -8,6 +8,14 @@
   height: 100vh;
 }
 
+.primary1 {
+  color: #2962ff;
+}
+
+.primary2 {
+  color: #ffd700;
+}
+
 .main {
   padding: 5rem 0;
   flex: 1;
