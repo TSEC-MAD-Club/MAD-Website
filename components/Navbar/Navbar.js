@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
