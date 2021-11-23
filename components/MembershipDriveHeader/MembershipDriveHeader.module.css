@@ -1,0 +1,30 @@
+.header_container{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.title{
+    padding: 8vw 8vw;
+}
+
+.header_title{
+    font-family: var(--title-font);
+    font-weight: 400;
+    font-size: 6vw;
+}
+
+.header_button{
+    font-family: var(--main-font);
+    background-color: var(--primary-4);
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    padding: 1vw 2.5vw;
+}
+
+.header_button:hover{
+    background-color: #FFFFFF;
+    color: var(--primary-4);
+    transition: all 0.5s ease;
+}
