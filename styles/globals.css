@@ -18,18 +18,19 @@ a {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: Anurati;
+  src: url('/assets/fonts/Anurati-Regular.otf');
+
+}
+
 :root{
   --primary-1: #000000;
   --primary-2: #373737;
   --primary-3: #FFD700;
   --primary-4: #2962FF;
   --main-font: 'Red Hat Display', sans-serif;
-}
-
-@font-face {
-  font-family: Anurati;
-  src: url('/assets/fonts/Anurati-Regular.otf');
-
+  --title-font: Anurati, 'Red Hat Display';
 }
 
 
