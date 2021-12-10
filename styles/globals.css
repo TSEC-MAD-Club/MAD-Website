@@ -31,11 +31,6 @@ a {
   padding: 80px 120px 20px;
 }
 
-.buttons {
-  padding: 10px 20px;
-  margin: 10px;
-}
-
 /* tabs */
 
 .nav {
@@ -81,18 +76,9 @@ a {
 }
 
 .button-box {
-  margin-left: 100px;
-  margin-bottom: 50px;
-}
-.laptop-pic {
-  position: relative;
-  top: 170px !important;
-  left: 20px !important;
+  margin: 6rem 0 0 12rem;
 }
 
-.head-line {
-  font-size: 40px;
-}
 .cont {
   padding: 20px;
   position: relative;

@@ -25,6 +25,10 @@
   align-items: center;
 }
 
+.sloganImg {
+  margin: 5rem 0 0 12rem;
+}
+
 .footer {
   width: 100%;
   height: 100px;
