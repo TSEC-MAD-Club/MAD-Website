@@ -2,9 +2,18 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Navbar from "../comps/Navbar";
+import TeamCard from "../comps/TeamCard";
+import Footer from "../comps/Footer";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [active, setActive] = useState(1);
+
+  const handleTabOnClick = e => {
+    setActive(e.target.id);
+  };
+
   return (
     <>
       <Navbar />
@@ -36,7 +45,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="main-2">
+      <svg viewBox="0 0 1536 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#000" d="M 0 189 L 495 144 L 495 0 L 0 0 Z"></path>{" "}
+        <path fill="#000" d="M 494 144 L 1048 184 L 1048 0 L 494 0 Z"></path>{" "}
+        <path fill="#000" d="M 1047 184 L 1437 136 L 1437 0 L 1047 0 Z"></path>
+        <path fill="#000" d="M 1436 136 L 1536 165 L 1536 0 L 1436 0 Z"></path>
+        <path
+          fill="#181818"
+          d="M 0 189 L 495 144 L 495 320 L 0 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 494 144 L 1048 184 L 1048 320 L 494 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 1047 184 L 1437 136 L 1437 320 L 1047 320 Z"
+        ></path>
+        <path
+          fill="#181818"
+          d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
+        ></path>
+      </svg>
+
+      <div className="main-2 container-fluid">
         <div className="row">
           <div className="col-lg-4">
             <Image
@@ -76,7 +108,191 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      <div className={styles.btnGroupWrap}>
+        <div className="btn-group mt-5" role="group">
+          <button
+            type="button"
+            id="1"
+            className={
+              active == 1
+                ? `btn ${styles.tabBtn} ${styles.tabBtnActive}`
+                : `btn ${styles.tabBtn}`
+            }
+            onClick={handleTabOnClick}
+          >
+            Core Committee
+          </button>
+          <button
+            type="button"
+            id="2"
+            onClick={handleTabOnClick}
+            className={
+              active == 2
+                ? `btn ${styles.tabBtn} ${styles.tabBtnActive}`
+                : `btn ${styles.tabBtn}`
+            }
+          >
+            Mentors
+          </button>
+          <button
+            type="button"
+            id="3"
+            onClick={handleTabOnClick}
+            className={
+              active == 3
+                ? `btn ${styles.tabBtn} ${styles.tabBtnActive}`
+                : `btn ${styles.tabBtn}`
+            }
+          >
+            Founders
+          </button>
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/WebTeam.png" alt="" width={400} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Mahima Samantara"}
+            imagePath={"/"}
+            year={"BE"}
+            branch={"IT"}
+          />
+          <TeamCard
+            name={"Kavish Shah"}
+            imagePath={"/KavishWebTeam.jpg"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Jay Kaku"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Ritwik Vaidya"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/DatabaseTeam.png" alt="" width={600} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Ruchit Thaker"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"IT"}
+          />
+          <TeamCard
+            name={"Keyul Jain"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/AppTeam.png" alt="" width={445} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Darshan Rander"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"IT"}
+          />
+          <TeamCard
+            name={"Tanay Kamath"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Gaurav Raj"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Harsh Mody"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"IT"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/GraphicsTeam.png" alt="" width={380} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Pooja Patel"}
+            imagePath={"/"}
+            year={"BE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Ishan Saksena"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/ContentTeam.png" alt="" width={682} height={120} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Amandeep Chawla"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Chemical"}
+          />
+        </div>
+      </div>
+
+      <svg viewBox="0 0 1536 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#000" d="M 0 189 L 495 144 L 495 0 L 0 0 Z"></path>{" "}
+        <path fill="#000" d="M 494 144 L 1048 184 L 1048 0 L 494 0 Z"></path>{" "}
+        <path fill="#000" d="M 1047 184 L 1437 136 L 1437 0 L 1047 0 Z"></path>
+        <path fill="#000" d="M 1436 136 L 1536 165 L 1536 0 L 1436 0 Z"></path>
+        <path
+          fill="#181818"
+          d="M 0 189 L 495 144 L 495 320 L 0 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 494 144 L 1048 184 L 1048 320 L 494 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 1047 184 L 1437 136 L 1437 320 L 1047 320 Z"
+        ></path>
+        <path
+          fill="#181818"
+          d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
+        ></path>
+      </svg>
+
+      <Footer />
     </>
   );
 }

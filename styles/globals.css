@@ -4,11 +4,32 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #000;
+}
+
+.card-wrapper {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+.card {
+  width: 18rem;
+  border: none;
+}
+
+.card-background {
+  background-color: #181818 !important;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.card-img-top {
+  object-fit: cover;
 }
 
 * {
@@ -21,7 +42,7 @@ a {
 }
 
 .main-2 {
-  background-color: #191a19;
+  background-color: #181818;
   padding: 70px;
 }
 
@@ -85,4 +106,16 @@ a {
   top: 40px;
   right: 50px;
   margin-bottom: 60px;
+}
+
+.footer {
+  background-color: #181818 !important;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul a {
+  display: block;
 }
