@@ -25,6 +25,29 @@
   align-items: center;
 }
 
+.sloganImg {
+  margin: 5rem 0 0 10rem;
+}
+
+.btnGroupWrap {
+  text-align: center;
+}
+
+.tabBtn {
+  width: 260px;
+  height: 64px;
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.tabBtn:hover {
+  color: white;
+}
+
+.tabBtnActive {
+  background-color: #2962ff;
+}
+
 .footer {
   width: 100%;
   height: 100px;

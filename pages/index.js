@@ -2,64 +2,99 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Navbar from "../comps/Navbar";
+import TeamCard from "../comps/TeamCard";
+import Footer from "../comps/Footer";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [active, setActive] = useState(1);
+
+  const handleTabOnClick = e => {
+    setActive(e.target.id);
+  };
+
   return (
     <>
       <Navbar />
-      <section className="main-1">
+      <section className="main-1 container-fluid">
         <div className="row">
-          <div className="col">
-            <div className="text">
-              Build <br />
-              Collaborate <br />
-              Work <br />
-              On Real Life Applications <br />
-              <p> with</p>
-              <p className={styles.primary2}>MAD CLUB </p>
+          <div className="col-5">
+            <div className={styles.sloganImg}>
+              <Image src="/slogan.png" width={800} height={615} alt="" />
             </div>
 
             <div className="button-box">
-              <button type="button" className="btn btn-primary buttons">
+              <button
+                type="button"
+                className="btn btn-lg btn-primary ps-5 pe-5"
+              >
                 JOIN THE FAM
               </button>
               <button
                 type="button"
-                className="btn btn-outline-primary buttons text-white"
+                className="btn btn-lg btn-outline-primary text-white ms-5 ps-5 pe-5"
               >
                 Know More
               </button>
             </div>
           </div>
-          <div className="col">DFJgfkJQBFK.</div>
+          <div className="col-7 text-center">
+            <Image src="/events.png" width={1100} height={846} alt="" />
+          </div>
         </div>
       </section>
 
-      <section className="main-2">
+      <svg viewBox="0 0 1536 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#000" d="M 0 189 L 495 144 L 495 0 L 0 0 Z"></path>{" "}
+        <path fill="#000" d="M 494 144 L 1048 184 L 1048 0 L 494 0 Z"></path>{" "}
+        <path fill="#000" d="M 1047 184 L 1437 136 L 1437 0 L 1047 0 Z"></path>
+        <path fill="#000" d="M 1436 136 L 1536 165 L 1536 0 L 1436 0 Z"></path>
+        <path
+          fill="#181818"
+          d="M 0 189 L 495 144 L 495 320 L 0 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 494 144 L 1048 184 L 1048 320 L 494 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 1047 184 L 1437 136 L 1437 320 L 1047 320 Z"
+        ></path>
+        <path
+          fill="#181818"
+          d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
+        ></path>
+      </svg>
+
+      <div className="main-2 container-fluid">
         <div className="row">
           <div className="col-lg-4">
             <Image
               className="laptop-pic"
               src="/laptop.png"
-              width={270}
-              height={270}
+              width={540}
+              height={540}
               alt=""
             />
           </div>
           <div className="col-lg-8">
             <div className="cont">
-              <div className="head-line">
-                <span className={styles.primary2}>WHO</span>{" "}
-                <span className={styles.primary1}>ARE WE ?</span>
-                <br />
+              <div>
+                <Image
+                  src="/who_are_we_text.png"
+                  alt=""
+                  width={573}
+                  height={72}
+                />
               </div>
-              <p style={{ fontSize: "25px", color: "white" }}>
+              <p className="mt-3" style={{ fontSize: "35px", color: "white" }}>
                 A committee more like a{" "}
                 <span className={styles.primary2}>community</span>
               </p>
               <br />
-              <p style={{ color: "#B8B2A6" }}>
+              <p style={{ fontSize: "25px", color: "#B8B2A6" }}>
                 The MAD (Mobile Developers club) of Thadomal Shahani Engineering
                 College was founded by Krishna Dubey with the support of
                 co-founders Ankita Kar and Rahul Nair. The committee over the
@@ -73,113 +108,191 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="tabs">
-        <div className="container">
-          <h6 className="section-title h1">Tabs</h6>
-          <div className="row">
-            <div className="col-xs-12 ">
-              <nav>
-                <div
-                  className="nav nav-tabs nav-fill"
-                  id="nav-tab"
-                  role="tablist"
-                >
-                  <a
-                    className="nav-item nav-link active"
-                    id="nav-home-tab"
-                    data-toggle="tab"
-                    href="#nav-home"
-                    role="tab"
-                    aria-controls="nav-home"
-                    aria-selected="true"
-                  >
-                    Home
-                  </a>
-                  <a
-                    className="nav-item nav-link"
-                    id="nav-profile-tab"
-                    href="#nav-profile"
-                    data-toggle="tab"
-                    role="tab"
-                    aria-controls="nav-profile"
-                    aria-selected="false"
-                  >
-                    Profile
-                  </a>
-                  <a
-                    className="nav-item nav-link"
-                    href="#nav-about"
-                    id="nav-about-tab"
-                    data-toggle="tab"
-                    role="tab"
-                    aria-controls="nav-about"
-                    aria-selected="false"
-                  >
-                    About
-                  </a>
-                </div>
-              </nav>
-              <div
-                className="tab-content py-3 px-3 px-sm-0"
-                id="nav-tabContent"
-              >
-                <div
-                  className="tab-pane fade show active"
-                  id="nav-home"
-                  role="tabpanel"
-                  aria-labelledby="nav-home-tab"
-                >
-                  Et et consectetur ipsum labore excepteur est proident
-                  excepteur ad velit occaecat qui minim occaecat veniam. Fugiat
-                  veniam incididunt anim aliqua enim pariatur veniam sunt est
-                  aute sit dolor anim. Velit non irure adipisicing aliqua
-                  ullamco irure incididunt irure non esse consectetur nostrud
-                  minim non minim occaecat. Amet duis do nisi duis veniam non
-                  est eiusmod tempor incididunt tempor dolor ipsum in qui sit.
-                  Exercitation mollit sit culpa nisi culpa non adipisicing
-                  reprehenderit do dolore. Duis reprehenderit occaecat anim
-                  ullamco ad duis occaecat ex.
-                </div>
-                <div
-                  className="tab-pane fade"
-                  name="nav-profile"
-                  role="tabpanel"
-                  aria-labelledby="nav-profile-tab"
-                >
-                  ms consectetur ipsum labore excepteur est proident excepteur
-                  ad velit occaecat qui minim occaecat veniam. Fugiat veniam
-                  incididunt anim aliqua enim pariatur veniam sunt est aute sit
-                  dolor anim. Velit non irure adipisicing aliqua ullamco irure
-                  incididunt irure non esse consectetur nostrud minim non minim
-                  occaecat. Amet duis do nisi duis veniam non est eiusmod tempor
-                  incididunt tempor dolor ipsum in qui sit. Exercitation mollit
-                  sit culpa nisi culpa non adipisicing reprehenderit do dolore.
-                  Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-                </div>
-                <div
-                  className="tab-pane fade"
-                  id="nav-about"
-                  role="tabpanel"
-                  aria-labelledby="nav-about-tab"
-                >
-                  ns et consectetur ipsum labore excepteur est proident
-                  excepteur ad velit occaecat qui minim occaecat veniam. Fugiat
-                  veniam incididunt anim aliqua enim pariatur veniam sunt est
-                  aute sit dolor anim. Velit non irure adipisicing aliqua
-                  ullamco irure incididunt irure non esse consectetur nostrud
-                  minim non minim occaecat. Amet duis do nisi duis veniam non
-                  est eiusmod tempor incididunt tempor dolor ipsum in qui sit.
-                  Exercitation mollit sit culpa nisi culpa non adipisicing
-                  reprehenderit do dolore. Duis reprehenderit occaecat anim
-                  ullamco ad duis occaecat ex.
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className={styles.btnGroupWrap}>
+        <div className="btn-group mt-5" role="group">
+          <button
+            type="button"
+            id="1"
+            className={
+              active == 1
+                ? `btn ${styles.tabBtn} ${styles.tabBtnActive}`
+                : `btn ${styles.tabBtn}`
+            }
+            onClick={handleTabOnClick}
+          >
+            Core Committee
+          </button>
+          <button
+            type="button"
+            id="2"
+            onClick={handleTabOnClick}
+            className={
+              active == 2
+                ? `btn ${styles.tabBtn} ${styles.tabBtnActive}`
+                : `btn ${styles.tabBtn}`
+            }
+          >
+            Mentors
+          </button>
+          <button
+            type="button"
+            id="3"
+            onClick={handleTabOnClick}
+            className={
+              active == 3
+                ? `btn ${styles.tabBtn} ${styles.tabBtnActive}`
+                : `btn ${styles.tabBtn}`
+            }
+          >
+            Founders
+          </button>
         </div>
-      </section>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/WebTeam.png" alt="" width={400} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Mahima Samantara"}
+            imagePath={"/"}
+            year={"BE"}
+            branch={"IT"}
+          />
+          <TeamCard
+            name={"Kavish Shah"}
+            imagePath={"/KavishWebTeam.jpg"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Jay Kaku"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Ritwik Vaidya"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/DatabaseTeam.png" alt="" width={600} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Ruchit Thaker"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"IT"}
+          />
+          <TeamCard
+            name={"Keyul Jain"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/AppTeam.png" alt="" width={445} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Darshan Rander"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"IT"}
+          />
+          <TeamCard
+            name={"Tanay Kamath"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Gaurav Raj"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Harsh Mody"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"IT"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/GraphicsTeam.png" alt="" width={380} height={100} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Pooja Patel"}
+            imagePath={"/"}
+            year={"BE"}
+            branch={"Computer"}
+          />
+          <TeamCard
+            name={"Ishan Saksena"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Computer"}
+          />
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="text-center mt-5">
+          <Image src="/ContentTeam.png" alt="" width={682} height={120} />
+        </div>
+        <div className="card-wrapper">
+          <TeamCard
+            name={"Amandeep Chawla"}
+            imagePath={"/"}
+            year={"TE"}
+            branch={"Chemical"}
+          />
+        </div>
+      </div>
+
+      <svg viewBox="0 0 1536 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#000" d="M 0 189 L 495 144 L 495 0 L 0 0 Z"></path>{" "}
+        <path fill="#000" d="M 494 144 L 1048 184 L 1048 0 L 494 0 Z"></path>{" "}
+        <path fill="#000" d="M 1047 184 L 1437 136 L 1437 0 L 1047 0 Z"></path>
+        <path fill="#000" d="M 1436 136 L 1536 165 L 1536 0 L 1436 0 Z"></path>
+        <path
+          fill="#181818"
+          d="M 0 189 L 495 144 L 495 320 L 0 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 494 144 L 1048 184 L 1048 320 L 494 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 1047 184 L 1437 136 L 1437 320 L 1047 320 Z"
+        ></path>
+        <path
+          fill="#181818"
+          d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
+        ></path>
+      </svg>
+
+      <Footer />
     </>
   );
 }
