@@ -2,9 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import Navbar from "../comps/Navbar";
-import TeamCard from "../comps/TeamCard";
-import Footer from "../comps/Footer";
+import Navbar from "../components/Navbar/Navbar";
+import TeamCard from "../components/TeamCard";
+import Footer from "../components/Footer";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -19,12 +19,12 @@ export default function Home() {
   return (
     <>
 
-      <Navbar />
+      
       <section className="main-1 container-fluid">
         <div className="row">
           <div className="col-5">
             <div className={styles.sloganImg}>
-              <Image src="/slogan.png" width={800} height={615} alt="" />
+              <Image src="/assets/images/slogan.png" width={800} height={615} alt="" />
             </div>
 
             <div className="button-box">
@@ -43,7 +43,7 @@ export default function Home() {
             </div>
           </div>
           <div className="col-7 text-center">
-            <Image src="/events.png" width={1100} height={846} alt="" />
+            <Image src="/assets/images/events.png" width={1100} height={846} alt="" />
           </div>
         </div>
       </section>
@@ -76,7 +76,7 @@ export default function Home() {
           <div className="col-lg-4">
             <Image
               className="laptop-pic"
-              src="/laptop.png"
+              src="/assets/images/laptop.png"
               width={540}
               height={540}
               alt=""
@@ -86,7 +86,7 @@ export default function Home() {
             <div className="cont">
               <div>
                 <Image
-                  src="/who_are_we_text.png"
+                  src="/assets/images/who_are_we_text.png"
                   alt=""
                   width={573}
                   height={72}
@@ -156,7 +156,7 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/WebTeam.png" alt="" width={400} height={100} />
+          <Image src="/assets/images/WebTeam.png" alt="" width={400} height={100} />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -167,7 +167,7 @@ export default function Home() {
           />
           <TeamCard
             name={"Kavish Shah"}
-            imagePath={"/KavishWebTeam.jpg"}
+            imagePath={"/assets/images/KavishWebTeam.jpg"}
             year={"TE"}
             branch={"Computer"}
           />
@@ -188,7 +188,7 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/DatabaseTeam.png" alt="" width={600} height={100} />
+          <Image src="/assets/images/DatabaseTeam.png" alt="" width={600} height={100} />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -208,7 +208,7 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/AppTeam.png" alt="" width={445} height={100} />
+          <Image src="/assets/images/AppTeam.png" alt="" width={445} height={100} />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -240,7 +240,7 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/GraphicsTeam.png" alt="" width={380} height={100} />
+          <Image src="/assets/images/GraphicsTeam.png" alt="" width={380} height={100} />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -260,7 +260,7 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/ContentTeam.png" alt="" width={682} height={120} />
+          <Image src="/assets/images/ContentTeam.png" alt="" width={682} height={120} />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -295,7 +295,6 @@ export default function Home() {
         ></path>
       </svg>
 
-      <Footer />
     </>
   );
 }

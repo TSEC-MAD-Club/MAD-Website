@@ -33,7 +33,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="col-4">
-          <Image src="/Map.png" alt="" width={380} height={230} />
+          <Image src="/assets/images/Map.png" alt="" width={380} height={230} />
           <p className="text-white" style={{ maxWidth: "400px" }}>
             <b>Thadomal Shahani Engineering College</b>, W, P. G. Kher Marg, Off
             Linking Rd, TPS III, Bandra West, Mumbai, Maharashtra - 400050

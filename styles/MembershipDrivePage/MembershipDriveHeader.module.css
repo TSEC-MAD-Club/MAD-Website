@@ -70,7 +70,6 @@
   margin: 6vw 2.5vw;
   height: 45vh;
   width: 40vw;
-  /* position: relative; */
 }
 
 .code_container {
@@ -85,21 +84,15 @@
   width: 3.5vw;
   height: 25vw;
   margin: 0 2.2vw;
-  /* padding: 3vw; */
 }
 
-/* .code_container{
-    display: inline;
-    position: relative;
-} */
 
 .code {
   transform: rotate(-7deg);
   vertical-align: bottom;
   width: 30vw;
   height: 25vw;
-  /* padding: 3vw; */
-  /* position: relative; */
+
 }
 
 .index_tab {
@@ -113,22 +106,3 @@
   left: 0;
 }
 
-/* .index_tab{
-    position: absolute;
-    transform: rotate(-7deg);
-    border-radius: 4px;
-    height: 20px;
-    width: 100px;
-    background-color: #202020;
-    color: #FFFFFF;
-    font-weight: 100;
-    font-size: 14px;
-    padding: 0px 9px;
-    top: -11vw;
-    left: 0;
-    cursor: default;
-}
-
-.tab_cross{
-    display: flex;
-} */
