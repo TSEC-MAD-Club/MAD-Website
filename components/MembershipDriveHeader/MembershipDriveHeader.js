@@ -1,4 +1,4 @@
-import styles from "./MembershipDriveHeader.module.css";
+import styles from "../../styles/MembershipDrivePage/MembershipDriveHeader.module.css";
 import Image from "next/image";
 
 const MembershipDriveHeader = () => {
@@ -16,7 +16,6 @@ const MembershipDriveHeader = () => {
               >
                 Membership
               </h1>
-              {/* <br /> */}
               <h1
                 className={styles.header_title}
                 style={{ color: "var(--primary-4)" }}
@@ -53,7 +52,6 @@ const MembershipDriveHeader = () => {
                 className={styles.index_tab}
                 src="/assets/images/index-tab.png"
               />
-              {/* <div className={styles.index_tab}>Index.html <img className={styles.tab_cross} src="/assets/images/Cross.svg"/></div> */}
             </div>
           </div>
         </div>

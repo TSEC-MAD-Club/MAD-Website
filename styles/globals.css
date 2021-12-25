@@ -57,7 +57,6 @@ a {
 
 .main-1 {
   background-color: black;
-  /* height:80vh; */
 }
 
 .main-2 {
@@ -67,7 +66,6 @@ a {
 
 .text {
   color: white;
-  /* font-family: var(--main-font); */
   font-size: 35px;
   padding: 80px 120px 20px;
 }
