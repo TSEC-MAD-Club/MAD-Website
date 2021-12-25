@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import Layout from "../components/Layout/Layout"
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
@@ -22,7 +23,9 @@ function MyApp({ Component, pageProps }) {
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       </Head>
 
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

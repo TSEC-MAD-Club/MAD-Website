@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+
 import Navbar from "../comps/Navbar";
 import TeamCard from "../comps/TeamCard";
 import Footer from "../comps/Footer";
+
 import Link from "next/link";
 import { useState } from "react";
 
@@ -16,6 +18,7 @@ export default function Home() {
 
   return (
     <>
+
       <Navbar />
       <section className="main-1 container-fluid">
         <div className="row">
