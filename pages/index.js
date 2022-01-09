@@ -12,19 +12,22 @@ import { useState } from "react";
 export default function Home() {
   const [active, setActive] = useState(1);
 
-  const handleTabOnClick = e => {
+  const handleTabOnClick = (e) => {
     setActive(e.target.id);
   };
 
   return (
     <>
-
-      
       <section className="main-1 container-fluid">
         <div className="row">
           <div className="col-5">
             <div className={styles.sloganImg}>
-              <Image src="/assets/images/slogan.png" width={800} height={615} alt="" />
+              <Image
+                src="/assets/images/slogan.png"
+                width={800}
+                height={615}
+                alt=""
+              />
             </div>
 
             <div className="button-box">
@@ -43,7 +46,12 @@ export default function Home() {
             </div>
           </div>
           <div className="col-7 text-center">
-            <Image src="/assets/images/events.png" width={1100} height={846} alt="" />
+            <Image
+              src="/assets/images/events.png"
+              width={1100}
+              height={846}
+              alt=""
+            />
           </div>
         </div>
       </section>
@@ -114,7 +122,7 @@ export default function Home() {
       </div>
 
       <div className={styles.btnGroupWrap}>
-        <div className="btn-group mt-5" role="group">
+        <div className="btn-group flex-wrap mt-5" role="group">
           <button
             type="button"
             id="1"
@@ -156,7 +164,12 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/assets/images/WebTeam.png" alt="" width={400} height={100} />
+          <Image
+            src="/assets/images/WebTeam.png"
+            alt=""
+            width={400}
+            height={100}
+          />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -188,7 +201,12 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/assets/images/DatabaseTeam.png" alt="" width={600} height={100} />
+          <Image
+            src="/assets/images/DatabaseTeam.png"
+            alt=""
+            width={600}
+            height={100}
+          />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -208,7 +226,12 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/assets/images/AppTeam.png" alt="" width={445} height={100} />
+          <Image
+            src="/assets/images/AppTeam.png"
+            alt=""
+            width={445}
+            height={100}
+          />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -240,7 +263,12 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/assets/images/GraphicsTeam.png" alt="" width={380} height={100} />
+          <Image
+            src="/assets/images/GraphicsTeam.png"
+            alt=""
+            width={380}
+            height={100}
+          />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -260,7 +288,12 @@ export default function Home() {
 
       <div className="container-fluid">
         <div className="text-center mt-5">
-          <Image src="/assets/images/ContentTeam.png" alt="" width={682} height={120} />
+          <Image
+            src="/assets/images/ContentTeam.png"
+            alt=""
+            width={682}
+            height={120}
+          />
         </div>
         <div className="card-wrapper">
           <TeamCard
@@ -294,7 +327,6 @@ export default function Home() {
           d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
         ></path>
       </svg>
-
     </>
   );
 }
