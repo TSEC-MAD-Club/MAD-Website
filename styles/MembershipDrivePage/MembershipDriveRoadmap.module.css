@@ -85,3 +85,9 @@
     margin-right: 0px;
   }
 }
+
+@media screen and (width <=360px) {
+  .domainInfo {
+    padding: 0 !important;
+  }
+}
