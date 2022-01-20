@@ -1,3 +1,7 @@
+.btnGroupWrap {
+  text-align: center;
+}
+
 .devDomainChoiceTitle {
   display: flex;
   justify-content: center;

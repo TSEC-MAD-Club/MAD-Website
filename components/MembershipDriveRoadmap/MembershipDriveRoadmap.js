@@ -1,16 +1,16 @@
 import React from "react";
 import style from "../../styles/MembershipDrivepage/MembershipDriveRoadmap.module.css";
 
-export default function MembershipDriveRoadmap(props) {
+export default function MembershipDriveRoadmap({ domain }) {
   return (
     <div className={`container-fluid ${style.membershipDriveRoadmap}`}>
       <div className="row">
-        {/* <div>{props.text}</div> */}
+        {/* <div>{text}</div> */}
         <div className={style.domainInfo}>
           {" "}
           <div className={`container-fluid center ${style.domainTitle}`}>
             <div>
-              <img className={style.domainLogo} src={props.domain.logo} />
+              <img className={style.domainLogo} src={domain.logo} />
             </div>
             <div
               style={{
@@ -19,11 +19,11 @@ export default function MembershipDriveRoadmap(props) {
                 marginLeft: "0.6em",
               }}
             >
-              {props.domain.devDomainName}
+              {domain.devDomainName}
             </div>
           </div>
           <div className={`container-fluid ${style.descriptionDomain}`}>
-            {`${props.domain.description}`.split("\n").map((str, index) => {
+            {`${domain.description}`.split("\n").map((str, index) => {
               return <div key={index}>{str}</div>;
             })}
           </div>
@@ -41,13 +41,12 @@ export default function MembershipDriveRoadmap(props) {
                 <div className={`col col-md-3 ${style.phaseContent}`}>
                   <div className={style.phaseTitle}>Phase 1</div>
                   <div className={style.phaseDescription}>
-                    {props !== undefined
-                      ? `${props.domain.phaseDetails.phase1}`
-                          .split("\n")
-                          .map((str, index) => {
-                            return <div key={index}>{str}</div>;
-                          })
-                      : ""}
+                    {domain &&
+                      `${domain.phaseDetails.phase1}`
+                        .split("\n")
+                        .map((str, index) => {
+                          return <div key={index}>{str}</div>;
+                        })}
                   </div>
                 </div>
               </div>
@@ -60,19 +59,18 @@ export default function MembershipDriveRoadmap(props) {
                 <div className={`col col-md-3 ${style.phaseContent}`}>
                   <div className={style.phaseTitle}>Phase 2</div>
                   <div className={style.phaseDescription}>
-                    {props !== undefined
-                      ? `${props.domain.phaseDetails.phase2}`
-                          .split("\n")
-                          .map((str, index) => {
-                            return <div key={index}>{str}</div>;
-                          })
-                      : ""}
+                    {domain &&
+                      `${domain.phaseDetails.phase2}`
+                        .split("\n")
+                        .map((str, index) => {
+                          return <div key={index}>{str}</div>;
+                        })}
                   </div>
                 </div>
                 <img
                   className={`col col-md-3 ${style.phase1Img}`}
                   alt="Phase 1"
-                  src={props.domain.img_phase2}
+                  src={domain.img_phase2}
                 />
               </div>
             </div>
@@ -89,13 +87,12 @@ export default function MembershipDriveRoadmap(props) {
                 <div className={`col col-md-3 ${style.phaseContent}`}>
                   <div className={style.phaseTitle}>Phase 3</div>
                   <div className={style.phaseDescription}>
-                    {props !== undefined
-                      ? `${props.domain.phaseDetails.phase3}`
-                          .split("\n")
-                          .map((str, index) => {
-                            return <div key={index}>{str}</div>;
-                          })
-                      : ""}
+                    {domain &&
+                      `${domain.phaseDetails.phase3}`
+                        .split("\n")
+                        .map((str, index) => {
+                          return <div key={index}>{str}</div>;
+                        })}
                   </div>
                 </div>
               </div>
