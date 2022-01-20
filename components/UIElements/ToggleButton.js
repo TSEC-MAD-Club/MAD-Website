@@ -1,5 +1,4 @@
 import React from "react";
-//import styles from "../../styles/UIElements/ToggleButton.module.css";
 
 export default function ToggleButton({
   domain,
