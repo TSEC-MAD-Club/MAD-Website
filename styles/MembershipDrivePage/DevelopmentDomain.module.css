@@ -1,0 +1,49 @@
+.btnGroupWrap {
+  text-align: center;
+}
+
+.devDomainChoiceTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 6em;
+  width: 100%;
+
+  font-family: var(--title-font);
+  font-size: 1.75rem;
+  color: white;
+}
+
+.choose_tool_img {
+  width: 2.5em;
+  height: 2.5em;
+  margin: 0.8em;
+}
+
+.card_svg {
+  font-family: var(--main-font);
+}
+
+@media screen and (width >= 1000.00px) {
+  .card_svg {
+    width: 20rem;
+    height: 20rem;
+    font-size: 1.8rem;
+  }
+
+  .web_dev_card {
+    background: center / contain no-repeat
+      url(../../public/assets/images/Web_dev_card.svg);
+  }
+
+  .app_dev_card {
+    background: center / contain no-repeat
+      url(../../public/assets/images/App_dev_card.svg);
+  }
+
+  .flutter_dev_card {
+    background: center / contain no-repeat
+      url(../../public/assets/images/Flutter_dev_card.svg);
+  }
+}
