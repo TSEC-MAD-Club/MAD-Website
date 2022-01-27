@@ -1,0 +1,93 @@
+.membershipDriveRoadmap {
+  padding: 3rem;
+}
+
+.domainTitle {
+  font-family: var(--title-font);
+  font-size: 2.5em;
+  color: white;
+
+  display: flex;
+  align-items: center;
+}
+
+.domainLogo {
+  width: 1.75em;
+  /* height: 1.5em; */
+}
+
+.descriptionDomain {
+  font-family: var(--main-font);
+  font-size: 1rem;
+  color: white;
+
+  padding-top: 1.5rem;
+}
+
+.domainInfo {
+  padding: 2.5rem;
+  border: solid;
+  border-color: #545454;
+}
+
+.roadMap {
+  margin: 4rem;
+}
+
+.phasePeriod {
+  width: fit-content;
+
+  padding-top: 0.2em;
+  padding-bottom: 0.3em;
+
+  justify-content: center;
+
+  font-family: var(--title-font);
+
+  color: var(--primary-4); /* blue #2962FF; */
+  background-color: #181818;
+
+  border: 0.05em solid var(--primary-3);
+}
+
+.phase {
+  margin: 1.5em 0 1.5em 0;
+}
+.phase1Img {
+  width: 20em;
+  height: fit-content;
+}
+
+.phaseContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  width: 20rem;
+}
+
+.phaseTitle {
+  font-family: var(--title-font);
+  font-size: 1.5em;
+  color: var(--primary-3);
+}
+.phaseDescription {
+  font-family: var(--main-font);
+  font-size: 1rem;
+  color: white;
+
+  margin-bottom: 2em;
+}
+
+@media screen and (width <=560px) {
+  .roadMap {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+@media screen and (width <=360px) {
+  .domainInfo {
+    padding: 0 !important;
+  }
+}
