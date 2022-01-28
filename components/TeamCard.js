@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const TeamCard = ({ name, imagePath, year, branch }) => {
+const TeamCard = ({ name, imagePath, content }) => {
   return (
     <div>
       <div className="card card-background">
@@ -14,7 +14,7 @@ const TeamCard = ({ name, imagePath, year, branch }) => {
         <div className="card-body">
           <h5 className="card-title text-center text-white">{name}</h5>
           <p className="card-text text-center text-secondary">
-            {year.toUpperCase()} - {branch.toUpperCase()}
+            {content}
           </p>
         </div>
         <svg viewBox="0 0 1920 200" xmlns="http://www.w3.org/2000/svg">
