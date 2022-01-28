@@ -30,7 +30,7 @@ const MembershipDriveHeader = () => {
           </div>
           <hr className={styles.dotted_line}/>
           <br/>
-          <hr className={styles.dotted_line_vertical}/>
+          {/* <hr className={styles.dotted_line_vertical}/> */}
         </div>
         <div>
           <div className={styles.image_container}>
