@@ -22,8 +22,12 @@ export default function Home() {
         <div className="row">
           <div className="col-5">
             <div className={styles.sloganImg}>
-
-              <Image src="/assets/images/slogan.png" width={800} height={615} alt="" />
+              <Image
+                src="/assets/images/slogan.png"
+                width={800}
+                height={615}
+                alt=""
+              />
             </div>
 
             <div className="button-box">
@@ -42,8 +46,12 @@ export default function Home() {
             </div>
           </div>
           <div className="col-7 text-center">
-
-            <Image src="/assets/images/events.png" width={1100} height={846} alt="" />
+            <Image
+              src="/assets/images/events.png"
+              width={1100}
+              height={846}
+              alt=""
+            />
           </div>
         </div>
       </section>
@@ -154,153 +162,202 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="container-fluid">
-        <div className="text-center mt-5">
+      <div className={active == 1 ? "d-block" : "d-none"}>
+        <div className="container-fluid">
+          <div className="text-center mt-5">
+            <Image
+              src="/assets/images/WebTeam.png"
+              alt=""
+              width={400}
+              height={100}
+            />
+          </div>
+          <div className="card-wrapper">
+            <TeamCard
+              name={"Mahima Samantara"}
+              imagePath={"/assets/images/MahimaWebTeam.png"}
+              content={"BE - IT"}
+            />
 
-          <Image src="/assets/images/WebTeam.png" alt="" width={400} height={100} />
+            <TeamCard
+              name={"Kavish Shah"}
+              imagePath={"/assets/images/KavishWebTeam.jpg"}
+              content={"TE - Computer"}
+            />
+            <TeamCard
+              name={"Jay Kaku"}
+              imagePath={"/assets/images/JayWebTeam.png"}
+              content={"TE - Computer"}
+            />
+            <TeamCard
+              name={"Ritwik Vaidya"}
+              imagePath={"/assets/images/RitwikWebTeam.jpeg"}
+              content={"BE - Computer"}
+            />
+          </div>
         </div>
-        <div className="card-wrapper">
-          <TeamCard
-            name={"Mahima Samantara"}
-            imagePath={"/"}
-            year={"BE"}
-            branch={"IT"}
-          />
-          <TeamCard
-            name={"Kavish Shah"}
-            imagePath={"/assets/images/KavishWebTeam.jpg"}
-            year={"TE"}
-            branch={"Computer"}
-          />
-          <TeamCard
-            name={"Jay Kaku"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"Computer"}
-          />
-          <TeamCard
-            name={"Ritwik Vaidya"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"Computer"}
-          />
+
+        <div className="container-fluid">
+          <div className="text-center mt-5">
+            <Image
+              src="/assets/images/DatabaseTeam.png"
+              alt=""
+              width={600}
+              height={100}
+            />
+          </div>
+          <div className="card-wrapper">
+            <TeamCard
+              name={"Ruchit Thaker"}
+              imagePath={"/assets/images/RuchitDatabaseTeam.jpg"}
+              content={"TE - IT"}
+            />
+            <TeamCard
+              name={"Keyul Jain"}
+              imagePath={"/assets/images/KeyulDatabaseTeam.jfif"}
+              content={"TE - Computer"}
+            />
+          </div>
         </div>
+
+        <div className="container-fluid">
+          <div className="text-center mt-5">
+            <Image
+              src="/assets/images/AppTeam.png"
+              alt=""
+              width={445}
+              height={100}
+            />
+          </div>
+          <div className="card-wrapper">
+            <TeamCard
+              name={"Darshan Rander"}
+              imagePath={"/assets/images/DarshanAppTeam.png"}
+              content={"TE - IT"}
+            />
+            <TeamCard
+              name={"Tanay Kamath"}
+              imagePath={"/assets/images/TanayAppTeam.png"}
+              content={"TE - Computer"}
+            />
+            <TeamCard
+              name={"Gaurav Raj"}
+              imagePath={"/assets/images/GauravAppTeam.png"}
+              content={"TE - Computer"}
+            />
+            <TeamCard
+              name={"Harsh Mody"}
+              imagePath={"/assets/images/HarshAppTeam.png"}
+              content={"TE - IT"}
+            />
+          </div>
+        </div>
+
+        <div className="container-fluid">
+          <div className="text-center mt-5">
+            <Image
+              src="/assets/images/GraphicsTeam.png"
+              alt=""
+              width={380}
+              height={100}
+            />
+          </div>
+          <div className="card-wrapper">
+            <TeamCard
+              name={"Pooja Patel"}
+              imagePath={"/assets/images/PoojaGraphicsTeam.png"}
+              content={"BE - Computer"}
+            />
+            <TeamCard
+              name={"Ishan Saksena"}
+              imagePath={"/assets/images/IshanGraphicsTeam.png"}
+              content={"TE - Computer"}
+            />
+          </div>
+        </div>
+
+        <div className="container-fluid">
+          <div className="text-center mt-5">
+            <Image
+              src="/assets/images/ContentTeam.png"
+              alt=""
+              width={682}
+              height={120}
+            />
+          </div>
+          <div className="card-wrapper">
+            <TeamCard
+              name={"Amandeep Chawla"}
+              imagePath={"/assets/images/AmandeepContentTeam.png"}
+              content={"TE - Chemical"}
+            />
+          </div>
+        </div>
+
+        <svg viewBox="0 0 1536 200" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#000" d="M 0 189 L 495 144 L 495 0 L 0 0 Z"></path>{" "}
+          <path fill="#000" d="M 494 144 L 1048 184 L 1048 0 L 494 0 Z"></path>{" "}
+          <path
+            fill="#000"
+            d="M 1047 184 L 1437 136 L 1437 0 L 1047 0 Z"
+          ></path>
+          <path
+            fill="#000"
+            d="M 1436 136 L 1536 165 L 1536 0 L 1436 0 Z"
+          ></path>
+          <path fill="#181818" d="M 0 189 L 495 144 L 495 320 L 0 320 Z"></path>{" "}
+          <path
+            fill="#181818"
+            d="M 494 144 L 1048 184 L 1048 320 L 494 320 Z"
+          ></path>{" "}
+          <path
+            fill="#181818"
+            d="M 1047 184 L 1437 136 L 1437 320 L 1047 320 Z"
+          ></path>
+          <path
+            fill="#181818"
+            d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
+          ></path>
+        </svg>
       </div>
 
-      <div className="container-fluid">
-        <div className="text-center mt-5">
-
-          <Image src="/assets/images/DatabaseTeam.png" alt="" width={600} height={100} />
-        </div>
-        <div className="card-wrapper">
-          <TeamCard
-            name={"Ruchit Thaker"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"IT"}
-          />
-          <TeamCard
-            name={"Keyul Jain"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"Computer"}
-          />
-        </div>
+      <div className={active == 2 ? `${styles.tabContentActive}` : "d-none"}>
+        
+        <TeamCard
+              name={"Dr. G. T. Thampi"}
+              imagePath={"/assets/images/gtthampi.jpg"}
+              content={"Principal"}
+            />
+            <TeamCard
+              name={"Dr. Shachi Natu"}
+              imagePath={"/assets/images/shachinatu.jpg"}
+              content={"Computer"}
+            />
+            <TeamCard
+              name={"Ms. Darakhshan Khan"}
+              imagePath={"/assets/images/darakhshankhan.jpg"}
+              content={"Computer"}
+            />
+            
       </div>
 
-      <div className="container-fluid">
-        <div className="text-center mt-5">
-
-          <Image src="/assets/images/AppTeam.png" alt="" width={445} height={100} />
-        </div>
-        <div className="card-wrapper">
-          <TeamCard
-            name={"Darshan Rander"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"IT"}
-          />
-          <TeamCard
-            name={"Tanay Kamath"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"Computer"}
-          />
-          <TeamCard
-            name={"Gaurav Raj"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"Computer"}
-          />
-          <TeamCard
-            name={"Harsh Mody"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"IT"}
-          />
-        </div>
+      <div className={active == 3 ? `${styles.tabContentActive}` : "d-none"}>
+      <TeamCard
+              name={"Krishna Dubey"}
+              imagePath={"/assets/images/krishnadubey.jpeg"}
+              content={""}
+            />
+            <TeamCard
+              name={"Ankita Kar"}
+              imagePath={"/assets/images/ankitakar.jpg"}
+              content={""}
+            />
+            <TeamCard
+              name={"Rahul Nair"}
+              imagePath={"/assets/images/rahulnair.jpg"}
+              content={""}
+            />
       </div>
-
-      <div className="container-fluid">
-        <div className="text-center mt-5">
-
-          <Image src="/assets/images/GraphicsTeam.png" alt="" width={380} height={100} />
-        </div>
-        <div className="card-wrapper">
-          <TeamCard
-            name={"Pooja Patel"}
-            imagePath={"/"}
-            year={"BE"}
-            branch={"Computer"}
-          />
-          <TeamCard
-            name={"Ishan Saksena"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"Computer"}
-          />
-        </div>
-      </div>
-
-      <div className="container-fluid">
-        <div className="text-center mt-5">
-
-          <Image src="/assets/images/ContentTeam.png" alt="" width={682} height={120} />
-        </div>
-        <div className="card-wrapper">
-          <TeamCard
-            name={"Amandeep Chawla"}
-            imagePath={"/"}
-            year={"TE"}
-            branch={"Chemical"}
-          />
-        </div>
-      </div>
-
-      <svg viewBox="0 0 1536 200" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#000" d="M 0 189 L 495 144 L 495 0 L 0 0 Z"></path>{" "}
-        <path fill="#000" d="M 494 144 L 1048 184 L 1048 0 L 494 0 Z"></path>{" "}
-        <path fill="#000" d="M 1047 184 L 1437 136 L 1437 0 L 1047 0 Z"></path>
-        <path fill="#000" d="M 1436 136 L 1536 165 L 1536 0 L 1436 0 Z"></path>
-        <path
-          fill="#181818"
-          d="M 0 189 L 495 144 L 495 320 L 0 320 Z"
-        ></path>{" "}
-        <path
-          fill="#181818"
-          d="M 494 144 L 1048 184 L 1048 320 L 494 320 Z"
-        ></path>{" "}
-        <path
-          fill="#181818"
-          d="M 1047 184 L 1437 136 L 1437 320 L 1047 320 Z"
-        ></path>
-        <path
-          fill="#181818"
-          d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
-        ></path>
-      </svg>
-
-
     </>
   );
 }
