@@ -22,19 +22,18 @@ const MembershipDriveHeader = () => {
               >
                 Drive
               </h1>
-              
             </div>
             <br />
             <button className={styles.header_button}>Start Learning</button>
-            
           </div>
-          <hr className={styles.dotted_line}/>
-          <br/>
+          <hr className={styles.dotted_line} />
+          <br />
           {/* <hr className={styles.dotted_line_vertical}/> */}
         </div>
         <div>
           <div className={styles.image_container}>
-            <img
+            <Image
+              loading="lazy"
               className={styles.sidebar}
               src="/assets/images/sidebar.png"
               // width={65}
@@ -42,13 +41,15 @@ const MembershipDriveHeader = () => {
               // alt=""
             />
             <div className={styles.code_container}>
-              <img
+              <Image
+                loading="lazy"
                 className={styles.code}
                 src="/assets/images/code.png"
                 // width={540}
                 // height={472}
               />
-              <img
+              <Image
+                loading="lazy"
                 className={styles.index_tab}
                 src="/assets/images/index-tab.png"
               />

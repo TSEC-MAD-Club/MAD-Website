@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Image from "next/dist/client/image";
 import styles from "../../styles/Home.module.css";
-import style from "../../styles/MembershipDrivepage/DevelopmentDomain.module.css";
+import style from "../../styles/MembershipDrivePage/DevelopmentDomain.module.css";
 import MembershipDriveRoadmap from "./MembershipDriveRoadmap";
 import ToggleButton from "../UIElements/ToggleButton";
 
@@ -71,7 +72,8 @@ export default function DevelopmentDomain() {
     <div className="container-fluid">
       <div className="row">
         <div className={`container-fluid ${style.devDomainChoiceTitle}`}>
-          <img
+          <Image
+            loading="lazy"
             className={style.choose_tool_img}
             alt="choose_tool"
             src="/assets/images/choose_tool_ninja.png"
