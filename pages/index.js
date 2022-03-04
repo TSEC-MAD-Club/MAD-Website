@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-
 import Navbar from "../components/Navbar/Navbar";
 import TeamCard from "../components/TeamCard";
 import Footer from "../components/Footer";
@@ -24,7 +23,6 @@ export default function Home() {
           <div className="col-5">
             <div className={styles.sloganImg}>
               <Image
-                loading="lazy"
                 src="/assets/images/slogan.png"
                 width={800}
                 height={615}
@@ -49,7 +47,6 @@ export default function Home() {
           </div>
           <div className="col-7 text-center">
             <Image
-              loading="lazy"
               src="/assets/images/events.png"
               width={1100}
               height={846}
@@ -97,7 +94,6 @@ export default function Home() {
             <div className="cont">
               <div>
                 <Image
-                  loading="lazy"
                   src="/assets/images/who_are_we_text.png"
                   alt=""
                   width={573}
@@ -170,7 +166,6 @@ export default function Home() {
         <div className="container-fluid">
           <div className="text-center mt-5">
             <Image
-              loading="lazy"
               src="/assets/images/WebTeam.png"
               alt=""
               width={400}
@@ -205,7 +200,6 @@ export default function Home() {
         <div className="container-fluid">
           <div className="text-center mt-5">
             <Image
-              loading="lazy"
               src="/assets/images/DatabaseTeam.png"
               alt=""
               width={600}
@@ -229,7 +223,6 @@ export default function Home() {
         <div className="container-fluid">
           <div className="text-center mt-5">
             <Image
-              loading="lazy"
               src="/assets/images/AppTeam.png"
               alt=""
               width={445}
@@ -263,7 +256,6 @@ export default function Home() {
         <div className="container-fluid">
           <div className="text-center mt-5">
             <Image
-              loading="lazy"
               src="/assets/images/GraphicsTeam.png"
               alt=""
               width={380}
@@ -287,7 +279,6 @@ export default function Home() {
         <div className="container-fluid">
           <div className="text-center mt-5">
             <Image
-              loading="lazy"
               src="/assets/images/ContentTeam.png"
               alt=""
               width={682}
@@ -331,39 +322,41 @@ export default function Home() {
       </div>
 
       <div className={active == 2 ? `${styles.tabContentActive}` : "d-none"}>
+        
         <TeamCard
-          name={"Dr. G. T. Thampi"}
-          imagePath={"/assets/images/gtthampi.jpg"}
-          content={"Principal"}
-        />
-        <TeamCard
-          name={"Dr. Shachi Natu"}
-          imagePath={"/assets/images/shachinatu.jpg"}
-          content={"Computer"}
-        />
-        <TeamCard
-          name={"Ms. Darakhshan Khan"}
-          imagePath={"/assets/images/darakhshankhan.jpg"}
-          content={"Computer"}
-        />
+              name={"Dr. G. T. Thampi"}
+              imagePath={"/assets/images/gtthampi.jpg"}
+              content={"Principal"}
+            />
+            <TeamCard
+              name={"Dr. Shachi Natu"}
+              imagePath={"/assets/images/shachinatu.jpg"}
+              content={"Computer"}
+            />
+            <TeamCard
+              name={"Ms. Darakhshan Khan"}
+              imagePath={"/assets/images/darakhshankhan.jpg"}
+              content={"Computer"}
+            />
+            
       </div>
 
       <div className={active == 3 ? `${styles.tabContentActive}` : "d-none"}>
-        <TeamCard
-          name={"Krishna Dubey"}
-          imagePath={"/assets/images/krishnadubey.jpeg"}
-          content={""}
-        />
-        <TeamCard
-          name={"Ankita Kar"}
-          imagePath={"/assets/images/ankitakar.jpg"}
-          content={""}
-        />
-        <TeamCard
-          name={"Rahul Nair"}
-          imagePath={"/assets/images/rahulnair.jpg"}
-          content={""}
-        />
+      <TeamCard
+              name={"Krishna Dubey"}
+              imagePath={"/assets/images/krishnadubey.jpeg"}
+              content={""}
+            />
+            <TeamCard
+              name={"Ankita Kar"}
+              imagePath={"/assets/images/ankitakar.jpg"}
+              content={""}
+            />
+            <TeamCard
+              name={"Rahul Nair"}
+              imagePath={"/assets/images/rahulnair.jpg"}
+              content={""}
+            />
       </div>
     </>
   );

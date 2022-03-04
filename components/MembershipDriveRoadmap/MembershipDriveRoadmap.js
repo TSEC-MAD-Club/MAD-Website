@@ -1,6 +1,5 @@
 import React from "react";
-import Image from "next/dist/client/image";
-import style from "../../styles/MembershipDrivePage/MembershipDriveRoadmap.module.css";
+import style from "../../styles/MembershipDrivepage/MembershipDriveRoadmap.module.css";
 
 export default function MembershipDriveRoadmap({ domain }) {
   return (
@@ -11,7 +10,7 @@ export default function MembershipDriveRoadmap({ domain }) {
           {" "}
           <div className={`container-fluid center ${style.domainTitle}`}>
             <div>
-              <Image className={style.domainLogo} src={domain.logo} />
+              <img className={style.domainLogo} src={domain.logo} />
             </div>
             <div
               style={{
@@ -34,8 +33,7 @@ export default function MembershipDriveRoadmap({ domain }) {
             </div>
             <div>
               <div className={`row justify-content-md-center ${style.phase}`}>
-                <Image
-                  loading="lazy"
+                <img
                   className={`col col-md-3 ${style.phase1Img}`}
                   alt="Phase 1"
                   src="/assets/images/Phase1_img.png"
@@ -69,8 +67,7 @@ export default function MembershipDriveRoadmap({ domain }) {
                         })}
                   </div>
                 </div>
-                <Image
-                  loading="lazy"
+                <img
                   className={`col col-md-3 ${style.phase1Img}`}
                   alt="Phase 1"
                   src={domain.img_phase2}
@@ -82,8 +79,7 @@ export default function MembershipDriveRoadmap({ domain }) {
             </div>
             <div>
               <div className={`row justify-content-md-center ${style.phase}`}>
-                <Image
-                  loading="lazy"
+                <img
                   className={`col col-md-3 ${style.phase1Img}`}
                   alt="Phase 1"
                   src="/assets/images/Phase3_img.png"

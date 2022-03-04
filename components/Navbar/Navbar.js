@@ -5,13 +5,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          <Image
-            loading="lazy"
-            src="/assets/images/logo.png"
-            width={130}
-            height={77}
-            alt=""
-          />{" "}
+          <Image src="/assets/images/logo.png" width={130} height={77} alt="" />{" "}
         </a>
         <button
           className="navbar-toggler"
@@ -28,9 +22,9 @@ const Navbar = () => {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item me-5">
               <Link href={"/"}>
-                <a className="nav-link" aria-current="page" href="#">
-                  Home
-                </a>
+              <a className="nav-link" aria-current="page" href="#">
+                Home
+              </a>
               </Link>
             </li>
             <li className="nav-item me-5 ">
