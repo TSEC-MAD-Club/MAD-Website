@@ -148,6 +148,7 @@ ul a {
   color: #fff !important;
   font-weight: bold;
   font-family: 'Poppins',sans-serif;
+  white-space: nowrap;
 }
 
 @media (max-width:1045px) {
