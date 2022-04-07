@@ -5,17 +5,16 @@ const TeamCard = ({ name, imagePath, content }) => {
     <div>
       <div className="card card-background">
         <Image
-          className="card-img-top"
-          src={imagePath}
+          className="card-img-top ll"
+          src={"/assets/images/300x300.webp"}
+          data-src={imagePath}
           alt=""
           width={300}
           height={300}
         />
         <div className="card-body">
           <h5 className="card-title text-center text-white">{name}</h5>
-          <p className="card-text text-center text-secondary">
-            {content}
-          </p>
+          <p className="card-text text-center text-secondary">{content}</p>
         </div>
         <svg viewBox="0 0 1920 200" xmlns="http://www.w3.org/2000/svg">
           <path

@@ -48,10 +48,10 @@
   background-color: #2962ff;
 }
 
-.tabContentActive{
+.tabContentActive {
   margin-top: 7rem;
   margin-bottom: 9rem;
-  display: flex;
+  /* display: flex; */
   justify-content: space-around;
 }
 

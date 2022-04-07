@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 html,
 body {
@@ -41,19 +40,17 @@ a {
 
 @font-face {
   font-family: Anurati;
-  src: url('/assets/fonts/Anurati-Regular.otf');
-
+  src: url("/assets/fonts/Anurati-Regular.otf");
 }
 
-:root{
+:root {
   --primary-1: #000000;
   --primary-2: #373737;
-  --primary-3: #FFD700;
-  --primary-4: #2962FF;
-  --main-font: 'Red Hat Display', sans-serif;
-  --title-font: Anurati, 'Red Hat Display';
+  --primary-3: #ffd700;
+  --primary-4: #2962ff;
+  --main-font: "Red Hat Display", sans-serif;
+  --title-font: Anurati, "Red Hat Display";
 }
-
 
 .main-1 {
   background-color: black;
@@ -136,4 +133,14 @@ ul {
 
 ul a {
   display: block;
+}
+.opacity.zero {
+  opacity: 0;
+}
+.opacity.one {
+  opacity: 1;
+}
+
+.abs {
+  position: absolute;
 }
