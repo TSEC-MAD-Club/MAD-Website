@@ -1,42 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { InView } from "react-intersection-observer";
 
-import Navbar from "../components/Navbar/Navbar";
 import TeamCard from "../components/TeamCard";
-import Footer from "../components/Footer";
 
-import Link from "next/link";
 import React, { useState } from "react";
-import { useEffect } from "react";
 
 const StaticData = React.memo(function StaticPage() {
-  const [observer, setObserver] = useState(null);
-  function callback(entries, observer) {
-    for (let i = 0; i < entries.length; i++) {
-      if (entries[i].isIntersecting && observer != null) {
-        entries[i].target.srcset = entries[i].target.dataset.src;
-        entries[i].target.src = entries[i].target.dataset.src;
-        observer.unobserve(entries[i].target);
-      }
-    }
-  }
-  useEffect(() => {
-    setObserver(
-      new IntersectionObserver(callback, {
-        rootMargin: "100px",
-      })
-    );
-  }, []);
-  useEffect(() => {
-    console.log("useEffect");
-    if (observer != null) {
-      for (let i = 0; i < document.querySelectorAll(".ll").length; i++) {
-        console.log(document.querySelectorAll(".ll")[i].dataset.src);
-        observer.observe(document.querySelectorAll(".ll")[i]);
-      }
-    }
-  }, [observer]);
   return (
     <>
       <section className="main-1 container-fluid">
@@ -101,26 +72,44 @@ const StaticData = React.memo(function StaticPage() {
       <div className="main-2 container-fluid">
         <div className="row">
           <div className="col-lg-4">
-            <Image
-              className="laptop-pic ll"
-              src="/assets/images/540x540.webp"
-              width={540}
-              height={540}
-              alt=""
-              data-src="/assets/images/laptop.png"
-            />
+            <InView rootMargin="100px" triggerOnce={true}>
+            {
+              ({ inView, ref }) => {
+                return (
+                    <div ref={ref}>
+                      <Image
+                        className="laptop-pic ll"
+                        src= { inView ? "/assets/images/laptop.png" : "/assets/images/540x540.webp" }
+                        width={540}
+                        height={540}
+                        alt=""
+                      />
+                  </div>
+                );
+              }
+            }
+            </InView>
           </div>
           <div className="col-lg-8">
             <div className="cont">
               <div>
-                <Image
-                  src="/assets/images/573x72.webp"
-                  className="ll"
-                  alt=""
-                  width={573}
-                  height={72}
-                  data-src="/assets/images/who_are_we_text.png"
-                />
+              <InView rootMargin="100px" triggerOnce={true}>
+            {
+              ({ inView, ref }) => {
+                return (
+                    <div ref={ref}>
+                      <Image
+                        src={ inView ? "/assets/images/who_are_we_text.png" : "/assets/images/573x72.webp" }
+                        className="ll"
+                        alt=""
+                        width={573}
+                        height={72}
+                      />
+                  </div>
+                );
+              }
+            }
+            </InView>
               </div>
               <p className="mt-3" style={{ fontSize: "35px", color: "white" }}>
                 A committee more like a{" "}
@@ -369,9 +358,11 @@ export default function Home() {
           key={tab.id}
           className={
             active == tab.id
-              ? `${styles.tabContentActive} opacity one`
-              : "opacity zero abs"
-          }
+              // ? `${styles.tabContentActive} opacity one`
+              // : "opacity zero abs"
+              ? `${styles.tabContentActive}`
+              : "d-none"
+            }
         >
           {tab.teams.map((team) => (
             <div
@@ -379,14 +370,23 @@ export default function Home() {
               className={"container-fluid " + active == tab.id ? "abs" : ""}
             >
               <div className="text-center mt-5">
-                <Image
-                  className="ll"
-                  src={"/assets/images/400x100.webp"}
-                  alt=""
-                  width={400}
-                  height={100}
-                  data-src={team.imagePath}
-                />
+              <InView rootMargin="100px" triggerOnce={true}>
+              {
+                ({ inView, ref }) => {
+                  return (
+                      <div ref={ref}>
+                        <Image
+                          className="ll"
+                          src={ inView ? team.imagePath : "/assets/images/400x100.webp" }
+                          alt=""
+                          width={400}
+                          height={100}
+                        />
+                    </div>
+                  );
+                }
+              }
+              </InView>
               </div>
               <div className="card-wrapper">
                 {team.member.map((member) => (
