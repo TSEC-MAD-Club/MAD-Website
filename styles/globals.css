@@ -140,10 +140,7 @@ ul a {
   display: block;
 }
 
-.navbar-nav {
-  align-items: center !important;
-  text-align: center;
-}
+
 .nav-link {
   color: #fff !important;
   font-weight: bold;
