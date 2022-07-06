@@ -1,6 +1,10 @@
 
+
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+
 
 html,
 body {
@@ -13,10 +17,49 @@ body {
 }
 
 .card-wrapper {
-  display: inline-flex;
+  display: grid;
   width: 100%;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   margin-top: 2rem;
+}
+
+.grid-4 {
+  grid-template-columns: auto auto auto auto;
+}
+.grid-2 {
+  grid-template-columns: auto auto;
+}
+.grid-3 {
+  grid-template-columns: auto auto auto;
+}
+
+@media (max-width: 1191px) {
+  .grid-4,
+  .grid-3 {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 600px) {
+  /* .grid-4,
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: auto;
+  } */
+  .btn.tab-btn {
+    width: 30vw;
+  }
+}
+
+.btn-group.mt-5 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 10px;
+}
+
+.btn-group.mt-5 > .btn {
+  flex: none;
 }
 
 .card {
@@ -43,19 +86,17 @@ a {
 
 @font-face {
   font-family: Anurati;
-  src: url('/assets/fonts/Anurati-Regular.otf');
-
+  src: url("/assets/fonts/Anurati-Regular.otf");
 }
 
-:root{
+:root {
   --primary-1: #000000;
   --primary-2: #373737;
-  --primary-3: #FFD700;
-  --primary-4: #2962FF;
-  --main-font: 'Red Hat Display', sans-serif;
-  --title-font: Anurati, 'Red Hat Display';
+  --primary-3: #ffd700;
+  --primary-4: #2962ff;
+  --main-font: "Red Hat Display", sans-serif;
+  --title-font: Anurati, "Red Hat Display";
 }
-
 
 .main-1 {
   background-color: black;
@@ -116,8 +157,89 @@ a {
   background-color: #a4d6ef !important;
 }
 
+.sloganImg {
+  margin: 5rem 0 0 10rem;
+}
+
 .button-box {
   margin: 6rem 0 0 8rem;
+  width:500px;
+}
+.button-box button{
+  font-size: 20px;
+}
+
+.button-box button:nth-child(2){
+  margin-left: 30px;
+}
+
+@media(max-width: 1300px) and (min-width: 993px){
+  .sloganImg{
+    margin: 5rem 0 0 5rem;
+  }
+
+  .button-box{
+    width: 250px;
+    margin: 5% 0% 0% 20%;
+    display: flex;
+    flex-direction: column;
+  }
+  .button-box button{
+    font-size: 15px;
+  }
+  .button-box button:nth-child(2){
+    margin: 30px 0 0 0;
+  }
+}
+
+@media(max-width: 992px) and (min-width: 769px){
+  .button-box{
+    margin: 5% 0 0 10%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .button-box button{
+    font-size: 13px;
+    width: 50%;
+  }
+
+  .button-box button:nth-child(2){
+    margin: 30px 0 0 0;
+  }
+
+  .sloganImg{
+    margin: 15% 0 0 10%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .sloganNbtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 100%;
+  }
+  .sloganImg{
+    width: 70%;
+    margin: 30px 0 0 0;
+  }
+  .button-box{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0 50px 0;
+  }
+  .button-box button{
+    font-size: 15px;
+    width: 80%;
+    align-self: center;
+  }
+  .button-box button:nth-child(2){
+    margin: 30px 0 0 0;
+  }
+  .jumbotron{
+    flex: 100%;
+  }
 }
 
 .cont {
@@ -141,6 +263,7 @@ ul a {
 }
 
 
+
 .nav-link {
   color: #fff !important;
   font-weight: bold;
@@ -161,3 +284,15 @@ ul a {
     font-size: 18px;
   }
 }
+
+.opacity.zero {
+  opacity: 0;
+}
+.opacity.one {
+  opacity: 1;
+}
+
+.abs {
+  position: absolute;
+}
+
