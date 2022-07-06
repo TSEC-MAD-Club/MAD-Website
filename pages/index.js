@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-
+import styles1 from "../styles/MembershipDrivePage/MembershipDriveHeader.module.css";
 import Navbar from "../components/Navbar/Navbar";
 import TeamCard from "../components/TeamCard";
 import Footer from "../components/Footer";
@@ -21,13 +21,35 @@ export default function Home() {
       <section className="main-1 container-fluid">
         <div className="row section-1">
           <div className="col-5 sloganNbtn">
-            <div className="sloganImg">
+            {/* <div className="sloganImg">
               <Image
                 src="/assets/images/slogan.png"
                 width={800}
                 height={615}
                 alt=""
               />
+            </div> */}
+            <div className="sloganImg">
+              <p
+                className="slogan-title"
+                style={{ color: "var(--primary-3)" }}
+              >
+                Build <br/>
+                Collaborate <br/>
+                Work
+              </p>
+              <p 
+                className="slogan-desc"
+                style={{ color: "var(--primary-5)" }}
+              >
+                on real-life applications with
+              </p>
+              <p
+                className="slogan-club-name"
+                style={{ color: "var(--primary-4)" }}
+              >
+                Developers' Club
+              </p>
             </div>
 
             <div className="button-box">
@@ -91,14 +113,22 @@ export default function Home() {
             />
           </div>
           <div className="col-lg-8">
-            <div className="cont">
+            <div 
+              className="desc-section"
+            >
               <div>
-                <Image
+                {/* <Image
                   src="/assets/images/who_are_we_text.png"
                   alt=""
                   width={573}
                   height={72}
-                />
+                /> */}
+                <p
+                  className="desc-title"
+                  style={{ color: "var(--primary-4)" }}
+                >
+                  WHO ARE WE ?
+                </p>
               </div>
               <p className="mt-3" style={{ fontSize: "35px", color: "white" }}>
                 A committee more like a{" "}
