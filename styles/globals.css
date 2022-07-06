@@ -1,7 +1,11 @@
+
 /* *{
   border: solid red 2px;
 } */
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
 
 html,
 body {
@@ -13,10 +17,49 @@ body {
 }
 
 .card-wrapper {
-  display: inline-flex;
+  display: grid;
   width: 100%;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   margin-top: 2rem;
+}
+
+.grid-4 {
+  grid-template-columns: auto auto auto auto;
+}
+.grid-2 {
+  grid-template-columns: auto auto;
+}
+.grid-3 {
+  grid-template-columns: auto auto auto;
+}
+
+@media (max-width: 1191px) {
+  .grid-4,
+  .grid-3 {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 600px) {
+  /* .grid-4,
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: auto;
+  } */
+  .btn.tab-btn {
+    width: 30vw;
+  }
+}
+
+.btn-group.mt-5 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 10px;
+}
+
+.btn-group.mt-5 > .btn {
+  flex: none;
 }
 
 .card {
@@ -43,20 +86,20 @@ a {
 
 @font-face {
   font-family: Anurati;
-  src: url('/assets/fonts/Anurati-Regular.otf');
-
+  src: url("/assets/fonts/Anurati-Regular.otf");
 }
 
-:root{
+:root {
   --primary-1: #000000;
   --primary-2: #373737;
+
   --primary-3: #FFD700;
   --primary-4: #2962FF;
   --primary-5: #fff;
   --main-font: 'Red Hat Display', sans-serif;
   --title-font: 'Anurati', 'Red Hat Display';
-}
 
+}
 
 .main-1 {
   background-color: black;
@@ -264,4 +307,14 @@ ul {
 
 ul a {
   display: block;
+}
+.opacity.zero {
+  opacity: 0;
+}
+.opacity.one {
+  opacity: 1;
+}
+
+.abs {
+  position: absolute;
 }

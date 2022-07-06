@@ -33,14 +33,12 @@ console.log(width);
               >
                 Drive
               </h1>
-              
             </div>
             <br />
             <button className={styles.header_button}>Start Learning</button>
-            
           </div>
-          <hr className={styles.dotted_line}/>
-          <br/>
+          <hr className={styles.dotted_line} />
+          <br />
           {/* <hr className={styles.dotted_line_vertical}/> */}
         </div>
         
