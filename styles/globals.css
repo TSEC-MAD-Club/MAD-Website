@@ -114,8 +114,89 @@ a {
   background-color: #a4d6ef !important;
 }
 
+.sloganImg {
+  margin: 5rem 0 0 10rem;
+}
+
 .button-box {
   margin: 6rem 0 0 8rem;
+  width:500px;
+}
+.button-box button{
+  font-size: 20px;
+}
+
+.button-box button:nth-child(2){
+  margin-left: 30px;
+}
+
+@media(max-width: 1300px) and (min-width: 993px){
+  .sloganImg{
+    margin: 5rem 0 0 5rem;
+  }
+
+  .button-box{
+    width: 250px;
+    margin: 5% 0% 0% 20%;
+    display: flex;
+    flex-direction: column;
+  }
+  .button-box button{
+    font-size: 15px;
+  }
+  .button-box button:nth-child(2){
+    margin: 30px 0 0 0;
+  }
+}
+
+@media(max-width: 992px) and (min-width: 769px){
+  .button-box{
+    margin: 5% 0 0 10%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .button-box button{
+    font-size: 13px;
+    width: 50%;
+  }
+
+  .button-box button:nth-child(2){
+    margin: 30px 0 0 0;
+  }
+
+  .sloganImg{
+    margin: 15% 0 0 10%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .sloganNbtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 100%;
+  }
+  .sloganImg{
+    width: 70%;
+    margin: 30px 0 0 0;
+  }
+  .button-box{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0 50px 0;
+  }
+  .button-box button{
+    font-size: 15px;
+    width: 80%;
+    align-self: center;
+  }
+  .button-box button:nth-child(2){
+    margin: 30px 0 0 0;
+  }
+  .jumbotron{
+    flex: 100%;
+  }
 }
 
 .cont {

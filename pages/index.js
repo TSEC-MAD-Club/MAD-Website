@@ -19,9 +19,9 @@ export default function Home() {
   return (
     <>
       <section className="main-1 container-fluid">
-        <div className="row">
-          <div className="col-5">
-            <div className={styles.sloganImg}>
+        <div className="row section-1">
+          <div className="col-5 sloganNbtn">
+            <div className="sloganImg">
               <Image
                 src="/assets/images/slogan.png"
                 width={800}
@@ -39,13 +39,13 @@ export default function Home() {
               </button>
               <button
                 type="button"
-                className="btn btn-lg btn-outline-primary text-white ms-5 ps-5 pe-5"
+                className="btn btn-lg btn-outline-primary text-white ps-5 pe-5"
               >
                 Know More
               </button>
             </div>
           </div>
-          <div className="col-7 text-center">
+          <div className="col-7 text-center jumbotron">
             <Image
               src="/assets/images/events.png"
               width={1100}
