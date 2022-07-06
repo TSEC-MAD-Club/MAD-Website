@@ -30,7 +30,7 @@
 }
 
 .tabBtn {
-  width: 15em;
+  width: min(15em, 20vw);
   height: 4em;
   background-color: #1f1f1f;
   color: white;
@@ -44,11 +44,12 @@
   background-color: #2962ff;
 }
 
-.tabContentActive{
+.tabContentActive {
   margin-top: 7rem;
   margin-bottom: 9rem;
-  display: flex;
-  justify-content: space-around;
+  /* display: flex; */
+  /* justify-content: space-around; */
+  display: grid;
 }
 
 .footer {
