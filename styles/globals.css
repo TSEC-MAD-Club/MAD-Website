@@ -10,10 +10,49 @@ body {
 }
 
 .card-wrapper {
-  display: inline-flex;
+  display: grid;
   width: 100%;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   margin-top: 2rem;
+}
+
+.grid-4 {
+  grid-template-columns: auto auto auto auto;
+}
+.grid-2 {
+  grid-template-columns: auto auto;
+}
+.grid-3 {
+  grid-template-columns: auto auto auto;
+}
+
+@media (max-width: 1191px) {
+  .grid-4,
+  .grid-3 {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 600px) {
+  /* .grid-4,
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: auto;
+  } */
+  .btn.tab-btn {
+    width: 30vw;
+  }
+}
+
+.btn-group.mt-5 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 10px;
+}
+
+.btn-group.mt-5 > .btn {
+  flex: none;
 }
 
 .card {

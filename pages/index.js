@@ -73,43 +73,47 @@ const StaticData = React.memo(function StaticPage() {
         <div className="row">
           <div className="col-lg-4">
             <InView rootMargin="100px" triggerOnce={true}>
-            {
-              ({ inView, ref }) => {
+              {({ inView, ref }) => {
                 return (
-                    <div ref={ref}>
-                      <Image
-                        className="laptop-pic ll"
-                        src= { inView ? "/assets/images/laptop.png" : "/assets/images/540x540.webp" }
-                        width={540}
-                        height={540}
-                        alt=""
-                      />
+                  <div ref={ref}>
+                    <Image
+                      className="laptop-pic ll"
+                      src={
+                        inView
+                          ? "/assets/images/laptop.png"
+                          : "/assets/images/540x540.webp"
+                      }
+                      width={540}
+                      height={540}
+                      alt=""
+                    />
                   </div>
                 );
-              }
-            }
+              }}
             </InView>
           </div>
           <div className="col-lg-8">
             <div className="cont">
               <div>
-              <InView rootMargin="100px" triggerOnce={true}>
-            {
-              ({ inView, ref }) => {
-                return (
-                    <div ref={ref}>
-                      <Image
-                        src={ inView ? "/assets/images/who_are_we_text.png" : "/assets/images/573x72.webp" }
-                        className="ll"
-                        alt=""
-                        width={573}
-                        height={72}
-                      />
-                  </div>
-                );
-              }
-            }
-            </InView>
+                <InView rootMargin="100px" triggerOnce={true}>
+                  {({ inView, ref }) => {
+                    return (
+                      <div ref={ref}>
+                        <Image
+                          src={
+                            inView
+                              ? "/assets/images/who_are_we_text.png"
+                              : "/assets/images/573x72.webp"
+                          }
+                          className="ll"
+                          alt=""
+                          width={573}
+                          height={72}
+                        />
+                      </div>
+                    );
+                  }}
+                </InView>
               </div>
               <p className="mt-3" style={{ fontSize: "35px", color: "white" }}>
                 A committee more like a{" "}
@@ -335,7 +339,7 @@ export default function Home() {
     <>
       <StaticData />
       <div className={styles.btnGroupWrap}>
-        <div className="btn-group flex-wrap mt-5" role="group">
+        <div className="btn-group mt-5" role="group">
           {state.map((tab) => (
             <button
               key={tab.id}
@@ -343,8 +347,8 @@ export default function Home() {
               id={tab.id}
               className={
                 active == tab.id
-                  ? `btn ${styles.tabBtn} ${styles.tabBtnActive}`
-                  : `btn ${styles.tabBtn}`
+                  ? `btn tab-btn ${styles.tabBtn} ${styles.tabBtnActive}`
+                  : `btn tab-btn ${styles.tabBtn}`
               }
               onClick={handleTabOnClick}
             >
@@ -358,11 +362,11 @@ export default function Home() {
           key={tab.id}
           className={
             active == tab.id
-              // ? `${styles.tabContentActive} opacity one`
-              // : "opacity zero abs"
-              ? `${styles.tabContentActive}`
+              ? // ? `${styles.tabContentActive} opacity one`
+                // : "opacity zero abs"
+                `${styles.tabContentActive}`
               : "d-none"
-            }
+          }
         >
           {tab.teams.map((team) => (
             <div
@@ -370,25 +374,27 @@ export default function Home() {
               className={"container-fluid " + active == tab.id ? "abs" : ""}
             >
               <div className="text-center mt-5">
-              <InView rootMargin="100px" triggerOnce={true}>
-              {
-                ({ inView, ref }) => {
-                  return (
+                <InView rootMargin="100px" triggerOnce={true}>
+                  {({ inView, ref }) => {
+                    return (
                       <div ref={ref}>
                         <Image
                           className="ll"
-                          src={ inView ? team.imagePath : "/assets/images/400x100.webp" }
+                          src={
+                            inView
+                              ? team.imagePath
+                              : "/assets/images/400x100.webp"
+                          }
                           alt=""
                           width={400}
                           height={100}
                         />
-                    </div>
-                  );
-                }
-              }
-              </InView>
+                      </div>
+                    );
+                  }}
+                </InView>
               </div>
-              <div className="card-wrapper">
+              <div className={`card-wrapper grid-${team.member.length}`}>
                 {team.member.map((member) => (
                   <TeamCard
                     key={member.id}
