@@ -5,7 +5,13 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div className="container-fluid homebox">
         <a className="navbar-brand" href="#">
-          <Image src="/assets/images/logo.png" width={130} height={77} alt="" />{" "}
+          <img
+            src="https://pps.whatsapp.net/v/t61.24694-24/158318743_498252878509049_663621015264115443_n.jpg?ccb=11-4&oh=01_AVyllSGcdF9fqVxG50OVLNHY_49jamkcJdN0OBslszHErQ&oe=62D6BDB8"
+            width={77}
+            height={77}
+            style={{ borderRadius: "50%" }}
+            alt=""
+          />{" "}
         </a>
         <button
           className="navbar-toggler"
