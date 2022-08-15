@@ -67,7 +67,7 @@
 } 
 
 .image_container {
-  margin: 6vw 2.5vw;
+  margin: 6vw 0;
   height: 45vh;
   width: 40vw;
 }
@@ -106,3 +106,13 @@
   left: 0;
 }
 
+@media(max-width: 768px){
+  .header_container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .image_container{
+    display: none;
+  }
+}
