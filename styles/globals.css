@@ -141,7 +141,7 @@ ul a {
 }
 
 .navbar-nav {
-  align-items: center !important;
+  align-items: center;
   text-align: center;
 }
 .nav-link {
