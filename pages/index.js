@@ -1,6 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+
+import styles1 from "../styles/MembershipDrivePage/MembershipDriveHeader.module.css";
+import Navbar from "../components/Navbar/Navbar";
+
 import { InView } from "react-intersection-observer";
 
 import TeamCard from "../components/TeamCard";
@@ -13,13 +17,35 @@ const StaticData = React.memo(function StaticPage() {
       <section className="main-1 container-fluid">
         <div className="row section-1">
           <div className="col-5 sloganNbtn">
-            <div className="sloganImg">
+            {/* <div className="sloganImg">
               <Image
                 src="/assets/images/slogan.png"
                 width={800}
                 height={615}
                 alt=""
               />
+            </div> */}
+            <div className="sloganImg">
+              <p
+                className="slogan-title"
+                style={{ color: "var(--primary-3)" }}
+              >
+                Build <br/>
+                Collaborate <br/>
+                Work
+              </p>
+              <p 
+                className="slogan-desc"
+                style={{ color: "var(--primary-5)" }}
+              >
+                on real-life applications with
+              </p>
+              <p
+                className="slogan-club-name"
+                style={{ color: "var(--primary-4)" }}
+              >
+                Developers' Club
+              </p>
             </div>
 
             <div className="button-box">
@@ -93,27 +119,24 @@ const StaticData = React.memo(function StaticPage() {
             </InView>
           </div>
           <div className="col-lg-8">
-            <div className="cont">
+            <div 
+              className="desc-section"
+            >
               <div>
-                <InView rootMargin="100px" triggerOnce={true}>
-                  {({ inView, ref }) => {
-                    return (
-                      <div ref={ref}>
-                        <Image
-                          src={
-                            inView
-                              ? "/assets/images/who_are_we_text.png"
-                              : "/assets/images/573x72.webp"
-                          }
-                          className="ll"
-                          alt=""
-                          width={573}
-                          height={72}
-                        />
-                      </div>
-                    );
-                  }}
-                </InView>
+
+                {/* <Image
+                  src="/assets/images/who_are_we_text.png"
+                  alt=""
+                  width={573}
+                  height={72}
+                /> */}
+                <p
+                  className="desc-title"
+                  style={{ color: "var(--primary-4)" }}
+                >
+                  WHO ARE WE ?
+                </p>
+
               </div>
               <p className="mt-3" style={{ fontSize: "35px", color: "white" }}>
                 A committee more like a{" "}
@@ -141,7 +164,7 @@ const StaticData = React.memo(function StaticPage() {
 
 export default function Home() {
   const [active, setActive] = useState(1);
-  const [state, setState] = useState([
+  const [state, _] = useState([
     {
       id: 1,
       name: "Core Committee",
@@ -149,7 +172,7 @@ export default function Home() {
         {
           id: 1,
           name: "Web Team",
-          imagePath: "/assets/images/WebTeam.png",
+          title: "Web Dev Team",
           member: [
             {
               id: 1,
@@ -180,7 +203,7 @@ export default function Home() {
         {
           id: 2,
           name: "Database team",
-          imagePath: "/assets/images/DatabaseTeam.png",
+          title: "Database Mangement Team",
           member: [
             {
               id: 1,
@@ -199,7 +222,7 @@ export default function Home() {
         {
           id: 3,
           name: "App Team",
-          imagePath: "/assets/images/AppTeam.png",
+          title: "App Dev Team",
           member: [
             {
               id: 1,
@@ -230,7 +253,7 @@ export default function Home() {
         {
           id: 4,
           name: "Graphics team",
-          imagePath: "/assets/images/GraphicsTeam.png",
+          title: "Graphics Team",
           member: [
             {
               id: 1,
@@ -249,7 +272,7 @@ export default function Home() {
         {
           id: 5,
           name: "Content team",
-          imagePath: "/assets/images/ContentTeam.png",
+          title: "Content and Social Media Team",
           member: [
             {
               id: 1,
@@ -268,7 +291,7 @@ export default function Home() {
         {
           id: 1,
           name: "Mentor Team",
-          imagePath: "/assets/images/WebTeam.png",
+          title: "Mentors",
           member: [
             {
               id: 1,
@@ -300,6 +323,7 @@ export default function Home() {
           id: 1,
           name: "Mentor Team",
           imagePath: "/assets/images/WebTeam.png",
+          title: "Founders",
           member: [
             {
               id: 1,
@@ -368,7 +392,7 @@ export default function Home() {
               : "d-none"
           }
         >
-          {tab.teams.map((team) => (
+          {tab.teams.map((team, i) => (
             <div
               key={team.id}
               className={"container-fluid " + active == tab.id ? "abs" : ""}
@@ -377,18 +401,30 @@ export default function Home() {
                 <InView rootMargin="100px" triggerOnce={true}>
                   {({ inView, ref }) => {
                     return (
-                      <div ref={ref}>
-                        <Image
-                          className="ll"
-                          src={
-                            inView
-                              ? team.imagePath
-                              : "/assets/images/400x100.webp"
-                          }
-                          alt=""
-                          width={400}
-                          height={100}
-                        />
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "5rem",
+                        }}
+                        ref={ref}
+                      >
+                        <div style={{ marginRight: "10px" }}>{"["}</div>
+                        <div
+                          style={{
+                            fontSize: "2rem",
+                            fontFamily: "var(--title-font)",
+                            transform: "translateY(10px)",
+                            color:
+                              i % 2 == 0
+                                ? "var(--primary-3)"
+                                : "var(--primary-4)",
+                          }}
+                        >
+                          {team.title}
+                        </div>
+                        <div style={{ marginLeft: "10px" }}>{"]"}</div>
                       </div>
                     );
                   }}

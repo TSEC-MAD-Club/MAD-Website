@@ -17,6 +17,7 @@ const TeamCard = ({ name, imagePath, content }) => {
             return (
               <div ref={ref}>
                 <Image
+                  style={{ display: "block" }}
                   className="card-img-top ll"
                   src={inView ? imagePath : "/assets/images/300x300.webp"}
                   alt=""

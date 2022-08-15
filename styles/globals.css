@@ -1,7 +1,11 @@
 
-
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+/* *{
+  border: solid red 2px;
+} */
+
 
 
 
@@ -92,10 +96,13 @@ a {
 :root {
   --primary-1: #000000;
   --primary-2: #373737;
-  --primary-3: #ffd700;
-  --primary-4: #2962ff;
-  --main-font: "Red Hat Display", sans-serif;
-  --title-font: Anurati, "Red Hat Display";
+
+  --primary-3: #FFD700;
+  --primary-4: #2962FF;
+  --primary-5: #fff;
+  --main-font: 'Red Hat Display', sans-serif;
+  --title-font: 'Anurati', 'Red Hat Display';
+
 }
 
 .main-1 {
@@ -104,7 +111,34 @@ a {
 
 .main-2 {
   background-color: #181818;
-  padding: 70px;
+}
+
+.slogan-title {
+  font-family: var(--title-font);
+  font-weight: 400;
+  font-size: 4vw;
+  letter-spacing: 4px;
+}
+
+.slogan-desc{
+  font-family: var(--main-font);
+  font-weight: 300;
+  font-size: 2vw;
+  letter-spacing: 1px;
+}
+
+.slogan-club-name{
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: 4vw;
+  letter-spacing: 2px;
+}
+
+.desc-title{
+  font-family: var(--title-font);
+  font-weight: 400;
+  font-size: 4vw;
+  letter-spacing: 4px;
 }
 
 .text {
@@ -211,6 +245,15 @@ a {
   .sloganImg{
     margin: 15% 0 0 10%;
   }
+
+  .desc-title{
+    font-size: 6vw;
+  }
+
+  .laptop-pic{
+    width: 100px;
+    height: 100px;
+  }
 }
 
 @media screen and (max-width: 768px){
@@ -221,8 +264,16 @@ a {
     flex: 100%;
   }
   .sloganImg{
-    width: 70%;
     margin: 30px 0 0 0;
+  }
+  .slogan-title{
+    font-size: 8vw;
+  }
+  .slogan-desc{
+    font-size: 4vw;
+  }
+  .slogan-club-name{
+    font-size: 8vw;
   }
   .button-box{
     display: flex;
@@ -231,7 +282,7 @@ a {
   }
   .button-box button{
     font-size: 15px;
-    width: 80%;
+    width: 50%;
     align-self: center;
   }
   .button-box button:nth-child(2){
@@ -240,14 +291,14 @@ a {
   .jumbotron{
     flex: 100%;
   }
+  .desc-title{
+    font-size: 7vw;
+  }
 }
 
-.cont {
+.desc-section {
   padding: 20px;
-  position: relative;
-  top: 40px;
-  right: 50px;
-  margin-bottom: 60px;
+  align-items: center;
 }
 
 .footer {
