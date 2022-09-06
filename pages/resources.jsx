@@ -13,6 +13,7 @@ const data = [
       "Conditionals, logic relational operator loops.",
       "Object oriented programming concepts- Encapsulation, inheritance, Polymorphism, abstract class.",
     ],
+    img: "https://i.ibb.co/SR3zg9y/logo1.png",
     resources: [],
     video_tutorials: [],
   },
@@ -28,6 +29,7 @@ const data = [
       "Conditionals, logic relational operator loops.",
       "Object oriented programming concepts- Encapsulation, inheritance, Polymorphism, abstract class.",
     ],
+    img: "https://i.ibb.co/j8RqNj8/image-36.png",
     resources: [],
     video_tutorials: [],
   },
@@ -43,6 +45,7 @@ const data = [
       "Conditionals, logic relational operator loops.",
       "Object oriented programming concepts- Encapsulation, inheritance, Polymorphism, abstract class.",
     ],
+    img: "https://i.ibb.co/NYqt4vM/Flutter.png",
     resources: [],
     video_tutorials: [],
   },
@@ -65,14 +68,22 @@ export default function Resources() {
       {/* Resources to learn intro */}
 
       {/* Pick domain */}
-      <div style={{ color: "#fff" }}>
+      <div style={{ color: "#fff" }} className="resource-main">
         <h2>Pick your domain</h2>
-
-        {data.map((domain_object, index) => (
-          <div key={domain_object.id} onClick={() => handleDomainClick(index)}>
-            {domain_object.title}
-          </div>
-        ))}
+        <div className="resource-box">
+          {data.map((domain_object, index) => (
+            <div
+              key={domain_object.id}
+              className="bx"
+              onClick={() => handleDomainClick(index)}
+            >
+              <div className="object"></div>
+              <div className="object2"></div>
+              {domain_object.title}
+              <img src={domain_object.img} />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Show details of domain */}
