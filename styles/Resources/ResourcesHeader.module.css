@@ -1,0 +1,108 @@
+
+.header_container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+.title {
+    padding: 8vw 8vw;
+}
+
+.header_title {
+    font-family: var(--title-font);
+    font-weight: 400;
+    font-size: 5vw;
+    letter-spacing: 4px;
+}
+
+.dotted_line {
+    width: 45vw;
+    position: absolute;
+    height: 1px !important;
+    background-image: linear-gradient(
+        90deg,
+        transparent,
+        transparent 50%,
+        var(--primary-1) 50%,
+        var(--primary-1) 100%
+        ),
+        linear-gradient(to right, rgba(255, 215, 0, 1), rgba(255, 215, 0, 0));
+    background-size: 20px 3px, 100% 3px;
+    border: none;
+    opacity: 1 !important;
+}
+
+.dotted_line_vertical {
+    width: 40vh;
+    position: absolute;
+    height: 1px !important;
+    background-image: linear-gradient(
+        90deg,
+        transparent,
+        transparent 50%,
+        var(--primary-1) 50%,
+        var(--primary-1) 100%
+        ),
+        linear-gradient(to right, rgba(255, 215, 0, 1), rgba(255, 215, 0, 0));
+    background-size: 20px 3px, 100% 3px;
+    border: none;
+    opacity: 1 !important;
+    transform: rotate(270deg);
+}
+
+.image_container {
+    margin: 8vw 8vw;
+}
+
+.resources_img img{
+    height: 45vh;
+    width: 40vw;
+}
+
+@media(max-width: 768px) and (min-width: 560px){
+    
+    .header_container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .title{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 6vw 10vh;
+        padding-right: 0px;
+    }
+
+    .header_title {
+        font-family: var(--title-font);
+        font-weight: 400;
+        font-size: 8vw;
+        letter-spacing: 4px;
+    }
+
+    .image_container {
+        margin: 0px;
+    }
+    
+    .resources_img img{
+        padding-right: 40px;
+    }
+    
+}
+
+@media screen and (max-width: 561px){
+    .image_container{
+        display: none;
+    }
+
+    .header_title {
+        font-family: var(--title-font);
+        font-weight: 400;
+        font-size: 14vw;
+        letter-spacing: 4px;
+    }
+}

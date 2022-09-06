@@ -11,7 +11,7 @@
 .header_title {
   font-family: var(--title-font);
   font-weight: 400;
-  font-size: 6vw;
+  font-size: 5vw;
   letter-spacing: 4px;
 }
 
@@ -59,12 +59,12 @@
       var(--primary-1) 50%,
       var(--primary-1) 100%
     ),
-    linear-gradient(to bottom, rgba(255, 215, 0, 1), rgba(255, 215, 0, 0));
+    linear-gradient(to right, rgba(255, 215, 0, 1), rgba(255, 215, 0, 0));
   background-size: 20px 3px, 100% 3px;
   border: none;
   opacity: 1 !important;
   transform: rotate(270deg);
-} 
+}
 
 .image_container {
   margin: 6vw 0;
