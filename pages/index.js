@@ -2,9 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import styles1 from "../styles/MembershipDrivePage/MembershipDriveHeader.module.css";
-import Navbar from "../components/Navbar/Navbar";
-
 import { InView } from "react-intersection-observer";
 
 import TeamCard from "../components/TeamCard";
@@ -26,25 +23,19 @@ const StaticData = React.memo(function StaticPage() {
               />
             </div> */}
             <div className="sloganImg">
-              <p
-                className="slogan-title"
-                style={{ color: "var(--primary-3)" }}
-              >
-                Build <br/>
-                Collaborate <br/>
+              <p className="slogan-title" style={{ color: "var(--primary-3)" }}>
+                Build <br />
+                Collaborate <br />
                 Work
               </p>
-              <p 
-                className="slogan-desc"
-                style={{ color: "var(--primary-5)" }}
-              >
+              <p className="slogan-desc" style={{ color: "var(--primary-5)" }}>
                 on real-life applications with
               </p>
               <p
                 className="slogan-club-name"
                 style={{ color: "var(--primary-4)" }}
               >
-                Developers' Club
+                Developers&apos; Club
               </p>
             </div>
 
@@ -119,24 +110,17 @@ const StaticData = React.memo(function StaticPage() {
             </InView>
           </div>
           <div className="col-lg-8">
-            <div 
-              className="desc-section"
-            >
+            <div className="desc-section">
               <div>
-
                 {/* <Image
                   src="/assets/images/who_are_we_text.png"
                   alt=""
                   width={573}
                   height={72}
                 /> */}
-                <p
-                  className="desc-title"
-                  style={{ color: "var(--primary-4)" }}
-                >
+                <p className="desc-title" style={{ color: "var(--primary-4)" }}>
                   WHO ARE WE ?
                 </p>
-
               </div>
               <p className="mt-3" style={{ fontSize: "35px", color: "white" }}>
                 A committee more like a{" "}
