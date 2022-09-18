@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../styles/Resources/Resources.module.css";
 
 const data = [
   {
@@ -6,7 +7,7 @@ const data = [
     id: "1",
     title: "Web Dev",
     description:
-      "As to get started with flutter, dart is the programming language which is used to make flutter UIs as well as applications. So here are some topics listed below you before starting with app development.",
+      "As to get started with web, dart is the programming language which is used to make flutter UIs as well as applications. So here are some topics listed below you before starting with app development.",
     getting_started: [
       "Variables, Null safety.",
       "Built in types, sets, maps, lists.",
@@ -15,13 +16,45 @@ const data = [
     ],
     resources: [],
     video_tutorials: [],
+    tasks: [
+      {
+        title: "Make a Quiz console app",
+        description: "Make a quiz console app using dart",
+        deadline: "2021-10-10",
+        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+      },
+      {
+        title: "Make a Quiz console app",
+        description: "Make a quiz console app using dart",
+        deadline: "2021-10-10",
+        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+      },
+      {
+        title: "Make a Quiz console app",
+        description: "Make a quiz console app using dart",
+        deadline: "2021-10-10",
+        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+      },
+      {
+        title: "Make a Quiz console app",
+        description: "Make a quiz console app using dart",
+        deadline: "2021-10-10",
+        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+      },
+      {
+        title: "Make a Quiz console app",
+        description: "Make a quiz console app using dart",
+        deadline: "2021-10-10",
+        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+      },
+    ],
   },
   {
     domain: "app",
     id: "2",
     title: "App Dev",
     description:
-      "As to get started with flutter, dart is the programming language which is used to make flutter UIs as well as applications. So here are some topics listed below you before starting with app development.",
+      "As to get started with app, dart is the programming language which is used to make flutter UIs as well as applications. So here are some topics listed below you before starting with app development.",
     getting_started: [
       "Variables, Null safety.",
       "Built in types, sets, maps, lists.",
@@ -30,6 +63,7 @@ const data = [
     ],
     resources: [],
     video_tutorials: [],
+    tasks: [],
   },
   {
     domain: "flutter",
@@ -45,6 +79,7 @@ const data = [
     ],
     resources: [],
     video_tutorials: [],
+    tasks: [],
   },
 ];
 
@@ -109,6 +144,22 @@ export default function Resources() {
               ))}
             </ul>
           )}
+        </div>
+      </div>
+      {/* Task */}
+      <div style={{ color: "#fff" }}>
+        <div className={styles.flex}>
+          <h4>Tasks</h4>
+          <div className={`${styles.taskGrid} grid-4`}>
+            {domain_detail.tasks?.map((task, index) => (
+              <div key={index} className={`${styles.taskBox} task-card`}>
+                <div className={styles.taskTitle}>{task.title}</div>
+                <p className={styles.ellipsis}>
+                  Referance Link: {task.referance}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
