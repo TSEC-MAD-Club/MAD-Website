@@ -1,0 +1,73 @@
+.resource-main {
+    height: auto;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:20px;
+    gap:20px;
+}
+.resource-box {
+    width: 80vw;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    gap:20px
+}
+.resource-box .bx {
+    height: 350px;
+    width: 250px;
+    border:1px dashed #9F9F9F;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+}
+.resource-box .bx .object {
+    position: absolute;
+    left: -5%;
+    right: 72.11%;
+    top: 8.62%;
+    bottom: 86.87%;
+    background: rgba(255, 215, 0, 0.8);
+    border-radius: 4px;
+    width: 120%;
+    transform: rotate(340deg);
+}
+.resource-box .bx .object2 {
+    position: absolute;
+    left: -5%;
+    right: 72.11%;
+    top: 72.62%;
+    bottom: 22.87%;
+    background: #2962FF;
+    border-radius: 4px;
+    width: 120%;
+    transform: rotate(10deg);
+}
+
+.resource-box .bx img {
+    position: absolute;
+    width: auto;
+    height: auto;
+    max-height: 40px;
+    max-width: 80px;
+    left: 24px;
+    bottom: 24px;
+    mix-blend-mode: lighten;
+}
+
+
+@media (min-width:250px) and (max-width:800px) {
+    .resource-box {
+        flex-direction: column;
+        align-items: center;
+    }
+    .resource-box .bx {
+        width: 60vw;
+    }
+}
