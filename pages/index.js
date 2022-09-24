@@ -6,7 +6,7 @@ import { InView } from "react-intersection-observer";
 
 import TeamCard from "../components/TeamCard";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StaticData = React.memo(function StaticPage() {
   return (
@@ -333,11 +333,15 @@ export default function Home() {
     },
   ]);
 
-  // useEffect(() => {
-  //   fetch("/api/hello")
-  //     .then((res) => res.json())
-  //     .then((data) => setState(data));
-  // }, []);
+  useEffect(() => {
+    window.onscroll = function () {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("scrollToTop").style.display = "flex";
+      } else {
+        document.getElementById("scrollToTop").style.display = "none";
+      }
+    }
+  }, []);
 
   const handleTabOnClick = (e) => {
     setActive(e.target.id);
@@ -428,6 +432,33 @@ export default function Home() {
           ))}
         </div>
       ))}
+      <div
+        id="scrollToTop"
+        style={{
+          display: "none",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "fixed",
+          bottom: "50px",
+          right: "50px",
+          cursor: "pointer",
+          zIndex: "1000",
+          color: "white",
+          backgroundColor: "var(--primary-2)",
+          borderRadius: "10px",
+          width: "50px",
+          height: "50px",
+          boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
+        }}
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        Top
+      </div>
     </>
   );
 }

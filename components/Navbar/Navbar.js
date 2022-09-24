@@ -91,9 +91,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item me-5 ">
-              <a className="nav-link" href="#">
-                Reach Us
-              </a>
+              <Link href={"/#reach-us"}>
+                <a className="nav-link" href="#">
+                  Reach Us
+                </a>
+              </Link>
             </li>
           </ul>
         </div>
