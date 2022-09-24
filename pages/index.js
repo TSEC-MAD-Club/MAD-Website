@@ -109,7 +109,7 @@ const StaticData = React.memo(function StaticPage() {
               }}
             </InView>
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-8" id="aboutus">
             <div className="desc-section">
               <div>
                 {/* <Image
@@ -346,7 +346,7 @@ export default function Home() {
   return (
     <>
       <StaticData />
-      <div className={styles.btnGroupWrap}>
+      <div className={styles.btnGroupWrap} id="members">
         <div className="btn-group mt-5" role="group">
           {state.map((tab) => (
             <button
@@ -371,8 +371,8 @@ export default function Home() {
           className={
             active == tab.id
               ? // ? `${styles.tabContentActive} opacity one`
-                // : "opacity zero abs"
-                `${styles.tabContentActive}`
+              // : "opacity zero abs"
+              `${styles.tabContentActive}`
               : "d-none"
           }
         >

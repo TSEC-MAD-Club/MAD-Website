@@ -31,9 +31,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item me-5 ">
-              <a className="nav-link" aria-current="page" href="#">
-                About Us
-              </a>
+              <Link href={"/#aboutus"}>
+                <a className="nav-link" aria-current="page" href="#">
+                  About Us
+                </a>
+              </Link>
             </li>
 
             <li className="nav-item me-5  dropdown">
@@ -75,14 +77,18 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item me-5 ">
-              <a className="nav-link" href="/road-map">
-                Road Map
-              </a>
+              <Link href={"/road-map"}>
+                <a className="nav-link" href="#">
+                  Road Map
+                </a>
+              </Link>
             </li>
             <li className="nav-item me-5 ">
-              <a className="nav-link" href="#">
-                Members
-              </a>
+              <Link href={"/#members"}>
+                <a className="nav-link" aria-current="page" href="#">
+                  Members
+                </a>
+              </Link>
             </li>
             <li className="nav-item me-5 ">
               <a className="nav-link" href="#">
