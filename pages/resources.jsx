@@ -1,4 +1,5 @@
 import React from "react";
+import ResourcesHeader from "../components/ResourcesHeader/ResourcesHeader";
 import styles from "../styles/Resources/Resources.module.css";
 
 const data = [
@@ -100,10 +101,34 @@ export default function Resources() {
     <React.Fragment>
       {/* Navbar */}
 
-      {/* Resources to learn intro */}
+      {/* Resources to learn header */}
+      <ResourcesHeader />
+
+      <svg viewBox="0 0 1536 200" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#000" d="M 0 189 L 495 144 L 495 0 L 0 0 Z"></path>{" "}
+        <path fill="#000" d="M 494 144 L 1048 184 L 1048 0 L 494 0 Z"></path>{" "}
+        <path fill="#000" d="M 1047 184 L 1437 136 L 1437 0 L 1047 0 Z"></path>
+        <path fill="#000" d="M 1436 136 L 1536 165 L 1536 0 L 1436 0 Z"></path>
+        <path
+          fill="#181818"
+          d="M 0 189 L 495 144 L 495 320 L 0 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 494 144 L 1048 184 L 1048 320 L 494 320 Z"
+        ></path>{" "}
+        <path
+          fill="#181818"
+          d="M 1047 184 L 1437 136 L 1437 320 L 1047 320 Z"
+        ></path>
+        <path
+          fill="#181818"
+          d="M 1436 136 L 1536 165 L 1536 320 L 1436 320 Z"
+        ></path>
+      </svg>
 
       {/* Pick domain */}
-      <div style={{ color: "#fff" }} className="resource-main">
+      <div style={{ color: "#fff", backgroundColor: "#181818" }} className="resource-main">
         <h2>Pick your domain</h2>
         <div className="resource-box">
           {data.map((domain_object, index) => (
