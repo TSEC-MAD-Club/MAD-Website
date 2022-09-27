@@ -27,9 +27,6 @@ const ResourcesHeader = () => {
                         <div className={styles.design_component}>
                             <img src='/assets/design-component-2.svg'></img>
                         </div>
-                        {/* <hr className={styles.dotted_line} />
-                        <br />
-                        <hr className={styles.dotted_line_vertical}/> */}
                     </div>
 
                     <div>

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React from "react";
 import ResourcesHeader from "../components/ResourcesHeader/ResourcesHeader";
 import styles from "../styles/Resources/Resources.module.css";
@@ -23,31 +24,31 @@ const data = [
         title: "Make a Quiz console app",
         description: "Make a quiz console app using dart",
         deadline: "2021-10-10",
-        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+        referance: "https://www.youtube.com/watch?v=UV_ULe7dZuE",
       },
       {
         title: "Make a Quiz console app",
         description: "Make a quiz console app using dart",
         deadline: "2021-10-10",
-        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+        referance: "https://www.youtube.com/watch?v=UV_ULe7dZuE",
       },
       {
         title: "Make a Quiz console app",
         description: "Make a quiz console app using dart",
         deadline: "2021-10-10",
-        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+        referance: "https://www.youtube.com/watch?v=UV_ULe7dZuE",
       },
       {
         title: "Make a Quiz console app",
         description: "Make a quiz console app using dart",
         deadline: "2021-10-10",
-        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+        referance: "https://www.youtube.com/watch?v=UV_ULe7dZuE",
       },
       {
         title: "Make a Quiz console app",
         description: "Make a quiz console app using dart",
         deadline: "2021-10-10",
-        referance: "https://www.youtube.com/watch?v=J2X5mJ3HDYE",
+        referance: "https://www.youtube.com/watch?v=UV_ULe7dZuE",
       },
     ],
   },
@@ -87,6 +88,35 @@ const data = [
   },
 ];
 
+function Task(props) {
+  return (
+    <>
+      <div style={{ color: "#fff" }}>
+        <div className={styles.flex}>
+          <h4>Tasks</h4>
+          <div className={`${styles.taskGrid} grid-4`}>
+            {props.domain_detail.tasks?.map((task, index) => (
+              <div key={index} className={`${styles.taskBox} task-card`}>
+                <div className={styles.taskTitle}>{task.title}</div>
+                {/* <p className={styles.ellipsis}>
+                  Referance Link: {task.referance}
+                </p> */}
+                <iframe
+                  src="https://www.youtube.com/embed/UV_ULe7dZuE"
+                  title="How to Build Simple Search in Flutter App"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 export default function Resources() {
   const [domain_detail, setDomainDetails] = React.useState(data[0]);
   const [toggleGettingStarted, setToggleGettingStarted] = React.useState(false);
@@ -99,6 +129,9 @@ export default function Resources() {
 
   return (
     <React.Fragment>
+      <Head>
+        <title>Road Map</title>
+      </Head>
       {/* Navbar */}
 
       {/* Resources to learn header */}
@@ -183,21 +216,7 @@ export default function Resources() {
         </div>
       </div>
       {/* Task */}
-      <div style={{ color: "#fff" }}>
-        <div className={styles.flex}>
-          <h4>Tasks</h4>
-          <div className={`${styles.taskGrid} grid-4`}>
-            {domain_detail.tasks?.map((task, index) => (
-              <div key={index} className={`${styles.taskBox} task-card`}>
-                <div className={styles.taskTitle}>{task.title}</div>
-                <p className={styles.ellipsis}>
-                  Referance Link: {task.referance}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <Task domain_detail={domain_detail} />
 
       {/* Detail section for particular domain */}
     </React.Fragment>

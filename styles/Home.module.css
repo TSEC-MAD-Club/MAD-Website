@@ -1,4 +1,3 @@
-
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -154,4 +153,12 @@
     width: 100%;
     flex-direction: column;
   }
+}
+.arrow {
+  width: 70%;
+  height: 70%;
+  background-color: #fff;
+  transform: translateY(15%);
+  -webkit-clip-path: polygon(50% 0, 100% 50%, 95% 55%, 50% 10%, 5% 55%, 0 50%);
+  clip-path: polygon(50% 0, 100% 50%, 95% 55%, 50% 10%, 5% 55%, 0 50%);
 }

@@ -6,7 +6,7 @@ import { InView } from "react-intersection-observer";
 
 import TeamCard from "../components/TeamCard";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StaticData = React.memo(function StaticPage() {
   return (
@@ -109,7 +109,7 @@ const StaticData = React.memo(function StaticPage() {
               }}
             </InView>
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-8" id="aboutus">
             <div className="desc-section">
               <div>
                 {/* <Image
@@ -333,11 +333,15 @@ export default function Home() {
     },
   ]);
 
-  // useEffect(() => {
-  //   fetch("/api/hello")
-  //     .then((res) => res.json())
-  //     .then((data) => setState(data));
-  // }, []);
+  useEffect(() => {
+    window.onscroll = function () {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("scrollToTop").style.display = "flex";
+      } else {
+        document.getElementById("scrollToTop").style.display = "none";
+      }
+    }
+  }, []);
 
   const handleTabOnClick = (e) => {
     setActive(e.target.id);
@@ -346,7 +350,7 @@ export default function Home() {
   return (
     <>
       <StaticData />
-      <div className={styles.btnGroupWrap}>
+      <div className={styles.btnGroupWrap} id="members">
         <div className="btn-group mt-5" role="group">
           {state.map((tab) => (
             <button
@@ -371,8 +375,8 @@ export default function Home() {
           className={
             active == tab.id
               ? // ? `${styles.tabContentActive} opacity one`
-                // : "opacity zero abs"
-                `${styles.tabContentActive}`
+              // : "opacity zero abs"
+              `${styles.tabContentActive}`
               : "d-none"
           }
         >
@@ -428,6 +432,33 @@ export default function Home() {
           ))}
         </div>
       ))}
+      <div
+        id="scrollToTop"
+        style={{
+          display: "none",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "fixed",
+          bottom: "50px",
+          right: "50px",
+          cursor: "pointer",
+          zIndex: "1000",
+          color: "white",
+          backgroundColor: "var(--primary-2)",
+          borderRadius: "10px",
+          width: "50px",
+          height: "50px",
+          boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
+        }}
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        <div className={styles.arrow}></div>
+      </div>
     </>
   );
 }
