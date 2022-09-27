@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <div className="container-fluid footer pt-5">
+    <div className="container-fluid footer pt-5" id="reach-us">
       <div className="row">
         <div className="col-4 text-center">
           <h2 className={styles.primary1}>

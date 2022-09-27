@@ -2,14 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-import styles1 from "../styles/MembershipDrivePage/MembershipDriveHeader.module.css";
-import Navbar from "../components/Navbar/Navbar";
-
 import { InView } from "react-intersection-observer";
 
 import TeamCard from "../components/TeamCard";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StaticData = React.memo(function StaticPage() {
   return (
@@ -26,25 +23,19 @@ const StaticData = React.memo(function StaticPage() {
               />
             </div> */}
             <div className="sloganImg">
-              <p
-                className="slogan-title"
-                style={{ color: "var(--primary-3)" }}
-              >
-                Build <br/>
-                Collaborate <br/>
+              <p className="slogan-title" style={{ color: "var(--primary-3)" }}>
+                Build <br />
+                Collaborate <br />
                 Work
               </p>
-              <p 
-                className="slogan-desc"
-                style={{ color: "var(--primary-5)" }}
-              >
+              <p className="slogan-desc" style={{ color: "var(--primary-5)" }}>
                 on real-life applications with
               </p>
               <p
                 className="slogan-club-name"
                 style={{ color: "var(--primary-4)" }}
               >
-                Developers' Club
+                Developers&apos; Club
               </p>
             </div>
 
@@ -118,25 +109,18 @@ const StaticData = React.memo(function StaticPage() {
               }}
             </InView>
           </div>
-          <div className="col-lg-8">
-            <div 
-              className="desc-section"
-            >
+          <div className="col-lg-8" id="aboutus">
+            <div className="desc-section">
               <div>
-
                 {/* <Image
                   src="/assets/images/who_are_we_text.png"
                   alt=""
                   width={573}
                   height={72}
                 /> */}
-                <p
-                  className="desc-title"
-                  style={{ color: "var(--primary-4)" }}
-                >
+                <p className="desc-title" style={{ color: "var(--primary-4)" }}>
                   WHO ARE WE ?
                 </p>
-
               </div>
               <p className="mt-3" style={{ fontSize: "35px", color: "white" }}>
                 A committee more like a{" "}
@@ -349,11 +333,15 @@ export default function Home() {
     },
   ]);
 
-  // useEffect(() => {
-  //   fetch("/api/hello")
-  //     .then((res) => res.json())
-  //     .then((data) => setState(data));
-  // }, []);
+  useEffect(() => {
+    window.onscroll = function () {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("scrollToTop").style.display = "flex";
+      } else {
+        document.getElementById("scrollToTop").style.display = "none";
+      }
+    }
+  }, []);
 
   const handleTabOnClick = (e) => {
     setActive(e.target.id);
@@ -362,7 +350,7 @@ export default function Home() {
   return (
     <>
       <StaticData />
-      <div className={styles.btnGroupWrap}>
+      <div className={styles.btnGroupWrap} id="members">
         <div className="btn-group mt-5" role="group">
           {state.map((tab) => (
             <button
@@ -387,8 +375,8 @@ export default function Home() {
           className={
             active == tab.id
               ? // ? `${styles.tabContentActive} opacity one`
-                // : "opacity zero abs"
-                `${styles.tabContentActive}`
+              // : "opacity zero abs"
+              `${styles.tabContentActive}`
               : "d-none"
           }
         >
@@ -444,6 +432,33 @@ export default function Home() {
           ))}
         </div>
       ))}
+      <div
+        id="scrollToTop"
+        style={{
+          display: "none",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "fixed",
+          bottom: "50px",
+          right: "50px",
+          cursor: "pointer",
+          zIndex: "1000",
+          color: "white",
+          backgroundColor: "var(--primary-2)",
+          borderRadius: "10px",
+          width: "50px",
+          height: "50px",
+          boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)"
+        }}
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        <div className={styles.arrow}></div>
+      </div>
     </>
   );
 }
