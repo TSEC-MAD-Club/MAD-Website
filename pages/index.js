@@ -155,114 +155,166 @@ export default function Home() {
       teams: [
         {
           id: 1,
-          name: "Web Team",
-          title: "Web Dev Team",
+          name: "Core team",
+          title: "Core Team",
           member: [
             {
               id: 1,
-              name: "Mahima Samantara",
-              imagePath: "/assets/images/MahimaWebTeam.png",
-              content: "BE - IT",
+              name: "Aaditya Chinchkhedkar",
+              imagePath: "/assets/images/Aaditya Chinchkhedkar.jpg",
+              content: "Chairperson"
             },
             {
               id: 2,
-              name: "Kavish Shah",
-              imagePath: "/assets/images/KavishWebTeam.jpg",
-              content: "BE - Computer",
-            },
-            {
-              id: 3,
-              name: "Jay Kaku",
-              imagePath: "/assets/images/JayWebTeam.png",
-              content: "BE - Computer",
-            },
-            {
-              id: 4,
-              name: "Ritwik Vaidya",
-              imagePath: "/assets/images/RitwikWebTeam.jpeg",
-              content: "BE - Computer",
+              name: "Yash Dalvi",
+              imagePath: "/assets/images/Yash Dalvi.jpg",
+              content: "Vice-Chairperson"
             },
           ],
         },
         {
           id: 2,
-          name: "Database team",
-          title: "Database Mangement Team",
-          member: [
-            {
-              id: 1,
-              name: "Ruchit Thaker",
-              imagePath: "/assets/images/RuchitDatabaseTeam.jpg",
-              content: "BE - IT",
-            },
-            {
-              id: 2,
-              name: "Keyul Jain",
-              imagePath: "/assets/images/KeyulDatabaseTeam.jfif",
-              content: "BE - Computer",
-            },
-          ],
-        },
-        {
-          id: 3,
           name: "App Team",
           title: "App Dev Team",
           member: [
             {
               id: 1,
-              name: "Darshan Rander",
-              imagePath: "/assets/images/DarshanAppTeam.png",
-              content: "BE - IT",
+              name: "Krishana Dave",
+              imagePath: "/assets/images/Krishana Dave.jpg",
             },
             {
               id: 2,
-              name: "Tanay Kamath",
-              imagePath: "/assets/images/TanayAppTeam.png",
-              content: "BE - Computer",
+              name: "Abhinay Patil",
+              imagePath: "/assets/images/Abhinay Patil.jpg",
             },
             {
               id: 3,
-              name: "Gaurav Raj",
-              imagePath: "/assets/images/GauravAppTeam.png",
-              content: "BE - Computer",
+              name: "Dhruv Jain",
+              imagePath: "/assets/images/Dhruv jain.jpg",
             },
             {
               id: 4,
-              name: "Harsh Mody",
-              imagePath: "/assets/images/HarshAppTeam.png",
-              content: "BE - IT",
+              name: "Punnet Shetty",
+              imagePath: "/assets/images/Puneet Shetty.jpeg",
+            },            
+            {
+              id: 5,
+              name: "Prasad Ranjane",
+              imagePath: "/assets/images/Prasad Ranjane.jpg",
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: "Web Team",
+          title: "Web Dev Team",
+          member: [
+            {
+              id: 1,
+              name: "Hritik Sharma",
+              imagePath: "/assets/images/Hritik Sharma.png",
+            },
+            {
+              id: 2,
+              name: "Shreesh Srivastava",
+              imagePath: "/assets/images/Shreesh Srivastava.jpg",
+            },
+            {
+              id: 3,
+              name: "Vaibhavi Pore",
+              imagePath: "/assets/images/Vaibhavi Pore.jpg",
+            },
+            {
+              id: 4,
+              name: "Ronak Lala",
+              imagePath: "/assets/images/Ronak Lala.jpeg",
+            },
+            {
+              id: 5,
+              name: "Raunak Raikisani",
+              imagePath: "/assets/images/Raunak Raikisani.jpg",
             },
           ],
         },
         {
           id: 4,
-          name: "Graphics team",
-          title: "Graphics Team",
+          name: "Design team",
+          title: "Design Team",
           member: [
             {
               id: 1,
-              name: "Pooja Patel",
-              imagePath: "/assets/images/PoojaGraphicsTeam.png",
-              content: "BE - Computer",
+              name: "Gayatri Joshi",
+              imagePath: "/assets/images/Gayatri Joshi.jpeg",
             },
             {
               id: 2,
-              name: "Ishan Saksena",
-              imagePath: "/assets/images/IshanGraphicsTeam.png",
-              content: "BE - Computer",
+              name: "Komalika Acharya",
+              imagePath: "/assets/images/Komalika Acharya.jpeg",
             },
           ],
         },
         {
           id: 5,
-          name: "Content team",
-          title: "Content and Social Media Team",
+          name: "Public Relations and Marketing Team",
+          title: "Public Relations and Marketing Team",
           member: [
             {
               id: 1,
-              name: "Amandeep Chawla",
-              imagePath: "/assets/images/AmandeepContentTeam.png",
-              content: "BE - Chemical",
+              name: "Mandar Kasangottuwar",
+              imagePath: "/assets/images/Mandar Kasangottuwar.jpg",
+            },
+            {
+              id: 2,
+              name: "Mitesh Singh",
+              imagePath: "/assets/images/Mitesh Singh.jpeg",
+            },
+            {
+              id: 3,
+              name: "Rohan Lalwani",
+              imagePath: "/assets/images/Rohan Lalwani.jpg",
+            },
+            {
+              id: 4,
+              name: "Deep Shukla",
+              imagePath: "/assets/images/Deep Shukla.jpeg",
+            },
+            {
+              id: 5,
+              name: "Chetana Bhojwani",
+              imagePath: "/assets/images/Chetana Bhojwani.jpg",
+            },
+            {
+              id: 6,
+              name: "Jeevika Tiwari",
+              imagePath: "/assets/images/Jeevika Tiwari.jpg",
+            },
+            {
+              id: 7,
+              name: "Anas Khan",
+              imagePath: "/assets/images/Anas Khan.png",
+            },
+            {
+              id: 8,
+              name: "Jay Samberkar",
+              imagePath: "/assets/images/Jay Samberkar.jpg",
+            },
+
+          ],
+        },
+        {
+          id: 6,
+          name: "Content team",
+          title: "Content Team",
+          member: [
+            {
+              id: 1,
+              name: "Shreya Kamath",
+              imagePath: "/assets/images/Shreya Kamath.jpg",
+            },
+            {
+              id: 2,
+              name: "Sarah Khan",
+              imagePath: "/assets/images/Sarah Khan.png",
             },
           ],
         },
@@ -385,7 +437,7 @@ export default function Home() {
               key={team.id}
               className={"container-fluid " + active == tab.id ? "abs" : ""}
             >
-              <div className="text-center mt-5">
+              <div className="text-center mt-1">
                 <InView rootMargin="100px" triggerOnce={true}>
                   {({ inView, ref }) => {
                     return (
@@ -418,7 +470,7 @@ export default function Home() {
                   }}
                 </InView>
               </div>
-              <div className={`card-wrapper grid-${team.member.length}`}>
+              <div className={`card-wrapper grid-${team.member.length<3?team.member.length:3}`}>
                 {team.member.map((member) => (
                   <TeamCard
                     key={member.id}
