@@ -20,15 +20,18 @@ export default function Dashboard(props) {
         <div className={styles.reminderTitle}>New Reminder</div>
         <div className={styles.reminderBody}>
           <div className={styles.reminderBodyLeft}>
+
             <Element title="Title of Reminder">
-              <input type="text" name="title" id="title" />
+              <input type="text" name="title" id="title" className={styles.inputText} style={{"borderColor": "#285580"}} placeholder="Enter a task here" />
             </Element>
             <Element title="Description">
               <textarea
                 name="decription"
                 id="decription"
                 cols="30"
-                rows="10"
+                rows="5"
+                placeholder="Enter details here"
+                className={styles.inputText}
               ></textarea>
             </Element>
           </div>
