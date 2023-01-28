@@ -20,9 +20,14 @@ export default function Dashboard(props) {
         <div className={styles.reminderTitle}>New Reminder</div>
         <div className={styles.reminderBody}>
           <div className={styles.reminderBodyLeft}>
-
             <Element title="Title of Reminder">
-              <input type="text" name="title" id="title" className={styles.inputText} style={{"borderColor": "#285580"}} placeholder="Enter a task here" />
+              <input
+                type="text"
+                name="title"
+                id="title"
+                className={styles.inputText}
+                placeholder="Enter a task here"
+              />
             </Element>
             <Element title="Description">
               <textarea
@@ -37,12 +42,52 @@ export default function Dashboard(props) {
           </div>
           <div className={styles.reminderBodyRight}>
             <Element title="Select date and time">
-              date time selector Dropdown element
+              <div className={styles.inputbox}>
+                <input type="date" className="date form-control" />{" "}
+                <input type="time" className="time form-control" />
+              </div>
             </Element>
             <Element title="Add attachments">
-              <input type="file" name="attachment" id="attachment" />
+              <div className={styles.inputbox}>
+                <input type="file" id="actual-btn" name="attachment" hidden />
+                <label htmlFor="actual-btn" className={styles.label}>
+                  +
+                </label>
+                <label>Upload From Device</label>
+              </div>
             </Element>
-            <Element title="Select students">Dropdown element</Element>
+            <Element title="Select students" className="box">
+              <div className={styles.box}>
+                <div className={styles.inputboxdates}>
+                  <select>
+                    <option selected>Year</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                  </select>
+                </div>
+                <div className={styles.inputboxdates}>
+                  <select>
+                    <option selected>Branch </option>
+                    <option>IT</option>
+                    <option>CO</option>
+                  </select>
+                </div>
+                <div className={styles.inputboxdates}>
+                  <select>
+                    <option selected>Div</option>
+                    <option>G</option>
+                    <option>H</option>
+                  </select>
+                </div>
+                <div className={styles.inputboxdates}>
+                  <select>
+                    <option selected>Batch</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                  </select>
+                </div>
+              </div>
+            </Element>
           </div>
         </div>
       </div>
