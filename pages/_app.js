@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import Layout from "../components/Layout/Layout";
 import Head from "next/head";
 import "./css/resources.css";
+import { ToastContainer } from "react-nextjs-toast";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -24,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         ></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       </Head>
-
+      <ToastContainer />
       <Layout>
         <Component {...pageProps} />
       </Layout>

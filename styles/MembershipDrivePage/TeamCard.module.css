@@ -1,7 +1,0 @@
-.teamCardSize {
-  width: min(288px, 40vw);
-}
-
-.teamCardSize > div > span {
-  display: block !important;
-}
