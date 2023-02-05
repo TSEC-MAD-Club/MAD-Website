@@ -4,7 +4,12 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { toast } from "react-nextjs-toast";
 import "firebase/storage";
-import { getStorage } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 const selectedBranch = {
   Comps: ["all", "C1", "C2", "C3"],
@@ -44,32 +49,71 @@ function CreateReminderComponent() {
   const [description, setDescription] = useState("");
   const [branch, setBranch] = useState("all");
   const [year, setYear] = useState("all");
-  const [mediaPath, setMediaPath] = useState("hritik/desktop/profile.jpg");
+  const [mediaPath, setMediaPath] = useState("");
+  const [media, setMedia] = useState("");
+  const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
   const [division, setDivision] = useState(() => {
     if (year == "all" || branch === "all") return "all";
 
     return selectedBranch[branch][0];
   });
-
-  const uploadFile = async (file) => {
-    console.log(file, "uploading file");
-    const storage = getStorage();
-    const storageRef = storage.ref();
-    const folderRef = storageRef.child("common_notification");
-    const fileRef = folderRef.child(file.name);
-    try {
-      const snapshot = await fileRef.put(file);
-      return snapshot.ref.getDownloadURL();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const [batch, setBatch] = useState(() => {
     if (year === "all" || branch === "all") return "all";
 
     return selectedDivision[selectedBranch[branch][0]][0];
   });
+
+  const uploadFile = async (file) => {
+    setMedia(file);
+    const storage = getStorage();
+    const storageRef = ref(storage, "images/" + file.name);
+
+    // Upload the file and metadata
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+        }
+      },
+      (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+
+        switch (error.code) {
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+
+          // ...
+
+          case "storage/unknown":
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setMediaUploadStatus(true);
+          setMediaPath(downloadURL);
+        });
+      }
+    );
+  };
 
   const setNotification = async (notificationPath) => {
     const docRef = await addDoc(collection(db, "notifications"), {
@@ -77,7 +121,19 @@ function CreateReminderComponent() {
       message: description,
       title,
       topic: notificationPath,
+      attachment: mediaPath,
     });
+
+    setTitle("");
+    setMediaPath("");
+    setBranch("all");
+    setDescription("");
+    setYear("all");
+    setDivision("all");
+    setBatch("all");
+    setMedia("");
+    setMediaUploadStatus(false);
+    toast.notify(`Submitted response`, { type: "success" });
 
     return;
   };
@@ -134,7 +190,6 @@ function CreateReminderComponent() {
         ("-" + branch + "-" + division + "-" + batch)
     );
 
-    toast.notify(`Submitted response`, { type: "success" });
     return;
   };
 
@@ -191,7 +246,7 @@ function CreateReminderComponent() {
               <input
                 type="file"
                 onChange={(e) => {
-                  setMediaPath(e.target.value);
+                  uploadFile(e.target.files[0]);
                 }}
                 id="actual-btn"
                 name="attachment"
@@ -202,6 +257,11 @@ function CreateReminderComponent() {
               </label>
               <label>Upload From Device</label>
             </div>
+            {uploadMediaStatus && (
+              <p style={{ color: "#fff", marginTop: "5px" }}>
+                Uploaded {media.name}
+              </p>
+            )}
           </Element>
           <Element title="Select students *" className="box">
             <div className={styles.box}>

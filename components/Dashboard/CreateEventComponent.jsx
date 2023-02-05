@@ -4,7 +4,12 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { toast } from "react-nextjs-toast";
 import "firebase/storage";
-import { getStorage } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 const EVENT_COMMITTEE_NAME = "Committee Name";
 const EVENT_LOCATION = "Event Location";
@@ -38,6 +43,8 @@ function Element(props) {
 
 function CreateEventComponent() {
   const [eventDetails, setEventDetails] = useState(initialDetails);
+  const [mediaUrl, setMeidaUrl] = useState("");
+  const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
 
   const handleEventDetails = (e) => {
     e.preventDefault();
@@ -49,16 +56,59 @@ function CreateEventComponent() {
   };
 
   const uploadFile = async (file) => {
+    setMediaUploadStatus(true);
     const storage = getStorage();
-    const storageRef = storage.ref();
-    const folderRef = storageRef.child("common_notification");
-    const fileRef = folderRef.child(file.name);
-    try {
-      const snapshot = await fileRef.put(file);
-      return snapshot.ref.getDownloadURL();
-    } catch (error) {
-      console.error(error);
-    }
+    const storageRef = ref(storage, "images/" + file.name);
+
+    // Upload the file and metadata
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+        }
+      },
+      (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+
+        switch (error.code) {
+          case "storage/unauthorized":
+            // User doesn't have permission to access the object
+            break;
+          case "storage/canceled":
+            // User canceled the upload
+            break;
+
+          // ...
+
+          case "storage/unknown":
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setMeidaUrl(downloadURL);
+          setMediaUploadStatus(false);
+          setEventDetails((prev) => ({
+            ...prev,
+            [EVENT_IMAGE_URL]: downloadURL,
+          }));
+        });
+      }
+    );
   };
 
   const setNotification = async () => {
@@ -72,8 +122,6 @@ function CreateEventComponent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(eventDetails);
 
     if (eventDetails[EVENT_COMMITTEE_NAME].trim().length === 0) {
       toast.notify(`Please add title`, { type: "error" });
@@ -195,14 +243,15 @@ function CreateEventComponent() {
             </div>
           </Element>
 
-          <Element title="Add attachments (Optional)">
+          <Element title="Add attachments *">
             <div className={styles.inputbox}>
               <input
                 type="file"
                 id="actual-btn"
                 name={EVENT_IMAGE_URL}
-                value={eventDetails[EVENT_IMAGE_URL]}
-                onChange={handleEventDetails}
+                onChange={async (e) => {
+                  let val = await uploadFile(e.target.files[0]);
+                }}
                 hidden
               />
               <label htmlFor="actual-btn" className={styles.label}>
@@ -210,6 +259,18 @@ function CreateEventComponent() {
               </label>
               <label>Upload From Device</label>
             </div>
+            {mediaUrl && (
+              <div
+                style={{
+                  background: "white",
+                  width: "180px",
+                  marginTop: "12px",
+                }}
+              >
+                <img src={mediaUrl} width="100%" alt="" />
+              </div>
+            )}
+            {uploadMediaStatus && <p style={{ color: "#fff" }}>Loading...</p>}
           </Element>
         </div>
       </div>
