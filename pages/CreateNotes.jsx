@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "../../styles/Dashboard/Dashboard.module.css";
+import styles from "../styles/Dashboard/Dashboard.module.css";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../firebase";
 import { toast } from "react-nextjs-toast";
 import "firebase/storage";
 import {
@@ -21,12 +21,12 @@ const selectedBranch = {
 };
 
 const selectedDivision = {
-  C1: ["all", "C11", "C12", "C13"],
-  C2: ["all", "C21", "C22", "C23"],
-  C3: ["all", "C31", "C32", "C33"],
-  I1: ["all", "I11", "I12", "I13"],
-  I2: ["all", "I21", "I22", "I23"],
-  I3: ["all", "I31", "I32", "I33"],
+  C1: ["all", "c11", "c12", "c13"],
+  C2: ["all", "c21", "c22", "c23"],
+  C3: ["all", "c31", "c32", "c33"],
+  I1: ["all", "i11", "i12", "i13"],
+  I2: ["all", "i21", "i22", "i23"],
+  I3: ["all", "i31", "i32", "i33"],
   M1: ["all", "m11", "m12", "m13"],
   M2: ["all", "m21", "m22", "m23"],
   M3: ["all", "m31", "m32", "m33"],
@@ -44,7 +44,7 @@ function Element(props) {
   );
 }
 
-function CreateReminderComponent() {
+function CreateNotes() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [branch, setBranch] = useState("all");
@@ -121,7 +121,7 @@ function CreateReminderComponent() {
       message: description,
       title,
       topic: notificationPath,
-      attachments: [mediaPath],
+      attachment: mediaPath,
     });
 
     setTitle("");
@@ -214,16 +214,16 @@ function CreateReminderComponent() {
 
   return (
     <div className={styles.reminder}>
-      <div className={styles.reminderTitle}>New Reminder</div>
+      <div className={styles.reminderTitle}>Send Notes</div>
 
       <div className={styles.reminderBody}>
         <div className={styles.reminderBodyLeft}>
-          <Element title="Title of Reminder *">
+          <Element title="Subject *">
             <input
               type="text"
               name="title"
               className={styles.inputText}
-              placeholder="Enter a task here"
+              placeholder="Enter subject name"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -241,7 +241,7 @@ function CreateReminderComponent() {
           </Element>
         </div>
         <div className={styles.reminderBodyRight}>
-          <Element title="Add attachments (Optional)">
+          <Element title="Add Notes *">
             <div className={styles.inputbox}>
               <input
                 type="file"
@@ -365,4 +365,4 @@ function CreateReminderComponent() {
   );
 }
 
-export default CreateReminderComponent;
+export default CreateNotes;

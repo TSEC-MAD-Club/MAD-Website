@@ -1,11 +1,27 @@
-import Image from "next/image";
+imwport Image from "next/image";
 import Link from "next/link";
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
-      <div className="container-fluid homebox">
-        <a className="navbar-brand" href="/">
-          <Image src="/assets/images/logo.png" width={130} height={77} alt="" />{" "}
+      <div className="container-fluid homebox" style={{ height: "90px" }}>
+        <a
+          className="navbar-brand"
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+            marginTop: '50px'
+          }}
+          href="/"
+        >
+          <Image
+            className="navbar-logo"
+            src="/assets/images/DevsClubLogo.png"
+            width={80}
+            height={80}
+            objectFit={"cover"}
+            alt=""
+          />{" "}
         </a>
         <button
           className="navbar-toggler"
@@ -24,8 +40,8 @@ const Navbar = () => {
         >
           <ul className="navbar-nav ms-auto">
             <li className="nav-item me-5 ">
-              <Link href={"/ViewReminder"}>
-                <a className="nav-link">View Reminder</a>
+              <Link href={"/CreateNotes"}>
+                <a className="nav-link">Send Notes</a>
               </Link>
             </li>
             <li className="nav-item me-5 ">

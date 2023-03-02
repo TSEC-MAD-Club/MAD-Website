@@ -17,8 +17,8 @@ const EVENT_NAME = "Event Name";
 const EVENT_DATE = "Event date";
 const EVENT_TIME = "Event Time";
 const EVENT_DESCRIPTION = "Event description";
-const EVENT_REGISTRATION_LINK = "Event registration link";
-const EVENT_IMAGE_URL = "Image url";
+const EVENT_REGISTRATION_LINK = "Event registration url";
+const EVENT_IMAGE_URL = "Image url ";
 const FIREBASE_EVENT_COLLECTION = "Events";
 
 const initialDetails = {
@@ -117,6 +117,9 @@ function CreateEventComponent() {
     });
 
     toast.notify(`Submitted response`, { type: "success" });
+    setEventDetails(initialDetails);
+    setMediaUploadStatus(false);
+    setMeidaUrl("");
     return;
   };
 
@@ -173,8 +176,19 @@ function CreateEventComponent() {
                 style={{ minWidth: "100%" }}
               >
                 <option value={""}>Select commitee name</option>
-                <option value={"Dev's club"}>Dev's club</option>
-                <option value={"Code cell"}>Code cell</option>
+                <option value={"Dev's Club"}>Dev's Club</option>
+                <option value={"TSEC Codecell"}>TSEC Codecell</option>
+                <option value={"TSEC Codetantra"}>TSEC Codetantra</option>
+                <option value={"ISTE-TSEC"}>ISTE-TSEC</option>
+                <option value={"NSS-TSEC"}>NSS-TSEC</option>
+                <option value={"TSEC Sports Committee"}>
+                  TSEC Sports Committee
+                </option>
+                <option value={"TSEC Student Council"}>
+                  TSEC Student Council
+                </option>
+                <option value={"CSI-TSEC"}>CSI-TSEC</option>
+                <option value={"RC-TSEC"}>RC-TSEC</option>
               </select>
             </div>
           </Element>
@@ -283,3 +297,45 @@ function CreateEventComponent() {
 }
 
 export default CreateEventComponent;
+
+/*
+
+case "TSEC Codestorm":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2FCodeStorm_logo.png?alt=media&token=5ce893a0-ecf4-4524-97c6-83bfa8f4d1d7";
+
+    case "Dev's Club":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2FDevs_club%20logo.png?alt=media&token=4d73670f-c753-48ee-92b4-84a1b53a462c";
+
+    case "Xeuron-TSEC":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2FXeuron-tsec.jpeg?alt=media&token=4cada1c0-8984-47e1-b145-d376aa3416d7";
+
+    case "CSI-TSEC":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fcsi-tsec.jpg?alt=media&token=b0897ca6-b54c-4b26-81c1-71f3105de53d";
+
+    case "IEEE-TSEC":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fieee_tsec.jpg?alt=media&token=e8d91977-ff63-4d0d-af03-c86fc59227b4";
+
+    case "IETE-TSEC":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fiete-tsec.jpg?alt=media&token=e52eb59d-6d51-43d8-a041-7fcd79b48ef1";
+
+    case "ISTE-TSEC":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fiste-tsec.jpg?alt=media&token=408ace7c-f28a-4986-be04-40c18b706660";
+
+    case "TSEC-MCL":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fmcl-tsec.jpg?alt=media&token=835cf7cc-e8e1-48ce-9f4d-7ef721ef6247";
+
+    case "MS-TSEC":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fms-tsec.jpg?alt=media&token=56985117-de99-4c2d-ba5f-90c39f08a479";
+
+    case "NSS-TSEC":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fnss-tsec.png?alt=media&token=01df2d46-11e4-49f8-9dc9-d287caf31c5d";
+
+    case "TSEC Sports Committee":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Fsports_com.png?alt=media&token=f6ca8fdf-04c7-4062-a97e-4cacb1888e6c";
+
+    case "TSEC Codecell":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Ftsec_code_cell.png?alt=media&token=b3c4df91-1b74-4957-bd8b-e1762406b036";
+
+    case "TSEC E-Cell":
+      return "https://firebasestorage.googleapis.com/v0/b/tsec-app.appspot.com/o/committees%2Ftsec_e_cell.png?alt=media&token=76f25a18-c191-4cf7-824f-fc52202ed7d5";
+*/
