@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Login from "./Login";
+import Navbar from "../components/Navbar/Navbar";
+import { UserContext } from "./_app";
 
 const StaticData = React.memo(function StaticPage() {
   return (
@@ -74,9 +76,27 @@ const StaticData = React.memo(function StaticPage() {
 });
 
 export default function Home() {
+  const { loggedIn, setLoggedIn } = React.useContext(UserContext);
+  useEffect(() => {
+    isAuthenticatedFn();
+  }, []);
+
+  function isAuthenticatedFn() {
+    if (localStorage) {
+      const user = JSON.parse(localStorage.getItem("loggedIn"));
+      if (!!user) {
+        setLoggedIn(true);
+      }
+    }
+  }
+
   return (
     <>
-      <StaticData />
+      {loggedIn ? (
+        <StaticData />
+      ) : (
+        <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+      )}
     </>
   );
 }

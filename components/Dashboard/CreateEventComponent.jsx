@@ -79,9 +79,6 @@ function CreateEventComponent() {
         }
       },
       (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-
         switch (error.code) {
           case "storage/unauthorized":
             // User doesn't have permission to access the object

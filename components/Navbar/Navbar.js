@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+import { UserContext } from "../../pages/_app";
+
 const Navbar = () => {
+  const { loggedIn, setLoggedIn } = React.useContext(UserContext);
   return (
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div className="container-fluid homebox" style={{ height: "90px" }}>
@@ -10,7 +14,7 @@ const Navbar = () => {
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "flex-end",
-            marginTop: '50px'
+            marginTop: "50px",
           }}
           href="/"
         >
@@ -38,20 +42,30 @@ const Navbar = () => {
           className="desktop-menu collapse navbar-collapse"
           id="navbarNavDropdown"
         >
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item me-5 ">
-              <Link href={"/CreateNotes"}>
-                <a className="nav-link">Send Notes</a>
-              </Link>
-            </li>
-            <li className="nav-item me-5 ">
-              <Link href={"/#members"}>
-                <a className="nav-link" aria-current="page" href="#">
+          {loggedIn ? (
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item me-5 ">
+                <Link href={"/SendNotes"}>
+                  <a className="nav-link">Send Notes</a>
+                </Link>
+              </li>
+              <li className="nav-item me-5">
+                <button
+                  className="nav-link"
+                  style={{ background: "none", border: 0 }}
+                  onClick={() => {
+                    localStorage.setItem("loggedIn", false);
+                    setLoggedIn(false);
+                  }}
+                  aria-current="page"
+                >
                   Logout
-                </a>
-              </Link>
-            </li>
-          </ul>
+                </button>
+              </li>
+            </ul>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </nav>

@@ -4,10 +4,16 @@ import Layout from "../components/Layout/Layout";
 import Head from "next/head";
 import "./css/resources.css";
 import { ToastContainer } from "react-nextjs-toast";
+import React from "react";
+
+const UserContext = React.createContext({
+  loggedIn: false,
+});
 
 function MyApp({ Component, pageProps }) {
+  const [loggedIn, setLoggedIn] = React.useState(false);
   return (
-    <>
+    <UserContext.Provider value={{ loggedIn, setLoggedIn }}>
       <Head>
         {/* // Responsive meta tag */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,8 +35,10 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </UserContext.Provider>
   );
 }
 
 export default MyApp;
+
+export { UserContext };

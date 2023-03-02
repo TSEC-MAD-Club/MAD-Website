@@ -44,7 +44,7 @@ function Element(props) {
   );
 }
 
-function CreateNotes() {
+function SendNotes() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [branch, setBranch] = useState("all");
@@ -365,4 +365,4 @@ function CreateNotes() {
   );
 }
 
-export default CreateNotes;
+export default SendNotes;
