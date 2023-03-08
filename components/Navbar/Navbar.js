@@ -20,7 +20,7 @@ const Navbar = () => {
         >
           <Image
             className="navbar-logo"
-            src="/assets/images/DevsClubLogo.png"
+            src="/assets/images/Background-14.png"
             width={80}
             height={80}
             objectFit={"cover"}
