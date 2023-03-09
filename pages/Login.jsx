@@ -57,7 +57,7 @@ const Login = ({ setLoggedIn }) => {
                   },
                   "FIREBASE_API_KEY"
                 );
-                // loginMsg();
+                loginMsg();
               }}
               className={style.rightContainer}
             >
