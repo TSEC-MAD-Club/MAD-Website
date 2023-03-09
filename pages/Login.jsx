@@ -16,18 +16,21 @@ const Login = ({ setLoggedIn }) => {
   const [email, setEmail] = useState("");
 
   const loginMsg = () => {
+    console.log("Auth ke upar")
     const auth = getAuth();
-    console.log(auth, "Hi!!!!");
-    
+    console.log(auth, "auth ke neeche");
+
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
+        console.log("signin ke andar")
         const user = userCredential.user;
         toast.notify("Successfully logged in!!", { type: "success" });
         localStorage.setItem("loggedIn", true);
         setLoggedIn(true);
       })
       .catch((error) => {
+        console.log("catch ke andar")
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage, "error");
@@ -62,7 +65,9 @@ const Login = ({ setLoggedIn }) => {
                   },
                   "FIREBASE_API_KEY"
                 );
+                console.log("Login ke upar")
                 loginMsg();
+                console.log("login ke neeche")
               }}
               className={style.rightContainer}
             >
