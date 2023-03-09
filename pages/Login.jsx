@@ -17,7 +17,8 @@ const Login = ({ setLoggedIn }) => {
 
   const loginMsg = () => {
     const auth = getAuth();
-
+    console.log(auth, "Hi!!!!");
+    
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
