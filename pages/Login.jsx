@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import style from "../styles/Login.module.css";
+import { toast } from "react-nextjs-toast";
 // import { getStorage } from "firebase/";
 
 const Login = ({ setLoggedIn }) => {
@@ -21,7 +22,7 @@ const Login = ({ setLoggedIn }) => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-
+        toast.notify("Successfully logged in!!", { type: "success" });
         localStorage.setItem("loggedIn", true);
         setLoggedIn(true);
       })
@@ -29,6 +30,7 @@ const Login = ({ setLoggedIn }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage, "error");
+        toast.notify(errorCode + " " + errorMessage, { type: "error" });
         // ..
       });
   };
@@ -51,8 +53,10 @@ const Login = ({ setLoggedIn }) => {
                     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
                     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
                     projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-                    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-                    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+                    storageBucket:
+                      process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+                    messagingSenderId:
+                      process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
                     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
                   },
                   "FIREBASE_API_KEY"
