@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { db } from "../firebase";
+import { db, app } from "../firebase";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -16,8 +16,8 @@ const Login = ({ setLoggedIn }) => {
   const [email, setEmail] = useState("");
 
   const loginMsg = () => {
-    console.log("Auth ke upar")
-    const auth = getAuth();
+    console.log("Auth ke upar", email, password)
+    const auth = getAuth(app);
     console.log(auth, "auth ke neeche");
 
     signInWithEmailAndPassword(auth, email, password)
