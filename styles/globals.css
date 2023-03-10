@@ -327,10 +327,14 @@ ul a {
   .homebox .show {
     height: auto;
     padding-bottom: 10px;
+    width: 100vw;
+    margin-left: -12px;
   }
   .navbar-nav {
     height: 100%;
+    width: 100vw;
     gap: 10px;
+    background-color: #373737;
   }
   .nav-link {
     font-size: 18px;

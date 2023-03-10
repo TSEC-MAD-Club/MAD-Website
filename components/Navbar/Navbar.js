@@ -14,7 +14,7 @@ const Navbar = () => {
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "flex-end",
-            marginTop: "50px",
+            marginTop: "0px",
           }}
           href="/"
         >
