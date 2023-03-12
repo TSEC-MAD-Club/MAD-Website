@@ -11,28 +11,91 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-const selectedBranch = {
-  Comps: ["all", "C1", "C2", "C3"],
-  It: ["all", "I1", "I2", "I3"],
-  Mech: ["all", "M1", "M2", "M3"],
-  Aids: ["all", "A1"],
-  Chem: ["all", "Ch1"],
-  all: ["all"],
+const notificationTopic = {
+  3: {
+    Comps: {
+      C1: ["C11", "C12", "C13", "C14", "all"],
+      C2: ["C21", "C22", "C23", "C24", "all"],
+      C3: ["C31", "C32", "C33", "C34", "all"],
+      all: [],
+    },
+    It: {
+      T1: ["T11", "T12", "T13", "T14", "all"],
+      T2: ["T21", "T22", "T23", "T24", "all"],
+      all: [],
+    },
+    Extc: {
+      A: ["A1", "A2", "A3", "all"],
+      all: [],
+    },
+    Chem: {
+      K: ["K1", "K2", "K3", "all"],
+      all: [],
+    },
+    Aids: {
+      T: ["T1", "T2", "T3", "all"],
+      all: [],
+    },
+    all: {},
+  },
+  4: {
+    Comps: {
+      C1: ["C11", "C12", "C13", "C14", "all"],
+      C2: ["C21", "C22", "C23", "C24", "all"],
+      C3: ["C31", "C32", "C33", "C34", "all"],
+      all: [],
+    },
+    It: {
+      B1: ["B11", "B12", "B13", "B14", "all"],
+      B2: ["B21", "B22", "B23", "B24", "all"],
+      all: [],
+    },
+    Chem: {
+      K: ["K1", "K2", "K3", "all"],
+      all: [],
+    },
+    Extc: {
+      A: ["A1", "A2", "A3", "all"],
+      all: [],
+    },
+    all: {},
+  },
+  2: {
+    Comps: {
+      C1: ["C11", "C12", "C13", "C14", "all"],
+      C2: ["C21", "C22", "C23", "C24", "all"],
+      C3: ["C31", "C32", "C33", "C34", "all"],
+      all: [],
+    },
+    It: {
+      S1: ["S11", "S12", "S13", "S14", "all"],
+      S2: ["S21", "S22", "S23", "S24", "all"],
+      all: [],
+    },
+    Aids: {
+      S1: ["S11", "S12", "S13", "S14", "all"],
+      S2: ["S21", "S22", "S23", "S24", "all"],
+      all: [],
+    },
+    Chem: {
+      K: ["K1", "K2", "K3", "all"],
+      all: [],
+    },
+    Extc: {
+      A: ["A1", "A2", "A3", "all"],
+      all: [],
+    },
+    all: {},
+  },
+  all: {},
 };
 
-const selectedDivision = {
-  C1: ["all", "c11", "c12", "c13"],
-  C2: ["all", "c21", "c22", "c23"],
-  C3: ["all", "c31", "c32", "c33"],
-  I1: ["all", "i11", "i12", "i13"],
-  I2: ["all", "i21", "i22", "i23"],
-  I3: ["all", "i31", "i32", "i33"],
-  M1: ["all", "m11", "m12", "m13"],
-  M2: ["all", "m21", "m22", "m23"],
-  M3: ["all", "m31", "m32", "m33"],
-  A1: ["all"],
-  Ch1: ["all"],
-  all: [],
+const yearClass = {
+  1: "First Year",
+  2: "Second Year",
+  3: "Third Year",
+  4: "Fourth Year",
+  all: "All",
 };
 
 function Element(props) {
@@ -52,16 +115,8 @@ function SendNotes() {
   const [mediaPath, setMediaPath] = useState("");
   const [media, setMedia] = useState("");
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
-  const [division, setDivision] = useState(() => {
-    if (year == "all" || branch === "all") return "all";
-
-    return selectedBranch[branch][0];
-  });
-  const [batch, setBatch] = useState(() => {
-    if (year === "all" || branch === "all") return "all";
-
-    return selectedDivision[selectedBranch[branch][0]][0];
-  });
+  const [division, setDivision] = useState("all");
+  const [batch, setBatch] = useState("all");
 
   const uploadFile = async (file) => {
     setMedia(file);
@@ -193,25 +248,6 @@ function SendNotes() {
     return;
   };
 
-  React.useEffect(() => {
-    if (year == "all" || branch === "all") {
-      setDivision("all");
-      setBatch("all");
-
-      return;
-    }
-
-    setDivision(selectedBranch[branch][0]);
-    let _division = selectedBranch[branch][0];
-    setBatch(selectedDivision[_division][0]);
-  }, [branch]);
-
-  React.useEffect(() => {
-    if (year == "all" || branch === "all") setBatch("all");
-
-    setBatch(selectedDivision[selectedBranch[branch][0]][0]);
-  }, [division]);
-
   return (
     <div className={styles.reminder}>
       <div className={styles.reminderTitle}>Send Notes</div>
@@ -266,12 +302,20 @@ function SendNotes() {
           <Element title="Select students *" className="box">
             <div className={styles.box}>
               <div className={styles.inputboxdates}>
-                <select onChange={(e) => setYear(e.target.value)} value={year}>
-                  <option value="all">All year</option>
-                  <option value={1}>First year</option>
-                  <option value={2}>Second year</option>
-                  <option value={3}>Third year</option>
-                  <option value={4}>Fourth year</option>
+                <select
+                  onChange={(e) => {
+                    setBatch("all");
+                    setDivision("all");
+                    setBranch("all");
+                    setYear(e.target.value);
+                  }}
+                  value={year}
+                >
+                  {Object.keys(notificationTopic).map((student_year, index) => (
+                    <option key={student_year + index} value={student_year}>
+                      {yearClass[student_year]}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -286,28 +330,20 @@ function SendNotes() {
                   disabled={year === "all"}
                   onChange={(e) => {
                     setBranch(e.target.value);
-                    setBatch(selectedDivision[selectedBranch[branch][0]][0]);
+                    setDivision("all");
                   }}
                   value={branch}
                 >
-                  <option key={"all"} value={"all"}>
-                    All{" "}
-                  </option>
-                  <option key={"Comps"} value={"Comps"}>
-                    Comps
-                  </option>
-                  <option key={"It"} value="It">
-                    IT
-                  </option>
-                  <option key={"Aids"} value="Aids">
-                    Aids
-                  </option>
-                  <option key={"Chem"} value={"Chem"}>
-                    Chem
-                  </option>
-                  <option key={"Mech"} value={"Mech"}>
-                    Mech
-                  </option>
+                  {Object.keys(notificationTopic[year]).map(
+                    (student_branch, index) => (
+                      <option
+                        key={student_branch + index}
+                        value={student_branch}
+                      >
+                        {student_branch}
+                      </option>
+                    )
+                  )}
                 </select>
               </div>
 
@@ -321,16 +357,23 @@ function SendNotes() {
                 <select
                   disabled={year === "all"}
                   onChange={(e) => {
+                    setBatch("all");
                     setDivision(e.target.value);
-                    setBatch(selectedDivision[e.target.value][0]);
                   }}
                   value={division}
                 >
-                  {selectedBranch[branch].map((_div) => (
-                    <option key={_div} value={_div}>
-                      {_div}
-                    </option>
-                  ))}
+                  {year !== "all"
+                    ? Object.keys(notificationTopic[year][branch]).map(
+                        (student_division, index) => (
+                          <option
+                            key={student_division + index}
+                            value={student_division}
+                          >
+                            {student_division}
+                          </option>
+                        )
+                      )
+                    : null}
                 </select>
               </div>
 
@@ -346,11 +389,20 @@ function SendNotes() {
                   onChange={(e) => setBatch(e.target.value)}
                   value={batch}
                 >
-                  {selectedDivision[division].map((_batch) => (
-                    <option key={_batch} value={_batch}>
-                      {_batch}
-                    </option>
-                  ))}
+                  {year !== "all" && branch !== "all" && division !== "all" ? (
+                    notificationTopic[year][branch][division].map(
+                      (student_batch, index) => (
+                        <option
+                          key={student_batch + index}
+                          value={student_batch}
+                        >
+                          {student_batch}
+                        </option>
+                      )
+                    )
+                  ) : (
+                    <></>
+                  )}
                 </select>
               </div>
             </div>

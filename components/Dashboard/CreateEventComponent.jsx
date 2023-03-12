@@ -59,7 +59,7 @@ function CreateEventComponent() {
   const uploadFile = async (file) => {
     setMediaUploadStatus(true);
     const storage = getStorage();
-    const storageRef = ref(storage, "images/" + file.name);
+    const storageRef = ref(storage, "events/" + file.name);
 
     // Upload the file and metadata
     const uploadTask = uploadBytesResumable(storageRef, file);

@@ -12,7 +12,6 @@ import {
 } from "firebase/storage";
 import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 const notificationTopic = {
   3: {
