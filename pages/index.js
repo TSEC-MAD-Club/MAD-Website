@@ -38,7 +38,7 @@ const StaticData = React.memo(function StaticPage({ user }) {
                 <Link
                   passHref={true}
                   className="button-box-link"
-                  href="/SendNotes"
+                  href="/CreateEvent"
                 >
                   <button
                     type="button"
