@@ -2,13 +2,12 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Login from "./Login";
 import Navbar from "../components/Navbar/Navbar";
 import { UserContext } from "./_app";
+import Link from "next/link";
 
 const StaticData = React.memo(function StaticPage({ user }) {
-  console.log(user, "user");
   return (
     <>
       <section className="main-1 container-fluid">
@@ -22,7 +21,11 @@ const StaticData = React.memo(function StaticPage({ user }) {
             </div>
 
             <div className="button-box">
-              <Link className="button-box-link" href="CreateEvent">
+              <Link
+                passHref={true}
+                className="button-box-link"
+                href="/CreateEvent"
+              >
                 <button
                   type="button"
                   className="btn btn-lg btn-primary ps-5 pe-5"
@@ -31,7 +34,7 @@ const StaticData = React.memo(function StaticPage({ user }) {
                 </button>
               </Link>
               {user.type === "faculty" ? (
-                <Link href="CreateReminder">
+                <Link passHref={true} href="/CreateReminder">
                   <button
                     type="button"
                     className="btn btn-lg btn-primary ps-5 pe-5"

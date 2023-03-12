@@ -13,14 +13,13 @@ import { collection, getDocs } from "firebase/firestore";
 
 // import { getStorage } from "firebase/";
 
-const Login = ({ setLoggedIn, setUser }) => {
+const Login = ({ setLoggedIn, setUser, loggedIn }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
 
   const loginMsg = () => {
     const auth = getAuth(app);
-    let isLoggedIn = false;
 
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
@@ -40,7 +39,6 @@ const Login = ({ setLoggedIn, setUser }) => {
             });
             setLoggedIn(true);
             toast.notify("Successfully logged in!!", { type: "success" });
-            isLoggedIn = true;
           }
         });
       })
@@ -49,9 +47,8 @@ const Login = ({ setLoggedIn, setUser }) => {
         const errorMessage = error.message;
         console.log(errorMessage, "error");
         toast.notify(errorCode + " " + errorMessage, { type: "error" });
-        // ..
       }).finally(() => {
-        if(isLoggedIn) {
+        if(loggedIn) {
           toast.notify("User not found!", { type: "error" });
         }
       })

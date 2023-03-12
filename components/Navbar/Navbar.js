@@ -9,6 +9,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div className="container-fluid homebox" style={{ height: "90px" }}>
         <Link
+          passHref={true}
           className="navbar-brand"
           style={{
             display: "flex",
@@ -24,9 +25,9 @@ const Navbar = () => {
             width={80}
             height={80}
             alt=""
-          />{" "}
+          />
         </Link>
-        <div className=" navbar-collapse">
+        <div className="">
           {loggedIn ? (
             <ul className="navbar-nav ms-auto">
               <li className="nav-item me-5">
@@ -42,6 +43,9 @@ const Navbar = () => {
                   <img
                     src="https://i.ibb.co/2Y5LJ0C/image-removebg-preview.webp"
                     height="50"
+                    width={"50"}
+                    style={{width: "50px"}}
+                    alt="logout-img"
                   />
                 </button>
               </li>

@@ -123,14 +123,6 @@ function CreateReminderComponent() {
   const [division, setDivision] = useState("all");
   const [batch, setBatch] = useState("all");
 
-  React.useEffect(() => {
-    if (!user.type) {
-      return {
-        notFound: true,
-      };
-    }
-  });
-
   const uploadFile = async (file) => {
     setMedia(file);
     const storage = getStorage();
