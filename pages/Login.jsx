@@ -45,7 +45,6 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage, "error");
         toast.notify(errorCode + " " + errorMessage, { type: "error" });
       }).finally(() => {
         if(loggedIn) {

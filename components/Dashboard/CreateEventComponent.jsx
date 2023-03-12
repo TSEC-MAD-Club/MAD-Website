@@ -47,7 +47,7 @@ function Element(props) {
 
 function CreateEventComponent() {
   const [eventDetails, setEventDetails] = useState(initialDetails);
-  const [mediaUrl, setMeidaUrl] = useState("");
+  const [mediaUrl, setMediaUrl] = useState("");
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
   const [mediaPath, setMediaPath] = useState("");
   const [media, setMedia] = useState({});
@@ -56,11 +56,10 @@ function CreateEventComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(user, "user");
     if (!user.email.trim()) {
       router.push("/");
     }
-  });
+  }, []);
 
   const handleEventDetails = (e) => {
     e.preventDefault();
@@ -87,10 +86,8 @@ function CreateEventComponent() {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -101,15 +98,18 @@ function CreateEventComponent() {
         switch (error.code) {
           case "storage/unauthorized":
             // User doesn't have permission to access the object
+            toast.notify(`Storage unauthorized`, { type: "error" });
             break;
           case "storage/canceled":
             // User canceled the upload
+            toast.notify(`Storage canceled`, { type: "error" });
             break;
 
           // ...
 
           case "storage/unknown":
             // Unknown error occurred, inspect error.serverResponse
+            toast.notify(`Storage unknown`, { type: "error" });
             break;
         }
       },
@@ -128,14 +128,18 @@ function CreateEventComponent() {
   };
 
   const setNotification = async () => {
-    const docRef = await addDoc(collection(db, FIREBASE_EVENT_COLLECTION), {
-      ...eventDetails,
-    });
+    try {
+      const docRef = await addDoc(collection(db, FIREBASE_EVENT_COLLECTION), {
+        ...eventDetails,
+      });
+      toast.notify(`Submitted response`, { type: "success" });
+      setEventDetails(initialDetails);
+      setMediaUploadStatus(false);
+      setMediaUrl("");
+    } catch (err) {
+      toast.notify(`Submit failed`, { type: "error" });
+    }
 
-    toast.notify(`Submitted response`, { type: "success" });
-    setEventDetails(initialDetails);
-    setMediaUploadStatus(false);
-    setMeidaUrl("");
     return;
   };
 
@@ -166,7 +170,7 @@ function CreateEventComponent() {
       toast.notify(`Please add event date`, { type: "error" });
 
       return;
-    } else if (eventDetails[EVENT_IMAGE_URL].trim.length === 0) {
+    } else if (eventDetails[EVENT_IMAGE_URL].trim().length === 0) {
       toast.notify(`Please add event image`, { type: "error" });
 
       return;

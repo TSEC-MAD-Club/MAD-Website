@@ -123,7 +123,6 @@ function SendNotes() {
   const { user } = React.useContext(UserContext);
 
   useEffect(() => {
-    console.log(user, "user");
     if (!user.email.trim()) {
       router.push("/");
     }
@@ -145,10 +144,8 @@ function SendNotes() {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -159,15 +156,18 @@ function SendNotes() {
         switch (error.code) {
           case "storage/unauthorized":
             // User doesn't have permission to access the object
+            toast.notify(`storage unauthorized`, { type: "error" });
             break;
           case "storage/canceled":
             // User canceled the upload
+            toast.notify(`storage canceled`, { type: "error" });
             break;
 
           // ...
 
           case "storage/unknown":
             // Unknown error occurred, inspect error.serverResponse
+            toast.notify(`storage unknown`, { type: "error" });
             break;
         }
       },
@@ -193,18 +193,22 @@ function SendNotes() {
       upload_data.attachments = [mediaPath];
     }
 
-    const docRef = await addDoc(collection(db, "notifications"), upload_data);
+    try {
+      const docRef = await addDoc(collection(db, "notifications"), upload_data);
 
-    setTitle("");
-    setMediaPath("");
-    setBranch("all");
-    setDescription("");
-    setYear("all");
-    setDivision("all");
-    setBatch("all");
-    setMedia("");
-    setMediaUploadStatus(false);
-    toast.notify(`Submitted response`, { type: "success" });
+      setTitle("");
+      setMediaPath("");
+      setBranch("all");
+      setDescription("");
+      setYear("all");
+      setDivision("all");
+      setBatch("all");
+      setMedia("");
+      setMediaUploadStatus(false);
+      toast.notify(`Submitted response`, { type: "success" });
+    } catch (error) {
+      toast.notify(`Submitted failed`, { type: "error" });
+    }
 
     return;
   };

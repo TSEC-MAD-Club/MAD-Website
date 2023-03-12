@@ -144,10 +144,8 @@ function CreateReminderComponent() {
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -158,15 +156,18 @@ function CreateReminderComponent() {
         switch (error.code) {
           case "storage/unauthorized":
             // User doesn't have permission to access the object
+            toast.notify(`Storage unauthorized`, { type: "error" });
             break;
           case "storage/canceled":
             // User canceled the upload
+            toast.notify(`Storage canceled`, { type: "error" });
             break;
 
           // ...
 
           case "storage/unknown":
             // Unknown error occurred, inspect error.serverResponse
+            toast.notify(`Storage unknown`, { type: "error" });
             break;
         }
       },
@@ -191,20 +192,23 @@ function CreateReminderComponent() {
       upload_data.attachments = [mediaPath];
     }
 
-    const docRef = await addDoc(collection(db, "notifications"), upload_data);
+    try {
+      const docRef = await addDoc(collection(db, "notifications"), upload_data);
 
-    setTitle("");
-    setMediaPath("");
-    setBranch("all");
-    setDescription("");
-    setYear("all");
-    setDivision("all");
-    setBatch("all");
-    setMedia("");
-    setMediaUploadStatus(false);
-    toast.notify(`Submitted response`, { type: "success" });
-
-    return;
+      setTitle("");
+      setMediaPath("");
+      setBranch("all");
+      setDescription("");
+      setYear("all");
+      setDivision("all");
+      setBatch("all");
+      setMedia("");
+      setMediaUploadStatus(false);
+      toast.notify(`Submitted response`, { type: "success" });
+      return;
+    } catch (error) {
+      toast.notify(`Submit failed`, { type: "error" });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -313,8 +317,11 @@ function CreateReminderComponent() {
               <label htmlFor="actual-btn" className={styles.label}>
                 +
               </label>
-              <label>Upload From Device</label>
+              <label>Upload Image From Device</label>
             </div>
+            <p style={{ color: "rgb(255, 12, 19)" }}>
+              Image size : 1080x1350, 1080x680, 1080x1080
+            </p>
             {uploadMediaStatus && (
               <>
                 <p style={{ color: "#fff", marginTop: "5px" }}>
