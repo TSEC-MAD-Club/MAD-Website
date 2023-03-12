@@ -46,6 +46,8 @@ function CreateEventComponent() {
   const [eventDetails, setEventDetails] = useState(initialDetails);
   const [mediaUrl, setMeidaUrl] = useState("");
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
+  const [mediaPath, setMediaPath] = useState("");
+  const [media, setMedia] = useState({});
 
   const handleEventDetails = (e) => {
     e.preventDefault();
@@ -57,9 +59,9 @@ function CreateEventComponent() {
   };
 
   const uploadFile = async (file) => {
-    setMediaUploadStatus(true);
+    setMedia(file);
     const storage = getStorage();
-    const storageRef = ref(storage, "events/" + file.name);
+    const storageRef = ref(storage, "images/" + file.name);
 
     // Upload the file and metadata
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -80,6 +82,9 @@ function CreateEventComponent() {
         }
       },
       (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+
         switch (error.code) {
           case "storage/unauthorized":
             // User doesn't have permission to access the object
@@ -98,12 +103,8 @@ function CreateEventComponent() {
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setMeidaUrl(downloadURL);
-          setMediaUploadStatus(false);
-          setEventDetails((prev) => ({
-            ...prev,
-            [EVENT_IMAGE_URL]: downloadURL,
-          }));
+          setMediaUploadStatus(true);
+          setMediaPath(downloadURL);
         });
       }
     );
@@ -225,7 +226,7 @@ function CreateEventComponent() {
           </Element>
         </div>
         <div className={styles.reminderBodyRight}>
-          <Element title="Event registration link *">
+          <Element title="Event registration link">
             <input
               cols="30"
               rows="5"
@@ -236,7 +237,7 @@ function CreateEventComponent() {
               onChange={handleEventDetails}
             />
             <p style={{ color: "rgb(255, 12, 19)" }}>
-              Please upload the full url, Don't upload shortened url *
+              Please upload the full url, Don't upload shortened url
             </p>
           </Element>
           <Element title="Select date and time">
@@ -262,11 +263,11 @@ function CreateEventComponent() {
             <div className={styles.inputbox}>
               <input
                 type="file"
+                onChange={(e) => {
+                  uploadFile(e.target.files[0]);
+                }}
                 id="actual-btn"
                 name={EVENT_IMAGE_URL}
-                onChange={async (e) => {
-                  let val = await uploadFile(e.target.files[0]);
-                }}
                 hidden
               />
               <label htmlFor="actual-btn" className={styles.label}>
@@ -277,18 +278,22 @@ function CreateEventComponent() {
             <p style={{ color: "rgb(255, 12, 19)" }}>
               Image size : 1080x1350, 1080x680, 1080x1080 *
             </p>
-            {mediaUrl && (
-              <div
-                style={{
-                  background: "white",
-                  width: "180px",
-                  marginTop: "12px",
-                }}
-              >
-                <Image src={mediaUrl} width="100%" height={"100%"} alt="" />
-              </div>
+            {uploadMediaStatus && (
+              <>
+                <p style={{ color: "#fff", marginTop: "5px" }}>
+                  Uploaded {media.name}
+                </p>
+                <div
+                  style={{
+                    background: "white",
+                    width: "180px",
+                    marginTop: "12px",
+                  }}
+                >
+                  <img src={mediaPath} width="100%" height={"100%"} alt="" />
+                </div>
+              </>
             )}
-            {uploadMediaStatus && <p style={{ color: "#fff" }}>Loading...</p>}
           </Element>
         </div>
       </div>
