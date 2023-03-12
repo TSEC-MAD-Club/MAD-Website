@@ -323,6 +323,10 @@ ul a {
   white-space: nowrap;
 }
 
+.navbar-collapse {
+    flex-basis: 0;
+}
+
 @media (max-width: 1045px) {
   .homebox .show {
     height: auto;
@@ -331,10 +335,7 @@ ul a {
     margin-left: -12px;
   }
   .navbar-nav {
-    height: 100%;
-    width: 100vw;
-    gap: 10px;
-    background-color: #373737;
+    width: 0px;
   }
   .nav-link {
     font-size: 18px;

@@ -27,28 +27,9 @@ const Navbar = () => {
             alt=""
           />{" "}
         </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div
-          className="desktop-menu collapse navbar-collapse"
-          id="navbarNavDropdown"
-        >
+        <div className=" navbar-collapse">
           {loggedIn ? (
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item me-5 ">
-                <Link href={"/SendNotes"}>
-                  <a className="nav-link">Send Notes</a>
-                </Link>
-              </li>
               <li className="nav-item me-5">
                 <button
                   className="nav-link"
@@ -59,7 +40,10 @@ const Navbar = () => {
                   }}
                   aria-current="page"
                 >
-                  Logout
+                  <img
+                    src="https://i.ibb.co/2Y5LJ0C/image-removebg-preview.webp"
+                    height="50"
+                  />
                 </button>
               </li>
             </ul>
