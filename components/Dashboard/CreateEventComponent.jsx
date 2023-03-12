@@ -53,12 +53,12 @@ function CreateEventComponent() {
   const [media, setMedia] = useState({});
   const { loggedIn, setLoggedIn, user, setUser } =
     React.useContext(UserContext);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     console.log(user, "user");
-    if(!user.email.trim()) {
-      router.push("/")
+    if (!user.email.trim()) {
+      router.push("/");
     }
   });
 
@@ -74,7 +74,7 @@ function CreateEventComponent() {
   const uploadFile = async (file) => {
     setMedia(file);
     const storage = getStorage();
-    const storageRef = ref(storage, "images/" + file.name);
+    const storageRef = ref(storage, "events/" + file.name);
 
     // Upload the file and metadata
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -118,6 +118,10 @@ function CreateEventComponent() {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setMediaUploadStatus(true);
           setMediaPath(downloadURL);
+          setEventDetails((prev) => ({
+            ...prev,
+            [EVENT_IMAGE_URL]: downloadURL,
+          }));
         });
       }
     );
@@ -160,6 +164,10 @@ function CreateEventComponent() {
       return;
     } else if (eventDetails[EVENT_DATE].trim().length === 0) {
       toast.notify(`Please add event date`, { type: "error" });
+
+      return;
+    } else if (eventDetails[EVENT_IMAGE_URL].trim.length === 0) {
+      toast.notify(`Please add event image`, { type: "error" });
 
       return;
     }

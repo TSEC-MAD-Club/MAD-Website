@@ -131,7 +131,7 @@ function CreateReminderComponent() {
   const uploadFile = async (file) => {
     setMedia(file);
     const storage = getStorage();
-    const storageRef = ref(storage, "images/" + file.name);
+    const storageRef = ref(storage, "notification/" + file.name);
 
     // Upload the file and metadata
     const uploadTask = uploadBytesResumable(storageRef, file);
