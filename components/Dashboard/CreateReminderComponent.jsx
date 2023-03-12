@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/Dashboard/Dashboard.module.css";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -123,7 +123,6 @@ function CreateReminderComponent() {
   const [batch, setBatch] = useState("all");
 
   useEffect(() => {
-    console.log(user, "user");
     if (!user.email.trim()) {
       router.push("/");
     }

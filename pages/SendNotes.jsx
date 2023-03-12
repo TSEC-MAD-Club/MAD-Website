@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/Dashboard/Dashboard.module.css";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -11,6 +11,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import { useRouter } from "next/router";
+import { UserContext } from "./_app";
 
 const notificationTopic = {
   3: {
@@ -119,13 +120,14 @@ function SendNotes() {
   const [division, setDivision] = useState("all");
   const [batch, setBatch] = useState("all");
   const router = useRouter();
+  const { user } = React.useContext(UserContext);
 
   useEffect(() => {
     console.log(user, "user");
     if (!user.email.trim()) {
       router.push("/");
     }
-  });
+  }, []);
 
   const uploadFile = async (file) => {
     setMedia(file);
