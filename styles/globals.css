@@ -171,6 +171,20 @@ a {
   border: 1px solid #a4d6ef;
   color: #a4d6ef;
 }
+.button-box {
+  cursor: pointer;
+}
+
+.fourOfourPage {
+  color: white;
+}
+
+.box {
+  margin-top: 20px;
+}
+.navbar-log {
+  object-fit: contain;
+}
 
 .nav-item {
   border-radius: 0 !important;

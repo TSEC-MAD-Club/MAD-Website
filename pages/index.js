@@ -7,7 +7,8 @@ import Login from "./Login";
 import Navbar from "../components/Navbar/Navbar";
 import { UserContext } from "./_app";
 
-const StaticData = React.memo(function StaticPage() {
+const StaticData = React.memo(function StaticPage({ user }) {
+  console.log(user, "user");
   return (
     <>
       <section className="main-1 container-fluid">
@@ -15,28 +16,32 @@ const StaticData = React.memo(function StaticPage() {
           <div className="col-5 sloganNbtn">
             <div className="sloganImg">
               <p className="slogan-title" style={{ color: "var(--primary-3)" }}>
-                Faculty <br />
+                {user?.type === "faculty" ? "Faculty" : "Committee"} <br />
                 Dashboard
               </p>
             </div>
 
             <div className="button-box">
-              <Link href="CreateEvent">
+              <Link className="button-box-link" href="CreateEvent">
                 <button
                   type="button"
                   className="btn btn-lg btn-primary ps-5 pe-5"
                 >
-                  Create Event
+                  {user.type === "faculty" ? "Send Notes" : "Create Event"}
                 </button>
               </Link>
-              <Link href="CreateReminder">
-                <button
-                  type="button"
-                  className="btn btn-lg btn-primary ps-5 pe-5"
-                >
-                  Create Reminder
-                </button>
-              </Link>
+              {user.type === "faculty" ? (
+                <Link href="CreateReminder">
+                  <button
+                    type="button"
+                    className="btn btn-lg btn-primary ps-5 pe-5"
+                  >
+                    Create Notification
+                  </button>
+                </Link>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <div className="col-7 text-center jumbotron">
@@ -76,26 +81,29 @@ const StaticData = React.memo(function StaticPage() {
 });
 
 export default function Home() {
-  const { loggedIn, setLoggedIn } = React.useContext(UserContext);
+  const { loggedIn, setLoggedIn, user, setUser } =
+    React.useContext(UserContext);
+
   useEffect(() => {
     isAuthenticatedFn();
   }, []);
 
   function isAuthenticatedFn() {
-    if (localStorage) {
-      const user = JSON.parse(localStorage.getItem("loggedIn"));
-      if (!!user) {
-        setLoggedIn(true);
-      }
+    if (user.email) {
+      return true;
     }
   }
 
   return (
     <>
       {loggedIn ? (
-        <StaticData />
+        <StaticData user={user} />
       ) : (
-        <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Login
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          setUser={setUser}
+        />
       )}
     </>
   );

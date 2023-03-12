@@ -8,25 +8,24 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div className="container-fluid homebox" style={{ height: "90px" }}>
-        <a
+        <Link
           className="navbar-brand"
           style={{
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "flex-end",
-            marginTop: "0px",
+            marginLeft: "20px",
           }}
           href="/"
         >
           <Image
             className="navbar-logo"
-            src="/assets/images/Background-14.png"
+            src="/assets/images/logo.png"
             width={80}
             height={80}
-            objectFit={"cover"}
             alt=""
           />{" "}
-        </a>
+        </Link>
         <div className=" navbar-collapse">
           {loggedIn ? (
             <ul className="navbar-nav ms-auto">

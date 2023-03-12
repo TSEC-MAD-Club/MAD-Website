@@ -12,8 +12,14 @@ const UserContext = React.createContext({
 
 function MyApp({ Component, pageProps }) {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [user, setUser] = React.useState({
+    type: "",
+    email: "",
+    name: "",
+  });
+
   return (
-    <UserContext.Provider value={{ loggedIn, setLoggedIn }}>
+    <UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser }}>
       <Head>
         {/* // Responsive meta tag */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
