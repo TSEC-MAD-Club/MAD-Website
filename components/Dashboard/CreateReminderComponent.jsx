@@ -16,80 +16,80 @@ import { useRouter } from "next/router";
 const notificationTopic = {
   3: {
     Comps: {
-      C1: ["C11", "C12", "C13", "C14", "all"],
-      C2: ["C21", "C22", "C23", "C24", "all"],
-      C3: ["C31", "C32", "C33", "C34", "all"],
-      all: [],
+      C1: ["C11", "C12", "C13", "C14", "All"],
+      C2: ["C21", "C22", "C23", "C24", "All"],
+      C3: ["C31", "C32", "C33", "C34", "All"],
+      All: [],
     },
     It: {
-      T1: ["T11", "T12", "T13", "T14", "all"],
-      T2: ["T21", "T22", "T23", "T24", "all"],
-      all: [],
+      T1: ["T11", "T12", "T13", "T14", "All"],
+      T2: ["T21", "T22", "T23", "T24", "All"],
+      All: [],
     },
     Extc: {
-      A: ["A1", "A2", "A3", "all"],
-      all: [],
+      A: ["A1", "A2", "A3", "All"],
+      All: [],
     },
     Chem: {
-      K: ["K1", "K2", "K3", "all"],
-      all: [],
+      K: ["K1", "K2", "K3", "All"],
+      All: [],
     },
     Aids: {
-      T: ["T1", "T2", "T3", "all"],
-      all: [],
+      T: ["T1", "T2", "T3", "All"],
+      All: [],
     },
-    all: {},
+    All: {},
   },
   4: {
     Comps: {
-      C1: ["C11", "C12", "C13", "C14", "all"],
-      C2: ["C21", "C22", "C23", "C24", "all"],
-      C3: ["C31", "C32", "C33", "C34", "all"],
-      all: [],
+      C1: ["C11", "C12", "C13", "C14", "All"],
+      C2: ["C21", "C22", "C23", "C24", "All"],
+      C3: ["C31", "C32", "C33", "C34", "All"],
+      All: [],
     },
     It: {
-      B1: ["B11", "B12", "B13", "B14", "all"],
-      B2: ["B21", "B22", "B23", "B24", "all"],
-      all: [],
+      B1: ["B11", "B12", "B13", "B14", "All"],
+      B2: ["B21", "B22", "B23", "B24", "All"],
+      All: [],
     },
     Chem: {
-      K: ["K1", "K2", "K3", "all"],
-      all: [],
+      K: ["K1", "K2", "K3", "All"],
+      All: [],
     },
     Extc: {
-      A: ["A1", "A2", "A3", "all"],
-      all: [],
+      A: ["A1", "A2", "A3", "All"],
+      All: [],
     },
-    all: {},
+    All: {},
   },
   2: {
     Comps: {
-      C1: ["C11", "C12", "C13", "C14", "all"],
-      C2: ["C21", "C22", "C23", "C24", "all"],
-      C3: ["C31", "C32", "C33", "C34", "all"],
-      all: [],
+      C1: ["C11", "C12", "C13", "C14", "All"],
+      C2: ["C21", "C22", "C23", "C24", "All"],
+      C3: ["C31", "C32", "C33", "C34", "All"],
+      All: [],
     },
     It: {
-      S1: ["S11", "S12", "S13", "S14", "all"],
-      S2: ["S21", "S22", "S23", "S24", "all"],
-      all: [],
+      S1: ["S11", "S12", "S13", "S14", "All"],
+      S2: ["S21", "S22", "S23", "S24", "All"],
+      All: [],
     },
     Aids: {
-      S1: ["S11", "S12", "S13", "S14", "all"],
-      S2: ["S21", "S22", "S23", "S24", "all"],
-      all: [],
+      S1: ["S11", "S12", "S13", "S14", "All"],
+      S2: ["S21", "S22", "S23", "S24", "All"],
+      All: [],
     },
     Chem: {
-      K: ["K1", "K2", "K3", "all"],
-      all: [],
+      K: ["K1", "K2", "K3", "All"],
+      All: [],
     },
     Extc: {
-      A: ["A1", "A2", "A3", "all"],
-      all: [],
+      A: ["A1", "A2", "A3", "All"],
+      All: [],
     },
-    all: {},
+    All: {},
   },
-  all: {},
+  All: {},
 };
 
 const yearClass = {
@@ -97,7 +97,7 @@ const yearClass = {
   2: "Second Year",
   3: "Third Year",
   4: "Fourth Year",
-  all: "All",
+  All: "All",
 };
 
 function Element(props) {
@@ -114,13 +114,13 @@ function CreateReminderComponent() {
   const { user } = React.useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [branch, setBranch] = useState("all");
-  const [year, setYear] = useState("all");
+  const [branch, setBranch] = useState("All");
+  const [year, setYear] = useState("All");
   const [mediaPath, setMediaPath] = useState("");
   const [media, setMedia] = useState("");
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
-  const [division, setDivision] = useState("all");
-  const [batch, setBatch] = useState("all");
+  const [division, setDivision] = useState("All");
+  const [batch, setBatch] = useState("All");
 
   useEffect(() => {
     if (!user.email.trim()) {
@@ -197,11 +197,11 @@ function CreateReminderComponent() {
 
       setTitle("");
       setMediaPath("");
-      setBranch("all");
+      setBranch("All");
       setDescription("");
-      setYear("all");
-      setDivision("all");
-      setBatch("all");
+      setYear("All");
+      setDivision("All");
+      setBatch("All");
       setMedia("");
       setMediaUploadStatus(false);
       toast.notify(`Submitted response`, { type: "success" });
@@ -228,23 +228,23 @@ function CreateReminderComponent() {
       // await uploadFile(mediaPath);
     }
 
-    if (year === "all") {
-      setNotification("all");
+    if (year === "All") {
+      setNotification("All");
 
       return;
-    } else if (branch === "all") {
+    } else if (branch === "All") {
       setNotification(Number(new Date().getFullYear()) + 4 - Number(year));
       toast.notify(`Submitted response`, { type: "success" });
 
       return;
-    } else if (division === "all") {
+    } else if (division === "All") {
       setNotification(
         Number(new Date().getFullYear()) + 4 - Number(year) + ("-" + branch)
       );
       toast.notify(`Submitted response`, { type: "success" });
 
       return;
-    } else if (batch === "all" || !batch) {
+    } else if (batch === "All" || !batch) {
       setNotification(
         Number(new Date().getFullYear()) +
           4 -
@@ -344,9 +344,9 @@ function CreateReminderComponent() {
               <div className={styles.inputboxdates}>
                 <select
                   onChange={(e) => {
-                    setBatch("all");
-                    setDivision("all");
-                    setBranch("all");
+                    setBatch("All");
+                    setDivision("All");
+                    setBranch("All");
                     setYear(e.target.value);
                   }}
                   value={year}
@@ -363,14 +363,14 @@ function CreateReminderComponent() {
               <div
                 className={
                   styles.inputboxdates +
-                  (year === "all" ? " " + styles.disabledDropdown : "")
+                  (year === "All" ? " " + styles.disabledDropdown : "")
                 }
               >
                 <select
-                  disabled={year === "all"}
+                  disabled={year === "All"}
                   onChange={(e) => {
                     setBranch(e.target.value);
-                    setDivision("all");
+                    setDivision("All");
                   }}
                   value={branch}
                 >
@@ -391,18 +391,18 @@ function CreateReminderComponent() {
               <div
                 className={
                   styles.inputboxdates +
-                  (year === "all" ? " " + styles.disabledDropdown : "")
+                  (year === "All" ? " " + styles.disabledDropdown : "")
                 }
               >
                 <select
-                  disabled={year === "all"}
+                  disabled={year === "All"}
                   onChange={(e) => {
-                    setBatch("all");
+                    setBatch("All");
                     setDivision(e.target.value);
                   }}
                   value={division}
                 >
-                  {year !== "all"
+                  {year !== "All"
                     ? Object.keys(notificationTopic[year][branch]).map(
                         (student_division, index) => (
                           <option
@@ -421,15 +421,15 @@ function CreateReminderComponent() {
               <div
                 className={
                   styles.inputboxdates +
-                  (year === "all" ? " " + styles.disabledDropdown : "")
+                  (year === "All" ? " " + styles.disabledDropdown : "")
                 }
               >
                 <select
-                  disabled={year === "all"}
+                  disabled={year === "All"}
                   onChange={(e) => setBatch(e.target.value)}
                   value={batch}
                 >
-                  {year !== "all" && branch !== "all" && division !== "all" ? (
+                  {year !== "All" && branch !== "All" && division !== "All" ? (
                     notificationTopic[year][branch][division].map(
                       (student_batch, index) => (
                         <option
