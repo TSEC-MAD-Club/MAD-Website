@@ -122,6 +122,13 @@ function CreateReminderComponent() {
   const [division, setDivision] = useState("all");
   const [batch, setBatch] = useState("all");
 
+  useEffect(() => {
+    console.log(user, "user");
+    if (!user.email.trim()) {
+      router.push("/");
+    }
+  });
+
   const uploadFile = async (file) => {
     setMedia(file);
     const storage = getStorage();

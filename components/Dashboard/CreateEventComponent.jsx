@@ -11,6 +11,9 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import Image from "next/image";
+import { useEffect } from "react";
+import { UserContext } from "../../pages/_app";
+import { useRouter } from "next/router";
 
 const EVENT_COMMITTEE_NAME = "Committee Name";
 const EVENT_LOCATION = "Event Location";
@@ -48,6 +51,16 @@ function CreateEventComponent() {
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
   const [mediaPath, setMediaPath] = useState("");
   const [media, setMedia] = useState({});
+  const { loggedIn, setLoggedIn, user, setUser } =
+    React.useContext(UserContext);
+  const router = useRouter()
+
+  useEffect(() => {
+    console.log(user, "user");
+    if(!user.email.trim()) {
+      router.push("/")
+    }
+  });
 
   const handleEventDetails = (e) => {
     e.preventDefault();
@@ -139,10 +152,6 @@ function CreateEventComponent() {
       return;
     } else if (eventDetails[EVENT_DESCRIPTION].trim().length === 0) {
       toast.notify(`Please add description`, { type: "error" });
-
-      return;
-    } else if (eventDetails[EVENT_REGISTRATION_LINK].trim().length === 0) {
-      toast.notify(`Please add registration link`, { type: "error" });
 
       return;
     } else if (eventDetails[EVENT_TIME].trim().length === 0) {

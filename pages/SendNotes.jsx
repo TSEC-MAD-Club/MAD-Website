@@ -10,6 +10,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { useRouter } from "next/router";
 
 const notificationTopic = {
   3: {
@@ -117,6 +118,14 @@ function SendNotes() {
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
   const [division, setDivision] = useState("all");
   const [batch, setBatch] = useState("all");
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(user, "user");
+    if (!user.email.trim()) {
+      router.push("/");
+    }
+  });
 
   const uploadFile = async (file) => {
     setMedia(file);
@@ -183,7 +192,7 @@ function SendNotes() {
     }
 
     const docRef = await addDoc(collection(db, "notifications"), upload_data);
-    
+
     setTitle("");
     setMediaPath("");
     setBranch("all");
