@@ -171,14 +171,19 @@ function SendNotes() {
   };
 
   const setNotification = async (notificationPath) => {
-    const docRef = await addDoc(collection(db, "notifications"), {
+    const upload_data = {
       notificationTime: new Date(),
       message: description,
       title,
       topic: notificationPath,
-      attachment: mediaPath,
-    });
+    };
 
+    if (mediaPath) {
+      upload_data.attachments = [mediaPath];
+    }
+
+    const docRef = await addDoc(collection(db, "notifications"), upload_data);
+    
     setTitle("");
     setMediaPath("");
     setBranch("all");

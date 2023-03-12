@@ -182,7 +182,7 @@ function CreateReminderComponent() {
       topic: notificationPath,
     };
     if (mediaPath) {
-      upload_data.attachments = mediaPath;
+      upload_data.attachments = [mediaPath];
     }
 
     const docRef = await addDoc(collection(db, "notifications"), upload_data);
@@ -309,6 +309,9 @@ function CreateReminderComponent() {
               </label>
               <label>Upload From Device</label>
             </div>
+            <p style={{ color: "rgb(255, 12, 19)" }}>
+              Image size : 1080x1350, 1080x680, 1080x1080 *
+            </p>
             {uploadMediaStatus && (
               <>
                 <p style={{ color: "#fff", marginTop: "5px" }}>

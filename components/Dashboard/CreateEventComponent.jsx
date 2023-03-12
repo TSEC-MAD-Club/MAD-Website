@@ -235,6 +235,9 @@ function CreateEventComponent() {
               value={eventDetails[EVENT_REGISTRATION_LINK]}
               onChange={handleEventDetails}
             />
+            <p style={{ color: "rgb(255, 12, 19)" }}>
+              Please upload the full url, Don't upload shortened url *
+            </p>
           </Element>
           <Element title="Select date and time">
             <div className={styles.inputbox}>
@@ -271,6 +274,9 @@ function CreateEventComponent() {
               </label>
               <label>Upload From Device</label>
             </div>
+            <p style={{ color: "rgb(255, 12, 19)" }}>
+              Image size : 1080x1350, 1080x680, 1080x1080 *
+            </p>
             {mediaUrl && (
               <div
                 style={{
