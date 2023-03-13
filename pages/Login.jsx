@@ -65,7 +65,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
               }}
               className={style.rightContainer}
             >
-              <h2 className={style.loginTitle}>Login to faculty account</h2>
+              <h2 className={style.loginTitle}>Login to your account</h2>
               <div className={style.field}>
                 <p className={style.emailText}>Email</p>
                 <input
