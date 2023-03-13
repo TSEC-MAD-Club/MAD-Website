@@ -317,7 +317,7 @@ function CreateReminderComponent() {
               <label htmlFor="actual-btn" className={styles.label}>
                 +
               </label>
-              <label>Upload Image From Device</label>
+              <label>Upload From Device</label>
             </div>
             <p style={{ color: "rgb(255, 12, 19)" }}>
               Image size : 1080x1350, 1080x680, 1080x1080
@@ -327,15 +327,6 @@ function CreateReminderComponent() {
                 <p style={{ color: "#fff", marginTop: "5px" }}>
                   Uploaded {media.name}
                 </p>
-                <div
-                  style={{
-                    background: "white",
-                    width: "180px",
-                    marginTop: "12px",
-                  }}
-                >
-                  <img src={mediaPath} width="100%" height={"100%"} alt="" />
-                </div>
               </>
             )}
           </Element>
