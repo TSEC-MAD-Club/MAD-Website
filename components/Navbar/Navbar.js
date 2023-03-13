@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { UserContext } from "../../pages/_app";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const { loggedIn, setLoggedIn } = React.useContext(UserContext);
+  const router = useRouter()
   return (
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div className="container-fluid homebox" style={{ height: "90px" }}>
@@ -35,8 +37,9 @@ const Navbar = () => {
                   className="nav-link"
                   style={{ background: "none", border: 0 }}
                   onClick={() => {
-                    localStorage.setItem("loggedIn", false);
+                    // localStorage.setItem("loggedIn", false);
                     setLoggedIn(false);
+                    router.push("/")
                   }}
                   aria-current="page"
                 >
