@@ -268,11 +268,10 @@ function CreateReminderComponent() {
 
   return (
     <div className={styles.reminder}>
-      <div className={styles.reminderTitle}>New Reminder</div>
-
+      <div className={styles.reminderTitle}>New Notification</div>
       <div className={styles.reminderBody}>
         <div className={styles.reminderBodyLeft}>
-          <Element title="Title of Reminder *">
+          <Element title="Title of Notification *">
             <input
               type="text"
               name="title"
@@ -319,9 +318,6 @@ function CreateReminderComponent() {
               </label>
               <label>Upload From Device</label>
             </div>
-            <p style={{ color: "rgb(255, 12, 19)" }}>
-              Image size : 1080x1350, 1080x680, 1080x1080
-            </p>
             {uploadMediaStatus && (
               <>
                 <p style={{ color: "#fff", marginTop: "5px" }}>

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 const Navbar = () => {
   const { loggedIn, setLoggedIn } = React.useContext(UserContext);
-  const router = useRouter()
+  const router = useRouter();
   return (
     <nav className="navbar navbar-expand-lg  navbar-dark bg-dark ">
       <div className="container-fluid homebox" style={{ height: "90px" }}>
