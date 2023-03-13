@@ -297,7 +297,7 @@ function CreateEventComponent() {
               <label>Upload From Device</label>
             </div>
             <p style={{ color: "rgb(255, 12, 19)" }}>
-              Image size : 1080x1350, 1080x680, 1080x1080 *
+              Image Dimension : 1080x1350, 1080x680, 1080x1080 *
             </p>
             {uploadMediaStatus && (
               <>
