@@ -23,7 +23,7 @@ const EVENT_TIME = "Event Time";
 const EVENT_DESCRIPTION = "Event description";
 const EVENT_REGISTRATION_LINK = "Event registration url";
 const EVENT_IMAGE_URL = "Image url ";
-const FIREBASE_EVENT_COLLECTION = "TempEvents";
+const FIREBASE_EVENT_COLLECTION = "Events";
 
 const initialDetails = {
   [EVENT_COMMITTEE_NAME]: "",
