@@ -85,7 +85,7 @@ export default function Admin() {
           let docRef = doc(db, "TempEvents", events.id);
           await deleteDoc(docRef);
 
-          docRef = await addDoc(collection(db, "TestEvents"), data);
+          docRef = await addDoc(collection(db, "Events"), data);
         } else {
           newPendingEvents.push(data);
         }
