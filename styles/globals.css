@@ -220,6 +220,24 @@ a {
   margin-left: 30px;
 }
 
+.checkBoxContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 25px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.checkBoxContainer input {
+  cursor: pointer;
+  margin-right: 8px;
+}
+
 @media (max-width: 1300px) and (min-width: 993px) {
   .sloganImg {
     margin: 5rem 0 0 5rem;
@@ -338,7 +356,7 @@ ul a {
 }
 
 .navbar-collapse {
-    flex-basis: 0;
+  flex-basis: 0;
 }
 
 @media (max-width: 1045px) {

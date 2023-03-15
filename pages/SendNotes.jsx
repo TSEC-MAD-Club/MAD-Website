@@ -211,7 +211,7 @@ function SendNotes() {
     }
 
     return;
-  };
+  };w
 
   const handleSubmit = async (e) => {
     e.preventDefault();

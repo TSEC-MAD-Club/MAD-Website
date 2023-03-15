@@ -15,23 +15,47 @@ const StaticData = React.memo(function StaticPage({ user }) {
           <div className="col-5 sloganNbtn">
             <div className="sloganImg">
               <p className="slogan-title" style={{ color: "var(--primary-3)" }}>
-                {user?.type === "faculty" ? "Faculty" : "Committee"} <br />
+                {user?.type === "faculty"
+                  ? "Faculty"
+                  : user.type === "admin"
+                  ? "Admin"
+                  : "Committee"}
+                <br />
                 Dashboard
               </p>
             </div>
 
             <div className="button-box">
               {user.type === "faculty" ? (
-                <Link
-                  passHref={true}
-                  className="button-box-link"
-                  href="/SendNotes"
-                >
+                <>
+                  <Link
+                    passHref={true}
+                    className="button-box-link"
+                    href="/SendNotes"
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-lg btn-primary ps-5 pe-5"
+                    >
+                      Send Notes
+                    </button>
+                  </Link>
+                  <Link passHref={true} href="/CreateReminder">
+                    <button
+                      type="button"
+                      className="btn btn-lg btn-primary ps-5 pe-5"
+                    >
+                      Create Notification
+                    </button>
+                  </Link>
+                </>
+              ) : user.type === "admin" ? (
+                <Link passHref={true} href="/Admin">
                   <button
                     type="button"
                     className="btn btn-lg btn-primary ps-5 pe-5"
                   >
-                    Send Notes
+                    Approve Events
                   </button>
                 </Link>
               ) : (
@@ -47,18 +71,6 @@ const StaticData = React.memo(function StaticPage({ user }) {
                     Create Event
                   </button>
                 </Link>
-              )}
-              {user.type === "faculty" ? (
-                <Link passHref={true} href="/CreateReminder">
-                  <button
-                    type="button"
-                    className="btn btn-lg btn-primary ps-5 pe-5"
-                  >
-                    Create Notification
-                  </button>
-                </Link>
-              ) : (
-                <></>
               )}
             </div>
           </div>

@@ -123,10 +123,10 @@ function CreateReminderComponent() {
   const [batch, setBatch] = useState("All");
 
   useEffect(() => {
-    if (!user.email.trim()) {
+    if (!user.type.trim() || user.type != "faculty") {
       router.push("/");
     }
-  });
+  }, [user]);
 
   const uploadFile = async (file) => {
     setMedia(file);

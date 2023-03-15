@@ -56,10 +56,10 @@ function CreateEventComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user.email.trim()) {
+    if (!user.type.trim() || user.type != "committee") {
       router.push("/");
     }
-  }, []);
+  }, [user]);
 
   const handleEventDetails = (e) => {
     e.preventDefault();
