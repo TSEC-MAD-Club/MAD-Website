@@ -34,7 +34,7 @@ export default function Admin() {
   }, []);
 
   useEffect(() => {
-    if (user && (!user.type.trim() || user.type != "admin")) {
+    if (!user.type.trim() || user.type != "admin") {
       router.push("/");
     }
   }, [user]);
