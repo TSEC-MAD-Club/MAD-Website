@@ -137,7 +137,7 @@ function CreateEventComponent() {
       setMediaUploadStatus(false);
       setMediaUrl("");
     } catch (err) {
-      toast.notify(`Submit failed`, { type: "error" });
+      toast.notify(`Submit failed ${err}`, { type: "error" });
     }
 
     return;
@@ -198,6 +198,7 @@ function CreateEventComponent() {
                 <option value={""}>Select commitee name</option>
                 <option value={"Dev's Club"}>Dev's Club</option>
                 <option value={"TSEC Codecell"}>TSEC Codecell</option>
+                <option value={"TSEC E-Cell"}>TSEC E-Cell</option>
                 <option value={"TSEC Codetantra"}>TSEC Codetantra</option>
                 <option value={"ISTE-TSEC"}>ISTE-TSEC</option>
                 <option value={"NSS-TSEC"}>NSS-TSEC</option>
