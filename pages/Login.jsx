@@ -25,7 +25,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
-        
+
         const facultyRef = collection(db, "Faculty");
         const querySnapshot = await getDocs(facultyRef);
         querySnapshot.forEach((doc) => {
@@ -46,11 +46,12 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         toast.notify(errorCode + " " + errorMessage, { type: "error" });
-      }).finally(() => {
-        if(loggedIn) {
+      })
+      .finally(() => {
+        if (loggedIn) {
           toast.notify("User not found!", { type: "error" });
         }
-      })
+      });
   };
 
   return (
@@ -73,7 +74,11 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
                   type="text"
                   placeholder="Enter email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      setEmail(e.target.value.trim());
+                    }
+                  }}
                 />
               </div>
               <div className={style.field}>
