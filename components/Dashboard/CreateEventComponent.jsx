@@ -200,6 +200,7 @@ function CreateEventComponent() {
                 <option value={"TSEC Codecell"}>TSEC Codecell</option>
                 <option value={"TSEC E-Cell"}>TSEC E-Cell</option>
                 <option value={"TSEC Codetantra"}>TSEC Codetantra</option>
+                <option value={"IIC"}>IIC</option>
                 <option value={"ISTE-TSEC"}>ISTE-TSEC</option>
                 <option value={"NSS-TSEC"}>NSS-TSEC</option>
                 <option value={"TSEC Sports Committee"}>
