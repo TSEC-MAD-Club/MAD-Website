@@ -75,9 +75,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
                   placeholder="Enter email"
                   value={email}
                   onChange={(e) => {
-                    if (e.target.value) {
-                      setEmail(e.target.value.trim());
-                    }
+                    setEmail(e.target.value.trim());
                   }}
                 />
               </div>
