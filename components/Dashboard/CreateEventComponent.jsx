@@ -203,6 +203,7 @@ function CreateEventComponent() {
                 <option value={"IIC"}>IIC</option>
                 <option value={"ISTE-TSEC"}>ISTE-TSEC</option>
                 <option value={"NSS-TSEC"}>NSS-TSEC</option>
+                <option value={"IETE-TSEC"}>IETE-TSEC</option>
                 <option value={"TSEC Sports Committee"}>
                   TSEC Sports Committee
                 </option>
