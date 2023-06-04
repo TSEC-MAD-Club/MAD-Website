@@ -17,6 +17,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { UserContext } from "./_app";
+import { userTypes } from "../constants/userTypes";
 
 // import { getStorage } from "firebase/";
 
@@ -34,7 +35,7 @@ export default function Admin() {
   }, []);
 
   useEffect(() => {
-    if (!user.type.trim() || user.type != "admin") {
+    if (!user.type.trim() || user.type != userTypes.ADMIN) {
       router.push("/");
     }
   }, [user]);

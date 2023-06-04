@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
+import { userTypes } from "../../constants/userTypes";
 
 const EVENT_COMMITTEE_NAME = "Committee Name";
 const EVENT_LOCATION = "Event Location";
@@ -56,7 +57,7 @@ function CreateEventComponent() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user.type.trim() || user.type != "committee") {
+    if (!user.type.trim() || user.type != userTypes.COMMITTEE) {
       router.push("/");
     }
   }, [user]);
