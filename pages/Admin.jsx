@@ -102,6 +102,29 @@ export default function Admin() {
     }
   };
 
+  const handleDeleteFn = async () => {
+    // remove the document from collection "TempEvents" and add it to "Events"
+    let newPendingEvents = [];
+    try {
+      pendingEvents.map(async (events) => {
+        if (checkedBoxes.includes(events.id)) {
+          let docRef = doc(db, "TempEvents", events.id);
+          await deleteDoc(docRef);
+        } else {
+          newPendingEvents.push(events);
+        }
+      });
+      if (newPendingEvents.length !== pendingEvents.length) {
+        toast.notify(`Successfully Deleted!`, { type: "success" });
+        setPendingEvents(newPendingEvents);
+      } else {
+        toast.notify(`No Events Selected!`, { type: "error" });
+      }
+    } catch (error) {
+      toast.notify(`Delete failed: ${error}`, { type: "error" });
+    }
+  };
+
   // Render the list of checkboxes using the "checkboxes" array
   const renderedCheckboxes = pendingEvents.map((checkbox) => (
     <label key={checkbox.id} className="checkBoxContainer">
@@ -120,7 +143,10 @@ export default function Admin() {
         <p style={{ color: "#fff", fontSize: "24px" }}>Pending events</p>
         {renderedCheckboxes}
         {pendingEvents.length ? (
-          <button onClick={handleApproveFn}>Approve events</button>
+          <>
+            <button onClick={handleApproveFn}>Approve events</button>
+            <button onClick={handleDeleteFn}>Delete events</button>
+          </>
         ) : (
           <p>No Pending Events found</p>
         )}
