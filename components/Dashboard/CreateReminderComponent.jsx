@@ -130,7 +130,7 @@ function CreateReminderComponent() {
       setMedia("");
       setMediaUploadStatus(false);
       setTeacher("All");
-      senderName("");
+      setSenderName("");
       toast.notify(`Submitted response`, { type: "success" });
       return;
     } catch (error) {
