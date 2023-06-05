@@ -146,7 +146,10 @@ function CreateReminderComponent() {
       toast.notify(`Please add title`, { type: "error" });
 
       return;
-    } else if (senderName.trim().length === 0) {
+    } else if (
+      senderName.trim().length === 0 &&
+      user.type == userTypes.FACULTY
+    ) {
       toast.notify(`Please add sender name`, { type: "error" });
 
       return;
