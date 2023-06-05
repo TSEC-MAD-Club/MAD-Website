@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import "semantic-ui-css/semantic.min.css";
 import { db, app } from "../firebase";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import style from "../styles/Login.module.css";
+import styles from "../styles/Login.module.css";
 import { toast } from "react-nextjs-toast";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -56,50 +56,50 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
 
   return (
     <>
-      <div className={style.signInUpBody}>
-        <div className="box">
-          <div className="right">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                loginMsg();
+      <div style={{ backgroundColor: "#1E1E1E" }}>
+        <img className={styles.devs_img} src="/assets/images/devs.jpeg" />
+        <img
+          src="/assets/images/events.png"
+          className={styles.side_img}
+          alt="W3Schools.com"
+        />
+        <div className={styles.Authentication}>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            loginMsg();
+          }}>
+            <h2 style={{ fontSize: "2.7rem" }} className={styles.greet_text}>Welcome Back!</h2>
+            <h5 style={{ color: "grey" }} className={styles.greet_text}>Login into your Account to access your Dashboard</h5>
+            <input
+              type="email"
+              placeholder="Email"
+              style={{ textIndent: "10px" }}
+              className={`${styles.formInput} ${styles.emailInput}`}
+              onChange={(e) => {
+                if (e.target.value) {
+                  setEmail(e.target.value.trim());
+                }
               }}
-              className={style.rightContainer}
-            >
-              <h2 className={style.loginTitle}>Login to your account</h2>
-              <div className={style.field}>
-                <p className={style.emailText}>Email</p>
-                <input
-                  className={style.emailInput}
-                  type="text"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value.trim());
-                  }}
-                />
-              </div>
-              <div className={style.field}>
-                <p className="password-text">Password</p>
-                <input
-                  className={style.passwordInput}
-                  type="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <input
-                className={style.loginButton}
-                type="submit"
-                value="Log in"
-              />
-            </form>
+            />
+            <input
+              type="password"
+              style={{ textIndent: "10px" }}
+              placeholder="Password"
+              className={`${styles.formInput} ${styles.passwordInput}`}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="ui toggle checkbox ">
+              <input type="checkbox" name="public" />
+              <label>Remember Me</label>
+            </div>
+            <button className={`${styles.login_btn}`} type="submit">
+              Log In
+            </button>
+          </form>
+          <div className={styles.need_help}>
+            Need help with Login ? <a href="#">Contact Us!</a>
           </div>
         </div>
-        <div className="shape1 shape"></div>
-        <div className="shape2 shape"></div>
-        <div className="shape3 shape"></div>
       </div>
     </>
   );
