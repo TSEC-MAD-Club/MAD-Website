@@ -6,8 +6,10 @@ import Login from "./Login";
 import Navbar from "../components/Navbar/Navbar";
 import { UserContext } from "./_app";
 import Link from "next/link";
+import { userTypes } from "../constants/userTypes";
 
 const StaticData = React.memo(function StaticPage({ user }) {
+  const usertype = user?.type;
   return (
     <>
       <section className="main-1 container-fluid">
@@ -15,18 +17,14 @@ const StaticData = React.memo(function StaticPage({ user }) {
           <div className="col-5 sloganNbtn">
             <div className="sloganImg">
               <p className="slogan-title" style={{ color: "var(--primary-3)" }}>
-                {user?.type === "faculty"
-                  ? "Faculty"
-                  : user.type === "admin"
-                  ? "Admin"
-                  : "Committee"}
+                {usertype.charAt(0).toUpperCase() + usertype.slice(1)}
                 <br />
                 Dashboard
               </p>
             </div>
 
             <div className="button-box">
-              {user.type === "faculty" ? (
+              {user.type === userTypes.FACULTY && (
                 <>
                   <Link
                     passHref={true}
@@ -49,7 +47,8 @@ const StaticData = React.memo(function StaticPage({ user }) {
                     </button>
                   </Link>
                 </>
-              ) : user.type === "admin" ? (
+              )}
+              {user.type === userTypes.ADMIN && (
                 <Link passHref={true} href="/Admin">
                   <button
                     type="button"
@@ -58,7 +57,8 @@ const StaticData = React.memo(function StaticPage({ user }) {
                     Approve Events
                   </button>
                 </Link>
-              ) : (
+              )}
+              {user.type === userTypes.COMMITTEE && (
                 <Link
                   passHref={true}
                   className="button-box-link"
@@ -69,6 +69,16 @@ const StaticData = React.memo(function StaticPage({ user }) {
                     className="btn btn-lg btn-primary ps-5 pe-5"
                   >
                     Create Event
+                  </button>
+                </Link>
+              )}
+              {user.type === userTypes.PRINCIPAL && (
+                <Link passHref={true} href="/CreateReminder">
+                  <button
+                    type="button"
+                    className="btn btn-lg btn-primary ps-5 pe-5"
+                  >
+                    Create Notification
                   </button>
                 </Link>
               )}

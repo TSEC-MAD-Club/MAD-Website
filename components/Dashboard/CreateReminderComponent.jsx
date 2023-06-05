@@ -12,93 +12,10 @@ import {
 } from "firebase/storage";
 import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
-
-const notificationTopic = {
-  3: {
-    Comps: {
-      C1: ["C11", "C12", "C13", "C14", "All"],
-      C2: ["C21", "C22", "C23", "C24", "All"],
-      C3: ["C31", "C32", "C33", "C34", "All"],
-      All: [],
-    },
-    It: {
-      T1: ["T11", "T12", "T13", "T14", "All"],
-      T2: ["T21", "T22", "T23", "T24", "All"],
-      All: [],
-    },
-    Extc: {
-      A: ["A1", "A2", "A3", "All"],
-      All: [],
-    },
-    Chem: {
-      K: ["K1", "K2", "K3", "All"],
-      All: [],
-    },
-    Aids: {
-      T: ["T1", "T2", "T3", "All"],
-      All: [],
-    },
-    All: {},
-  },
-  4: {
-    Comps: {
-      C1: ["C11", "C12", "C13", "C14", "All"],
-      C2: ["C21", "C22", "C23", "C24", "All"],
-      C3: ["C31", "C32", "C33", "C34", "All"],
-      All: [],
-    },
-    It: {
-      B1: ["B11", "B12", "B13", "B14", "All"],
-      B2: ["B21", "B22", "B23", "B24", "All"],
-      All: [],
-    },
-    Chem: {
-      K: ["K1", "K2", "K3", "All"],
-      All: [],
-    },
-    Extc: {
-      A: ["A1", "A2", "A3", "All"],
-      All: [],
-    },
-    All: {},
-  },
-  2: {
-    Comps: {
-      C1: ["C11", "C12", "C13", "C14", "All"],
-      C2: ["C21", "C22", "C23", "C24", "All"],
-      C3: ["C31", "C32", "C33", "C34", "All"],
-      All: [],
-    },
-    It: {
-      S1: ["S11", "S12", "S13", "S14", "All"],
-      S2: ["S21", "S22", "S23", "S24", "All"],
-      All: [],
-    },
-    Aids: {
-      S1: ["S11", "S12", "S13", "S14", "All"],
-      S2: ["S21", "S22", "S23", "S24", "All"],
-      All: [],
-    },
-    Chem: {
-      K: ["K1", "K2", "K3", "All"],
-      All: [],
-    },
-    Extc: {
-      A: ["A1", "A2", "A3", "All"],
-      All: [],
-    },
-    All: {},
-  },
-  All: {},
-};
-
-const yearClass = {
-  1: "First Year",
-  2: "Second Year",
-  3: "Third Year",
-  4: "Fourth Year",
-  All: "All",
-};
+import { yearClass } from "../../constants/yearClass";
+import { notificationTopic } from "../../constants/notificationTopic";
+import { userTypes } from "../../constants/userTypes";
+import { teacherDept } from "../../constants/teacherDept";
 
 function Element(props) {
   return (
@@ -121,9 +38,15 @@ function CreateReminderComponent() {
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
   const [division, setDivision] = useState("All");
   const [batch, setBatch] = useState("All");
+  const [teacher, setTeacher] = useState("All");
+  const [senderName, setSenderName] = useState("");
+  console.log(user);
 
   useEffect(() => {
-    if (!user.type.trim() || user.type != "faculty") {
+    if (
+      !user.type.trim() ||
+      !(user.type == userTypes.FACULTY || user.type == userTypes.PRINCIPAL)
+    ) {
       router.push("/");
     }
   }, [user]);
@@ -187,6 +110,8 @@ function CreateReminderComponent() {
       message: description,
       title,
       topic: notificationPath,
+      sentBy: user.name,
+      senderName: senderName,
     };
     if (mediaPath) {
       upload_data.attachments = [mediaPath];
@@ -204,18 +129,25 @@ function CreateReminderComponent() {
       setBatch("All");
       setMedia("");
       setMediaUploadStatus(false);
+      setTeacher("All");
+      setSenderName("");
       toast.notify(`Submitted response`, { type: "success" });
       return;
     } catch (error) {
+      console.log(error);
       toast.notify(`Submit failed`, { type: "error" });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const preTeacher = "T-";
     if (title.trim().length === 0) {
       toast.notify(`Please add title`, { type: "error" });
+
+      return;
+    } else if (senderName.trim().length === 0) {
+      toast.notify(`Please add sender name`, { type: "error" });
 
       return;
     } else if (description.trim().length === 0) {
@@ -226,6 +158,11 @@ function CreateReminderComponent() {
 
     if (mediaPath.trim().length > 0) {
       // await uploadFile(mediaPath);
+    }
+
+    if (user.type == userTypes.PRINCIPAL) {
+      setNotification(preTeacher + teacher);
+      return;
     }
 
     if (year === "All") {
@@ -271,6 +208,18 @@ function CreateReminderComponent() {
       <div className={styles.reminderTitle}>New Notification</div>
       <div className={styles.reminderBody}>
         <div className={styles.reminderBodyLeft}>
+          {user.type === userTypes.FACULTY && (
+            <Element title="Name of sender *">
+              <input
+                type="text"
+                name="senderName"
+                className={styles.inputText}
+                placeholder="Your name"
+                value={senderName}
+                onChange={(e) => setSenderName(e.target.value)}
+              />
+            </Element>
+          )}
           <Element title="Title of Notification *">
             <input
               type="text"
@@ -281,6 +230,7 @@ function CreateReminderComponent() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </Element>
+
           <Element title="Description *">
             <textarea
               name="decription"
@@ -326,114 +276,140 @@ function CreateReminderComponent() {
               </>
             )}
           </Element>
-          <Element title="Select students *" className="box">
-            <div className={styles.box}>
-              <div className={styles.inputboxdates}>
-                <select
-                  onChange={(e) => {
-                    setBatch("All");
-                    setDivision("All");
-                    setBranch("All");
-                    setYear(e.target.value);
-                  }}
-                  value={year}
-                >
-                  {Object.keys(notificationTopic).map((student_year, index) => (
-                    <option key={student_year + index} value={student_year}>
-                      {yearClass[student_year]}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          {user?.type === userTypes.FACULTY && (
+            <Element title="Select students *" className="box">
+              <div className={styles.box}>
+                <div className={styles.inputboxdates}>
+                  <select
+                    onChange={(e) => {
+                      setBatch("All");
+                      setDivision("All");
+                      setBranch("All");
+                      setYear(e.target.value);
+                    }}
+                    value={year}
+                  >
+                    {Object.keys(notificationTopic).map(
+                      (student_year, index) => (
+                        <option key={student_year + index} value={student_year}>
+                          {yearClass[student_year]}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
 
-              {/* Select Year */}
-              <div
-                className={
-                  styles.inputboxdates +
-                  (year === "All" ? " " + styles.disabledDropdown : "")
-                }
-              >
-                <select
-                  disabled={year === "All"}
-                  onChange={(e) => {
-                    setBranch(e.target.value);
-                    setDivision("All");
-                  }}
-                  value={branch}
+                {/* Select Year */}
+                <div
+                  className={
+                    styles.inputboxdates +
+                    (year === "All" ? " " + styles.disabledDropdown : "")
+                  }
                 >
-                  {Object.keys(notificationTopic[year]).map(
-                    (student_branch, index) => (
-                      <option
-                        key={student_branch + index}
-                        value={student_branch}
-                      >
-                        {student_branch}
-                      </option>
-                    )
-                  )}
-                </select>
-              </div>
+                  <select
+                    disabled={year === "All"}
+                    onChange={(e) => {
+                      setBranch(e.target.value);
+                      setDivision("All");
+                    }}
+                    value={branch}
+                  >
+                    {Object.keys(notificationTopic[year]).map(
+                      (student_branch, index) => (
+                        <option
+                          key={student_branch + index}
+                          value={student_branch}
+                        >
+                          {student_branch}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
 
-              {/* Select Division */}
-              <div
-                className={
-                  styles.inputboxdates +
-                  (year === "All" ? " " + styles.disabledDropdown : "")
-                }
-              >
-                <select
-                  disabled={year === "All"}
-                  onChange={(e) => {
-                    setBatch("All");
-                    setDivision(e.target.value);
-                  }}
-                  value={division}
+                {/* Select Division */}
+                <div
+                  className={
+                    styles.inputboxdates +
+                    (year === "All" ? " " + styles.disabledDropdown : "")
+                  }
                 >
-                  {year !== "All"
-                    ? Object.keys(notificationTopic[year][branch]).map(
-                        (student_division, index) => (
+                  <select
+                    disabled={year === "All"}
+                    onChange={(e) => {
+                      setBatch("All");
+                      setDivision(e.target.value);
+                    }}
+                    value={division}
+                  >
+                    {year !== "All"
+                      ? Object.keys(notificationTopic[year][branch]).map(
+                          (student_division, index) => (
+                            <option
+                              key={student_division + index}
+                              value={student_division}
+                            >
+                              {student_division}
+                            </option>
+                          )
+                        )
+                      : null}
+                  </select>
+                </div>
+
+                {/* Select batch */}
+                <div
+                  className={
+                    styles.inputboxdates +
+                    (year === "All" ? " " + styles.disabledDropdown : "")
+                  }
+                >
+                  <select
+                    disabled={year === "All"}
+                    onChange={(e) => setBatch(e.target.value)}
+                    value={batch}
+                  >
+                    {year !== "All" &&
+                    branch !== "All" &&
+                    division !== "All" ? (
+                      notificationTopic[year][branch][division].map(
+                        (student_batch, index) => (
                           <option
-                            key={student_division + index}
-                            value={student_division}
+                            key={student_batch + index}
+                            value={student_batch}
                           >
-                            {student_division}
+                            {student_batch}
                           </option>
                         )
                       )
-                    : null}
-                </select>
+                    ) : (
+                      <></>
+                    )}
+                  </select>
+                </div>
               </div>
-
-              {/* Select batch */}
-              <div
-                className={
-                  styles.inputboxdates +
-                  (year === "All" ? " " + styles.disabledDropdown : "")
-                }
-              >
-                <select
-                  disabled={year === "All"}
-                  onChange={(e) => setBatch(e.target.value)}
-                  value={batch}
-                >
-                  {year !== "All" && branch !== "All" && division !== "All" ? (
-                    notificationTopic[year][branch][division].map(
-                      (student_batch, index) => (
-                        <option
-                          key={student_batch + index}
-                          value={student_batch}
-                        >
-                          {student_batch}
-                        </option>
-                      )
-                    )
-                  ) : (
-                    <></>
-                  )}
-                </select>
+            </Element>
+          )}
+          {user?.type === userTypes.PRINCIPAL && (
+            <Element title="Select teachers *" className="box">
+              <div className={styles.box}>
+                <div className={styles.inputboxdates}>
+                  <select
+                    onChange={(e) => {
+                      setTeacher(e.target.value);
+                    }}
+                    value={teacher}
+                  >
+                    {teacherDept.map((teacher, index) => (
+                      <option key={teacher + index} value={teacher}>
+                        {teacher}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
-            </div>
-          </Element>
+            </Element>
+          )}
         </div>
       </div>
 
