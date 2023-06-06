@@ -26,7 +26,7 @@
   width: 426px;
   height: 512px;
   left: 172px;
-  top: 215px;
+  top: 170px;
 }
 
 .emailInput {
@@ -85,4 +85,11 @@
   text-align: center;
   margin-top: -5px;
   margin-bottom: 30px;
+}
+
+.carousel {
+  position: absolute;
+  width: 50vw;
+  left: 96vh;
+  top: 115px;
 }

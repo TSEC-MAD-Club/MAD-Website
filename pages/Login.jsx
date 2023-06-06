@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,6 +11,8 @@ import {
 import styles from "../styles/Login.module.css";
 import { toast } from "react-nextjs-toast";
 import { collection, getDocs } from "firebase/firestore";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // import { getStorage } from "firebase/";
 
@@ -58,11 +61,41 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
     <>
       <div style={{ backgroundColor: "#1E1E1E" }}>
         <img className={styles.devs_img} src="/assets/images/devs.jpeg" />
-        <img
-          src="/assets/images/events.png"
-          className={styles.side_img}
-          alt="W3Schools.com"
-        />
+        <div className={styles.carousel}>
+          <Carousel
+            autoPlay={true}
+            interval={3000}
+            infiniteLoop={true}
+            showIndicators={false}
+            swipeable={true}
+            showThumbs={false}
+            showStatus={false} >
+            <div>
+              <img src="/assets/images/img1.jpg"
+                alt="Slide 1" />
+            </div>
+            <div>
+              <img src="/assets/images/img2.jpg"
+                alt="Slide 2" />
+            </div>
+            <div>
+              <img src="/assets/images/img3.jpg"
+                alt="Slide 3" />
+            </div>
+            <div>
+              <img src="/assets/images/img4.jpg"
+                alt="Slide 4" />
+            </div>
+            <div>
+              <img src="/assets/images/img5.jpg"
+                alt="Slide 5" />
+            </div>
+            <div>
+              <img src="/assets/images/img6.jpg"
+                alt="Slide 6" />
+            </div>
+          </Carousel>
+        </div>
         <div className={styles.Authentication}>
           <form onSubmit={(e) => {
             e.preventDefault();
