@@ -1,63 +1,95 @@
-/* Welcome section */
-.welcomeImg {
-  width: 100%;
+.main_div {
+  background-color: #b63838;
 }
 
-.welcomeText {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
-  color: rgb(220, 218, 218);
+.devs_img {
+  position: absolute;
+  width: 92px;
+  left: 60px;
+  top: 27px;
 }
-
-.signInUpBody {
-  width: 50%;
-  margin: auto;
-}
-
-/* Login form */
-.loginTitle {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: rgb(220, 218, 218);
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  color: rgb(173, 171, 171);
-}
-
-.emailText,
-.passwordText {
+.formInput {
+  width: 426px;
+  height: 64px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
   font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
+  line-height: 14px;
+  color: #5a5a5a;
 }
 
-.emailInput,
+.Authentication {
+  position: absolute;
+  width: 426px;
+  height: 512px;
+  left: 172px;
+  top: 170px;
+}
+
+.emailInput {
+  width: 426px;
+  height: 64px;
+  /* left: 172px; */
+  font-family: "Poppins";
+  left: 198px;
+  top: 386px;
+}
+
 .passwordInput {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #f0f0f0;
-  font-size: 16px;
+  font-family: "Poppins";
+  width: 426px;
+  height: 64px;
+  left: 172px;
+  top: 482px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.loginButton {
-  padding: 10px;
+.login_btn {
+  padding: 15px;
+  width: 426px;
+  margin-top: 35px;
+  background: #2a66ff;
+  border-radius: 10px;
   border: none;
-  border-radius: 5px;
-  background-color: #1a6e2b;
-  color: white;
-  font-size: 16px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 14px;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
 }
 
+.side_img {
+  position: absolute;
+  width: 660px;
+  height: 585px;
+  left: 750px;
+  top: 99px;
+  border-radius: 10px;
+}
+.need_help {
+  position: absolute;
+  width: 279px;
+  height: 17px;
+  margin-top: 20px;
+  text-align: center;
+  margin-left: 58px;
+}
+.greet_text {
+  text-align: center;
+  margin-top: -5px;
+  margin-bottom: 30px;
+}
 
-@media only screen and (max-width: 600px) {
-  .signInUpBody {
-    width: 90%;
-  }
+.carousel {
+  position: absolute;
+  width: 50vw;
+  left: 96vh;
+  top: 115px;
 }
