@@ -5,6 +5,7 @@ import Head from "next/head";
 import "./css/resources.css";
 import { ToastContainer } from "react-nextjs-toast";
 import React from "react";
+import { ThemeProvider } from "../context/ThemeContext";
 
 const UserContext = React.createContext({
   loggedIn: false,
@@ -39,7 +40,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ToastContainer />
       <Layout>
-        <Component {...pageProps} />
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </Layout>
     </UserContext.Provider>
   );

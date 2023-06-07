@@ -11,8 +11,7 @@ import {
 import styles from "../styles/Login.module.css";
 import { toast } from "react-nextjs-toast";
 import { collection, getDocs } from "firebase/firestore";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import DarkMode from "../components/DarkMode/DarkMode";
 
 // import { getStorage } from "firebase/";
 
@@ -59,42 +58,10 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
 
   return (
     <>
-      <div style={{ backgroundColor: "#1E1E1E" }}>
-        <img className={styles.devs_img} src="/assets/images/devs.jpeg" />
-        <div className={styles.carousel}>
-          <Carousel
-            autoPlay={true}
-            interval={3000}
-            infiniteLoop={true}
-            showIndicators={false}
-            swipeable={true}
-            showThumbs={false}
-            showStatus={false} >
-            <div>
-              <img src="/assets/images/img1.jpg"
-                alt="Slide 1" />
-            </div>
-            <div>
-              <img src="/assets/images/img2.jpg"
-                alt="Slide 2" />
-            </div>
-            <div>
-              <img src="/assets/images/img3.jpg"
-                alt="Slide 3" />
-            </div>
-            <div>
-              <img src="/assets/images/img4.jpg"
-                alt="Slide 4" />
-            </div>
-            <div>
-              <img src="/assets/images/img5.jpg"
-                alt="Slide 5" />
-            </div>
-            <div>
-              <img src="/assets/images/img6.jpg"
-                alt="Slide 6" />
-            </div>
-          </Carousel>
+      <div style={{ backgroundColor: "#EFF4F8" }}>
+        <img className={styles.devs_img} src="/assets/images/devs.png" />
+        <div className={styles.darkmode_toggle}>
+          <DarkMode />
         </div>
         <div className={styles.Authentication}>
           <form onSubmit={(e) => {
@@ -130,7 +97,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
             </button>
           </form>
           <div className={styles.need_help}>
-            Need help with Login ? <a href="#">Contact Us!</a>
+            Need help with login? <a style={{ Color: "#2A66FF" }} href="#"> Contact Us!</a>
           </div>
         </div>
       </div>
