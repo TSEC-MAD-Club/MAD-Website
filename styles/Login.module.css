@@ -141,3 +141,15 @@
   top: 55px;
   right: 10vh;
 }
+.eye_icon {
+  position: absolute;
+  right: 3vh;
+  z-index: 4;
+}
+
+.password_div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}

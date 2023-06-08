@@ -12,13 +12,18 @@ import styles from "../styles/Login.module.css";
 import { toast } from "react-nextjs-toast";
 import { collection, getDocs } from "firebase/firestore";
 import DarkMode from "../components/DarkMode/DarkMode";
-
+import { eyeOff } from 'react-icons-kit/feather/eyeOff'
+import { eye } from 'react-icons-kit/feather/eye'
+import Icon from "react-icons-kit";
 // import { getStorage } from "firebase/";
 
 const Login = ({ setLoggedIn, setUser, loggedIn }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [type, setType] = useState('password');
+  const [icon, setIcon] = useState(eyeOff);
   const router = useRouter();
+
 
   const loginMsg = () => {
     const auth = getAuth(app);
@@ -56,6 +61,17 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
       });
   };
 
+  const handlePasswordToggle = () => {
+    if (type == 'password') {
+      setIcon(eye);
+      setType('text');
+    }
+    else {
+      setIcon(eyeOff);
+      setType('password');
+    }
+  }
+
   return (
     <>
       <div style={{ backgroundColor: "#EFF4F8" }}>
@@ -81,13 +97,20 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
                 }
               }}
             />
-            <input
-              type="password"
-              style={{ textIndent: "10px" }}
-              placeholder="Password"
-              className={`${styles.formInput} ${styles.passwordInput}`}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+
+            <div className={`${styles.password_div}`}>
+              <input
+                type={type}
+                style={{ textIndent: "10px" }}
+                placeholder="Password"
+                className={`${styles.formInput} ${styles.passwordInput}`}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span onClick={handlePasswordToggle} className={`${styles.eye_icon}`}>
+                <Icon icon={icon}></Icon> </span>
+            </div>
+
+
             <div className="ui toggle checkbox ">
               <input type="checkbox" name="public" />
               <label>Remember Me</label>
