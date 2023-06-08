@@ -5,6 +5,7 @@ import Head from "next/head";
 import "./css/resources.css";
 import { ToastContainer } from "react-nextjs-toast";
 import React from "react";
+import { ThemeProvider } from "../src/context/ThemeContext";
 
 const UserContext = React.createContext({
   loggedIn: false,
@@ -17,6 +18,14 @@ function MyApp({ Component, pageProps }) {
     email: "",
     name: "",
   });
+  const [theme, setTheme] = React.useState("light");
+
+  React.useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(JSON.parse(storedTheme));
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser }}>
@@ -38,9 +47,11 @@ function MyApp({ Component, pageProps }) {
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
       </Head>
       <ToastContainer />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </UserContext.Provider>
   );
 }

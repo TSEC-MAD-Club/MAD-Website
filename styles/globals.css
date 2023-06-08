@@ -3,18 +3,34 @@
 } */
 
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --devs-blue: #2a66ff;
+  --light-bg: #eff4f8;
+  --dark-bg: #00071a;
+  --grey: #5a5a5a;
+  --login-font: "Poppins", sans-serif;
+}
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #000;
-  overflow-x: hidden;
+  height: 100%;
 }
-
+#__next {
+  height: 100%;
+}
+.App {
+  height: 100%;
+  font-family: var(--login-font);
+  overflow-x: hidden;
+  background-color: var(--light-bg);
+}
+#dark.App {
+  background-color: var(--dark-bg) !important;
+}
 .card-wrapper {
   display: grid;
   width: 100%;
@@ -32,10 +48,67 @@ body {
   grid-template-columns: auto auto auto;
 }
 
+.page-width {
+  padding: 0 12%;
+}
+
+/*Login css*/
+.loginWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+.loginHeader {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.loginTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.loginSubtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0 0.8rem;
+}
+.loginInputs {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  width: 100%;
+  height: 3.5rem;
+  padding: 0.5rem;
+}
+.loginButton {
+  border: none;
+  background-color: var(--devs-blue);
+  width: 100%;
+  height: 3rem;
+  border-radius: 10px;
+  color: #ffffff;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+}
+#dark .loginWrapper {
+  color: #ffffff;
+}
+
 @media (max-width: 1191px) {
   .grid-4,
   .grid-3 {
     grid-template-columns: auto auto;
+  }
+  .page-width {
+    padding: 0 10%;
   }
 }
 
@@ -45,6 +118,9 @@ body {
   .grid-3 {
     grid-template-columns: auto;
   } */
+  .page-width {
+    padding: 0 5%;
+  }
   .btn.tab-btn {
     width: 30vw !important;
   }
@@ -91,17 +167,6 @@ a {
 @font-face {
   font-family: Anurati;
   src: url("/assets/fonts/Anurati-Regular.otf");
-}
-
-:root {
-  --primary-1: #000000;
-  --primary-2: #373737;
-
-  --primary-3: #ffd700;
-  --primary-4: #2962ff;
-  --primary-5: #fff;
-  --main-font: "Red Hat Display", sans-serif;
-  --title-font: "Anurati", "Red Hat Display";
 }
 
 .main-1 {
