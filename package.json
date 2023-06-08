@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "devp": "next dev -p 8080",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,8 +18,7 @@
     "react-icons-kit": "^2.0.0",
     "react-intersection-observer": "^8.34.0",
     "react-nextjs-toast": "^1.2.5",
-    "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.4"
+    "react-switch": "^7.0.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.1.5",

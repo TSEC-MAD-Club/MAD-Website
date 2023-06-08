@@ -39,7 +39,7 @@ const Navbar = () => {
                   onClick={() => {
                     // localStorage.setItem("loggedIn", false);
                     setLoggedIn(false);
-                    router.push("/")
+                    router.push("/");
                   }}
                   aria-current="page"
                 >
@@ -47,7 +47,7 @@ const Navbar = () => {
                     src="https://i.ibb.co/2Y5LJ0C/image-removebg-preview.webp"
                     height="50"
                     width={"50"}
-                    style={{width: "50px"}}
+                    style={{ width: "50px" }}
                     alt="logout-img"
                   />
                 </button>

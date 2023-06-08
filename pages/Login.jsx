@@ -1,29 +1,27 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import "semantic-ui-css/semantic.min.css";
+import React, { useContext, useState } from "react";
 import { db, app } from "../firebase";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import styles from "../styles/Login.module.css";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import "../styles/Login.module.css";
 import { toast } from "react-nextjs-toast";
 import { collection, getDocs } from "firebase/firestore";
-import DarkMode from "../components/DarkMode/DarkMode";
+import devsLogoDark from "../public/assets/images/logo.png";
+import Switch from "react-switch";
+import { SunIcon } from "../components/SunIcon";
+import { MoonIcon } from "../components/MoonIcon";
+import { ThemeContext } from "../src/context/ThemeContext";
 import { eyeOff } from 'react-icons-kit/feather/eyeOff'
 import { eye } from 'react-icons-kit/feather/eye'
 import Icon from "react-icons-kit";
-// import { getStorage } from "firebase/";
+import styles from "../styles/Login.module.css"
 
 const Login = ({ setLoggedIn, setUser, loggedIn }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff);
-  const router = useRouter();
-
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const loginMsg = () => {
     const auth = getAuth(app);
@@ -61,6 +59,9 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
       });
   };
 
+  const handleRememberMe = () => {
+    setRememberMe(!rememberMe);
+  };
   const handlePasswordToggle = () => {
     if (type == 'password') {
       setIcon(eye);
@@ -73,58 +74,106 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
   }
 
   return (
-    <>
-      <div style={{ backgroundColor: "#EFF4F8" }}>
-        <img className={styles.devs_img} src="/assets/images/devs.png" />
-        <div className={styles.darkmode_toggle}>
-          <DarkMode />
-        </div>
-        <div className={styles.Authentication}>
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            loginMsg();
-          }}>
-            <h2 style={{ fontSize: "2.7rem" }} className={styles.greet_text}>Welcome Back!</h2>
-            <h5 style={{ color: "grey" }} className={styles.greet_text}>Login into your Account to access your Dashboard</h5>
+    <div className="page-width">
+      <div className="loginHeader">
+        <img
+          className="loginLogo"
+          src={
+            theme === "dark"
+              ? "/assets/images/devs-dark.png"
+              : "/assets/images/devs-light.png"
+          }
+        />
+        <Switch
+          checked={theme === "dark" ? true : false}
+          onChange={toggleTheme}
+          uncheckedHandleIcon={
+            <SunIcon
+              width={16}
+              height={16}
+              style={{ marginTop: "-6px", marginLeft: "2px" }}
+            />
+          }
+          checkedHandleIcon={
+            <MoonIcon
+              width={16}
+              height={16}
+              style={{ marginTop: "-6px", marginLeft: "2px" }}
+            />
+          }
+          onColor={"#2a66ff"}
+          offColor={"#C9C9C9"}
+          uncheckedIcon={false}
+          checkedIcon={false}
+          height={24}
+          width={48}
+          handleDiameter={20}
+        />
+      </div>
+      <div className="loginWrapper">
+        <div>
+          <form
+            className="loginForm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              loginMsg();
+            }}
+          >
+            <h2 className="loginTitle">Welcome Back!</h2>
+            <h5 className="loginSubtitle">
+              Login into your account to access your dashboard
+            </h5>
             <input
               type="email"
               placeholder="Email"
               style={{ textIndent: "10px" }}
-              className={`${styles.formInput} ${styles.emailInput}`}
+              className="loginInputs"
               onChange={(e) => {
                 if (e.target.value) {
                   setEmail(e.target.value.trim());
                 }
               }}
             />
-
-            <div className={`${styles.password_div}`}>
+            <div className={styles.password}>
               <input
                 type={type}
                 style={{ textIndent: "10px" }}
                 placeholder="Password"
-                className={`${styles.formInput} ${styles.passwordInput}`}
+                className="loginInputs"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span onClick={handlePasswordToggle} className={`${styles.eye_icon}`}>
-                <Icon icon={icon}></Icon> </span>
+              <span onClick={handlePasswordToggle} className={styles.eye_icon}>
+                <Icon icon={icon}></Icon>
+              </span>
             </div>
-
-
-            <div className="ui toggle checkbox ">
-              <input type="checkbox" name="public" />
+            <div className={styles.switch}>
+              <Switch
+                checked={rememberMe}
+                onChange={handleRememberMe}
+                onColor={"#2a66ff"}
+                offColor={"#C9C9C9"}
+                uncheckedIcon={false}
+                checkedIcon={false}
+                height={24}
+                width={48}
+                handleDiameter={19}
+              />
               <label>Remember Me</label>
             </div>
-            <button className={`${styles.login_btn}`} type="submit">
+            <button type="submit" className="loginButton">
               Log In
             </button>
+            <div>
+              Need help with login?{" "}
+              <a style={{ color: "var(--devs-blue)" }} href="#">
+                {" "}
+                Contact Us!
+              </a>
+            </div>
           </form>
-          <div className={styles.need_help}>
-            Need help with login? <a style={{ Color: "#2A66FF" }} href="#"> Contact Us!</a>
-          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
