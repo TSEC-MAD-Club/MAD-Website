@@ -137,7 +137,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
                 style={{ textIndent: "10px" }}
                 placeholder="Password"
                 className="loginInputs"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value.trim())}
               />
               <span onClick={handlePasswordToggle} className={styles.eye_icon}>
                 <Icon icon={icon}></Icon>

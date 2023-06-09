@@ -82,6 +82,7 @@ body {
   height: 3.5rem;
   padding: 0.5rem;
 }
+
 .loginButton {
   border: none;
   background-color: var(--devs-blue);
@@ -100,6 +101,11 @@ body {
 }
 #dark .loginWrapper {
   color: #ffffff;
+}
+@media (max-width: 403px) {
+  .loginSubtitle {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 1191px) {
