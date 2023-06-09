@@ -5,24 +5,22 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import "../styles/Login.module.css";
 import { toast } from "react-nextjs-toast";
 import { collection, getDocs } from "firebase/firestore";
-import devsLogoDark from "../public/assets/images/logo.png";
 import Switch from "react-switch";
 import { SunIcon } from "../components/SunIcon";
 import { MoonIcon } from "../components/MoonIcon";
 import { ThemeContext } from "../src/context/ThemeContext";
-import { eyeOff } from 'react-icons-kit/feather/eyeOff'
-import { eye } from 'react-icons-kit/feather/eye'
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
-import styles from "../styles/Login.module.css"
+import styles from "../styles/Login.module.css";
 
 const Login = ({ setLoggedIn, setUser, loggedIn }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [type, setType] = useState('password');
+  const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
   const { theme, toggleTheme } = useContext(ThemeContext);
-
   const loginMsg = () => {
     const auth = getAuth(app);
 
@@ -63,15 +61,14 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
     setRememberMe(!rememberMe);
   };
   const handlePasswordToggle = () => {
-    if (type == 'password') {
+    if (type == "password") {
       setIcon(eye);
-      setType('text');
-    }
-    else {
+      setType("text");
+    } else {
       setIcon(eyeOff);
-      setType('password');
+      setType("password");
     }
-  }
+  };
 
   return (
     <div className="page-width">
