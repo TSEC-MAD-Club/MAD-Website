@@ -6,6 +6,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
+  --primary-1: #000000;
+  --primary-2: #373737;
+  --primary-3: #ffd700;
+  --primary-4: #2962ff;
+  --primary-5: #fff;
+  --main-font: "Red Hat Display", sans-serif;
+  --title-font: "Anurati", "Red Hat Display";
   --devs-blue: #2a66ff;
   --light-bg: #eff4f8;
   --dark-bg: #00071a;
@@ -17,6 +24,8 @@ html,
 body {
   padding: 0;
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   height: 100%;
 }
 #__next {

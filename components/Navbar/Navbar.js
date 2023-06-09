@@ -23,9 +23,9 @@ const Navbar = () => {
         >
           <Image
             className="navbar-logo"
-            src="/assets/images/logo.png"
-            width={80}
-            height={80}
+            src="/assets/images/devs-dark.png"
+            width={70}
+            height={70}
             alt=""
           />
         </Link>
