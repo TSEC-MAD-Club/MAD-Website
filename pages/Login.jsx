@@ -123,7 +123,6 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
             <input
               type="email"
               placeholder="Email"
-              style={{ textIndent: "10px" }}
               className="loginInputs"
               onChange={(e) => {
                 if (e.target.value) {
@@ -134,7 +133,6 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
             <div className={styles.password}>
               <input
                 type={type}
-                style={{ textIndent: "10px" }}
                 placeholder="Password"
                 className="loginInputs"
                 onChange={(e) => setPassword(e.target.value.trim())}
