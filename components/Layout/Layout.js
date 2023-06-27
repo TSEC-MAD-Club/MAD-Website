@@ -1,4 +1,4 @@
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../Navbar";
 import Footer from "../Footer";
 import { UserContext } from "../../pages/_app";
 

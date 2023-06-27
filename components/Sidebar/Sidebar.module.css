@@ -1,0 +1,176 @@
+.sidebarWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
+  width: 23vw;
+  border: 1px solid #ffffff;
+  border-radius: 24px;
+  margin-top: 4vh;
+  margin-left: 2vw;
+  background-color: #ffffff;
+}
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
+.sidebarLogo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: 2rem;
+}
+
+.sidebarUser {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--login-font);
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebarUsername {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 0.1rem;
+}
+
+.sidebarUsermail {
+  font-size: 0.7rem;
+  font-weight: 300;
+  margin-bottom: 0.3rem;
+}
+
+.sidebarHorizontalRule {
+  color: #000000;
+  width: 80%;
+}
+
+.sidebarFunctions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 30%;
+  font-family: var(--login-font);
+  font-size: 0.9rem;
+  gap: 0.9rem;
+}
+
+.sidebarFunctions img {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
+}
+
+.sidebarMenu {
+  display: none;
+}
+
+.sidebarOpen .sidebarMenu {
+  display: block;
+}
+
+.sidebarMenu li {
+  margin-bottom: 10px;
+}
+
+.sidebarMenu a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+
+.toggleCheckbox {
+  display: none;
+}
+
+.toggleLabel {
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  top: 8rem;
+  left: 0;
+  z-index: 1;
+}
+
+.toggleIcon {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #000;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.toggleIcon:before,
+.toggleIcon:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  position: absolute;
+}
+
+.toggleIcon:before {
+  top: -6px;
+}
+
+.toggleIcon:after {
+  top: 6px;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 700px) {
+  .sidebarWrapper {
+    width: auto;
+    margin: 2vh 2vw;
+  }
+
+  .sidebarFunctions {
+    display: none;
+  }
+
+  .sidebarMenu {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  .sidebarUser {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .toggleCheckbox:checked ~ .sidebarContent {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .toggleCheckbox:checked ~ .sidebarContent .sidebarMenu .sidebarWrapper {
+    display: block;
+  }
+
+  .toggleCheckbox:checked ~ .sidebarHeader .sidebarUser .sidebarUsermail {
+    display: none;
+  }
+
+  /* .toggleIcon:before {
+    transform: translateY(6px) rotate(45deg);
+  } */
+
+  /* .toggleIcon:after {
+    transform: translateY(-6px) rotate(-45deg);
+  } */
+}

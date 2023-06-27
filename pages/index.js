@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
 import Login from "./Login";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/Navbar";
 import { UserContext } from "./_app";
 import Link from "next/link";
 import { userTypes } from "../constants/userTypes";
@@ -69,6 +69,20 @@ const StaticData = React.memo(function StaticPage({ user }) {
                     className="btn btn-lg btn-primary ps-5 pe-5"
                   >
                     Create Event
+                  </button>
+                </Link>
+              )}
+              {user.type === userTypes.COMMITTEE && (
+                <Link
+                  passHref={true}
+                  className="button-box-link"
+                  href="/CreateNote"
+                >
+                  <button
+                    type="button"
+                    className="btn btn-lg btn-primary ps-5 pe-5"
+                  >
+                    Create Note
                   </button>
                 </Link>
               )}
