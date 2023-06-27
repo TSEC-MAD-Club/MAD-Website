@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { UserContext } from "../../pages/_app";
+import { UserContext } from "../pages/_app";
 import { useRouter } from "next/router";
 
 const Navbar = () => {

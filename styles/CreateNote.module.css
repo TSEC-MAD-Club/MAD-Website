@@ -1,0 +1,138 @@
+.pageWrapper {
+  display: flex;
+  background-color: #eff4f8;
+}
+
+.noteWrapper {
+  margin-top: 3rem;
+  margin-left: 3rem;
+  height: 80vh;
+  width: 67vw;
+}
+
+.mainHeading {
+  font-family: var(--login-font);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.subTitle {
+  font-family: var(--login-font);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.createNoteWrapper {
+  margin-top: 4rem;
+  display: grid;
+  width: 67vw;
+  column-gap: 2rem;
+  row-gap: 2rem;
+  grid-template-columns: 10fr 10fr;
+}
+
+.gridBox {
+  height: 100%;
+}
+
+.subjectDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.subjectText {
+  margin-top: 0.8rem;
+  padding: 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+}
+
+.descriptionDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionBox {
+  margin-top: 0.8rem;
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  height: 7rem;
+  resize: none;
+}
+
+.sendNoteButton {
+  margin-top: 3rem;
+  width: 32.5vw;
+  border: none;
+  background-color: var(--devs-blue);
+  height: 3rem;
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.addNotesDiv img {
+  height: 3rem;
+  width: 3rem;
+  color: #483ea8;
+}
+
+.addNotesDiv span {
+  color: #483ea8;
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  font-family: Mulish;
+  font-weight: 700;
+  line-height: 24px;
+  text-decoration: underline;
+  font-family: var(--login-font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+.addNotesContainer {
+  display: flex;
+  gap: 2rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px dashed rgba(56, 78, 183, 0.3);
+  background: #f8f8ff;
+  width: 100%;
+  height: 1.5%;
+  flex-shrink: 0;
+  font-family: var(--login-font);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.uploadTextInstruction {
+  color: #676767;
+  text-align: center;
+  font-size: 12px;
+  font-family: var(--login-font);
+  line-height: 18px;
+}
+
+@media screen and (max-width: 1000px) {
+  .createNoteWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .sendNoteButtonContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
