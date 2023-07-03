@@ -2,13 +2,20 @@ import React from "react";
 import Sidebar from "../components/Sidebar/SidebarComponent";
 import styles from "../styles/CreateNote.module.css"
 import uploadIcon from "../public/assets/images/uploadIcon.png"
+import HamburgerMenu from "../components/Hamburger/HamburgerMenu";
+
 
 const CreateNote = () => {
     return (
+        <div style={{ background: "var(--dark-bg)" }}>
         <div className={styles.pageWrapper}>
             <Sidebar />
+            
+                <HamburgerMenu/>
+            
+             
             <div className={styles.noteWrapper}>
-                <h1 className={styles.mainHeading}>Create Note</h1>
+                <h1 className={styles.mainHeading}>Create a Note</h1>
                 <h5 className={styles.subTitle}>Create a Note about something for the students</h5>
                 <div className={styles.createNoteWrapper}>
                     <div className={styles.gridBox}>
@@ -70,7 +77,8 @@ Supported formates: JPEG, PNG, GIF, MP4, PDF, PSD, AI, Word, PPT
                     </button>
                 </div>
             </div>
-        </div>
+            </div>
+            </div>
     )
 }
 

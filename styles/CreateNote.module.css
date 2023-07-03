@@ -2,6 +2,9 @@
   display: flex;
   background-color: #eff4f8;
 }
+.hamburgerContainer {
+  display: none;
+}
 
 .noteWrapper {
   margin-top: 3rem;
@@ -58,7 +61,7 @@
   padding-top: 0.8rem;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
-  height: 7rem;
+  height: 13rem;
   resize: none;
 }
 
@@ -69,7 +72,7 @@
   background-color: var(--devs-blue);
   height: 3rem;
   border-radius: 10px;
-  color: #ffffff;
+  color: var(--primary-5);
 }
 
 .addNotesDiv img {
@@ -116,6 +119,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  height: 12rem;
 }
 .uploadTextInstruction {
   color: #676767;
