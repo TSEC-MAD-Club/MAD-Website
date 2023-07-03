@@ -1,13 +1,26 @@
 .sidebarWrapper {
   display: flex;
   flex-direction: column;
-  height: 92vh;
-  width: 23vw;
-  border: 1px solid #ffffff;
-  border-radius: 24px;
-  margin-top: 4vh;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 5rem;
+  width: 17vw;
+  border: 1px solid var(--primary-5);
+  border-radius: 25px;
+  margin-top: 2vh;
   margin-left: 2vw;
-  background-color: #ffffff;
+  padding-bottom: 2rem;
+  padding-right: 2rem;
+  background-color: var(--primary-5);
+}
+.sidebarDevslogo img {
+  width: 3rem;
+  height: 3rem;
+}
+.sidebarDevslogo {
+  width: 100%;
+  margin-top: 1rem;
+  margin-left: 2rem;
 }
 
 .sidebarContent {
@@ -19,21 +32,25 @@
 
 .sidebarHeader {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: center;
   margin-left: 1rem;
   margin-right: auto;
   margin-top: 1rem;
+  margin-top: 1rem;
+  width: 100%;
 }
 
 .sidebarLogo {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
+  margin-right: 2rem;
 }
 
 .sidebarUser {
-  margin-top: 4rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   font-family: var(--login-font);
@@ -54,7 +71,7 @@
 }
 
 .sidebarHorizontalRule {
-  color: #000000;
+  color: var(--primary-1);
   width: 80%;
 }
 
@@ -62,11 +79,29 @@
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   margin-left: 30%;
   font-family: var(--login-font);
   font-size: 0.9rem;
-  gap: 0.9rem;
+  gap: 1rem;
+  width: 100%;
+}
+.sidebarFunctions a {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 1vh;
+  align-items: center;
+  color: var(--primary-1);
+  text-decoration: none;
+  height: 2rem;
+}
+.sidebarFunctions a:hover {
+  background-color: #e3e8ef;
+  border-radius: 6px;
+}
+.sidebarFunctions a:active {
+  background-color: #e3e8ef;
+  border-radius: 6px;
 }
 
 .sidebarFunctions img {
@@ -87,12 +122,31 @@
   margin-bottom: 10px;
 }
 
-.sidebarMenu a {
+.sidebarMenu {
   display: block;
-  color: #000;
+  /* color: var(--primary-1); */
+  color: var(--primary-1);
   text-decoration: none;
+  height: 3rem;
 }
-
+.sidebarMenu a:hover {
+  display: block;
+  background-color: black;
+  text-decoration: none;
+  color: var(--primary-1);
+}
+.sidebarInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+.sidebarInformation button {
+  border: none;
+  background: none;
+}
 .toggleCheckbox {
   display: none;
 }
@@ -110,7 +164,7 @@
   display: block;
   width: 20px;
   height: 2px;
-  background-color: #000;
+  background-color: var(--primary-1);
   position: relative;
   transition: background-color 0.3s ease;
 }
@@ -173,4 +227,14 @@
   /* .toggleIcon:after {
     transform: translateY(-6px) rotate(-45deg);
   } */
+}
+@media screen and (max-width: 690px) {
+  .sidebarWrapper {
+    display: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .sidebarWrapper {
+    width: 20rem;
+  }
 }
