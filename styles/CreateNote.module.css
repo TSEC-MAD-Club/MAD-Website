@@ -1,9 +1,6 @@
 .pageWrapper {
   display: flex;
-  background-color: #eff4f8;
-}
-.hamburgerContainer {
-  display: none;
+  background-color: var(--primary-5);
 }
 
 .noteWrapper {
@@ -46,7 +43,7 @@
 .subjectText {
   margin-top: 0.8rem;
   padding: 1rem;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--light-bg);
   border-radius: 10px;
 }
 
@@ -59,7 +56,7 @@
   margin-top: 0.8rem;
   padding-left: 1rem;
   padding-top: 0.8rem;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--light-bg);
   border-radius: 10px;
   height: 13rem;
   resize: none;
