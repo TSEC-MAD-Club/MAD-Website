@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Sidebar from "../components/Sidebar/Sidebar";
 import styles from "../styles/CreateNote.module.css"
-import SideBar from "../components/Sidebar/Sidebar";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { toast } from "react-nextjs-toast";
@@ -175,10 +175,10 @@ const CreateNote = () => {
     return (
         <div style={{ background: "var(--dark-bg)" }}>
             <div className={styles.pageWrapper}>
-                <SideBar user={user} />
+                <Sidebar user={user} />
                 <div className={styles.noteWrapper}>
-                    <h1 className={styles.mainHeading}>Create a Note</h1>
-                    <h5 className={styles.subTitle}>Create a Note about something for the students</h5>
+                    <h1 className={styles.mainHeading}>Create a Notification</h1>
+                    <h5 className={styles.subTitle}>Create a Notification about something for the students</h5>
                     <div className={styles.createNoteWrapper}>
                         <div className={styles.gridBox}>
                             <div className={styles.subjectDiv}>
@@ -195,7 +195,7 @@ const CreateNote = () => {
                         </div>
                         <div className={styles.gridBox}>
                             <label>Select Students</label>
-                            <div style={{ display: "flex" }}>
+                            <div style={{ display: "flex", flexwrap: "wrap" }}>
                                 <select
                                     onChange={(e) => {
                                         setBatch("All");
@@ -316,7 +316,7 @@ const CreateNote = () => {
                         <div className={styles.gridBox}>
                             <div className={styles.addNotesDiv}>
                                 <label className={styles.label} style={{ marginBottom: '1rem' }}>
-                                    Add Notes*
+                                    Add attachments (Optional)
                                 </label>
                                 <div className={styles.addNotesContainer}>
                                     <label htmlFor="file-upload">

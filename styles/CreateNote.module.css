@@ -1,6 +1,6 @@
 .pageWrapper {
   display: flex;
-  background-color: var(--primary-5);
+  background-color: var(--light-bg);
 }
 
 .noteWrapper {
@@ -135,5 +135,15 @@
   .sendNoteButtonContainer {
     display: flex;
     justify-content: center;
+  }
+}
+@media screen and (max-width: 690px) {
+  .noteWrapper {
+    margin-left: 1rem;
+    margin-top: 5rem;
+    width: 90vw;
+  }
+  .sendNoteButton {
+    margin-bottom: 3rem;
   }
 }
