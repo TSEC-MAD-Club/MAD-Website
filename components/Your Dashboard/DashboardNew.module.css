@@ -1,0 +1,149 @@
+.pageWrapper {
+  display: flex;
+  background-color: var(--light-bg);
+}
+
+.find {
+  display: flex;
+  flex-direction: column;
+}
+
+.root {
+  box-sizing: border-box;
+  padding: 2%;
+  margin: 0;
+}
+
+.headerText {
+  font-family: var(--login-font);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.operations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 260px;
+}
+.twobutton {
+  display: flex;
+  width: 100%;
+  height: 175px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.item {
+  background: var(--primary-5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 16px;
+  padding: 2.2rem;
+  width: 50%;
+  margin: 1rem;
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+}
+
+.recent {
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  overflow-x: auto;
+  background: var(--primary-5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1rem;
+  width: 100%;
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+}
+.recent h3 {
+  font-weight: 600;
+}
+
+.hr {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  text-align: left;
+  table-layout: fixed;
+}
+
+.tableRow {
+  height: 2rem;
+}
+
+.tableCol {
+  width: 30%;
+  padding: 2%;
+}
+@media screen and (max-width: 1000px) {
+  .twobutton {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 175px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .sendNoteButtonContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
+/* tab view  */
+@media only screen and (max-width: 600px) {
+  .recent {
+    display: inline-block;
+  }
+  .table {
+    width: auto;
+  }
+  .operations {
+    display: flex;
+    flex-direction: column;
+  }
+  .twobutton {
+    display: block;
+    flex-direction: column;
+    height: max-content;
+  }
+  .item {
+    width: 90%;
+  }
+}
+/* mob view  */
+@media only screen and (max-width: 350px) {
+  .tableCol {
+    width: 30%;
+    padding: 1%;
+    font-size: 0.7rem;
+  }
+  .recent h3 {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .twobutton {
+    height: max-content;
+  }
+  .operations {
+    min-height: fit-content;
+  }
+  .item {
+    height: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+  .root h1 {
+    font-size: 1.5rem;
+  }
+}
