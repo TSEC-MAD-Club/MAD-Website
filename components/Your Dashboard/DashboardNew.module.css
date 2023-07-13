@@ -98,6 +98,7 @@
     justify-content: center;
   }
 }
+/* tab view  */
 @media only screen and (max-width: 600px) {
   .recent {
     display: inline-block;
@@ -112,8 +113,37 @@
   .twobutton {
     display: block;
     flex-direction: column;
+    height: max-content;
   }
   .item {
     width: 90%;
+  }
+}
+/* mob view  */
+@media only screen and (max-width: 350px) {
+  .tableCol {
+    width: 30%;
+    padding: 1%;
+    font-size: 0.7rem;
+  }
+  .recent h3 {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .twobutton {
+    height: max-content;
+  }
+  .operations {
+    min-height: fit-content;
+  }
+  .item {
+    height: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+  .root h1 {
+    font-size: 1.5rem;
   }
 }
