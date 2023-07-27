@@ -18,6 +18,22 @@
   --dark-bg: #00071a;
   --grey: #5a5a5a;
   --login-font: "Poppins", sans-serif;
+  --hover: #e3e8ef;
+}
+:root.dark-mode {
+  --primary-1: #ffffff;
+  --primary-2: #eaeaea;
+  --primary-3: #ffd700;
+  --primary-4: #2962ff;
+  --primary-5: #000c2c;
+  --main-font: "Red Hat Display", sans-serif;
+  --title-font: "Anurati", "Red Hat Display";
+  --devs-blue: #2a66ff;
+  --light-bg: #00071a;
+  --dark-bg: #eff4f8;
+  --grey: #5a5a5a;
+  --login-font: "Poppins", sans-serif;
+  --hover: #00154c;
 }
 
 html,
@@ -36,9 +52,7 @@ body {
   font-family: var(--login-font);
   overflow-x: hidden;
   background-color: var(--light-bg);
-}
-#dark.App {
-  background-color: var(--dark-bg) !important;
+  color: var(--dark-bg);
 }
 .card-wrapper {
   display: grid;

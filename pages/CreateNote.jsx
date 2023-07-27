@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { UserContext } from "./_app";
 import { notificationTopic } from "../constants/notificationTopic";
 import { yearClass } from "../constants/yearClass";
+import { userTypes } from "../constants/userTypes";
 
 const CreateNote = () => {
     const [title, setTitle] = useState("");
@@ -29,7 +30,7 @@ const CreateNote = () => {
     const router = useRouter();
     const { user } = React.useContext(UserContext);
     useEffect(() => {
-        if (!user.email.trim()) {
+        if (!user.email.trim() || user.type != userTypes.FACULTY) {
             router.push("/");
         }
     }, []);

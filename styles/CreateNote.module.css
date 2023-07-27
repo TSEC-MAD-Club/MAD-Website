@@ -20,6 +20,8 @@
   font-family: var(--login-font);
   font-size: 1rem;
   font-weight: 400;
+  border-bottom: 1px solid var(--grey);
+  padding-bottom: 2vh;
 }
 
 .createNoteWrapper {

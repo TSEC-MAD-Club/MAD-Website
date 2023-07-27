@@ -61,6 +61,7 @@ function CreateEventComponent() {
       router.push("/");
     }
   }, [user]);
+  console.log(user);
 
   const handleEventDetails = (e) => {
     e.preventDefault();
@@ -196,25 +197,8 @@ function CreateEventComponent() {
                 name={EVENT_COMMITTEE_NAME}
                 style={{ minWidth: "100%" }}
               >
-                <option value={""}>Select commitee name</option>
+                <option >{user.name}</option>
                 <option value={"Dev's Club"}>Dev's Club</option>
-                <option value={"TSEC Codecell"}>TSEC Codecell</option>
-                <option value={"TSEC Codestorm"}>TSEC Codestorm</option>
-                <option value={"TSEC E-Cell"}>TSEC E-Cell</option>
-                <option value={"TSEC Codetantra"}>TSEC Codetantra</option>
-                <option value={"TSEC GDSC"}>TSEC GDSC</option>
-                <option value={"IIC"}>IIC</option>
-                <option value={"ISTE-TSEC"}>ISTE-TSEC</option>
-                <option value={"NSS-TSEC"}>NSS-TSEC</option>
-                <option value={"IETE-TSEC"}>IETE-TSEC</option>
-                <option value={"TSEC Sports Committee"}>
-                  TSEC Sports Committee
-                </option>
-                <option value={"TSEC Student Council"}>
-                  TSEC Student Council
-                </option>
-                <option value={"CSI-TSEC"}>CSI-TSEC</option>
-                <option value={"RC-TSEC"}>RC-TSEC</option>
               </select>
             </div>
           </Element>

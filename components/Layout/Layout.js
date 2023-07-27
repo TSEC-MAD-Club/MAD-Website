@@ -11,11 +11,11 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {loggedIn && <Navbar />}
+      {/* {loggedIn && <Navbar />} */}
       <main id={theme} className="App">
         {children}
       </main>
-      {loggedIn && <Footer />}
+      {/* {loggedIn && <Footer />} */}
     </>
   );
 }

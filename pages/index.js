@@ -1,12 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import React, { useEffect, useState } from "react";
 import Login from "./Login";
-import Navbar from "../components/Navbar";
 import { UserContext } from "./_app";
 import Link from "next/link";
 import { userTypes } from "../constants/userTypes";
+import Sidebar from '../components/Sidebar/Sidebar';
+import YourDashboard from '../components/Your Dashboard/YourDashboard';
 
 const StaticData = React.memo(function StaticPage({ user }) {
   const usertype = user?.type;
@@ -151,7 +151,10 @@ export default function Home() {
   return (
     <>
       {loggedIn ? (
-        <StaticData user={user} />
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <Sidebar user={user} />
+          <YourDashboard user={user} />
+        </div>
       ) : (
         <Login
           loggedIn={loggedIn}

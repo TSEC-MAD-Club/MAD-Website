@@ -1,19 +1,58 @@
+import { useEffect, useState } from "react";
 import styles from "./DashboardNew.module.css";
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
+import Link from "next/link";
+import Features from "../Sidebar/link";
 
-function YourDashboard() {
+function YourDashboard({ user }) {
+  const [Notifications, setNotifications] = useState([]);
+
+  const fetchRecentNotifications = async () => {
+    try {
+      const notificationsRef = collection(db, "notifications");
+      const q = query(notificationsRef, orderBy("notificationTime", "desc"), limit(10));
+
+      const querySnapshot = await getDocs(q);
+
+      const fetchedNotifications = [];
+      querySnapshot.forEach((doc) => {
+        const notification = {
+          notificationTime: doc.data().notificationTime,
+          message: doc.data().message,
+          title: doc.data().title,
+          topic: doc.data().topic,
+        };
+        fetchedNotifications.push(notification);
+      });
+      setNotifications(fetchedNotifications);
+    } catch (error) {
+      console.error("Error fetching recent notifications:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecentNotifications();
+  }, []);
+
+  const userHasAccess = (featureTypes) => {
+    return featureTypes.length === 0 || featureTypes.includes(user.userType);
+  };
+
   return (
     <div className={styles.root}>
       <h1 className={styles.headerText}>Your Dashboard</h1>
       <hr />
-                <div className={styles.operations}>
-                       <div className={styles.twobutton}>
-        <button className={styles.item}>Create Notification</button>
-                              <button className={styles.item}>Create Note</button>
-                       </div>
-                       <div className={styles.twobutton}>
-        <button className={styles.item}>View Past Notifications</button>
-                       <button className={styles.item}>View Past Notes</button>
-                       </div>
+      <div className={styles.operations} >
+        <div className={styles.twobutton}>
+          {Features.map((data, id) => (
+            userHasAccess(data.type) && (
+              <Link key={id} href={data.mainLink}>
+                <button className={styles.item}>{data.mainTitle}</button>
+              </Link>
+            )
+          ))}
+        </div>
       </div>
       <div className={styles.recent}>
         <h3>Recent Notifications & Notices</h3>
@@ -21,36 +60,22 @@ function YourDashboard() {
         <table className={styles.table}>
           <tr className={styles.tableRow}>
             <th className={styles.tableCol}>Subject</th>
+            <th className={styles.tableCol}>Sent To</th>
             <th className={styles.tableCol}>Description</th>
             <th className={styles.tableCol}>Date</th>
-            <th className={styles.tableCol}>Type</th>
           </tr>
-          <tr className={styles.tableRow}>
-            <td className={styles.tableCol}>Notification 1</td>
-            <td className={styles.tableCol}>
-              This notification is for the purpose of notifying...
-            </td>
-            <td className={styles.tableCol}>01/05/2023</td>
-            <td className={styles.tableCol}>Notification</td>
-          </tr>
-          <tr className={styles.tableRow}>
-            <td className={styles.tableCol}>Note 1</td>
-            <td className={styles.tableCol}>
-              This note is for the purpose of explaining that...
-            </td>
-            <td className={styles.tableCol}>04/05/2023</td>
-            <td className={styles.tableCol}>Note</td>
-          </tr>
-          <tr className={styles.tableRow}>
-            <td className={styles.tableCol}>Notification 2</td>
-            <td className={styles.tableCol}>
-              This notification is for the purpose of notifying...
-            </td>
-            <td className={styles.tableCol}>12/05/2023</td>
-            <td className={styles.tableCol}>Notification</td>
-          </tr>
+          {Notifications.map((notification, id) => (
+            <tr key={id} className={styles.tableRow}>
+              <td className={styles.tableCol}>{notification.title}</td>
+              <td className={styles.tableCol}>{notification.topic}</td>
+              <td className={styles.tableCol}>{notification.message}</td>
+              <td className={styles.tableCol}>{notification.notificationTime.toDate().toLocaleString()}</td>
+            </tr>
+          ))
+          }
         </table>
       </div>
+
     </div>
   );
 }

@@ -9,12 +9,14 @@ export const ThemeProvider = ({ children }) => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", JSON.stringify(newTheme));
+    document.documentElement.classList.toggle("dark-mode", newTheme === "dark");
   };
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme) {
       setTheme(JSON.parse(storedTheme));
+      document.documentElement.classList.toggle("dark-mode", JSON.parse(storedTheme) === "dark");
     }
   }, []);
 

@@ -5,10 +5,15 @@ import { MoonIcon } from "../MoonIcon";
 import { ThemeContext } from "../../src/context/ThemeContext";
 import Switch from "react-switch";
 import Features from "./link";
+import { UserContext } from "../../pages/_app.js";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 function HamburgerMenu({ user }) {
   const [isOpen, setIsOpen] = useState(true);
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { loggedIn, setLoggedIn } = React.useContext(UserContext);
+  const router = useRouter();
   const today = new Date();
   const day = today.getDate();
   const getOrdinalIndicator = (day) => {
@@ -39,7 +44,12 @@ function HamburgerMenu({ user }) {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+  const userHasAccess = (featureTypes) => {
+    return (
+      featureTypes.length === 0 ||
+      featureTypes.includes(user.type)
+    );
+  };
   return (
     <div className={styles.hamburgerDisplay}>
       <div
@@ -72,14 +82,16 @@ function HamburgerMenu({ user }) {
               <hr className={styles.sidebarHorizontalRule} />
             </div>
             <div className={styles.sidebarFunctions}>
-              {
-                Features.map((data, id) => (
-                  <a key={id} href={data.mainLink} >
-                    <img src={data.iconLink} alt="" />
-                    {data.mainTitle}
-                  </a>
-                ))
-              }
+              {Features.map((data, id) => (
+                userHasAccess(data.type) ? (
+                  <Link key={id} href={data.mainLink}>
+                    <div className={styles.sidebarline}>
+                      <img src={data.iconLink} alt="" />
+                      {data.mainTitle}
+                    </div>
+                  </Link>
+                ) : null
+              ))}
             </div>
 
             <div className={styles.sidebarInformation}>
@@ -112,7 +124,11 @@ function HamburgerMenu({ user }) {
               <p>
                 {formattedDate}{getOrdinalIndicator(day)}
               </p>
-              <button >
+              <button
+                onClick={() => {
+                  setLoggedIn(false);
+                  router.push("/");
+                }} >
                 Logout
               </button>
             </div>
