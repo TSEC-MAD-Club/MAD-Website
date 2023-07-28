@@ -61,7 +61,6 @@ function CreateEventComponent() {
       router.push("/");
     }
   }, [user]);
-  console.log(user);
 
   const handleEventDetails = (e) => {
     e.preventDefault();
@@ -182,6 +181,7 @@ function CreateEventComponent() {
 
     return;
   };
+  eventDetails[EVENT_COMMITTEE_NAME] = user.name
 
   return (
     <div className={styles.reminder}>
@@ -196,9 +196,9 @@ function CreateEventComponent() {
                 value={eventDetails[EVENT_COMMITTEE_NAME]}
                 name={EVENT_COMMITTEE_NAME}
                 style={{ minWidth: "100%" }}
+                disabled
               >
-                <option >{user.name}</option>
-                <option value={"Dev's Club"}>Dev's Club</option>
+                <option value={user.name} >{user.name}</option>
               </select>
             </div>
           </Element>
