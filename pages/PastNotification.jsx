@@ -72,7 +72,8 @@ const Dashboard = () => {
         if (!user.email.trim()) {
             router.push("/");
         }
-    }, []);
+    }, [user]);
+
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <Sidebar user={user} />

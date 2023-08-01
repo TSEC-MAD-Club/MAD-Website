@@ -41,19 +41,17 @@ export default function Admin() {
   }, [user]);
 
   const getAllPendingEvents = async () => {
-    const pendingEvents = [];
     try {
       const tempEventsRef = collection(db, "TempEvents");
       const querySnapshot = await getDocs(tempEventsRef);
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        pendingEvents.push({ ...data, id: doc.id });
-      });
+      const pendingEvents = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setPendingEvents(pendingEvents);
     } catch (error) {
       console.log(error);
     }
-
-    setPendingEvents(pendingEvents);
   };
 
   // Event handler for when a checkbox is clicked

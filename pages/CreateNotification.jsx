@@ -32,7 +32,7 @@ const CreateNote = () => {
         if (!user.email.trim()) {
             router.push("/");
         }
-    }, []);
+    }, [user]);
 
     const uploadFile = async (file) => {
         setMedia(file);
