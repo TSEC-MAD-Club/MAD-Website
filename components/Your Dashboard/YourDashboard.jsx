@@ -11,7 +11,11 @@ function YourDashboard({ user }) {
   const fetchRecentNotifications = async () => {
     try {
       const notificationsRef = collection(db, "notifications");
-      const q = query(notificationsRef, orderBy("notificationTime", "desc"), limit(10));
+      const q = query(
+        notificationsRef,
+        orderBy("notificationTime", "desc"),
+        limit(10)
+      );
 
       const querySnapshot = await getDocs(q);
 
@@ -35,23 +39,25 @@ function YourDashboard({ user }) {
     fetchRecentNotifications();
   }, []);
 
-  const userHasAccess = (featureTypes) => {
-    return featureTypes.length === 0 || featureTypes.includes(user.userType);
+  const userHasAccess = (data) => {
+    if (data.mainTitle == "Dashboard") return false;
+    return data.type.length === 0 || data.type.includes(user?.type);
   };
 
   return (
     <div className={styles.root}>
       <h1 className={styles.headerText}>Your Dashboard</h1>
       <hr />
-      <div className={styles.operations} >
+      <div className={styles.operations}>
         <div className={styles.twobutton}>
-          {Features.map((data, id) => (
-            userHasAccess(data.type) && (
-              <Link key={id} href={data.mainLink}>
-                <button className={styles.item}>{data.mainTitle}</button>
-              </Link>
-            )
-          ))}
+          {Features.map(
+            (data, id) =>
+              userHasAccess(data) && (
+                <Link key={id} href={data.mainLink}>
+                  <button className={styles.item}>{data.mainTitle}</button>
+                </Link>
+              )
+          )}
         </div>
       </div>
       <div className={styles.recent}>
@@ -69,13 +75,13 @@ function YourDashboard({ user }) {
               <td className={styles.tableCol}>{notification.title}</td>
               <td className={styles.tableCol}>{notification.topic}</td>
               <td className={styles.tableCol}>{notification.message}</td>
-              <td className={styles.tableCol}>{notification.notificationTime.toDate().toLocaleString()}</td>
+              <td className={styles.tableCol}>
+                {notification.notificationTime.toDate().toLocaleString()}
+              </td>
             </tr>
-          ))
-          }
+          ))}
         </table>
       </div>
-
     </div>
   );
 }
