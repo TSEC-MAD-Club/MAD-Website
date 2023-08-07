@@ -56,10 +56,26 @@ function YourDashboard({ user }) {
                 <Link key={id} href={data.mainLink}>
                   <button className={styles.item}>{data.mainTitle}</button>
                 </Link>
+            
               )
           )}
         </div>
       </div>
+      {/* <div className={styles.operations}>
+        <div className={styles.twobutton}>
+          {Features.map(
+            (data, id) =>
+              userHasAccess(data) && (
+                <Link href="/CreateReminder">
+  <a className={styles.item}>
+    {data.mainTitle}
+  </a>
+</Link>
+            
+              )
+          )}
+        </div>
+      </div> */}
       <div className={styles.recent}>
         <h3>Recent Notifications & Notices</h3>
         <hr className={styles.hr} />

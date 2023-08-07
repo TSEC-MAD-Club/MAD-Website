@@ -13,6 +13,12 @@ const Features = [
     iconLink: "assets/images/Bell.png",
     type: [userTypes.FACULTY, userTypes.PRINCIPAL],
   },
+  // {
+  //   mainTitle: "Create Reminders",
+  //   mainLink: "/CreateReminder",
+  //   iconLink: "assets/images/Bell.png",
+  //   type: [userTypes.FACULTY, userTypes.PRINCIPAL],
+  // },
   {
     mainTitle: "Past Notifications",
     mainLink: "/PastNotification",
@@ -37,11 +43,11 @@ const Features = [
     iconLink: "assets/images/Notes.png",
     type: [userTypes.COMMITTEE],
   },
-  //   {
-  //     mainTitle: "Create Reminder",
-  //     mainLink: "/CreateReminder",
-  //     iconLink: "assets/images/Notes.png",
-  //     type: [userTypes.FACULTY, userTypes.PRINCIPAL],
-  //   },
+  {
+    mainTitle: "Create Reminder",
+    mainLink: "/CreateReminder",
+    iconLink: "assets/images/Notes.png",
+    type: [],
+  },
 ];
 export default Features;
