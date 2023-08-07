@@ -112,6 +112,7 @@ function CreateReminderComponent() {
       topic: notificationPath,
       sentBy: user.name,
       senderName: senderName,
+      attachments: [],
     };
     if (mediaPath) {
       upload_data.attachments = [mediaPath];
