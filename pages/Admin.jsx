@@ -127,7 +127,7 @@ export default function Admin() {
   const renderedCheckboxes = pendingEvents.map((checkbox) => (
     <label key={checkbox.id} className="checkBoxContainer">
       <input type="checkbox" id={checkbox.id} onChange={handleCheckboxChange} />
-      <div>
+      <div style={{ color: "black" }}>
         <p>Committee Name: {checkbox["Committee Name"]}</p>
         <p>Event Name: {checkbox["Event Name"]}</p>
         <p>Document ID: {checkbox["id"]}</p>
@@ -138,7 +138,7 @@ export default function Admin() {
   return (
     <>
       <div className={style.signInUpBody}>
-        <p style={{ color: "#fff", fontSize: "24px" }}>Pending events</p>
+        <p style={{ color: "var(--dark-bg)", fontSize: "24px" }}>Pending events</p>
         {renderedCheckboxes}
         {pendingEvents.length ? (
           <>

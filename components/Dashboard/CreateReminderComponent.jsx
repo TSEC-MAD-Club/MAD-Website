@@ -209,225 +209,225 @@ function CreateReminderComponent() {
   return (
     <div className={styles.reminder}>
       <div className={styles.reminderContent}>
-      
+
         <Sidebar user={user} />
-        
+
         <div className={styles.reminderEntry}>
           <div className={styles.reminderTitle}>New Notification</div>
           <hr />
-      
+
           <div className={styles.reminderBody}>
-         <div className={styles.reminderBodyLeft}>
-          {user.type === userTypes.FACULTY && (
-            <Element title="Name of sender *">
-              <input
-                type="text"
-                name="senderName"
-                className={styles.inputText}
-                placeholder="Your name"
-                value={senderName}
-                onChange={(e) => setSenderName(e.target.value)}
-              />
-            </Element>
-          )}
-          <Element title="Title of Notification *">
-            <input
-              type="text"
-              name="title"
-              className={styles.inputText}
-              placeholder="Enter a task here"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </Element>
+            <div className={styles.reminderBodyLeft}>
+              {user.type === userTypes.FACULTY && (
+                <Element title="Name of sender *">
+                  <input
+                    type="text"
+                    name="senderName"
+                    className={styles.inputText}
+                    placeholder="Your name"
+                    value={senderName}
+                    onChange={(e) => setSenderName(e.target.value)}
+                  />
+                </Element>
+              )}
+              <Element title="Title of Notification *">
+                <input
+                  type="text"
+                  name="title"
+                  className={styles.inputText}
+                  placeholder="Enter a task here"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </Element>
 
-          <Element title="Description *">
-            <textarea
-              name="decription"
-              cols="30"
-              rows="5"
-              placeholder="Enter details here"
-              className={styles.inputText}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </Element>
-          </div>
-          <div className={styles.reminderBodyRight}>
-          <Element title="Add attachments (Optional)">
-            <div className={styles.inputbox}>
-              <input
-                type="file"
-                onChange={(e) => {
-                  // const image_obj = new Image();
-                  // image_obj.src = URL.createObjectURL(event.target.files[0]);
-                  // image_obj.onload = () => {
-                  //   console.log(
-                  //     `Image width: ${image_obj.width}, Image height: ${image_obj.height}`
-                  //   );
-                  // };
-
-                  uploadFile(e.target.files[0]);
-                }}
-                id="actual-btn"
-                name="attachment"
-                hidden
-              />
-              <label htmlFor="actual-btn" className={styles.label}>
-                +
-              </label>
-              <label>Upload From Device</label>
+              <Element title="Description *">
+                <textarea
+                  name="decription"
+                  cols="30"
+                  rows="5"
+                  placeholder="Enter details here"
+                  className={styles.inputText}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </Element>
             </div>
-            {uploadMediaStatus && (
-              <>
-                <p style={{ color: "#fff", marginTop: "5px" }}>
-                  Uploaded {media.name}
-                </p>
-              </>
-            )}
-          </Element>
-          {user?.type === userTypes.FACULTY && (
-            <Element title="Select students *" className="box">
-              <div className={styles.box}>
-                <div className={styles.inputboxdates}>
-                  <select
+            <div className={styles.reminderBodyRight}>
+              <Element title="Add attachments (Optional)">
+                <div className={styles.inputbox}>
+                  <input
+                    type="file"
                     onChange={(e) => {
-                      setBatch("All");
-                      setDivision("All");
-                      setBranch("All");
-                      setYear(e.target.value);
-                    }}
-                    value={year}
-                  >
-                    {Object.keys(notificationTopic).map(
-                      (student_year, index) => (
-                        <option key={student_year + index} value={student_year}>
-                          {yearClass[student_year]}
-                        </option>
-                      )
-                    )}
-                  </select>
-                </div>
+                      // const image_obj = new Image();
+                      // image_obj.src = URL.createObjectURL(event.target.files[0]);
+                      // image_obj.onload = () => {
+                      //   console.log(
+                      //     `Image width: ${image_obj.width}, Image height: ${image_obj.height}`
+                      //   );
+                      // };
 
-                {/* Select Year */}
-                <div
-                  className={
-                    styles.inputboxdates +
-                    (year === "All" ? " " + styles.disabledDropdown : "")
-                  }
-                >
-                  <select
-                    disabled={year === "All"}
-                    onChange={(e) => {
-                      setBranch(e.target.value);
-                      setDivision("All");
+                      uploadFile(e.target.files[0]);
                     }}
-                    value={branch}
-                  >
-                    {Object.keys(notificationTopic[year]).map(
-                      (student_branch, index) => (
-                        <option
-                          key={student_branch + index}
-                          value={student_branch}
-                        >
-                          {student_branch}
-                        </option>
-                      )
-                    )}
-                  </select>
+                    id="actual-btn"
+                    name="attachment"
+                    hidden
+                  />
+                  <label htmlFor="actual-btn" className={styles.label}>
+                    +
+                  </label>
+                  <label>Upload From Device</label>
                 </div>
+                {uploadMediaStatus && (
+                  <>
+                    <p style={{ color: "#fff", marginTop: "5px" }}>
+                      Uploaded {media.name}
+                    </p>
+                  </>
+                )}
+              </Element>
+              {user?.type === userTypes.FACULTY && (
+                <Element title="Select students *" className="box">
+                  <div className={styles.box}>
+                    <div className={styles.inputboxdates}>
+                      <select
+                        onChange={(e) => {
+                          setBatch("All");
+                          setDivision("All");
+                          setBranch("All");
+                          setYear(e.target.value);
+                        }}
+                        value={year}
+                      >
+                        {Object.keys(notificationTopic).map(
+                          (student_year, index) => (
+                            <option key={student_year + index} value={student_year}>
+                              {yearClass[student_year]}
+                            </option>
+                          )
+                        )}
+                      </select>
+                    </div>
 
-                {/* Select Division */}
-                <div
-                  className={
-                    styles.inputboxdates +
-                    (year === "All" ? " " + styles.disabledDropdown : "")
-                  }
-                >
-                  <select
-                    disabled={year === "All"}
-                    onChange={(e) => {
-                      setBatch("All");
-                      setDivision(e.target.value);
-                    }}
-                    value={division}
-                  >
-                    {year !== "All"
-                      ? Object.keys(notificationTopic[year][branch]).map(
-                        (student_division, index) => (
-                          <option
-                            key={student_division + index}
-                            value={student_division}
-                          >
-                            {student_division}
+                    {/* Select Year */}
+                    <div
+                      className={
+                        styles.inputboxdates +
+                        (year === "All" ? " " + styles.disabledDropdown : "")
+                      }
+                    >
+                      <select
+                        disabled={year === "All"}
+                        onChange={(e) => {
+                          setBranch(e.target.value);
+                          setDivision("All");
+                        }}
+                        value={branch}
+                      >
+                        {Object.keys(notificationTopic[year]).map(
+                          (student_branch, index) => (
+                            <option
+                              key={student_branch + index}
+                              value={student_branch}
+                            >
+                              {student_branch}
+                            </option>
+                          )
+                        )}
+                      </select>
+                    </div>
+
+                    {/* Select Division */}
+                    <div
+                      className={
+                        styles.inputboxdates +
+                        (year === "All" ? " " + styles.disabledDropdown : "")
+                      }
+                    >
+                      <select
+                        disabled={year === "All"}
+                        onChange={(e) => {
+                          setBatch("All");
+                          setDivision(e.target.value);
+                        }}
+                        value={division}
+                      >
+                        {year !== "All"
+                          ? Object.keys(notificationTopic[year][branch]).map(
+                            (student_division, index) => (
+                              <option
+                                key={student_division + index}
+                                value={student_division}
+                              >
+                                {student_division}
+                              </option>
+                            )
+                          )
+                          : null}
+                      </select>
+                    </div>
+
+                    {/* Select batch */}
+                    <div
+                      className={
+                        styles.inputboxdates +
+                        (year === "All" ? " " + styles.disabledDropdown : "")
+                      }
+                    >
+                      <select
+                        disabled={year === "All"}
+                        onChange={(e) => setBatch(e.target.value)}
+                        value={batch}
+                      >
+                        {year !== "All" &&
+                          branch !== "All" &&
+                          division !== "All" ? (
+                          notificationTopic[year][branch][division].map(
+                            (student_batch, index) => (
+                              <option
+                                key={student_batch + index}
+                                value={student_batch}
+                              >
+                                {student_batch}
+                              </option>
+                            )
+                          )
+                        ) : (
+                          <></>
+                        )}
+                      </select>
+                    </div>
+                  </div>
+                </Element>
+              )}
+              {user?.type === userTypes.PRINCIPAL && (
+                <Element title="Select teachers *" className="box">
+                  <div className={styles.box}>
+                    <div className={styles.inputboxdates}>
+                      <select
+                        onChange={(e) => {
+                          setTeacher(e.target.value);
+                        }}
+                        value={teacher}
+                      >
+                        {teacherDept.map((teacher, index) => (
+                          <option key={teacher + index} value={teacher}>
+                            {teacher}
                           </option>
-                        )
-                      )
-                      : null}
-                  </select>
-                </div>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </Element>
+              )}
+            </div>
+          </div>
 
-                {/* Select batch */}
-                <div
-                  className={
-                    styles.inputboxdates +
-                    (year === "All" ? " " + styles.disabledDropdown : "")
-                  }
-                >
-                  <select
-                    disabled={year === "All"}
-                    onChange={(e) => setBatch(e.target.value)}
-                    value={batch}
-                  >
-                    {year !== "All" &&
-                      branch !== "All" &&
-                      division !== "All" ? (
-                      notificationTopic[year][branch][division].map(
-                        (student_batch, index) => (
-                          <option
-                            key={student_batch + index}
-                            value={student_batch}
-                          >
-                            {student_batch}
-                          </option>
-                        )
-                      )
-                    ) : (
-                      <></>
-                    )}
-                  </select>
-                </div>
-              </div>
-            </Element>
-          )}
-          {user?.type === userTypes.PRINCIPAL && (
-            <Element title="Select teachers *" className="box">
-              <div className={styles.box}>
-                <div className={styles.inputboxdates}>
-                  <select
-                    onChange={(e) => {
-                      setTeacher(e.target.value);
-                    }}
-                    value={teacher}
-                  >
-                    {teacherDept.map((teacher, index) => (
-                      <option key={teacher + index} value={teacher}>
-                        {teacher}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </Element>
-          )}
+          <button onClick={handleSubmit} className={styles.submitButton}>
+            Submit
+          </button>
         </div>
       </div>
-
-      <button onClick={handleSubmit} className={styles.submitButton}>
-        Submit
-          </button>
-          </div>
-        </div>
     </div>
   );
 }

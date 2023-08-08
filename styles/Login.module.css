@@ -13,8 +13,17 @@
   width: 100%;
   display: flex;
 }
+.signInUpBody {
+  width: 50%;
+  margin: auto;
+}
 @media (max-width: 423px) {
   .eye_icon {
     right: 14vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .signInUpBody {
+    width: 90%;
   }
 }

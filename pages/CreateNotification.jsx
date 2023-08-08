@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { UserContext } from "./_app";
 import { notificationTopic } from "../constants/notificationTopic";
 import { yearClass } from "../constants/yearClass";
+import { userTypes } from "../constants/userTypes";
 
 const CreateNote = () => {
     const [title, setTitle] = useState("");
@@ -28,8 +29,12 @@ const CreateNote = () => {
     const [batch, setBatch] = useState("All");
     const router = useRouter();
     const { user } = React.useContext(UserContext);
+
     useEffect(() => {
-        if (!user.email.trim()) {
+        if (
+            !user.type.trim() ||
+            !(user.type == userTypes.FACULTY || user.type == userTypes.PRINCIPAL)
+        ) {
             router.push("/");
         }
     }, [user]);
@@ -37,7 +42,7 @@ const CreateNote = () => {
     const uploadFile = async (file) => {
         setMedia(file);
         const storage = getStorage();
-        const storageRef = ref(storage, "notes/" + file.name);
+        const storageRef = ref(storage, "notification/" + file.name);
 
         // Upload the file and metadata
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -62,18 +67,18 @@ const CreateNote = () => {
                 switch (error.code) {
                     case "storage/unauthorized":
                         // User doesn't have permission to access the object
-                        toast.notify(`storage unauthorized`, { type: "error" });
+                        toast.notify(`Storage unauthorized`, { type: "error" });
                         break;
                     case "storage/canceled":
                         // User canceled the upload
-                        toast.notify(`storage canceled`, { type: "error" });
+                        toast.notify(`Storage canceled`, { type: "error" });
                         break;
 
                     // ...
 
                     case "storage/unknown":
                         // Unknown error occurred, inspect error.serverResponse
-                        toast.notify(`storage unknown`, { type: "error" });
+                        toast.notify(`Storage unknown`, { type: "error" });
                         break;
                 }
             },
@@ -86,9 +91,44 @@ const CreateNote = () => {
             }
         );
     };
+
+    const setNotification = async (notificationPath) => {
+        const upload_data = {
+            notificationTime: new Date(),
+            message: description,
+            title,
+            topic: notificationPath,
+            sentBy: user.name,
+            senderName: user.name,
+            attachments: [],
+        };
+        if (mediaPath) {
+            upload_data.attachments = [mediaPath];
+        }
+
+        try {
+            const docRef = await addDoc(collection(db, "notifications"), upload_data);
+            setTitle("");
+            setMediaPath("");
+            setBranch("All");
+            setDescription("");
+            setYear("All");
+            setDivision("All");
+            setBatch("All");
+            setMedia("");
+            setMediaUploadStatus(false);
+            setTeacher("All");
+            toast.notify(`Submitted response`, { type: "success" });
+            return;
+        } catch (error) {
+            console.log(error);
+            toast.notify(`Submit failed`, { type: "error" });
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const preTeacher = "T-";
         if (title.trim().length === 0) {
             toast.notify(`Please add title`, { type: "error" });
 
@@ -100,7 +140,12 @@ const CreateNote = () => {
         }
 
         if (mediaPath.trim().length > 0) {
-            //   await uploadFile(mediaPath);
+            // await uploadFile(mediaPath);
+        }
+
+        if (user.type == userTypes.PRINCIPAL) {
+            setNotification(preTeacher + teacher);
+            return;
         }
 
         if (year === "All") {
@@ -137,37 +182,6 @@ const CreateNote = () => {
             Number(year) +
             ("-" + branch + "-" + division + "-" + batch)
         );
-
-        return;
-    };
-    const setNotification = async (notificationPath) => {
-        const upload_data = {
-            notificationTime: new Date(),
-            message: description,
-            title,
-            topic: notificationPath,
-        };
-
-        if (mediaPath) {
-            upload_data.attachments = [mediaPath];
-        }
-
-        try {
-            const docRef = await addDoc(collection(db, "notifications"), upload_data);
-
-            setTitle("");
-            setMediaPath("");
-            setBranch("All");
-            setDescription("");
-            setYear("All");
-            setDivision("All");
-            setBatch("All");
-            setMedia("");
-            setMediaUploadStatus(false);
-            toast.notify(`Submitted response`, { type: "success" });
-        } catch (error) {
-            toast.notify(`Submitted failed`, { type: "error" });
-        }
 
         return;
     };

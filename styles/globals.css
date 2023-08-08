@@ -60,7 +60,9 @@ body {
   /* justify-content: space-evenly; */
   margin-top: 2rem;
 }
-
+.toast-container {
+  z-index: 99;
+}
 .grid-4 {
   grid-template-columns: auto auto auto auto;
 }
