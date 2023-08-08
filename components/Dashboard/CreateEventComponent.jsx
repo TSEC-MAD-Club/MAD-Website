@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
 import { userTypes } from "../../constants/userTypes";
+import Sidebar from "../Sidebar/Sidebar";
 
 const EVENT_COMMITTEE_NAME = "Committee Name";
 const EVENT_LOCATION = "Event Location";
@@ -185,7 +186,12 @@ function CreateEventComponent() {
 
   return (
     <div className={styles.reminder}>
-      <div className={styles.reminderTitle}>New Event</div>
+      <div className={styles.reminderContent}>
+      
+        <Sidebar user={user} />
+         <div className={styles.reminderEntry}>
+          <div className={styles.reminderTitle}>New Event</div>
+          <hr />
 
       <div className={styles.reminderBody}>
         <div className={styles.reminderBodyLeft}>
@@ -309,9 +315,11 @@ function CreateEventComponent() {
         </div>
       </div>
 
-      <button onClick={handleSubmit} className={styles.submitButton}>
+      <button onClick={handleSubmit} className={styles.EventSubmitButton}>
         Submit
-      </button>
+          </button>
+          </div>
+        </div>
     </div>
   );
 }

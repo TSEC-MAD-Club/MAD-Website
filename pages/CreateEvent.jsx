@@ -3,7 +3,7 @@ import CreateEventComponent from "../components/Dashboard/CreateEventComponent";
 
 function CreateEvent() {
   return (
-    <div style={{ background: "var(--dark-bg)" }}>
+    <div>
       <CreateEventComponent />
     </div>
   );

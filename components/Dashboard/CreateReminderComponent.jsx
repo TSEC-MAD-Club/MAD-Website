@@ -10,13 +10,14 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { UserContext } from "../../pages/_app";
+// import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
 import { yearClass } from "../../constants/yearClass";
 import { notificationTopic } from "../../constants/notificationTopic";
 import { userTypes } from "../../constants/userTypes";
 import { teacherDept } from "../../constants/teacherDept";
-
+import { UserContext } from "../../pages/_app";
+import Sidebar from "../Sidebar/Sidebar";
 function Element(props) {
   return (
     <>
@@ -207,9 +208,16 @@ function CreateReminderComponent() {
 
   return (
     <div className={styles.reminder}>
-      <div className={styles.reminderTitle}>New Notification</div>
-      <div className={styles.reminderBody}>
-        <div className={styles.reminderBodyLeft}>
+      <div className={styles.reminderContent}>
+      
+        <Sidebar user={user} />
+        
+        <div className={styles.reminderEntry}>
+          <div className={styles.reminderTitle}>New Notification</div>
+          <hr />
+      
+          <div className={styles.reminderBody}>
+         <div className={styles.reminderBodyLeft}>
           {user.type === userTypes.FACULTY && (
             <Element title="Name of sender *">
               <input
@@ -244,8 +252,8 @@ function CreateReminderComponent() {
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </Element>
-        </div>
-        <div className={styles.reminderBodyRight}>
+          </div>
+          <div className={styles.reminderBodyRight}>
           <Element title="Add attachments (Optional)">
             <div className={styles.inputbox}>
               <input
@@ -417,7 +425,9 @@ function CreateReminderComponent() {
 
       <button onClick={handleSubmit} className={styles.submitButton}>
         Submit
-      </button>
+          </button>
+          </div>
+        </div>
     </div>
   );
 }

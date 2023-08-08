@@ -46,8 +46,8 @@ function HamburgerMenu({ user }) {
   };
   const userHasAccess = (featureTypes) => {
     return (
-      featureTypes.length === 0 ||
-      featureTypes.includes(user.type)
+      featureTypes.length === 0
+      || featureTypes.includes(user.type)
     );
   };
   return (
