@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
 import { userTypes } from "../../constants/userTypes";
+import Sidebar from "../Sidebar/Sidebar";
 
 const EVENT_COMMITTEE_NAME = "Committee Name";
 const EVENT_LOCATION = "Event Location";
@@ -181,10 +182,16 @@ function CreateEventComponent() {
 
     return;
   };
+  eventDetails[EVENT_COMMITTEE_NAME] = user.name
 
   return (
     <div className={styles.reminder}>
-      <div className={styles.reminderTitle}>New Event</div>
+      <div className={styles.reminderContent}>
+      
+        <Sidebar user={user} />
+         <div className={styles.reminderEntry}>
+          <div className={styles.reminderTitle}>New Event</div>
+          <hr />
 
       <div className={styles.reminderBody}>
         <div className={styles.reminderBodyLeft}>
@@ -195,26 +202,9 @@ function CreateEventComponent() {
                 value={eventDetails[EVENT_COMMITTEE_NAME]}
                 name={EVENT_COMMITTEE_NAME}
                 style={{ minWidth: "100%" }}
+                disabled
               >
-                <option value={""}>Select commitee name</option>
-                <option value={"Dev's Club"}>Dev's Club</option>
-                <option value={"TSEC Codecell"}>TSEC Codecell</option>
-                <option value={"TSEC Codestorm"}>TSEC Codestorm</option>
-                <option value={"TSEC E-Cell"}>TSEC E-Cell</option>
-                <option value={"TSEC Codetantra"}>TSEC Codetantra</option>
-                <option value={"TSEC GDSC"}>TSEC GDSC</option>
-                <option value={"IIC"}>IIC</option>
-                <option value={"ISTE-TSEC"}>ISTE-TSEC</option>
-                <option value={"NSS-TSEC"}>NSS-TSEC</option>
-                <option value={"IETE-TSEC"}>IETE-TSEC</option>
-                <option value={"TSEC Sports Committee"}>
-                  TSEC Sports Committee
-                </option>
-                <option value={"TSEC Student Council"}>
-                  TSEC Student Council
-                </option>
-                <option value={"CSI-TSEC"}>CSI-TSEC</option>
-                <option value={"RC-TSEC"}>RC-TSEC</option>
+                <option value={user.name} >{user.name}</option>
               </select>
             </div>
           </Element>
@@ -325,9 +315,11 @@ function CreateEventComponent() {
         </div>
       </div>
 
-      <button onClick={handleSubmit} className={styles.submitButton}>
+      <button onClick={handleSubmit} className={styles.EventSubmitButton}>
         Submit
-      </button>
+          </button>
+          </div>
+        </div>
     </div>
   );
 }

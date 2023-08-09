@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import style from "../styles/Login.module.css";
+import styles from "../styles/CreateNote.module.css";
 import { toast } from "react-nextjs-toast";
 import {
   addDoc,
@@ -18,6 +19,7 @@ import {
 } from "firebase/firestore";
 import { UserContext } from "./_app";
 import { userTypes } from "../constants/userTypes";
+import SideBar from "../components/Sidebar/Sidebar";
 
 // import { getStorage } from "firebase/";
 
@@ -41,19 +43,17 @@ export default function Admin() {
   }, [user]);
 
   const getAllPendingEvents = async () => {
-    const pendingEvents = [];
     try {
       const tempEventsRef = collection(db, "TempEvents");
       const querySnapshot = await getDocs(tempEventsRef);
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        pendingEvents.push({ ...data, id: doc.id });
-      });
+      const pendingEvents = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setPendingEvents(pendingEvents);
     } catch (error) {
       console.log(error);
     }
-
-    setPendingEvents(pendingEvents);
   };
 
   // Event handler for when a checkbox is clicked
@@ -129,7 +129,7 @@ export default function Admin() {
   const renderedCheckboxes = pendingEvents.map((checkbox) => (
     <label key={checkbox.id} className="checkBoxContainer">
       <input type="checkbox" id={checkbox.id} onChange={handleCheckboxChange} />
-      <div>
+      <div style={{ color: "black" }}>
         <p>Committee Name: {checkbox["Committee Name"]}</p>
         <p>Event Name: {checkbox["Event Name"]}</p>
         <p>Document ID: {checkbox["id"]}</p>
@@ -138,19 +138,22 @@ export default function Admin() {
   ));
 
   return (
-    <>
-      <div className={style.signInUpBody}>
-        <p style={{ color: "#fff", fontSize: "24px" }}>Pending events</p>
-        {renderedCheckboxes}
-        {pendingEvents.length ? (
-          <>
-            <button onClick={handleApproveFn}>Approve events</button>
-            <button onClick={handleDeleteFn}>Delete events</button>
-          </>
-        ) : (
-          <p>No Pending Events found</p>
-        )}
+    <div style={{ background: "var(--dark-bg)" }}>
+      <div className={styles.pageWrapper}>
+        <SideBar user={user} />
+        <div className={style.signInUpBody}>
+          <p style={{ color: "var(--dark-bg)", fontSize: "24px" }}>Pending events</p>
+          {renderedCheckboxes}
+          {pendingEvents.length ? (
+            <>
+              <button onClick={handleApproveFn}>Approve events</button>
+              <button onClick={handleDeleteFn}>Delete events</button>
+            </>
+          ) : (
+            <p>No Pending Events found</p>
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

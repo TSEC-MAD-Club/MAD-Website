@@ -1,0 +1,276 @@
+.sidebarWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 17vw;
+  border: 1px solid var(--primary-5);
+  border-radius: 25px;
+  margin-top: 4vh;
+  margin-left: 2vw;
+  padding-bottom: 2rem;
+  background-color: var(--primary-5);
+}
+.sidebarDevslogo img {
+  width: 3rem;
+  height: 3rem;
+}
+.sidebarDevslogo {
+  width: 100%;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+
+.sidebarHeader {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.sidebarLogo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: 1.5rem;
+}
+
+.sidebarUser {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--login-font);
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebarUsername {
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 0.1rem;
+}
+
+.sidebarUsermail {
+  font-size: 0.7rem;
+  font-weight: 300;
+  margin-bottom: 0.3rem;
+}
+
+.sidebarHorizontalRule {
+  color: var(--primary-1);
+  width: 80%;
+}
+
+.sidebarFunctions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: var(--login-font);
+  font-size: 0.9rem;
+  width: 80%;
+}
+.sidebarline {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 1vh;
+  align-items: center;
+  color: var(--primary-1);
+  text-decoration: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.sidebarline:hover {
+  background-color: var(--hover);
+  border-radius: 6px;
+}
+.sidebarline:active {
+  background-color: #e3e8ef;
+  border-radius: 6px;
+}
+
+.sidebarFunctions img {
+  height: 17px;
+  width: 17px;
+  margin-right: 20px;
+}
+
+.sidebarMenu {
+  display: none;
+}
+
+.sidebarOpen .sidebarMenu {
+  display: block;
+}
+
+.sidebarMenu li {
+  margin-bottom: 10px;
+}
+
+.sidebarMenu {
+  display: block;
+  /* color: var(--primary-1); */
+  color: var(--primary-1);
+  text-decoration: none;
+  height: 3rem;
+}
+.sidebarMenu a:hover {
+  display: block;
+  background-color: black;
+  text-decoration: none;
+  color: var(--primary-1);
+}
+.sidebarInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+.sidebarInformation button {
+  border: none;
+  background: none;
+  color: var(--dark-bg);
+}
+.toggleCheckbox {
+  display: none;
+}
+
+.toggleLabel {
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  top: 8rem;
+  left: 0;
+  z-index: 1;
+}
+
+.toggleIcon {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--primary-1);
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.toggleIcon:before,
+.toggleIcon:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  position: absolute;
+}
+
+.toggleIcon:before {
+  top: -6px;
+}
+
+.toggleIcon:after {
+  top: 6px;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 700px) {
+  .sidebarWrapper {
+    width: auto;
+    margin: 2vh 2vw;
+  }
+
+  .sidebarMenu {
+    display: block;
+    margin-top: 1rem;
+  }
+
+  .sidebarUser {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .toggleCheckbox:checked ~ .sidebarContent {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .toggleCheckbox:checked ~ .sidebarContent .sidebarMenu .sidebarWrapper {
+    display: block;
+  }
+
+  .toggleCheckbox:checked ~ .sidebarHeader .sidebarUser .sidebarUsermail {
+    display: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .sidebarWrapper {
+    width: 20rem;
+    height: 100%;
+  }
+}
+
+@media (max-width: 690px) {
+  .hamburger-menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hamburger-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    margin-top: 2rem;
+    right: 5%;
+  }
+
+  .line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--dark-bg);
+    margin-bottom: 5px;
+  }
+
+  .open .line:nth-child(1) {
+    transform: rotate(-45deg) translate(-6px, 5px);
+  }
+
+  .open .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .open .line:nth-child(3) {
+    transform: rotate(45deg) translate(-6px, -5px);
+  }
+
+  .anchoryy {
+    display: none;
+  }
+
+  .open {
+    display: block;
+    width: 100vw;
+  }
+  .hamburgerInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5rem;
+  }
+}
+@media (min-width: 690px) {
+  .hamburgerDisplay {
+    display: block;
+    z-index: 2;
+  }
+}

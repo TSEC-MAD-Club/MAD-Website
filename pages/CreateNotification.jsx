@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import styles from "../../styles/Dashboard/Dashboard.module.css";
+import React, { useEffect, useState } from "react";
+import Sidebar from "../components/Sidebar/Sidebar";
+import styles from "../styles/CreateNote.module.css";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../firebase";
 import { toast } from "react-nextjs-toast";
 import "firebase/storage";
 import {
@@ -10,26 +11,15 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
-import { yearClass } from "../../constants/yearClass";
-import { notificationTopic } from "../../constants/notificationTopic";
-import { userTypes } from "../../constants/userTypes";
-import { teacherDept } from "../../constants/teacherDept";
+import { UserContext } from "./_app";
+import { notificationTopic } from "../constants/notificationTopic";
+import { yearClass } from "../constants/yearClass";
+import { userTypes } from "../constants/userTypes";
 
-function Element(props) {
-  return (
-    <>
-      <div className={styles.reminderElementTitle}>{props.title}</div>
-      <div className={styles.reminderElementBody}>{props.children}</div>
-    </>
-  );
-}
-
-function CreateReminderComponent() {
-  const router = useRouter();
-  const { user } = React.useContext(UserContext);
+const CreateNote = () => {
   const [title, setTitle] = useState("");
+  const [teacherName, setTeacherName] = useState("");
   const [description, setDescription] = useState("");
   const [branch, setBranch] = useState("All");
   const [year, setYear] = useState("All");
@@ -38,14 +28,13 @@ function CreateReminderComponent() {
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
   const [division, setDivision] = useState("All");
   const [batch, setBatch] = useState("All");
-  const [teacher, setTeacher] = useState("All");
-  const [senderName, setSenderName] = useState("");
-  console.log(user);
+  const router = useRouter();
+  const { user } = React.useContext(UserContext);
 
   useEffect(() => {
     if (
       !user.type.trim() ||
-      !(user.type == userTypes.FACULTY || user.type == userTypes.PRINCIPAL)
+      !(user.type == userTypes.ADMIN || user.type == userTypes.FACULTY || user.type == userTypes.PRINCIPAL)
     ) {
       router.push("/");
     }
@@ -110,8 +99,8 @@ function CreateReminderComponent() {
       message: description,
       title,
       topic: notificationPath,
-      sentBy: user.name,
-      senderName: senderName,
+      sentBy: user?.name,
+      senderName: teacherName,
       attachments: [],
     };
     if (mediaPath) {
@@ -120,18 +109,16 @@ function CreateReminderComponent() {
 
     try {
       const docRef = await addDoc(collection(db, "notifications"), upload_data);
-
       setTitle("");
       setMediaPath("");
       setBranch("All");
       setDescription("");
       setYear("All");
+      setTeacherName("");
       setDivision("All");
       setBatch("All");
       setMedia("");
       setMediaUploadStatus(false);
-      setTeacher("All");
-      setSenderName("");
       toast.notify(`Submitted response`, { type: "success" });
       return;
     } catch (error) {
@@ -145,13 +132,6 @@ function CreateReminderComponent() {
     const preTeacher = "T-";
     if (title.trim().length === 0) {
       toast.notify(`Please add title`, { type: "error" });
-
-      return;
-    } else if (
-      senderName.trim().length === 0 &&
-      user.type == userTypes.FACULTY
-    ) {
-      toast.notify(`Please add sender name`, { type: "error" });
 
       return;
     } else if (description.trim().length === 0) {
@@ -188,9 +168,9 @@ function CreateReminderComponent() {
     } else if (batch === "All" || !batch) {
       setNotification(
         Number(new Date().getFullYear()) +
-          4 -
-          Number(year) +
-          ("-" + branch + "-" + division)
+        4 -
+        Number(year) +
+        ("-" + branch + "-" + division)
       );
       toast.notify(`Submitted response`, { type: "success" });
 
@@ -199,110 +179,65 @@ function CreateReminderComponent() {
 
     setNotification(
       Number(new Date().getFullYear()) +
-        4 -
-        Number(year) +
-        ("-" + branch + "-" + division + "-" + batch)
+      4 -
+      Number(year) +
+      ("-" + branch + "-" + division + "-" + batch)
     );
 
     return;
   };
 
   return (
-    <div className={styles.reminder}>
-      <div className={styles.reminderTitle}>New Notification</div>
-      <div className={styles.reminderBody}>
-        <div className={styles.reminderBodyLeft}>
-          {user.type === userTypes.FACULTY && (
-            <Element title="Name of sender *">
-              <input
-                type="text"
-                name="senderName"
-                className={styles.inputText}
-                placeholder="Your name"
-                value={senderName}
-                onChange={(e) => setSenderName(e.target.value)}
-              />
-            </Element>
-          )}
-          <Element title="Title of Notification *">
-            <input
-              type="text"
-              name="title"
-              className={styles.inputText}
-              placeholder="Enter a task here"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </Element>
-
-          <Element title="Description *">
-            <textarea
-              name="decription"
-              cols="30"
-              rows="5"
-              placeholder="Enter details here"
-              className={styles.inputText}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </Element>
-        </div>
-        <div className={styles.reminderBodyRight}>
-          <Element title="Add attachments (Optional)">
-            <div className={styles.inputbox}>
-              <input
-                type="file"
-                onChange={(e) => {
-                  // const image_obj = new Image();
-                  // image_obj.src = URL.createObjectURL(event.target.files[0]);
-                  // image_obj.onload = () => {
-                  //   console.log(
-                  //     `Image width: ${image_obj.width}, Image height: ${image_obj.height}`
-                  //   );
-                  // };
-
-                  uploadFile(e.target.files[0]);
-                }}
-                id="actual-btn"
-                name="attachment"
-                hidden
-              />
-              <label htmlFor="actual-btn" className={styles.label}>
-                +
-              </label>
-              <label>Upload From Device</label>
+    <div style={{ background: "var(--dark-bg)" }}>
+      <div className={styles.pageWrapper}>
+        <Sidebar user={user} />
+        <div className={styles.noteWrapper}>
+          <h1 className={styles.mainHeading}>Create a Notification</h1>
+          <hr />
+          <div className={styles.createNoteWrapper}>
+            <div className={styles.gridBox}>
+              <div className={styles.subjectDiv}>
+                <label>Name*</label>
+                <input
+                  placeholder="Enter your name here"
+                  type="text"
+                  name="name"
+                  value={teacherName}
+                  onChange={(e) => setTeacherName(e.target.value)}
+                  className={styles.subjectText}
+                />
+              </div>
+              <div className={styles.subjectDiv} style={{ "margin-top": "1rem" }}>
+                <label>Subject*</label>
+                <input
+                  placeholder="Enter the subject here"
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className={styles.subjectText}
+                />
+              </div>
             </div>
-            {uploadMediaStatus && (
-              <>
-                <p style={{ color: "#fff", marginTop: "5px" }}>
-                  Uploaded {media.name}
-                </p>
-              </>
-            )}
-          </Element>
-          {user?.type === userTypes.FACULTY && (
-            <Element title="Select students *" className="box">
-              <div className={styles.box}>
-                <div className={styles.inputboxdates}>
-                  <select
-                    onChange={(e) => {
-                      setBatch("All");
-                      setDivision("All");
-                      setBranch("All");
-                      setYear(e.target.value);
-                    }}
-                    value={year}
-                  >
-                    {Object.keys(notificationTopic).map(
-                      (student_year, index) => (
-                        <option key={student_year + index} value={student_year}>
-                          {yearClass[student_year]}
-                        </option>
-                      )
-                    )}
-                  </select>
-                </div>
-
+            <div className={styles.gridBox}>
+              <label>Select Students</label>
+              <div style={{ display: "flex", flexwrap: "wrap" }}>
+                <select
+                  onChange={(e) => {
+                    setBatch("All");
+                    setDivision("All");
+                    setBranch("All");
+                    setYear(e.target.value);
+                  }}
+                  value={year}
+                  className={styles.subjectText}
+                >
+                  {Object.keys(notificationTopic).map((student_year, index) => (
+                    <option key={student_year + index} value={student_year}>
+                      {yearClass[student_year]}
+                    </option>
+                  ))}
+                </select>
                 {/* Select Year */}
                 <div
                   className={
@@ -317,6 +252,7 @@ function CreateReminderComponent() {
                       setDivision("All");
                     }}
                     value={branch}
+                    className={styles.subjectText}
                   >
                     {Object.keys(notificationTopic[year]).map(
                       (student_branch, index) => (
@@ -345,18 +281,19 @@ function CreateReminderComponent() {
                       setDivision(e.target.value);
                     }}
                     value={division}
+                    className={styles.subjectText}
                   >
                     {year !== "All"
                       ? Object.keys(notificationTopic[year][branch]).map(
-                          (student_division, index) => (
-                            <option
-                              key={student_division + index}
-                              value={student_division}
-                            >
-                              {student_division}
-                            </option>
-                          )
+                        (student_division, index) => (
+                          <option
+                            key={student_division + index}
+                            value={student_division}
+                          >
+                            {student_division}
+                          </option>
                         )
+                      )
                       : null}
                   </select>
                 </div>
@@ -372,10 +309,11 @@ function CreateReminderComponent() {
                     disabled={year === "All"}
                     onChange={(e) => setBatch(e.target.value)}
                     value={batch}
+                    className={styles.subjectText}
                   >
                     {year !== "All" &&
-                    branch !== "All" &&
-                    division !== "All" ? (
+                      branch !== "All" &&
+                      division !== "All" ? (
                       notificationTopic[year][branch][division].map(
                         (student_batch, index) => (
                           <option
@@ -392,36 +330,77 @@ function CreateReminderComponent() {
                   </select>
                 </div>
               </div>
-            </Element>
-          )}
-          {user?.type === userTypes.PRINCIPAL && (
-            <Element title="Select teachers *" className="box">
-              <div className={styles.box}>
-                <div className={styles.inputboxdates}>
-                  <select
-                    onChange={(e) => {
-                      setTeacher(e.target.value);
-                    }}
-                    value={teacher}
-                  >
-                    {teacherDept.map((teacher, index) => (
-                      <option key={teacher + index} value={teacher}>
-                        {teacher}
-                      </option>
-                    ))}
-                  </select>
+            </div>
+            <div className={styles.gridBox}>
+              <div className={styles.descriptionDiv}>
+                <label>Description*</label>
+                <textarea
+                  name="decription"
+                  placeholder="Enter the details here"
+                  className={styles.descriptionBox}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
+              </div>
+            </div>
+            <div className={styles.gridBox}>
+              <div className={styles.addNotesDiv}>
+                <label
+                  className={styles.label}
+                  style={{ marginBottom: "1rem" }}
+                >
+                  Add attachments (Optional)
+                </label>
+                <div className={styles.addNotesContainer}>
+                  <label htmlFor="file-upload">
+                    <div className={styles.uploadContainer}>
+                      <img
+                        className={styles.uploadIcon}
+                        src="assets/images/uploadIcon.png"
+                        alt=""
+                      />
+                      <div className={styles.uploadText}>
+                        Drag and drop files or
+                        <input
+                          id="file-upload"
+                          type="file"
+                          onChange={(e) => {
+                            uploadFile(e.target.files[0]);
+                          }}
+                          name="attachment"
+                          hidden
+                          style={{ display: "none" }}
+                        />
+                        <span className={styles.browseText}> Browse</span>
+                      </div>
+                      <div className={styles.uploadTextInstruction}>
+                        Supported formates: JPEG, PNG, GIF, MP4, PDF, PSD, AI,
+                        Word, PPT
+                      </div>
+                    </div>
+                    {uploadMediaStatus && (
+                      <p style={{ color: "#fff", marginTop: "5px" }}>
+                        Uploaded {media.name}
+                      </p>
+                    )}
+                  </label>
                 </div>
               </div>
-            </Element>
-          )}
+            </div>
+          </div>
+          <div className={styles.sendNoteButtonContainer}>
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className={styles.sendNoteButton}
+            >
+              Send Note
+            </button>
+          </div>
         </div>
       </div>
-
-      <button onClick={handleSubmit} className={styles.submitButton}>
-        Submit
-      </button>
     </div>
   );
-}
+};
 
-export default CreateReminderComponent;
+export default CreateNote;

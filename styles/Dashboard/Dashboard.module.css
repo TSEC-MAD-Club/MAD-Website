@@ -1,20 +1,32 @@
 .reminder {
-  color: white;
+  color: var(--primary-1);
   display: flex;
   flex-direction: column;
   margin-top: 3%;
-  width: 80%;
+  width: 100%;
   margin: auto;
-  padding: 40px 0;
+}
+.reminderContent {
+  display: flex;
+  gap: 2rem;
+}
+.reminderEntry {
+  width: 100%;
+  margin-right: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  padding-top: 45px;
 }
 
 .reminderBody {
   display: flex;
   width: 100%;
-  margin: auto;
+  margin: 1rem;
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 2%;
+  height: 50%;
 }
 .reminderBodyRight input[type="date"],
 .reminderBodyRight input[type="time"] {
@@ -51,7 +63,7 @@
   margin-top: 20px;
   border-radius: 10px;
   border: none;
-  border: 1px solid #285580;
+  border: 1px solid var(--primary-4);
   padding: 5px;
   background-color: #242526;
   color: white;
@@ -59,8 +71,8 @@
 }
 
 .label {
-  background-color: white;
-  color: #000;
+  background-color: var(--primary-5);
+  color: var(--primary-1);
   padding: 5px;
   font-family: sans-serif;
   border-radius: 50%;
@@ -82,7 +94,7 @@
   background-color: #242526;
   padding: 10px;
   border-radius: 15px;
-  border: 1px solid #285580;
+  border: 1px solid var(--primary-4);
 }
 
 .inputboxdates,
@@ -97,16 +109,14 @@
   background-color: #242526;
   padding: 10px;
   border-radius: 15px;
-  border: 1px solid #285580;
+  border: 1px solid var(--primary-4);
 }
 
 .committeeName {
   min-width: 80%;
 }
-
-.submitButton {
+.EventSubmitButton {
   display: flex;
-  margin-top: 60px;
   justify-content: center;
   align-items: center;
   width: 140px;
@@ -115,6 +125,20 @@
   border-radius: 15px;
   border: 1px solid #285580;
   color: #fff;
+  margin-left: 52rem;
+  margin-top: 4rem;
+}
+.submitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  background-color: forestgreen;
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid #285580;
+  color: #fff;
+  margin-left: 1rem;
 }
 .inputbox input[type="date"]::-webkit-calendar-picker-indicator,
 .inputbox input[type="time"]::-webkit-calendar-picker-indicator {
@@ -153,7 +177,9 @@
   .reminderBody {
     flex-direction: column;
   }
-
+  .reminderContent {
+    gap: 1rem;
+  }
   .reminderBodyRight {
     width: 100%;
   }
@@ -161,8 +187,14 @@
   .reminderBodyLeft {
     width: 100%;
   }
-
+  .reminderEntry {
+    padding-top: 20px;
+  }
   .inputText {
     width: 100%;
+  }
+  .EventSubmitButton {
+    margin-left: 6rem;
+    margin-top: 16rem;
   }
 }
