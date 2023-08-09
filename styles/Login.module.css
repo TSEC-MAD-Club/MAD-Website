@@ -25,5 +25,6 @@
 @media only screen and (max-width: 600px) {
   .signInUpBody {
     width: 90%;
+    margin-top: 2rem;
   }
 }

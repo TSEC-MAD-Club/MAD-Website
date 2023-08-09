@@ -34,7 +34,7 @@ const CreateNote = () => {
   useEffect(() => {
     if (
       !user.type.trim() ||
-      !(user.type == userTypes.FACULTY || user.type == userTypes.PRINCIPAL)
+      !(user.type == userTypes.ADMIN || user.type == userTypes.FACULTY || user.type == userTypes.PRINCIPAL)
     ) {
       router.push("/");
     }

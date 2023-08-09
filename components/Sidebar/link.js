@@ -13,14 +13,14 @@ const Features = [
     mainLink: "/CreateNotification",
     lightIconLink: "assets/images/Bell.png",
     darkIconLink: "assets/images/bell-dark.png",
-    type: [userTypes.FACULTY, userTypes.PRINCIPAL],
+    type: [userTypes.ADMIN, userTypes.FACULTY, userTypes.PRINCIPAL],
   },
   {
     mainTitle: "Past Notifications",
     mainLink: "/PastNotification",
     lightIconLink: "assets/images/Bell.png",
     darkIconLink: "assets/images/bell-dark.png",
-    type: [userTypes.FACULTY, userTypes.PRINCIPAL],
+    type: [userTypes.ADMIN, userTypes.FACULTY, userTypes.PRINCIPAL],
   },
   {
     mainTitle: "Create Notes",
@@ -43,7 +43,13 @@ const Features = [
     darkIconLink: "assets/images/notes-dark.png",
     type: [userTypes.COMMITTEE],
   },
-
+  {
+    mainTitle: "Approve Events",
+    mainLink: "/Admin",
+    lightIconLink: "assets/images/Bell.png",
+    darkIconLink: "assets/images/bell-dark.png",
+    type: [userTypes.ADMIN],
+  },
   {
     mainTitle: "Coming Soon",
     mainLink: "/",
