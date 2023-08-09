@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Sidebar.module.css";
 import { SunIcon } from "../SunIcon";
 import { MoonIcon } from "../MoonIcon";
@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 function HamburgerMenu({ user }) {
-  const [isOpen, setIsOpen] = useState(window.innerWidth > 600);
+  const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { loggedIn, setLoggedIn } = React.useContext(UserContext);
   const router = useRouter();
@@ -50,6 +50,20 @@ function HamburgerMenu({ user }) {
       || featureTypes.includes(user.type)
     );
   };
+
+  useEffect(() => {
+    setIsOpen(window.innerWidth > 600);
+
+    const handleResize = () => {
+      setIsOpen(window.innerWidth > 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.hamburgerDisplay} style={{ zIndex: 2 }}>
       <div
