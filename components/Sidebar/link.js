@@ -37,12 +37,7 @@ const Features = [
     iconLink: "assets/images/Notes.png",
     type: [userTypes.COMMITTEE],
   },
-  {
-    mainTitle: "Create Reminder",
-    mainLink: "/CreateReminder",
-    iconLink: "assets/images/Notes.png",
-    type: [userTypes.FACULTY, userTypes.PRINCIPAL],
-  },
+
   {
     mainTitle: "Coming Soon",
     mainLink: "/",
