@@ -100,7 +100,7 @@ const CreateNote = () => {
       title,
       topic: notificationPath,
       sentBy: user?.name,
-      senderName: senderName,
+      senderName: teacherName,
       attachments: [],
     };
     if (mediaPath) {
