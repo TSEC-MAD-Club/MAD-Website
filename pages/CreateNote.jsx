@@ -124,9 +124,9 @@ const CreateNote = () => {
     } else if (batch === "All" || !batch) {
       setNotification(
         Number(new Date().getFullYear()) +
-          4 -
-          Number(year) +
-          ("-" + branch + "-" + division)
+        4 -
+        Number(year) +
+        ("-" + branch + "-" + division)
       );
       toast.notify(`Submitted response`, { type: "success" });
 
@@ -135,9 +135,9 @@ const CreateNote = () => {
 
     setNotification(
       Number(new Date().getFullYear()) +
-        4 -
-        Number(year) +
-        ("-" + branch + "-" + division + "-" + batch)
+      4 -
+      Number(year) +
+      ("-" + branch + "-" + division + "-" + batch)
     );
 
     return;
@@ -200,7 +200,7 @@ const CreateNote = () => {
                   className={styles.subjectText}
                 />
               </div>
-              <div className={styles.subjectDiv}>
+              <div className={styles.subjectDiv} style={{ "margin-top": "1rem" }}>
                 <label>Subject*</label>
                 <input
                   placeholder="Enter the subject here"
@@ -278,15 +278,15 @@ const CreateNote = () => {
                   >
                     {year !== "All"
                       ? Object.keys(notificationTopic[year][branch]).map(
-                          (student_division, index) => (
-                            <option
-                              key={student_division + index}
-                              value={student_division}
-                            >
-                              {student_division}
-                            </option>
-                          )
+                        (student_division, index) => (
+                          <option
+                            key={student_division + index}
+                            value={student_division}
+                          >
+                            {student_division}
+                          </option>
                         )
+                      )
                       : null}
                   </select>
                 </div>
@@ -305,8 +305,8 @@ const CreateNote = () => {
                     className={styles.subjectText}
                   >
                     {year !== "All" &&
-                    branch !== "All" &&
-                    division !== "All" ? (
+                      branch !== "All" &&
+                      division !== "All" ? (
                       notificationTopic[year][branch][division].map(
                         (student_batch, index) => (
                           <option

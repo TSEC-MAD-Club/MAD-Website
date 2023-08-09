@@ -78,7 +78,7 @@ const Dashboard = () => {
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <Sidebar user={user} />
             <div className={styles.root}>
-                <div className={styles.recent} style={{ height: "90vh" }}>
+                <div className={styles.recent} style={{ height: "96vh" }}>
                     <div className={styles.headings}>
                         <h3>Past Notifications</h3>
                         <input
@@ -86,7 +86,6 @@ const Dashboard = () => {
                             placeholder="Search..."
                             onChange={(e) => setQuery(e.target.value)}></input>
                     </div>
-                    <hr className={styles.hr} />
                     <table className={styles.table}>
                         <tr className={styles.tableRow}>
                             <th className={styles.tableCol}>Subject</th>

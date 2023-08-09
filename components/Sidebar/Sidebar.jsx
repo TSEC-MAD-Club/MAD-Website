@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 function HamburgerMenu({ user }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 600);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { loggedIn, setLoggedIn } = React.useContext(UserContext);
   const router = useRouter();
@@ -51,7 +51,7 @@ function HamburgerMenu({ user }) {
     );
   };
   return (
-    <div className={styles.hamburgerDisplay}>
+    <div className={styles.hamburgerDisplay} style={{ zIndex: 2 }}>
       <div
         className={`${styles["hamburger-menu"]} ${isOpen ? styles.open : ""}`}
       >
@@ -86,7 +86,8 @@ function HamburgerMenu({ user }) {
                 userHasAccess(data.type) ? (
                   <Link key={id} href={data.mainLink}>
                     <div className={styles.sidebarline}>
-                      <img src={data.iconLink} alt="" />
+                      {theme === "light" && <img src={data.lightIconLink} alt="" />}
+                      {theme === "dark" && <img src={data.darkIconLink} alt="" />}
                       {data.mainTitle}
                     </div>
                   </Link>

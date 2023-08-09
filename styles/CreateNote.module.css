@@ -25,7 +25,7 @@
 }
 
 .createNoteWrapper {
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: grid;
   width: 67vw;
   column-gap: 2rem;
@@ -65,13 +65,13 @@
 }
 
 .sendNoteButton {
-  margin-top: 3rem;
+  margin-top: 2rem;
   width: 32.5vw;
   border: none;
   background-color: var(--devs-blue);
   height: 3rem;
   border-radius: 10px;
-  color: var(--primary-5);
+  color: white;
 }
 
 .addNotesDiv img {

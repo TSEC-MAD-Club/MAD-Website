@@ -212,11 +212,6 @@
     display: none;
   }
 }
-@media screen and (max-width: 690px) {
-  /* .sidebarWrapper {
-    display: none;
-  } */
-}
 @media screen and (max-width: 1000px) {
   .sidebarWrapper {
     width: 20rem;
@@ -225,9 +220,6 @@
 }
 
 @media (max-width: 690px) {
-  /* .hamburgerDisplay {
-  display: none;
-} */
   .hamburger-menu {
     display: flex;
     flex-direction: column;
@@ -279,5 +271,6 @@
 @media (min-width: 690px) {
   .hamburgerDisplay {
     display: block;
+    z-index: 2;
   }
 }

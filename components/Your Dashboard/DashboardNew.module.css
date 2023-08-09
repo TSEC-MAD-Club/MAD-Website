@@ -10,9 +10,10 @@
 
 .root {
   box-sizing: border-box;
-  padding: 2%;
+  padding: 1%;
   margin: 0;
   margin-top: 1vh;
+  padding-bottom: 0;
 }
 
 .headerText {
@@ -64,7 +65,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
-  padding: 1rem;
+  padding: 0.8rem;
   width: 98%;
   height: 42vh;
   margin-left: 1%;
@@ -93,6 +94,19 @@
   width: 30%;
   padding: 2%;
 }
+.headings {
+  display: flex;
+  width: 98%;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  padding: 2vh 0;
+}
+.headings input {
+  border-radius: 15px;
+  padding-left: 10px;
+  border: 1px solid;
+  height: 40px;
+}
 @media screen and (max-width: 1000px) {
   .twobutton {
     display: flex;
@@ -113,9 +127,6 @@
     display: inline-block;
     height: 49vh;
   }
-  .table {
-    width: auto;
-  }
   .operations {
     display: flex;
     flex-direction: column;
@@ -126,12 +137,16 @@
     height: max-content;
   }
   .item {
-    width: 38%;
+    width: 41%;
     height: 14vh;
     font-size: 13px;
+    padding: 0.2rem;
   }
   .tableCol {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
+  }
+  .headings {
+    margin-top: 2rem;
   }
 }
 /* mob view  */
@@ -161,17 +176,4 @@
   .root h1 {
     font-size: 1.5rem;
   }
-}
-.headings {
-  display: flex;
-  width: 98%;
-  justify-content: space-between;
-  border-bottom: 1px solid;
-  padding: 2vh 0;
-}
-.headings input {
-  border-radius: 15px;
-  padding-left: 10px;
-  border: 1px solid;
-  height: 40px;
 }
