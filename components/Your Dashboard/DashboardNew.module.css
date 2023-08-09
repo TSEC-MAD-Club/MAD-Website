@@ -44,7 +44,7 @@
   -webkit-backdrop-filter: blur(5px);
   border-radius: 16px;
   padding: 2.2rem;
-  width: 47%;
+  width: 35vw;
   height: 20vh;
   margin: 1rem;
   border: none;
@@ -132,12 +132,11 @@
     flex-direction: column;
   }
   .twobutton {
-    display: block;
-    flex-direction: column;
+    /* flex-direction: column; */
     height: max-content;
   }
   .item {
-    width: 41%;
+    width: 40%;
     height: 14vh;
     font-size: 13px;
     padding: 0.2rem;
@@ -167,7 +166,6 @@
     min-height: fit-content;
   }
   .item {
-    height: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -175,5 +173,8 @@
   }
   .root h1 {
     font-size: 1.5rem;
+  }
+  .item {
+    width: 38%;
   }
 }

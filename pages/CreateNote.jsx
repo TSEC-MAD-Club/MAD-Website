@@ -184,9 +184,7 @@ const CreateNote = () => {
         <SideBar user={user} />
         <div className={styles.noteWrapper}>
           <h1 className={styles.mainHeading}>Create a Note</h1>
-          <h5 className={styles.subTitle}>
-            Create a Note about something for the students
-          </h5>
+          <hr />
           <div className={styles.createNoteWrapper}>
             <div className={styles.gridBox}>
               <div className={styles.subjectDiv}>

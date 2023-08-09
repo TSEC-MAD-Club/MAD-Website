@@ -193,9 +193,7 @@ const CreateNote = () => {
         <Sidebar user={user} />
         <div className={styles.noteWrapper}>
           <h1 className={styles.mainHeading}>Create a Notification</h1>
-          <h5 className={styles.subTitle}>
-            Create a Notification about something for the students
-          </h5>
+          <hr />
           <div className={styles.createNoteWrapper}>
             <div className={styles.gridBox}>
               <div className={styles.subjectDiv}>
@@ -209,7 +207,7 @@ const CreateNote = () => {
                   className={styles.subjectText}
                 />
               </div>
-              <div className={styles.subjectDiv}>
+              <div className={styles.subjectDiv} style={{ "margin-top": "1rem" }}>
                 <label>Subject*</label>
                 <input
                   placeholder="Enter the subject here"
