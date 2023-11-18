@@ -315,3 +315,122 @@
   
   /* ... existing styles ... */
   
+
+
+
+/* View All Record Compononent CSS*/
+.container{
+    width: 100%;
+    padding: 20px 60px;
+    background-color: #EFF4F8;
+    height: 100%;
+    display: flex;
+    gap: 5px;
+    font-family: Poppins;
+}
+.sidebar{
+    width: 30%;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    border-radius: 30px;
+    border: 1px solid #EFF4F8;
+    
+}
+.maincontent{
+    width: 70%;
+    padding: 30px;
+   
+
+}
+.maincontent .heading{
+    font-family: Poppins;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+}
+.sidebar .profile{
+    margin: 20px auto;
+    text-align: center;
+
+}
+.sidebar .title{
+margin-top: 5px;
+margin-bottom: 5px;
+font-family: Poppins;
+font-size: 20px;
+font-weight: 400;
+line-height: 20px;
+letter-spacing: 0.30000001192092896px;
+text-align: center;
+color:rgba(0, 0, 0, 1);
+}
+
+.sidebar .navigation{
+margin-top: 10%;
+
+ margin-left: 10%;
+}
+
+.sidebar .darkmode{
+    margin-top: 30%;
+    margin-left: 10%;
+}
+.sidebar .date{
+    margin-top: 3%;
+    margin-left: 10%;
+    font-size: 16px;
+}
+
+.maincontent .search{
+    width: 40%;
+    height: 8%;
+    margin-left: 45%;
+    margin-bottom: 5%;
+}
+.maincontent .record{
+    border-radius: 5px;
+    height: 92%;
+    width: 100%;
+    background-color: #FFFFFF;
+    margin-left: 2%;
+    margin-top: 4%;
+}
+
+.maincontent .record_title{
+    margin-top: 2%;
+    display: flex;
+    margin-left: 4%;
+    margin-right: 5%;
+}
+
+.maincontent .item{
+    margin-right: auto;
+}
+
+.input_section{
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    flex-direction: column;
+    margin-top: 10%;
+   
+}
+
+.download_csv_btn{
+    align-items:center;
+    background: "#00C720";
+    width:120px;
+    height:30px
+    
+}
+
+.table_heading {
+  background-color: antiquewhite;
+   
+   padding: 14px 20px;
+  }
+
+
+
+
+  
