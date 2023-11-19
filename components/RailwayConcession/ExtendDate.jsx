@@ -39,7 +39,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow }) => {
       <div style={{ display: "flex" }}>
         <div className={styles.certificateSection} style={{ width: "60%" }}>
           <span className={styles.modalInformation}>Extend Date to:</span>
-          <input></input>
+          <input type="date"></input>
         </div>
         <div className={styles.modalButtonDiv}>
           <button className={styles.modalApproveButton}>Extend Date</button>
