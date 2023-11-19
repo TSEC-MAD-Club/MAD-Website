@@ -2,15 +2,17 @@
 
 import React from "react";
 import RailwayConcessionCard from "./RailwayConcessionCard";
+import RailwayUpdateConcessionCard from "./RailwayUpdateConcessionCard";
 import styles from "./RailwayConcession.module.css";
 
-const RailwayConcessionList = () => {
+const RailwayUpdateConcessionList = () => {
   const concessionRequest = [
     {
       name: "BOHRA PRATHAM SURESH",
       gender: "Male",
       type: "WESTERN",
       from: "Charni Road",
+      certificateNumber: "Z 0182984",
       to: "Bandra",
       class: "I (First)",
       mode: "QTY",
@@ -25,6 +27,7 @@ const RailwayConcessionList = () => {
       gender: "Female",
       type: "SOUTHERN",
       from: "CST",
+      certificateNumber: "Z 0182984",
       to: "Thane",
       class: "II (Second)",
       mode: "MONTHLY",
@@ -39,10 +42,10 @@ const RailwayConcessionList = () => {
   return (
     <div className={styles.scrollContainer}>
       {concessionRequest.map((request, index) => (
-        <RailwayConcessionCard key={index} request={request} />
+        <RailwayUpdateConcessionCard key={index} request={request} />
       ))}
     </div>
   );
 };
 
-export default RailwayConcessionList;
+export default RailwayUpdateConcessionList;
