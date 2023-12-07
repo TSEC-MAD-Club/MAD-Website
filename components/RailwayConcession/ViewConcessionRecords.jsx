@@ -17,81 +17,25 @@ const ViewConcessionRecords = () => {
           <h4 className={style.title}>Helloe</h4>
           <h5>email@gmail.com</h5>
           <img src="/assets/images/Line 3.png" />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "start",
-              alignItems: "start",
-              flexDirection: "column",
-              marginTop: "2%",
-              margin: "0 auto",
-              paddingLeft: "14%",
-              gap: "25px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: "7px",
-                alignItems: "center",
-                paddingTop: "3%",
-                fontSize: "20px",
-                fontWeight: "400",
-              }}
-            >
+          <div className={style.dash_nav_container}>
+            <div className={style.dash_nav}>
               <img src="/assets/images/Dashboard.png" />
               <span>Dashboard</span>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                gap: "7px",
-                alignItems: "center",
-                paddingTop: "3%",
-                fontSize: "20px",
-                fontWeight: "400",
-              }}
-            >
+            <div className={style.dash_nav}>
               <img src="/assets/images/Bell.png" />
               <span>Create Notifications</span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                gap: "7px",
-                alignItems: "center",
-                paddingTop: "3%",
-                fontSize: "20px",
-                fontWeight: "400",
-              }}
-            >
+            <div className={style.dash_nav}>
               <img src="/assets/images/Bell.png" />
               <span>Past Notifications</span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                gap: "7px",
-                alignItems: "center",
-                fontSize: "20px",
-                paddingTop: "3%",
-                fontWeight: "400",
-              }}
-            >
+            <div className={style.dash_nav}>
               <img src="/assets/images/Notes.png" />
               <span>Create Notes</span>
             </div>
-            <div
-              style={{
-                display: "flex",
-                gap: "7px",
-                alignItems: "center",
-                fontSize: "20px",
-                paddingTop: "3%",
-                fontWeight: "400",
-              }}
-            >
+            <div className={style.dash_nav}>
               <img src="/assets/images/Notes.png" />
               <span>Paste Notes</span>
             </div>
@@ -103,14 +47,14 @@ const ViewConcessionRecords = () => {
               <SunIcon
                 width={16}
                 height={16}
-                style={{ marginTop: "-6px", marginLeft: "2px" }}
+                className={style.toggle_icon_style}
               />
             }
             checkedHandleIcon={
               <MoonIcon
                 width={16}
                 height={16}
-                style={{ marginTop: "-6px", marginLeft: "2px" }}
+                className={style.toggle_icon_style}
               />
             }
             onColor={"#2a66ff"}
@@ -134,16 +78,12 @@ const ViewConcessionRecords = () => {
         <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           <div style={{ paddingleft: "7%" }}>
             <h1
-              style={{
-                fontSize: "36px",
-                fontWeight: 200,
-                display: "flex",
-              }}
+              className={style.view_csv}
             >
               View CSV Files
             </h1>
             <h6
-              style={{ fontSize: "16px", fontWeight: "400", color: "#717171" }}
+              className={style.view_csv_description}
             >
               View or Download csv files of concession records
             </h6>
@@ -153,40 +93,16 @@ const ViewConcessionRecords = () => {
             <input
               placeholder="Enter Certificate Number"
               type="text"
-              style={{
-                marginTop: "8px",
-                alignItems: "center",
-
-                width: "295px",
-                height: "45px",
-                paddingLeft: "20px",
-                borderRadius: "5px",
-                border: "1px solid black",
-              }}
+              className={style.certificate_no_input}
             ></input>
             <span
-              style={{
-                position: "absolute",
-                right: "11px",
-                top: "35%",
-                transform: "translateY(-50%)",
-                fontSize: "24px",
-              }}
+              className={style.search_icon}
             >
               <img src="\assets/images/search.png" />
             </span>
           </div>
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid #A09C9C",
-              width: "200px",
-              borderRadius: "50px",
-              marginLeft: "100px",
-              height: "61px",
-              background: "#FFFFFF",
-            }}
+           className={style.toggle_btn}
           >
             <button
               onClick={() => setIsWestern(true)}
@@ -218,56 +134,28 @@ const ViewConcessionRecords = () => {
         </div>
 
         <div className={style.record}>
-          <h3
-            style={{
-              marginLeft: "8%",
-              paddingTop: "3%",
-              color: "#000000",
-              fontFamily: "Inter",
-            }}
-          >
+          <h3 className={style.concession_header}>
             {" "}
             <b>Concession Records(.csv)</b>
           </h3>
 
           <img
-            style={{ width: "90%", marginLeft: "4%" }}
+            className={style.line_img_style}
             src="/assets/images/Line 5.png"
           />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "10px 65px",
-              fontSize: "20px",
-              color: "#717171",
-            }}
-          >
+          <div className={style.table_col}>
             <h5>ID</h5>
             <h5>Certificate No</h5>
             <h5>Date Created</h5>
             <h5>CSV File</h5>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "10px 64px",
-            }}
-          >
+          <div className={style.table_content}>
             <h4>8</h4>
             <h4>Z 0188964 - 0198763</h4>
             <h4>12/05/2023</h4>
             <button
               type="button"
-              style={{
-                backgroundColor: "#00C720",
-                width: "120px",
-                height: "37px",
-              }}
-              className="btn btn-success"
+              className={`${style.download_btn} btn btn-success`}
             >
               Download
             </button>
