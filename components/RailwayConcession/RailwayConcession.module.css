@@ -432,5 +432,106 @@ margin-top: 10%;
 
 
 
+.dash_nav{
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding-top: 3%;
+  font-size: 20px;
+  font-weight: 400;
+}
 
-  
+.toggle_icon_style{
+  margin-top: -6px;
+  margin-top: -6px;
+}
+
+
+.dash_nav_container{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  margin-top: 2%;
+  margin: 0 auto;
+  padding-left: 14%;
+  gap: 25px;
+}
+
+
+.concession_header{
+  margin-left: 8%;
+  padding-top: 3%;
+  color: #000000;
+  font-family: "Inter";
+}
+
+.table_col{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 65px;
+  font-size: 20px;
+  color: #717171;
+}
+
+.table_content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 64px;
+}
+
+.line_img_style{
+  width: 90%;
+  margin-left: 4%;
+}
+
+.download_btn{
+  background-color: #00C720;
+  width: 120px;
+  height: 37px;
+}
+
+.view_csv{
+  font-size: 36px;
+  font-weight: 200;
+  display: flex;
+}
+
+.view_csv_description{
+  font-size: 16px;
+  font-weight: 400;
+  color: #717171;
+}
+
+.certificate_no_input{
+  margin-top: 8px;
+  align-items: center;
+  width: 295px;
+  height: 45px;
+  padding-left: 20px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.search_icon{
+  position: absolute;
+  right: 11px;
+  top: 35%;
+  transform: translateY(-50%);
+  font-size: 24px;
+}
+
+
+.toggle_btn{
+  display: flex;
+  align-items: center;
+  border: 1px solid #A09C9C;
+  width: 200px;
+  border-radius: 50px;
+  margin-left: 100px;
+  height: 61px;
+  background: #FFFFFF;
+}
+
