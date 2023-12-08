@@ -1,8 +1,9 @@
 // ApprovalInfo.js
-import React from "react";
+import React, { useState } from "react";
 import styles from "../RailwayConcession/RailwayUpdateConcession.module.css";
 
 const ExtendDate = ({ request, handleCloseInfoWindow }) => {
+  const [date, setDate] = useState(new Date());
   return (
     <div
       style={{
@@ -39,7 +40,12 @@ const ExtendDate = ({ request, handleCloseInfoWindow }) => {
       <div style={{ display: "flex" }}>
         <div className={styles.certificateSection} style={{ width: "60%" }}>
           <span className={styles.modalInformation}>Extend Date to:</span>
-          <input type="date"></input>
+          <input
+            type="date"
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+          ></input>
         </div>
         <div className={styles.modalButtonDiv}>
           <button className={styles.modalApproveButton}>Extend Date</button>

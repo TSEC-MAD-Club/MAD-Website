@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../components/RailwayConcession/RailwayUpdateConcession.module.css";
 import RailwaySidebar from "../components/Sidebar/RailwaySidebar.jsx";
 import RailwayUpdateConcessionList from "../components/RailwayConcession/RailwayUpdateConcessionList.jsx";
 
 const RailwayConcession = () => {
+  const [certificateNumber, setCertificateNumber] = useState("");
+
   const statusBoxStyle = {
     backgroundColor: "var(--primary-5)",
     padding: "8px",
@@ -61,6 +63,9 @@ const RailwayConcession = () => {
                 Enter Certificate Number
               </span>
               <input
+                onChange={(e) => {
+                  setCertificateNumber(e.target.value);
+                }}
                 style={{ border: "1px solid #D9D9D9", width: "110%" }}
               ></input>
             </div>

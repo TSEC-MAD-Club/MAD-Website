@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
 
 const CancelConcession = ({ request, handleCloseInfoWindow }) => {
+  const [message, setMessage] = useState("");
   return (
     <div
       style={{
@@ -39,7 +40,11 @@ const CancelConcession = ({ request, handleCloseInfoWindow }) => {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div className={styles.certificateSection} style={{ width: "100%" }}>
           <span className={styles.modalInformation}>Message:</span>
-          <textarea></textarea>
+          <textarea
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
+          ></textarea>
         </div>
         <div className={styles.modalRejectButtonDiv}>
           <button className={styles.modalRejectButton}>Cancel</button>
