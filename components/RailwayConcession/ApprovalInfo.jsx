@@ -6,39 +6,31 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
   const [certificateNumber, setCertificateNumber] = useState("");
 
   return (
-    <div
-      style={{
-        backgroundColor: "var(--primary-5)",
-        padding: "20px 30px",
-        borderRadius: "16px",
-        fontSize: "14px",
-        color: "var(--primary-2)",
-      }}
-    >
+    <div className={styles.modalDiv}>
       <span className={styles.modalTitle}>Approve Concession Request?</span>
-      <div style={{ display: "flex" }}>
+      <div className={styles.modalUpperDiv}>
         <div className={styles.studentApproveInfo}>
-          <span className={styles.modalInformation}>Name:</span>
-          <span className={styles.modalInformation} style={{ fontWeight: "600" }}>{request.name}</span>
+          <span className={styles.modalInformationTitle}>Name:</span>
+          <span className={styles.modalInformation}>{request.name}</span>
         </div>
-        <div style={{ display: "flex", flexDirection: "row", width: "50%" }}>
-          <div className={styles.studentApproveInfo} style={{ width: "100%" }}>
-            <span className={styles.modalInformation}>From:</span>
-            <span className={styles.modalInformation} style={{ fontWeight: "600" }}>
+        <div className={styles.modalFromToDiv}>
+          <div className={styles.studentApproveInfo}>
+            <span className={styles.modalInformationTitle}>From:</span>
+            <span className={styles.modalInformation}>
               {request.from}
             </span>
           </div>
-          <div className={styles.studentApproveInfo} style={{ width: "100%" }}>
-            <span className={styles.modalInformation}>To:</span>
-            <span className={styles.modalInformation} style={{ fontWeight: "600" }}>
+          <div className={styles.studentApproveInfo}>
+            <span className={styles.modalInformationTitle}>To:</span>
+            <span className={styles.modalInformation}>
               {request.to}
             </span>
           </div>
         </div>
       </div>
-      <div style={{ display: "flex" }}>
-        <div className={styles.certificateSection} style={{ width: "60%" }}>
-          <span className={styles.modalInformation}>Certificate Number:</span>
+      <div className={styles.modalLowerDiv}>
+        <div className={styles.certificateSection}>
+          <span className={styles.modalInformationTitle}>Certificate Number:</span>
           <input onChange={(e) => setCertificateNumber(e.target.value)}></input>
         </div>
         <div className={styles.modalButtonDiv}>
