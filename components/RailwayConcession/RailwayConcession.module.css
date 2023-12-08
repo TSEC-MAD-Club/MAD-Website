@@ -140,7 +140,13 @@
   }
   .railwayConcessionCardFooter {
     display: flex;
-    gap: 3rem;
+    gap: 5rem;
+    margin-top: 20px;
+  }
+
+  .railwayConcessionCardFooterButtonDiv {
+    display: flex;
+    gap: 2rem;
     margin-top: 20px;
   }
   
