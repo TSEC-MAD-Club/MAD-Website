@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import styles from "../components/RailwayConcession/RailwayUpdateConcession.module.css";
-import RailwaySidebar from "../components/Sidebar/RailwaySidebar.jsx";
 import RailwayUpdateConcessionList from "../components/RailwayConcession/RailwayUpdateConcessionList.jsx";
+import { UserContext } from "./_app";
+import SideBar from "../components/Sidebar/Sidebar";
 
 const RailwayConcession = () => {
   const [certificateNumber, setCertificateNumber] = useState("");
-
-  const statusBoxStyle = {
-    backgroundColor: "var(--primary-5)",
-    padding: "8px",
-    borderRadius: "4px",
-    fontSize: "14px",
-    color: "var(--primary-2)",
-    width: "7%",
-    height: "4rem",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "center",
-    marginLeft: "auto",
-  };
+  const { user } = React.useContext(UserContext);
 
   return (
     <div
@@ -32,7 +19,7 @@ const RailwayConcession = () => {
         overflow: "hidden",
       }}
     >
-      <RailwaySidebar />
+      <SideBar user={user} />
       <div style={{ padding: "16px", marginBottom: "16px" }}>
         <div
           style={{

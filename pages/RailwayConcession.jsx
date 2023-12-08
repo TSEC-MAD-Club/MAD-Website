@@ -1,8 +1,11 @@
 import React from 'react';
 import RailwayConcessionList from '../components/RailwayConcession/RailwayConcessionList';
-import RailwaySidebar from '../components/Sidebar/RailwaySidebar.jsx';
+import { UserContext } from "./_app";
+import SideBar from "../components/Sidebar/Sidebar";
 
 const RailwayConcession = () => {
+  const { user } = React.useContext(UserContext);
+
   const statusBoxStyle = {
     backgroundColor: 'var(--primary-5)',
     padding: '8px',
@@ -20,7 +23,7 @@ const RailwayConcession = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', height: '100vh', marginRight: '3rem', overflow: 'hidden' }}>
-      <RailwaySidebar />
+      <SideBar user={user} />
       <div style={{ padding: '16px', marginBottom: '16px' }}>
         <div style={{ display: 'flex', flexDirection: 'row', marginTop: '3rem', marginBottom: '1rem' }}>
           <div>

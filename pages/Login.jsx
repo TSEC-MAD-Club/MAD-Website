@@ -21,6 +21,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
   const { theme, toggleTheme } = useContext(ThemeContext);
+
   const loginMsg = () => {
     const auth = getAuth(app);
 

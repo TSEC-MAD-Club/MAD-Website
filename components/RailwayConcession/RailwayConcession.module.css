@@ -1,444 +1,432 @@
 .railwayConcessionCard {
-    width: 100%;
-    background-color: var(--primary-5);
-    border-radius: 30px;
-    padding: 3rem;
-    margin-bottom: 3rem;
-  }
-  
-  .nameAndGender {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .name {
-    /* font-family: Inter; */
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: left;
-  }
-  
-  .gender {
-    /* font-family: Inter; */
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 35px;
-    letter-spacing: 0em;
-    text-align: left;
-    display: flex;
-    align-items: flex-start;
-    margin-left: 5px;
-  }
-  
-  .western {
-    margin-left: auto;
-    display: flex;
-    align-items: flex-start;
-    /* font-family: Poppins; */
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 44px;
-    letter-spacing: 0em;
-    text-align: right;
-  }
-  
-  .railwayConcessionCardHr {
-    height: 1.5px;
-    border: none;
-    background-color: var(--primary-1);
-    width: 100%; /* Set width to 100% */
-    margin: 0 auto; /* Center the hr using margin */
-    display: flex;
-    align-items: center;
-  }
-  
-  .railwayConcessionCardTable {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-  /* styles.module.css */
-  
-  .railwayConcessionCardTableCell {
-    /* font-family: Inter; */
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 35px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: var(--primary-2);
-  }
-  
-  .railwayConcessionCardTableCell2 {
-    /* font-family: Inter; */
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 35px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: var(--primary-1);
-  }
-  .horizontalLine {
-    display: inline-block;
-    margin: 0 5px; /* Adjust the spacing as needed */
-    border-top: 1px solid var(--primary-1); /* You can customize the color and style */
-  }
-  /* styles.module.css */
-  
-  .railwayConcessionCardInfo {
-    display: flex;
-    justify-content: space-between;
-    gap: 3rem;
-    /* Add any additional styling as needed */
-  }
-  .railwayAdress {
-    width: 70%;
-  }
-  .railwayDOB {
-    width: 50%;
-  }
-  .railwayConcessionCardAddress {
-    /* font-family: Poppins; */
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 35px;
-    letter-spacing: 0em;
-    text-align: left;
-  }
-  
-  .railwayConcessionCardDocumentsList {
-    display: flex;
-    gap: 1rem;
-    color: var(--primary-4);
-    /* font-family: Poppins; */
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 35px;
-    letter-spacing: 0em;
-    text-align: left;
-  }
-  
-  .railwayConcessionCardApproveButton {
-    background-color: rgba(0, 199, 32, 1);
-    color: var(--primary-5);
-    padding: 6px;
-    border: none;
-    cursor: pointer;
-    width: 9rem;
-    height: 3.2rem;
-    /* font-family: Poppins; */
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: center;
-    border-radius: 15px;
-    margin-top: auto;
-  }
-  .railwayConcessionCardFooter {
-    display: flex;
-    gap: 5rem;
-    margin-top: 20px;
-  }
+  width: 100%;
+  background-color: var(--primary-5);
+  border-radius: 30px;
+  padding: 3rem;
+  margin-bottom: 10rem;
+}
 
-  .railwayConcessionCardFooterButtonDiv {
-    display: flex;
-    gap: 2rem;
-    margin-top: 20px;
-  }
-  
-  .railwayConcessionCardRejectButton {
-    background-color: rgba(219, 108, 108, 1);
-    color: var(--primary-5);
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    width: 9rem;
-    height: 3.2rem;
-    /* font-family: Poppins; */
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: center;
-    border-radius: 15px;
-    margin-top: auto;
-  }
-  /* RailwayConcession.module.css */
-  
-  .scrollContainer {
-    max-height: 100vh;
-    overflow-y: auto;
-    border: none;
-    scrollbar-width: thin; /* "auto" or "thin" for Firefox */
-    scrollbar-color: transparent transparent;
-  }
-  /* RailwayConcession.module.css */
-  /* ... existing styles ... */
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100; /* Ensure the overlay is above other elements */
-  }
-  
-  .modal {
-    background-color: var(--primary-5);
-    /* padding: 20px 30px; */
-    border-radius: 16px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 101; /* Ensure the modal is above the overlay */
-    width: 50%;
-    height: 50%;
-  }
-  
-  .modalTitle {
-    font-size: 2rem;
-    font-weight: 400;
-  }
-  
-  .modalInformation {
-    font-size: 1rem;
-  }
-  
-  .studentApproveInfo {
-    margin: 2rem 0rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    width: 50%;
-  }
-  
-  .studentRejectInfo {
-    margin: 1rem 0rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    width: 50%;
-  }
-  
-  .certificateSection {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    gap: 0.25rem;
-  }
-  
-  .certificateSection input {
-    width: 80%;
-    height: 2.6rem;
-    border: 0.75px solid var(--grey);
-    border-radius: 10px;
-    padding: 0.7rem;
-  }
-  
-  .certificateSection textarea {
-    width: 100%;
-    height: 4rem;
-    border: 0.75px solid var(--grey);
-    border-radius: 10px;
-    padding: 0.5rem;
-    resize: none;
-  }
-  
-  
-  .modalButtonDiv {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 0;
-  }
-  
-  .modalRejectButtonDiv {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 0;
-    justify-content: center;
-  }
-  
-  .modalApproveButton {
-    background-color: rgba(0, 199, 32, 1);
-    color: var(--primary-5);
-    padding: 6px;
-    border: none;
-    cursor: pointer;
-    width: 6rem;
-    height: 2.5rem;
-    /* font-family: Poppins; */
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: center;
-    border-radius: 15px;
-    margin-top: 0.75rem;
-  }
-  
-  .modalRejectButton {
-    background-color: rgba(219, 108, 108, 1);
-    color: var(--primary-5);
-    padding: 6px;
-    border: none;
-    cursor: pointer;
-    width: 6rem;
-    height: 2.5rem;
-    /* font-family: Poppins; */
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: center;
-    border-radius: 15px;
-    margin-top: 0.75rem;
-  }
-  
-  .modalGoBackButton {
-    background-color: #7E7E7E;
-    color: var(--primary-5);
-    padding: 6px;
-    border: none;
-    cursor: pointer;
-    width: 6rem;
-    height: 2.5rem;
-    /* font-family: Poppins; */
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 15px;
-    letter-spacing: 0em;
-    text-align: center;
-    border-radius: 15px;
-    margin-top: 0.75rem;
-  }
-  
-  /* ... existing styles ... */
-  
+.nameAndGender {
+  display: flex;
+  justify-content: space-between;
+}
 
+.name {
+  /* font-family: Inter; */
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: left;
+}
 
+.gender {
+  /* font-family: Inter; */
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  margin-left: 5px;
+}
+
+.western {
+  margin-left: auto;
+  display: flex;
+  align-items: flex-start;
+  /* font-family: Poppins; */
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 44px;
+  letter-spacing: 0em;
+  text-align: right;
+}
+
+.railwayConcessionCardHr {
+  height: 1.5px;
+  border: none;
+  background-color: var(--primary-1);
+  width: 100%; /* Set width to 100% */
+  margin: 0 auto; /* Center the hr using margin */
+  display: flex;
+  align-items: center;
+}
+
+.railwayConcessionCardTable {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+/* styles.module.css */
+
+.railwayConcessionCardTableCell {
+  /* font-family: Inter; */
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--primary-2);
+}
+
+.railwayConcessionCardTableCell2 {
+  /* font-family: Inter; */
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--primary-1);
+}
+.horizontalLine {
+  display: inline-block;
+  margin: 0 5px; /* Adjust the spacing as needed */
+  border-top: 1px solid var(--primary-1); /* You can customize the color and style */
+}
+/* styles.module.css */
+
+.railwayConcessionCardInfo {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  /* Add any additional styling as needed */
+}
+.railwayAdress {
+  width: 70%;
+}
+.railwayDOB {
+  width: 50%;
+}
+.railwayConcessionCardAddress {
+  /* font-family: Poppins; */
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.railwayConcessionCardDocumentsList {
+  display: flex;
+  gap: 1rem;
+  color: var(--primary-4);
+  /* font-family: Poppins; */
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.railwayConcessionCardApproveButton {
+  background-color: rgba(0, 199, 32, 1);
+  color: var(--primary-5);
+  padding: 6px;
+  border: none;
+  cursor: pointer;
+  width: 9rem;
+  height: 3.2rem;
+  /* font-family: Poppins; */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 15px;
+  margin-top: auto;
+}
+.railwayConcessionCardFooter {
+  display: flex;
+  gap: 5rem;
+  margin-top: 20px;
+}
+
+.railwayConcessionCardFooterButtonDiv {
+  display: flex;
+  gap: 2rem;
+  margin-top: 20px;
+}
+
+.railwayConcessionCardRejectButton {
+  background-color: rgba(219, 108, 108, 1);
+  color: var(--primary-5);
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 9rem;
+  height: 3.2rem;
+  /* font-family: Poppins; */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 15px;
+  margin-top: auto;
+}
+/* RailwayConcession.module.css */
+
+.scrollContainer {
+  max-height: 100vh;
+  overflow-y: auto;
+  border: none;
+  scrollbar-width: thin; /* "auto" or "thin" for Firefox */
+  scrollbar-color: transparent transparent;
+}
+/* RailwayConcession.module.css */
+/* ... existing styles ... */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100; /* Ensure the overlay is above other elements */
+}
+
+.modal {
+  background-color: var(--primary-5);
+  /* padding: 20px 30px; */
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 101; /* Ensure the modal is above the overlay */
+  width: 50%;
+  height: 50%;
+}
+
+.modalTitle {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.modalInformation {
+  font-size: 1rem;
+}
+
+.studentApproveInfo {
+  margin: 2rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 50%;
+}
+
+.studentRejectInfo {
+  margin: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 50%;
+}
+
+.certificateSection {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 0.25rem;
+}
+
+.certificateSection input {
+  width: 80%;
+  height: 2.6rem;
+  border: 0.75px solid var(--grey);
+  border-radius: 10px;
+  padding: 0.7rem;
+}
+
+.certificateSection textarea {
+  width: 100%;
+  height: 4rem;
+  border: 0.75px solid var(--grey);
+  border-radius: 10px;
+  padding: 0.5rem;
+  resize: none;
+}
+
+.modalButtonDiv {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.modalRejectButtonDiv {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  justify-content: center;
+}
+
+.modalApproveButton {
+  background-color: rgba(0, 199, 32, 1);
+  color: var(--primary-5);
+  padding: 6px;
+  border: none;
+  cursor: pointer;
+  width: 6rem;
+  height: 2.5rem;
+  /* font-family: Poppins; */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 15px;
+  margin-top: 0.75rem;
+}
+
+.modalRejectButton {
+  background-color: rgba(219, 108, 108, 1);
+  color: var(--primary-5);
+  padding: 6px;
+  border: none;
+  cursor: pointer;
+  width: 6rem;
+  height: 2.5rem;
+  /* font-family: Poppins; */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 15px;
+  margin-top: 0.75rem;
+}
+
+.modalGoBackButton {
+  background-color: #7e7e7e;
+  color: var(--primary-5);
+  padding: 6px;
+  border: none;
+  cursor: pointer;
+  width: 6rem;
+  height: 2.5rem;
+  /* font-family: Poppins; */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 15px;
+  margin-top: 0.75rem;
+}
+
+/* ... existing styles ... */
 
 /* View All Record Compononent CSS*/
-.container{
-    width: 100%;
-    padding: 20px 60px;
-    background-color: #EFF4F8;
-    height: 100%;
-    display: flex;
-    gap: 5px;
-    font-family: Poppins;
+.container {
+  width: 100%;
+  padding: 20px 60px;
+  background-color: #eff4f8;
+  height: 100%;
+  display: flex;
+  gap: 5px;
+  font-family: Poppins;
 }
-.sidebar{
-    width: 30%;
-    background-color: rgba(255, 255, 255, 1);
-    padding: 20px;
-    border-radius: 30px;
-    border: 1px solid #EFF4F8;
-    
+.sidebar {
+  width: 30%;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 20px;
+  border-radius: 30px;
+  border: 1px solid #eff4f8;
 }
-.maincontent{
-    width: 70%;
-    padding: 30px;
-   
-
+.maincontent {
+  width: 70%;
+  padding: 30px;
 }
-.maincontent .heading{
-    font-family: Poppins;
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 44px;
+.maincontent .heading {
+  font-family: Poppins;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
 }
-.sidebar .profile{
-    margin: 20px auto;
-    text-align: center;
-
+.sidebar .profile {
+  margin: 20px auto;
+  text-align: center;
 }
-.sidebar .title{
-margin-top: 5px;
-margin-bottom: 5px;
-font-family: Poppins;
-font-size: 20px;
-font-weight: 400;
-line-height: 20px;
-letter-spacing: 0.30000001192092896px;
-text-align: center;
-color:rgba(0, 0, 0, 1);
+.sidebar .title {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.30000001192092896px;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
 }
 
-.sidebar .navigation{
-margin-top: 10%;
+.sidebar .navigation {
+  margin-top: 10%;
 
- margin-left: 10%;
-}
-
-.sidebar .darkmode{
-    margin-top: 30%;
-    margin-left: 10%;
-}
-.sidebar .date{
-    margin-top: 3%;
-    margin-left: 10%;
-    font-size: 16px;
+  margin-left: 10%;
 }
 
-.maincontent .search{
-    width: 40%;
-    height: 8%;
-    margin-left: 45%;
-    margin-bottom: 5%;
+.sidebar .darkmode {
+  margin-top: 30%;
+  margin-left: 10%;
 }
-.maincontent .record{
-    border-radius: 5px;
-    height: 92%;
-    width: 100%;
-    background-color: #FFFFFF;
-    margin-left: 2%;
-    margin-top: 4%;
+.sidebar .date {
+  margin-top: 3%;
+  margin-left: 10%;
+  font-size: 16px;
 }
 
-.maincontent .record_title{
-    margin-top: 2%;
-    display: flex;
-    margin-left: 4%;
-    margin-right: 5%;
+.maincontent .search {
+  width: 40%;
+  height: 8%;
+  margin-left: 45%;
+  margin-bottom: 5%;
+}
+.maincontent .record {
+  border-radius: 5px;
+  height: 92%;
+  width: 100%;
+  background-color: #ffffff;
+  margin-left: 2%;
+  margin-top: 4%;
 }
 
-.maincontent .item{
-    margin-right: auto;
+.maincontent .record_title {
+  margin-top: 2%;
+  display: flex;
+  margin-left: 4%;
+  margin-right: 5%;
 }
 
-.input_section{
-    display: flex;
-    align-items: start;
-    gap: 10px;
-    flex-direction: column;
-    margin-top: 10%;
-   
+.maincontent .item {
+  margin-right: auto;
 }
 
-.download_csv_btn{
-    align-items:center;
-    background: "#00C720";
-    width:120px;
-    height:30px
-    
+.input_section {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  flex-direction: column;
+  margin-top: 10%;
+}
+
+.download_csv_btn {
+  align-items: center;
+  background: "#00C720";
+  width: 120px;
+  height: 30px;
 }
 
 .table_heading {
   background-color: antiquewhite;
-   
-   padding: 14px 20px;
-  }
 
+  padding: 14px 20px;
+}
 
-
-.dash_nav{
+.dash_nav {
   display: flex;
   gap: 7px;
   align-items: center;
@@ -447,13 +435,12 @@ margin-top: 10%;
   font-weight: 400;
 }
 
-.toggle_icon_style{
+.toggle_icon_style {
   margin-top: -6px;
   margin-top: -6px;
 }
 
-
-.dash_nav_container{
+.dash_nav_container {
   display: flex;
   justify-content: start;
   align-items: start;
@@ -464,15 +451,14 @@ margin-top: 10%;
   gap: 25px;
 }
 
-
-.concession_header{
+.concession_header {
   margin-left: 8%;
   padding-top: 3%;
   color: #000000;
   font-family: "Inter";
 }
 
-.table_col{
+.table_col {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -481,37 +467,37 @@ margin-top: 10%;
   color: #717171;
 }
 
-.table_content{
+.table_content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 64px;
 }
 
-.line_img_style{
+.line_img_style {
   width: 90%;
   margin-left: 4%;
 }
 
-.download_btn{
-  background-color: #00C720;
+.download_btn {
+  background-color: #00c720;
   width: 120px;
   height: 37px;
 }
 
-.view_csv{
+.view_csv {
   font-size: 36px;
   font-weight: 200;
   display: flex;
 }
 
-.view_csv_description{
+.view_csv_description {
   font-size: 16px;
   font-weight: 400;
   color: #717171;
 }
 
-.certificate_no_input{
+.certificate_no_input {
   margin-top: 8px;
   align-items: center;
   width: 295px;
@@ -521,7 +507,7 @@ margin-top: 10%;
   border: 1px solid black;
 }
 
-.search_icon{
+.search_icon {
   position: absolute;
   right: 11px;
   top: 35%;
@@ -529,15 +515,13 @@ margin-top: 10%;
   font-size: 24px;
 }
 
-
-.toggle_btn{
+.toggle_btn {
   display: flex;
   align-items: center;
-  border: 1px solid #A09C9C;
+  border: 1px solid #a09c9c;
   width: 200px;
   border-radius: 50px;
   margin-left: 100px;
   height: 61px;
-  background: #FFFFFF;
+  background: #ffffff;
 }
-

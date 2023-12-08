@@ -1,8 +1,10 @@
 // ApprovalInfo.js
-import React from "react";
+import React, { useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
 
 const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
+  const [certificateNumber, setCertificateNumber] = useState("");
+
   return (
     <div
       style={{
@@ -35,9 +37,9 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
         </div>
       </div>
       <div style={{ display: "flex" }}>
-        <div className={styles.certificateSection} style={{width: "60%"}}>
+        <div className={styles.certificateSection} style={{ width: "60%" }}>
           <span className={styles.modalInformation}>Certificate Number:</span>
-          <input></input>
+          <input onChange={(e) => setCertificateNumber(e.target.value)}></input>
         </div>
         <div className={styles.modalButtonDiv}>
           <button className={styles.modalApproveButton}>Approve</button>

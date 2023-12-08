@@ -33,7 +33,19 @@ const RailwayConcessionList = () => {
       dateOfBirth: "15/05/03",
       documents: ["ID card", "Residential proof"],
     },
-    // Add more items as needed
+    {
+      name: "SMITHA RAO",
+      gender: "Female",
+      type: "SOUTHERN",
+      from: "CST",
+      to: "Thane",
+      class: "II (Second)",
+      mode: "MONTHLY",
+      dateOfIssue: "19/07/10",
+      address: "SUNSHINE APARTMENTS, FLAT NO. 301, PALI HILL, MUMBAI - 400050",
+      dateOfBirth: "15/05/03",
+      documents: ["ID card", "Residential proof"],
+    },
   ];
 
   return (
