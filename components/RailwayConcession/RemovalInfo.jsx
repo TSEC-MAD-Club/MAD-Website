@@ -3,36 +3,27 @@ import styles from "../RailwayConcession/RailwayConcession.module.css";
 
 const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
   return (
-    <div
-      style={{
-        backgroundColor: "var(--primary-5)",
-        padding: "20px 30px",
-        borderRadius: "24px",
-        fontSize: "14px",
-        color: "var(--primary-2)",
-        width: "100%",
-      }}
-    >
-      <span style={{fontSize: "1.7rem"}}>Reject Concession Request?</span>
-      <div style={{ display: "flex" }}>
+    <div className={styles.modalDiv}>
+      <span className={styles.modalRejectTitle}>Reject Concession Request?</span>
+      <div className={styles.modalUpperDiv}>
         <div className={styles.studentRejectInfo}>
-          <span className={styles.modalInformation}>Name:</span>
-          <span className={styles.modalInformation} style={{ fontWeight: "600" }}>{request.name}</span>
+          <span className={styles.modalInformationTitle}>Name:</span>
+          <span className={styles.modalInformation}>{request.name}</span>
         </div>
-        <div style={{ display: "flex", flexDirection: "row", width: "50%" }}>
-          <div className={styles.studentRejectInfo} style={{ width: "100%" }}>
-            <span className={styles.modalInformation}>From:</span>
-            <span className={styles.modalInformation} style={{ fontWeight: "600" }}>{request.from}</span>
+        <div className={styles.modalFromToDiv}>
+          <div className={styles.studentRejectInfo}>
+            <span className={styles.modalInformationTitle}>From:</span>
+            <span className={styles.modalInformation}>{request.from}</span>
           </div>
-          <div className={styles.studentRejectInfo} style={{ width: "100%" }}>
-            <span className={styles.modalInformation}>To:</span>
-            <span className={styles.modalInformation} style={{ fontWeight: "600" }}>{request.to}</span>
+          <div className={styles.studentRejectInfo}>
+            <span className={styles.modalInformationTitle}>To:</span>
+            <span className={styles.modalInformation}>{request.to}</span>
           </div>
         </div>
       </div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div className={styles.certificateSection} style={{ width: "100%" }}>
-          <span className={styles.modalInformation}>Message:</span>
+      <div className={styles.modalRejectMessageDiv}>
+        <div className={styles.messageSection}>
+          <span className={styles.modalInformationTitle}>Message:</span>
           <textarea></textarea>
         </div>
         <div className={styles.modalRejectButtonDiv}>
