@@ -161,7 +161,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
             </button>
             <div>
               Need help with login?{" "}
-              <a style={{ color: "var(--devs-blue)" }} href="#">
+              <a style={{ color: "var(--devs-blue)" }} href="https://wa.me/+918104543329?text=Hey,%20Need%20help%20with%20devs%20dashboard%20login" target="_blank">
                 {" "}
                 Contact Us!
               </a>

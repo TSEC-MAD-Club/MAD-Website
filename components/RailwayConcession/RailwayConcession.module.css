@@ -91,15 +91,26 @@
 .railwayConcessionCardInfo {
   display: flex;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 1.3rem;
+  width: 100%;
   /* Add any additional styling as needed */
 }
 .railwayAdress {
-  width: 70%;
-}
-.railwayDOB {
   width: 50%;
 }
+
+.railwayDOB {
+  width: 15%;
+}
+
+.railwayAge {
+  width: 11%
+}
+
+ .railwayPhoneNumber {
+  width: 20%;
+}
+
 .railwayConcessionCardAddress {
   /* font-family: Poppins; */
   font-size: 20px;
@@ -119,6 +130,7 @@
   line-height: 35px;
   letter-spacing: 0em;
   text-align: left;
+  padding-left: 1rem;
 }
 
 .railwayConcessionCardApproveButton {
