@@ -71,5 +71,12 @@ const Features = [
     darkIconLink: "assets/images/bell-dark.png",
     type: [userTypes.RAILWAY],
   },
+  {
+    mainTitle: "Rejected Requests",
+    mainLink: "/RailwayRejectedConcession",
+    lightIconLink: "assets/images/Bell.png",
+    darkIconLink: "assets/images/bell-dark.png",
+    type: [userTypes.RAILWAY],
+  },
 ];
 export default Features;
