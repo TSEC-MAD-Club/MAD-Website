@@ -1,9 +1,81 @@
-// ApprovalInfo.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../RailwayConcession/RailwayUpdateConcession.module.css";
+import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const ExtendDate = ({ request, handleCloseInfoWindow }) => {
   const [date, setDate] = useState(new Date());
+  var uid = "";
+  var passNum = "";
+
+  const fetchConcessionDetails = async () => {
+    try {
+      const concessionDetailsCollection = collection(db, "ConcessionDetails");
+      const q = query(
+        concessionDetailsCollection,
+        where("name", "==", request.name),
+        where("phoneNum", "==", request.phoneNum)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const matchingDoc = querySnapshot.docs[0];
+        passNum = matchingDoc.data().passNum;
+        uid = matchingDoc.id;
+      } else {
+        console.error("ConcessionDetails document not found");
+      }
+    } catch (error) {
+      console.error("Error fetching ConcessionDetails:", error);
+    }
+  };
+
+  const handleApprove = async () => {
+    fetchConcessionDetails();
+    try {
+      // Update ConcessionRequest document
+      const requestQ = query(
+        collection(db, "ConcessionRequest"),
+        where("uid", "==", uid)
+      );
+
+      const requestQuerySnapshot = await getDocs(requestQ);
+
+      if (!requestQuerySnapshot.empty) {
+        const requestDoc = requestQuerySnapshot.docs[0];
+        const requestDocRef = requestDoc.ref;
+        await updateDoc(requestDocRef, { time: date, statusMessage: "Your date has been extended!" });
+      } else {
+        console.error("ConcessionRequest document not found");
+        return;
+      }
+
+      // Update ConcessionDetails document using the document ID directly
+      const concessionDetailsCollection = collection(db, "ConcessionDetails");
+      const q = query(
+        concessionDetailsCollection,
+        where("name", "==", request.name),
+        where("phoneNum", "==", request.phoneNum)
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const detailsDoc = querySnapshot.docs[0];
+        const detailsDocRef = detailsDoc.ref;
+
+        await updateDoc(detailsDocRef, { lastPassIssued: date });
+        console.log("ConcessionDetails document updated successfully");
+      } else {
+        console.error("No matching ConcessionDetails document found");
+      }
+
+      handleCloseInfoWindow();
+    } catch (error) {
+      console.error("Error updating status and message:", error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -32,7 +104,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow }) => {
               className={styles.modalInformation}
               style={{ fontWeight: "600" }}
             >
-              {request.certificateNumber}
+              {passNum}
             </span>
           </div>
         </div>
@@ -48,7 +120,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow }) => {
           ></input>
         </div>
         <div className={styles.modalButtonDiv}>
-          <button className={styles.modalApproveButton}>Extend Date</button>
+          <button className={styles.modalApproveButton} onClick={handleApprove}>Extend Date</button>
           <button
             className={styles.modalGoBackButton}
             onClick={handleCloseInfoWindow}

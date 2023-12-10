@@ -1,8 +1,58 @@
 import React, { useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
+import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { db } from "../../firebase";
+
 
 const CancelConcession = ({ request, handleCloseInfoWindow }) => {
   const [message, setMessage] = useState("");
+
+  var uid = "";
+
+  const fetchConcessionDetails = async () => {
+    try {
+      const concessionDetailsCollection = collection(db, "ConcessionDetails");
+      const q = query(
+        concessionDetailsCollection,
+        where("name", "==", request.name),
+        where("phoneNum", "==", request.phoneNum)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const matchingDoc = querySnapshot.docs[0];
+        uid = matchingDoc.id;
+      } else {
+        console.error("ConcessionDetails document not found");
+      }
+    } catch (error) {
+      console.error("Error fetching ConcessionDetails:", error);
+    }
+  };
+
+  const handleReject = async () => {
+    try {
+      fetchConcessionDetails()
+      const q = query(
+        collection(db, "ConcessionRequest"),
+        where("uid", "==", uid)
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const matchingDoc = querySnapshot.docs[0];
+        const docRef = matchingDoc.ref;
+        await updateDoc(docRef, { status: "Rejected", statusMessage: message });
+        handleCloseInfoWindow();
+      } else {
+        console.error("ConcessionRequest document not found");
+      }
+    } catch (error) {
+      console.error("Error updating status and message:", error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -47,7 +97,7 @@ const CancelConcession = ({ request, handleCloseInfoWindow }) => {
           ></textarea>
         </div>
         <div className={styles.modalRejectButtonDiv}>
-          <button className={styles.modalRejectButton}>Cancel</button>
+          <button className={styles.modalRejectButton} onClick={handleReject}>Cancel</button>
           <button
             className={styles.modalGoBackButton}
             onClick={handleCloseInfoWindow}

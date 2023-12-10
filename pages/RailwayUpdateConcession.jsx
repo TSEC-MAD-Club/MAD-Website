@@ -1,12 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../components/RailwayConcession/RailwayUpdateConcession.module.css";
 import RailwayUpdateConcessionList from "../components/RailwayConcession/RailwayUpdateConcessionList.jsx";
 import { UserContext } from "./_app";
 import SideBar from "../components/Sidebar/Sidebar";
+import { collection, query, limit, getDocs, where, doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const RailwayConcession = () => {
   const [certificateNumber, setCertificateNumber] = useState("");
   const { user } = React.useContext(UserContext);
+  const [Enquiries, setEnquiries] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchAllEnquiries = async () => {
+    try {
+      const concessionDetailsRef = collection(db, "ConcessionDetails");
+      const concessionRequestRef = collection(db, "ConcessionRequest");
+
+      // Get unserviced requests
+      const unservicedRequestsSnapshot = await getDocs(
+        query(concessionRequestRef, where("status", "==", "Serviced"))
+      );
+      console.log(unservicedRequestsSnapshot);
+      const fetchedEnquiries = [];
+
+      // Iterate through unserviced requests
+      for (const requestDoc of unservicedRequestsSnapshot.docs) {
+        // Get the associated ConcessionDetails document
+        const concessionDetailsId = requestDoc.data().uid;
+        // Check if the ConcessionDetailsId is valid
+
+        if (concessionDetailsId) {
+          const concessionDetailsDoc = await getDoc(
+            doc(concessionDetailsRef, concessionDetailsId)
+          );
+
+          // Check if the ConcessionDetails document exists
+          if (concessionDetailsDoc.exists()) {
+            const enquiry = concessionDetailsDoc.data();
+            fetchedEnquiries.push(enquiry);
+          }
+        }
+      }
+
+      setEnquiries(fetchedEnquiries);
+    } catch (error) {
+      console.error("Error fetching recent enquiries:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllEnquiries();
+  }, []);
 
   return (
     <div
@@ -58,7 +105,7 @@ const RailwayConcession = () => {
             </div>
           </div>
         </div>
-        <RailwayUpdateConcessionList />
+        {!loading ? <RailwayUpdateConcessionList Enquiries={Enquiries} /> : <p>Loading...</p>}
       </div>
     </div>
   );

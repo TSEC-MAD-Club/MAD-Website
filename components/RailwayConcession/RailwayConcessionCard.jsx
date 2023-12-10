@@ -41,8 +41,6 @@ const RailwayConcessionCard = ({ request }) => {
     return `${day}/${month}/${year}`;
   };
 
-  console.log(request);
-
   return (
     <div className={styles.railwayConcessionCard}>
       <div className={styles.railwayConcessionTitle}>
@@ -107,7 +105,7 @@ const RailwayConcessionCard = ({ request }) => {
         <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li><a href="#">ID Card</a></li>
+            <li><a href={request.idCardURL}>ID Card</a></li>
             <li><a href={request.previousPassURL}>Previous Pass</a></li>
             <li><a href="#">Additional documents</a></li>
           </ul>

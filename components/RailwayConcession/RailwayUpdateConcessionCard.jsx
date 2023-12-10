@@ -29,13 +29,25 @@ const RailwayUpdateConcessionCard = ({ request }) => {
     setInfoWindowVisibility(true);
   };
 
+  const convertDate = (date) => {
+    const dobTimestamp = date;
+    const dobMilliseconds = dobTimestamp.seconds * 1000 + dobTimestamp.nanoseconds / 1e6;
+    const dobDate = new Date(dobMilliseconds);
+    const dateObj = new Date(dobDate);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <div className={styles.railwayConcessionCard}>
       <div className={styles.railwayConcessionTitle}>
         <p className={styles.nameAndGender}>
           <span className={styles.name}>{request.name}</span>
           <span className={styles.gender}>{request.gender}</span>
-          <span className={styles.western}>{request.type}</span>
+          <span className={styles.western}>{request.travelLane}</span>
         </p>
       </div>
       <hr className={styles.railwayConcessionCardHr} />
@@ -62,10 +74,10 @@ const RailwayUpdateConcessionCard = ({ request }) => {
               {request.class}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.mode}
+              {request.duration}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.dateOfIssue}
+              {request.lastPassIssued}
             </td>
           </tr>
         </tbody>
@@ -84,7 +96,7 @@ const RailwayUpdateConcessionCard = ({ request }) => {
             Date of Birth:
           </p>
           <p className={styles.railwayConcessionCardAddress}>
-            {request.dateOfBirth}
+            {convertDate(request.dob)}
           </p>
         </div>
       </div>
@@ -93,23 +105,25 @@ const RailwayUpdateConcessionCard = ({ request }) => {
         <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            {request.documents.map((document) => (
-              <li key={document}>{document}</li>
-            ))}
+            <li><a href={request.idCardURL}>ID Card</a></li>
+            <li><a href={request.previousPassURL}>Previous Pass</a></li>
+            <li><a href="#">Additional documents</a></li>
           </ul>
         </div>
-        <button
-          className={styles.railwayConcessionCardApproveButton}
-          onClick={handleApproveClick}
-        >
-          Extend Date
-        </button>
-        <button
-          className={styles.railwayConcessionCardRejectButton}
-          onClick={handleRejectClick}
-        >
-          Cancel
-        </button>
+        <div className={styles.railwayConcessionCardFooterButtonDiv}>
+          <button
+            className={styles.railwayConcessionCardApproveButton}
+            onClick={handleApproveClick}
+          >
+            Extend Date
+          </button>
+          <button
+            className={styles.railwayConcessionCardRejectButton}
+            onClick={handleRejectClick}
+          >
+            Reject
+          </button>
+        </div>
       </div>
 
       {isInfoWindowVisible && (

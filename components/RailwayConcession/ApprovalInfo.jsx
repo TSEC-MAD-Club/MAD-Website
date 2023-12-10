@@ -1,11 +1,11 @@
-// ApprovalInfo.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
   const [certificateNumber, setCertificateNumber] = useState("");
+  var uid = "";
 
   const fetchConcessionDetails = async () => {
     try {
@@ -13,13 +13,13 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
       const q = query(
         concessionDetailsCollection,
         where("name", "==", request.name),
-        where("DOB", "==", request.DOB)
+        where("phoneNum", "==", request.phoneNum)
       );
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
         const matchingDoc = querySnapshot.docs[0];
-        console.log("Matching ConcessionDetails:", matchingDoc.data());
+        uid = matchingDoc.id;
       } else {
         console.error("ConcessionDetails document not found");
       }
@@ -30,17 +30,26 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
 
   const handleApprove = async () => {
     try {
-      const docRef = doc(db, "ConcessionRequest", uid);
-      await updateDoc(docRef, { status: "Serviced", passNum: certificateNumber, statusMessage: "Your request has been approved!" });
-      handleCloseInfoWindow();
+      fetchConcessionDetails()
+      const q = query(
+        collection(db, "ConcessionRequest"),
+        where("uid", "==", uid)
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const matchingDoc = querySnapshot.docs[0];
+        const docRef = matchingDoc.ref;
+        await updateDoc(docRef, { status: "Serviced", passNum: certificateNumber, statusMessage: "Your request has been approved!" });
+        handleCloseInfoWindow();
+      } else {
+        console.error("ConcessionRequest document not found");
+      }
     } catch (error) {
       console.error("Error updating status and message:", error);
     }
   };
-
-  // useEffect(() => {
-  //   fetchConcessionDetails();
-  // }, [request.name, request.DOB]);
 
   return (
     <div className={styles.modalDiv}>
