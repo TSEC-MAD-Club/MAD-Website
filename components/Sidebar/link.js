@@ -57,5 +57,19 @@ const Features = [
     darkIconLink: "assets/images/notes-dark.png",
     type: [userTypes.COMMITTEE],
   },
+  {
+    mainTitle: "New Requests",
+    mainLink: "/RailwayConcession",
+    lightIconLink: "assets/images/Bell.png",
+    darkIconLink: "assets/images/bell-dark.png",
+    type: [userTypes.RAILWAY],
+  },
+  {
+    mainTitle: "Update Requests",
+    mainLink: "/RailwayUpdateConcession",
+    lightIconLink: "assets/images/Bell.png",
+    darkIconLink: "assets/images/bell-dark.png",
+    type: [userTypes.RAILWAY],
+  },
 ];
 export default Features;

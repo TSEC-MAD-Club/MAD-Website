@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Login from "./Login";
 import { UserContext } from "./_app";
-import Sidebar from '../components/Sidebar/Sidebar';
-import YourDashboard from '../components/Your Dashboard/YourDashboard';
+import Sidebar from "../components/Sidebar/Sidebar";
+import YourDashboard from "../components/Your Dashboard/YourDashboard";
 
 export default function Home() {
   const { loggedIn, setLoggedIn, user, setUser } =
@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       {loggedIn ? (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <Sidebar user={user} />
           <YourDashboard user={user} />
         </div>
