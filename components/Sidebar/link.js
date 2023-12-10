@@ -55,7 +55,7 @@ const Features = [
     mainLink: "/",
     lightIconLink: "assets/images/Notes.png",
     darkIconLink: "assets/images/notes-dark.png",
-    type: [userTypes.COMMITTEE, userTypes.RAILWAY],
+    type: [userTypes.COMMITTEE],
   },
   {
     mainTitle: "New Requests",

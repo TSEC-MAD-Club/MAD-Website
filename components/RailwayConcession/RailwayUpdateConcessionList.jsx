@@ -1,7 +1,3 @@
-// RailwayConcessionList.js
-
-import React from "react";
-import RailwayConcessionCard from "./RailwayConcessionCard";
 import RailwayUpdateConcessionCard from "./RailwayUpdateConcessionCard";
 import styles from "./RailwayConcession.module.css";
 
