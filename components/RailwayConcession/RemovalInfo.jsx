@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
 
 const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
