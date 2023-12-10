@@ -56,13 +56,15 @@ const RailwayConcessionCard = ({ request }) => {
       <table className={styles.railwayConcessionCardTable}>
         <tbody>
           <tr>
-            <td className={styles.railwayConcessionCardTableCell}>From</td>
-            <td className={styles.railwayConcessionCardTableCell}>To</td>
-            <td className={styles.railwayConcessionCardTableCell}>Class</td>
-            <td className={styles.railwayConcessionCardTableCell}>Mode</td>
+            <td className={styles.railwayConcessionCardTableCell}>From:</td>
+            <td className={styles.railwayConcessionCardTableCell}>To:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Class:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Mode:</td>
             <td className={styles.railwayConcessionCardTableCell}>
-              Date of Issue
+              Date of Issue:
             </td>
+            <td className={styles.railwayConcessionCardTableCell}>Branch:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Current Year:</td>
           </tr>
 
           <tr>
@@ -80,6 +82,12 @@ const RailwayConcessionCard = ({ request }) => {
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
               {convertDate(request.lastPastIssued)}
+            </td>
+            <td className={styles.railwayConcessionCardTableCell2}>
+              {request.branch}
+            </td>
+            <td className={styles.railwayConcessionCardTableCell2}>
+              {request.gradYear}
             </td>
           </tr>
         </tbody>
@@ -101,13 +109,27 @@ const RailwayConcessionCard = ({ request }) => {
             {convertDate(request.dob)}
           </p>
         </div>
+
+        <div className={styles.railwayAge}>
+          <p className={styles.railwayConcessionCardTableCell}>Age:</p>
+          <p className={styles.railwayConcessionCardAddress}>
+            {request.ageYears} Years
+          </p>
+        </div>
+
+        <div className={styles.railwayPhoneNumber}>
+          <p className={styles.railwayConcessionCardTableCell}>Phone Number:</p>
+          <p className={styles.railwayConcessionCardAddress}>
+            {request.phoneNum}
+          </p>
+        </div>
       </div>
       <hr className={styles.railwayConcessionCardHr} />
       <div className={styles.railwayConcessionCardFooter}>
         <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li><a href="#">ID Card</a></li>
+            <li><a href={request.idCardURL}>ID Card</a></li>
             <li><a href={request.previousPassURL}>Previous Pass</a></li>
             <li><a href="#">Additional documents</a></li>
           </ul>

@@ -42,13 +42,15 @@ const RailwayUpdateConcessionCard = ({ request }) => {
       <table className={styles.railwayConcessionCardTable}>
         <tbody>
           <tr>
-            <td className={styles.railwayConcessionCardTableCell}>From</td>
-            <td className={styles.railwayConcessionCardTableCell}>To</td>
-            <td className={styles.railwayConcessionCardTableCell}>Class</td>
-            <td className={styles.railwayConcessionCardTableCell}>Mode</td>
+            <td className={styles.railwayConcessionCardTableCell}>From:</td>
+            <td className={styles.railwayConcessionCardTableCell}>To:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Class:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Mode:</td>
             <td className={styles.railwayConcessionCardTableCell}>
-              Date of Issue
+              Date of Issue:
             </td>
+            <td className={styles.railwayConcessionCardTableCell}>Branch:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Current Year:</td>
           </tr>
 
           <tr>
@@ -66,6 +68,12 @@ const RailwayUpdateConcessionCard = ({ request }) => {
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
               {request.dateOfIssue}
+            </td>
+            <td className={styles.railwayConcessionCardTableCell2}>
+              {request.branch}
+            </td>
+            <td className={styles.railwayConcessionCardTableCell2}>
+              {request.gradYear}
             </td>
           </tr>
         </tbody>
@@ -85,6 +93,20 @@ const RailwayUpdateConcessionCard = ({ request }) => {
           </p>
           <p className={styles.railwayConcessionCardAddress}>
             {request.dateOfBirth}
+          </p>
+        </div>
+
+        <div className={styles.railwayAge}>
+          <p className={styles.railwayConcessionCardTableCell}>Age:</p>
+          <p className={styles.railwayConcessionCardAddress}>
+            {request.ageYears} Years
+          </p>
+        </div>
+
+        <div className={styles.railwayPhoneNumber}>
+          <p className={styles.railwayConcessionCardTableCell}>Phone Number:</p>
+          <p className={styles.railwayConcessionCardAddress}>
+            {request.phoneNum}
           </p>
         </div>
       </div>
