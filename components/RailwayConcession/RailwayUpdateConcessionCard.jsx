@@ -111,7 +111,7 @@ const RailwayUpdateConcessionCard = ({ request }) => {
         <div className={styles.railwayAge}>
           <p className={styles.railwayConcessionCardTableCell}>Age:</p>
           <p className={styles.railwayConcessionCardAddress}>
-            {request.ageYears} Years
+            {request.ageYears} Years & {request.ageMonths} Months
           </p>
         </div>
 
