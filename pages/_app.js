@@ -19,6 +19,14 @@ function MyApp({ Component, pageProps }) {
     name: "",
   });
 
+  //if user has set remember me
+  React.useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setLoggedIn(true);
+      setUser(JSON.parse(localStorage.getItem("user")));
+    }
+  }, []);
+
   return (
     <ThemeProvider>
       <UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser }}>

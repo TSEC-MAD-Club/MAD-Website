@@ -141,6 +141,10 @@ function HamburgerMenu({ user }) {
               </p>
               <button
                 onClick={() => {
+                  // if user has set remember me
+                  if(localStorage.getItem('user')) {
+                    localStorage.removeItem('user');
+                  }
                   setLoggedIn(false);
                   router.push("/");
                 }} >

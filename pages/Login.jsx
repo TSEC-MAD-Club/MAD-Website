@@ -43,6 +43,15 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
             });
             setLoggedIn(true);
             toast.notify("Successfully logged in!!", { type: "success" });
+
+            //remember me logic
+            if(rememberMe){
+              localStorage.setItem("user", JSON.stringify({
+                name: data.name,
+                email: data.email,
+                type: data.type,
+              }));
+            }
           }
         });
       })
