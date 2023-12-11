@@ -5,7 +5,7 @@ import { db } from "../../firebase";
 
 const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
   const [certificateNumber, setCertificateNumber] = useState("");
-  var uid = "";
+  const [uid, setUid] = useState('');
 
   const fetchConcessionDetails = async () => {
     try {
@@ -19,7 +19,7 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
 
       if (!querySnapshot.empty) {
         const matchingDoc = querySnapshot.docs[0];
-        uid = matchingDoc.id;
+        setUid(matchingDoc.id);
       } else {
         console.error("ConcessionDetails document not found");
       }
@@ -30,7 +30,7 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
 
   const handleApprove = async () => {
     try {
-      fetchConcessionDetails()
+      await fetchConcessionDetails()
       const q = query(
         collection(db, "ConcessionRequest"),
         where("uid", "==", uid)

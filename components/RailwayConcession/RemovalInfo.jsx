@@ -3,8 +3,8 @@ import styles from "../RailwayConcession/RailwayConcession.module.css";
 
 const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
   const [message, setMessage] = useState("");
-  var uid = "";
-  console.log(message);
+  const [uid, setUid] = useState("");
+
   const fetchConcessionDetails = async () => {
     try {
       const concessionDetailsCollection = collection(db, "ConcessionDetails");
@@ -17,7 +17,7 @@ const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
 
       if (!querySnapshot.empty) {
         const matchingDoc = querySnapshot.docs[0];
-        uid = matchingDoc.id;
+        setUid(matchingDoc.id);
       } else {
         console.error("ConcessionDetails document not found");
       }
@@ -28,7 +28,7 @@ const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
 
   const handleReject = async () => {
     try {
-      fetchConcessionDetails()
+      await fetchConcessionDetails()
       const q = query(
         collection(db, "ConcessionRequest"),
         where("uid", "==", uid)
@@ -39,7 +39,7 @@ const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
       if (!querySnapshot.empty) {
         const matchingDoc = querySnapshot.docs[0];
         const docRef = matchingDoc.ref;
-        await updateDoc(docRef, { status: "Serviced", passNum: certificateNumber, statusMessage: "Your request has been approved!" });
+        await updateDoc(docRef, { status: "Rejected", statusMessage: message });
         handleCloseInfoWindow();
       } else {
         console.error("ConcessionRequest document not found");

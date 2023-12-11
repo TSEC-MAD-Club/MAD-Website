@@ -19,9 +19,8 @@ const RailwayConcession = () => {
 
       // Get unserviced requests
       const unservicedRequestsSnapshot = await getDocs(
-        query(concessionRequestRef, where("status", "==", "Rejected"))
+        query(concessionRequestRef, where("status", "==", "rejected"))
       );
-      console.log(unservicedRequestsSnapshot);
       const fetchedEnquiries = [];
 
       // Iterate through unserviced requests
@@ -62,8 +61,7 @@ const RailwayConcession = () => {
         flexDirection: "row",
         gap: "2rem",
         height: "100vh",
-        marginRight: "3rem",
-        overflow: "hidden",
+        marginRight: "3rem"
       }}
     >
       <SideBar user={user} />

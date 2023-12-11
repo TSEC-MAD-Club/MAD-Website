@@ -5,8 +5,8 @@ import { db } from "../../firebase";
 
 const ExtendDate = ({ request, handleCloseInfoWindow }) => {
   const [date, setDate] = useState(new Date());
-  var uid = "";
-  var passNum = "";
+  const [uid, setUid] = useState('');
+  const [passNum, setPassNum] = useState('');
 
   const fetchConcessionDetails = async () => {
     try {
@@ -20,8 +20,8 @@ const ExtendDate = ({ request, handleCloseInfoWindow }) => {
 
       if (!querySnapshot.empty) {
         const matchingDoc = querySnapshot.docs[0];
-        passNum = matchingDoc.data().passNum;
-        uid = matchingDoc.id;
+        setPassNum(matchingDoc.data().passNum);
+        setUid(matchingDoc.id);
       } else {
         console.error("ConcessionDetails document not found");
       }
@@ -31,7 +31,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow }) => {
   };
 
   const handleApprove = async () => {
-    fetchConcessionDetails();
+    await fetchConcessionDetails();
     try {
       // Update ConcessionRequest document
       const requestQ = query(
@@ -65,7 +65,6 @@ const ExtendDate = ({ request, handleCloseInfoWindow }) => {
         const detailsDocRef = detailsDoc.ref;
 
         await updateDoc(detailsDocRef, { lastPassIssued: date });
-        console.log("ConcessionDetails document updated successfully");
       } else {
         console.error("No matching ConcessionDetails document found");
       }

@@ -79,7 +79,7 @@ const RailwayUpdateConcessionCard = ({ request }) => {
               {request.duration}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.lastPassIssued}
+              {convertDate(request.lastPastIssued)}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
               {request.branch}
@@ -111,7 +111,7 @@ const RailwayUpdateConcessionCard = ({ request }) => {
         <div className={styles.railwayAge}>
           <p className={styles.railwayConcessionCardTableCell}>Age:</p>
           <p className={styles.railwayConcessionCardAddress}>
-            {request.ageYears} Years
+            {request.ageYears} Years & {request.ageMonths} Months
           </p>
         </div>
 
