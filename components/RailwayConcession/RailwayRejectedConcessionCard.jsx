@@ -4,7 +4,6 @@ import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../../firebase.js";
 
 const RailwayUpdateConcessionCard = ({ request }) => {
-  const [uid, setUid] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
   const convertDate = (date) => {
     const dobTimestamp = date;
@@ -18,54 +17,52 @@ const RailwayUpdateConcessionCard = ({ request }) => {
     return `${day}/${month}/${year}`;
   };
 
-  const fetchConcessionDetails = async () => {
+  const fetchConcessionDetailsAndRequest = async () => {
     try {
       const concessionDetailsCollection = collection(db, 'ConcessionDetails');
-      const q = query(
+      const concessionRequestRef = collection(db, 'ConcessionRequest');
+
+      const detailsQuery = query(
         concessionDetailsCollection,
-        where('name', '==', request.name),
+        where('firstName', '==', request.firstName),
         where('phoneNum', '==', request.phoneNum)
       );
-      const querySnapshot = await getDocs(q);
+      const detailsSnapshot = await getDocs(detailsQuery);
 
-      if (!querySnapshot.empty) {
-        const matchingDoc = querySnapshot.docs[0];
-        setUid(matchingDoc.id);
+      let uid = ""
+
+      if (!detailsSnapshot.empty) {
+        const matchingDetailsDoc = detailsSnapshot.docs[0];
+        uid = (matchingDetailsDoc.id);
+
+        // Fetch ConcessionRequest based on uid
+        const requestQuery = query(concessionRequestRef, where('uid', '==', uid));
+        const requestSnapshot = await getDocs(requestQuery);
+
+        if (!requestSnapshot.empty) {
+          const concessionRequest = requestSnapshot.docs[0].data();
+          setStatusMessage(concessionRequest.statusMessage);
+        } else {
+          console.error('No matching ConcessionRequest document found');
+        }
       } else {
         console.error('ConcessionDetails document not found');
       }
     } catch (error) {
-      console.error('Error fetching ConcessionDetails:', error);
+      console.error('Error fetching ConcessionDetails and ConcessionRequest:', error);
     }
   };
 
-  const fetchConcessionRequest = async () => {
-    try {
-      await fetchConcessionDetails();
-      const concessionRequestRef = collection(db, 'ConcessionRequest');
-      const q = query(concessionRequestRef, where('uid', '==', uid));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const concessionRequest = querySnapshot.docs[0].data();
-        setStatusMessage(concessionRequest.statusMessage);
-      } else {
-        console.error('No matching ConcessionRequest document found');
-      }
-    } catch (error) {
-      console.error('Error fetching ConcessionRequest:', error);
-    }
-  };
 
   useEffect(() => {
-    fetchConcessionRequest();
+    fetchConcessionDetailsAndRequest();
   }, [request]);
 
   return (
     <div className={styles.railwayConcessionCard}>
       <div className={styles.railwayConcessionTitle}>
         <p className={styles.nameAndGender}>
-          <span className={styles.name}>{request.name}</span>
+          <span className={styles.name}>{request.firstName} {request.middleName} {request.lastName}</span>
           <span className={styles.gender}>{request.gender}</span>
           <span className={styles.western}>{request.travelLane}</span>
         </p>
@@ -99,13 +96,13 @@ const RailwayUpdateConcessionCard = ({ request }) => {
               {request.duration}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {convertDate(request.lastPastIssued)}
+              {request.lastPassIssued && convertDate(request.lastPassIssued)}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
               {request.branch}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.gradYear}
+              {request.gradyear}
             </td>
           </tr>
         </tbody>
@@ -155,7 +152,7 @@ const RailwayUpdateConcessionCard = ({ request }) => {
         <p className={styles.railwayConcessionCardTableCell}>
           Message:
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li>{statusMessage}</li>
+            <li style={{ 'color': 'red' }}>{statusMessage}</li>
           </ul>
         </p>
       </div>

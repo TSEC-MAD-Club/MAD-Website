@@ -1,53 +1,63 @@
 import React, { useEffect, useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
-import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { Timestamp, collection, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../../firebase";
+import { toast } from "react-nextjs-toast";
 
-const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
+const ApprovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
   const [certificateNumber, setCertificateNumber] = useState("");
-  const [uid, setUid] = useState('');
-
-  const fetchConcessionDetails = async () => {
-    try {
-      const concessionDetailsCollection = collection(db, "ConcessionDetails");
-      const q = query(
-        concessionDetailsCollection,
-        where("name", "==", request.name),
-        where("phoneNum", "==", request.phoneNum)
-      );
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const matchingDoc = querySnapshot.docs[0];
-        setUid(matchingDoc.id);
-      } else {
-        console.error("ConcessionDetails document not found");
-      }
-    } catch (error) {
-      console.error("Error fetching ConcessionDetails:", error);
-    }
-  };
 
   const handleApprove = async () => {
     try {
-      await fetchConcessionDetails()
-      const q = query(
-        collection(db, "ConcessionRequest"),
-        where("uid", "==", uid)
+      const concessionDetailsCollection = collection(db, 'ConcessionDetails');
+      const concessionDetailsQuery = query(
+        concessionDetailsCollection,
+        where('firstName', '==', request.firstName),
+        where('phoneNum', '==', request.phoneNum)
       );
 
-      const querySnapshot = await getDocs(q);
+      const concessionDetailsSnapshot = await getDocs(concessionDetailsQuery);
 
-      if (!querySnapshot.empty) {
-        const matchingDoc = querySnapshot.docs[0];
-        const docRef = matchingDoc.ref;
-        await updateDoc(docRef, { status: "Serviced", passNum: certificateNumber, statusMessage: "Your request has been approved!" });
-        handleCloseInfoWindow();
+      if (!concessionDetailsSnapshot.empty) {
+        const matchingDetailsDoc = concessionDetailsSnapshot.docs[0];
+        const matchingDetailsRef = matchingDetailsDoc.ref;
+        // Update ConcessionDetails document
+        await updateDoc(matchingDetailsRef, {
+          lastPassIssued: Timestamp.now(),
+          status: 'approved',
+          statusMessage: 'Your request has been approved!',
+        });
+
+        // Update ConcessionRequest document
+        const concessionRequestCollection = collection(db, 'ConcessionRequest');
+        const concessionRequestQuery = query(
+          concessionRequestCollection,
+          where('uid', '==', matchingDetailsDoc.id)
+        );
+
+        const concessionRequestSnapshot = await getDocs(concessionRequestQuery);
+
+        if (!concessionRequestSnapshot.empty) {
+          const matchingRequestDoc = concessionRequestSnapshot.docs[0];
+          const matchingRequestRef = matchingRequestDoc.ref;
+
+          await updateDoc(matchingRequestRef, {
+            status: 'approved',
+            passNum: certificateNumber,
+            statusMessage: 'Your request has been approved!',
+          });
+
+          await fetchAllEnquiries();
+          toast.notify("Approved Request", { type: "info" });
+          handleCloseInfoWindow();
+        } else {
+          console.error('ConcessionRequest document not found');
+        }
       } else {
-        console.error("ConcessionRequest document not found");
+        console.error('ConcessionDetails document not found');
       }
     } catch (error) {
-      console.error("Error updating status and message:", error);
+      console.error('Error updating status and message:', error);
     }
   };
 
@@ -57,7 +67,7 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow }) => {
       <div className={styles.modalUpperDiv}>
         <div className={styles.studentApproveInfo}>
           <span className={styles.modalInformationTitle}>Name:</span>
-          <span className={styles.modalInformation}>{request.name}</span>
+          <span className={styles.modalInformation}>{request.firstName} {request.middleName} {request.lastName}</span>
         </div>
         <div className={styles.modalFromToDiv}>
           <div className={styles.studentApproveInfo}>
