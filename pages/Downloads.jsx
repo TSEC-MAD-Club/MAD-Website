@@ -100,11 +100,21 @@ const Downloads = () => {
         }
     };
 
+    const handleClick = async (region) => {
+        await fetchAllEnquiries(region);
+        await fetchEnquiries();
+        await fetchAndSetServicedCount(region);
+    };
+
+    const buttons = [
+        { region: 'western', label: 'Western' },
+        { region: 'central', label: 'Central' }
+    ];
+
     useEffect(() => {
         fetchEnquiries();
         fetchAndSetServicedCount('western');
-        fetchAndSetServicedCount('central');
-        fetchAndSetServicedCount('harbour');
+        fetchAndSetServicedCount('central')
     }, []);
 
     useEffect(() => {
@@ -119,27 +129,16 @@ const Downloads = () => {
             <div className={styles.root}>
                 <div className={styles.operations} style={{ minHeight: '0' }}>
                     <div className={styles.twobutton}>
-                        <button
-                            className={styles.item}
-                            style={{ width: '23vw', height: '16vh' }}
-                            onClick={() => fetchAllEnquiries('western')}
-                        >
-                            Western: {servicedCounts.western !== null ? servicedCounts.western : 'Loading...'}
-                        </button>
-                        <button
-                            className={styles.item}
-                            style={{ width: '23vw', height: '16vh' }}
-                            onClick={() => fetchAllEnquiries('central')}
-                        >
-                            Central: {servicedCounts.central !== null ? servicedCounts.central : 'Loading...'}
-                        </button>
-                        <button
-                            className={styles.item}
-                            style={{ width: '23vw', height: '16vh' }}
-                            onClick={() => fetchAllEnquiries('harbour')}
-                        >
-                            Harbour: {servicedCounts.harbour !== null ? servicedCounts.harbour : 'Loading...'}
-                        </button>
+                        {buttons.map((button) => (
+                            <button
+                                key={button.region}
+                                className={styles.item}
+                                style={{ width: '36.5vw', height: '16vh' }}
+                                onClick={() => handleClick(button.region)}
+                            >
+                                {button.label}: {servicedCounts[button.region] !== null ? servicedCounts[button.region] : 'Loading...'}
+                            </button>
+                        ))}
                     </div>
                 </div>
 

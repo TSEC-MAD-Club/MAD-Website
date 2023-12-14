@@ -6,6 +6,29 @@ import { toast } from "react-nextjs-toast";
 
 const storage = getStorage();
 
+const getUid = async (request) => {
+    try {
+        const concessionDetailsCollection = collection(db, 'ConcessionDetails');
+        const detailsQuery = query(
+            concessionDetailsCollection,
+            where('firstName', '==', request.firstName),
+            where('phoneNum', '==', request.phoneNum)
+        );
+        const detailsSnapshot = await getDocs(detailsQuery);
+
+        let uid = ""
+
+        if (!detailsSnapshot.empty) {
+            const matchingDetailsDoc = detailsSnapshot.docs[0];
+            uid = (matchingDetailsDoc.id);
+        }
+        return uid;
+    } catch (error) {
+        console.error('Error fetching uid:', error);
+        return null;
+    }
+}
+
 const uploadCsvToStorage = async (csvContent, fileName) => {
     const storageRef = ref(storage, `csvFiles/${fileName}`);
     await uploadString(storageRef, csvContent, 'raw');
@@ -82,10 +105,12 @@ const fetchAllEnquiries = async (travelLane) => {
 
         await batch.commit();
 
-        const csvContent = await convertJsonToCsv(fetchedEnquiries);
+        const columnsToInclude = ['passNum', 'name', 'gender', 'from', 'to', 'class', 'duration', 'address'];
+        const csvContent = await convertJsonToCsv(fetchedEnquiries, columnsToInclude);
         const firstName = await getPassNumFromConcessionRequest(fetchedPassNum[0])
         const lastName = await getPassNumFromConcessionRequest(fetchedPassNum[fetchedEnquiries.length - 1])
         const fileName = `${firstName}-${lastName}.csv`;
+
         const csvLink = await uploadCsvToStorage(csvContent, fileName);
 
         const csvDocRef = await addDoc(csvCollectionRef, {
@@ -96,20 +121,40 @@ const fetchAllEnquiries = async (travelLane) => {
             lastName: lastName,
             timestamp: serverTimestamp(),
         });
+
         console.log('CSV saved to collection with ID: ', csvDocRef.id);
         toast.notify("CSV file generated successfully.!!", { type: "success" });
         downloadCsv(csvContent, fileName);
-        window.location.reload();
-
     } catch (error) {
         console.error('Error fetching recent enquiries:', error);
     }
 };
 
-const convertJsonToCsv = async (jsonData) => {
+const convertJsonToCsv = async (jsonData, columns) => {
     try {
+        const enquiriesWithPassNum = await Promise.all(
+            jsonData.map(async (enquiry) => {
+                const uid = await getUid(enquiry);
+                const passNum = await getPassNumFromConcessionRequest(uid);
+
+                const name = [enquiry.firstName, enquiry.middleName, enquiry.lastName].filter(Boolean).join(' ');
+
+                return { ...enquiry, passNum, name };
+            })
+        );
+
+        // Filter only the properties present in the specified columns
+        const filteredData = enquiriesWithPassNum.map((item) =>
+            columns.reduce((acc, column) => {
+                if (item[column] !== undefined) {
+                    acc[column] = item[column];
+                }
+                return acc;
+            }, {})
+        );
+
         return new Promise((resolve, reject) => {
-            jsonexport(jsonData, (err, csv) => {
+            jsonexport(filteredData, { headers: columns }, (err, csv) => {
                 if (err) {
                     reject(err);
                 } else {
