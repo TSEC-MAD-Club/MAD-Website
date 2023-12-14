@@ -28,7 +28,6 @@ const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
           statusMessage: message,
         });
       } else {
-        console.error("ConcessionDetails document not found");
         return;
       }
 
@@ -52,10 +51,8 @@ const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
 
         handleCloseInfoWindow();
       } else {
-        console.error("ConcessionRequest document not found");
       }
     } catch (error) {
-      console.error("Error updating status and message:", error);
     }
   };
 

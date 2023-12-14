@@ -24,7 +24,6 @@ const getUid = async (request) => {
         }
         return uid;
     } catch (error) {
-        console.error('Error fetching uid:', error);
         return null;
     }
 }
@@ -50,11 +49,9 @@ const getPassNumFromConcessionRequest = async (uid) => {
             const concessionRequestData = matchingRequestDoc.data();
             return concessionRequestData.passNum;
         } else {
-            console.error('ConcessionRequest document not found');
             return null;
         }
     } catch (error) {
-        console.error('Error fetching pass number:', error);
         return null;
     }
 };
@@ -122,11 +119,9 @@ const fetchAllEnquiries = async (travelLane) => {
             timestamp: serverTimestamp(),
         });
 
-        console.log('CSV saved to collection with ID: ', csvDocRef.id);
         toast.notify("CSV file generated successfully.!!", { type: "success" });
         downloadCsv(csvContent, fileName);
     } catch (error) {
-        console.error('Error fetching recent enquiries:', error);
     }
 };
 
@@ -163,7 +158,6 @@ const convertJsonToCsv = async (jsonData, columns) => {
             });
         });
     } catch (error) {
-        console.error('Error converting JSON to CSV:', error);
         return null;
     }
 };

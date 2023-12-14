@@ -32,7 +32,6 @@ function YourDashboard({ user }) {
       });
       setNotifications(fetchedNotifications);
     } catch (error) {
-      console.error("Error fetching recent notifications:", error);
     }
   };
 

@@ -20,7 +20,6 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
       const concessionDetailsSnapshot = await getDocs(concessionDetailsQuery);
 
       if (concessionDetailsSnapshot.empty) {
-        console.error("ConcessionDetails document not found");
         return;
       }
 
@@ -36,7 +35,6 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
       const concessionRequestSnapshot = await getDocs(concessionRequestQuery);
 
       if (concessionRequestSnapshot.empty) {
-        console.error("ConcessionRequest document not found");
         return;
       }
 
@@ -44,7 +42,6 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
       const concessionRequestData = concessionRequestDoc.data();
       setPassNum(concessionRequestData.passNum);
     } catch (error) {
-      console.error("Error fetching pass number:", error);
     }
   };
 
@@ -62,10 +59,8 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
         const matchingDoc = querySnapshot.docs[0];
         setUid(matchingDoc.id);
       } else {
-        console.error("ConcessionDetails document not found");
       }
     } catch (error) {
-      console.error("Error fetching ConcessionDetails:", error);
     }
   };
 
@@ -90,7 +85,6 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
           statusMessage: message,
         });
       } else {
-        console.error("ConcessionDetails document not found");
         return;
       }
 
@@ -114,10 +108,8 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
 
         handleCloseInfoWindow();
       } else {
-        console.error("ConcessionRequest document not found");
       }
     } catch (error) {
-      console.error("Error updating status and message:", error);
     }
   };
 

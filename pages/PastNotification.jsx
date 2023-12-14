@@ -42,7 +42,6 @@ const Dashboard = () => {
             });
             setNotifications(search(fetchedNotifications));
         } catch (error) {
-            console.error("Error fetching recent notifications:", error);
         }
     };
 

@@ -21,7 +21,6 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const concessionDetailsSnapshot = await getDocs(concessionDetailsQuery);
 
       if (concessionDetailsSnapshot.empty) {
-        console.error("ConcessionDetails document not found");
         return;
       }
 
@@ -37,7 +36,6 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const concessionRequestSnapshot = await getDocs(concessionRequestQuery);
 
       if (concessionRequestSnapshot.empty) {
-        console.error("ConcessionRequest document not found");
         return;
       }
 
@@ -45,7 +43,6 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const concessionRequestData = concessionRequestDoc.data();
       setPassNum(concessionRequestData.passNum);
     } catch (error) {
-      console.error("Error fetching pass number:", error);
     }
   };
 
@@ -61,7 +58,6 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const concessionDetailsSnapshot = await getDocs(concessionDetailsQuery);
 
       if (concessionDetailsSnapshot.empty) {
-        console.error("ConcessionDetails document not found");
         return;
       }
 
@@ -78,7 +74,6 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const concessionRequestSnapshot = await getDocs(concessionRequestQuery);
 
       if (concessionRequestSnapshot.empty) {
-        console.error("ConcessionRequest document not found");
         return;
       }
 
@@ -95,7 +90,6 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       await fetchAllEnquiries();
       handleCloseInfoWindow();
     } catch (error) {
-      console.error("Error updating status and message:", error);
     }
   };
 

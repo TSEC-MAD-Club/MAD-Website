@@ -51,13 +51,10 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => 
           toast.notify("Approved Request", { type: "info" });
           handleCloseInfoWindow();
         } else {
-          console.error('ConcessionRequest document not found');
         }
       } else {
-        console.error('ConcessionDetails document not found');
       }
     } catch (error) {
-      console.error('Error updating status and message:', error);
     }
   };
 
