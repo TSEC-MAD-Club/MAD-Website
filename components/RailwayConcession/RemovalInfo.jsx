@@ -1,45 +1,55 @@
 import React, { useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
+import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { db } from "../../firebase";
+import { toast } from "react-nextjs-toast";
 
-const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
+const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
   const [message, setMessage] = useState("");
-  var uid = "";
-  console.log(message);
-  const fetchConcessionDetails = async () => {
-    try {
-      const concessionDetailsCollection = collection(db, "ConcessionDetails");
-      const q = query(
-        concessionDetailsCollection,
-        where("name", "==", request.name),
-        where("phoneNum", "==", request.phoneNum)
-      );
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const matchingDoc = querySnapshot.docs[0];
-        uid = matchingDoc.id;
-      } else {
-        console.error("ConcessionDetails document not found");
-      }
-    } catch (error) {
-      console.error("Error fetching ConcessionDetails:", error);
-    }
-  };
 
   const handleReject = async () => {
     try {
-      fetchConcessionDetails()
-      const q = query(
+      const concessionDetailsCollection = collection(db, "ConcessionDetails");
+      const detailsQuery = query(
+        concessionDetailsCollection,
+        where("firstName", "==", request.firstName),
+        where("phoneNum", "==", request.phoneNum)
+      );
+      const detailsSnapshot = await getDocs(detailsQuery);
+      const uid = "";
+
+      if (!detailsSnapshot.empty) {
+        const matchingDetailsDoc = detailsSnapshot.docs[0];
+        const matchingDetailsRef = matchingDetailsDoc.ref;
+        uid = matchingDetailsDoc.id;
+
+        await updateDoc(matchingDetailsRef, {
+          status: 'rejected',
+          statusMessage: message,
+        });
+      } else {
+        console.error("ConcessionDetails document not found");
+        return;
+      }
+
+      const requestQuery = query(
         collection(db, "ConcessionRequest"),
         where("uid", "==", uid)
       );
+      const requestSnapshot = await getDocs(requestQuery);
 
-      const querySnapshot = await getDocs(q);
+      if (!requestSnapshot.empty) {
+        const matchingRequestDoc = requestSnapshot.docs[0];
+        const matchingRequestRef = matchingRequestDoc.ref;
 
-      if (!querySnapshot.empty) {
-        const matchingDoc = querySnapshot.docs[0];
-        const docRef = matchingDoc.ref;
-        await updateDoc(docRef, { status: "Serviced", passNum: certificateNumber, statusMessage: "Your request has been approved!" });
+        await updateDoc(matchingRequestRef, {
+          status: "rejected",
+          statusMessage: message,
+        });
+
+        toast.notify("Request rejected", { type: "info" });
+        await fetchAllEnquiries();
+
         handleCloseInfoWindow();
       } else {
         console.error("ConcessionRequest document not found");
@@ -55,7 +65,7 @@ const RemovalInfo = ({ request, handleCloseInfoWindow }) => {
       <div className={styles.modalUpperDiv}>
         <div className={styles.studentRejectInfo}>
           <span className={styles.modalInformationTitle}>Name:</span>
-          <span className={styles.modalInformation}>{request.name}</span>
+          <span className={styles.modalInformation}>{request.firstName} {request.middleName} {request.lastName}</span>
         </div>
         <div className={styles.modalFromToDiv}>
           <div className={styles.studentRejectInfo}>

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./RailwayUpdateConcession.module.css";
-import ExtendDate from "./ExtendDate";
-import CancelConcession from "./CancelConcession";
+import { collection, query, getDocs, where } from "firebase/firestore";
+import { db } from "../../firebase.js";
 
 const RailwayUpdateConcessionCard = ({ request }) => {
-
+  const [statusMessage, setStatusMessage] = useState('');
   const convertDate = (date) => {
     const dobTimestamp = date;
     const dobMilliseconds = dobTimestamp.seconds * 1000 + dobTimestamp.nanoseconds / 1e6;
@@ -17,11 +17,52 @@ const RailwayUpdateConcessionCard = ({ request }) => {
     return `${day}/${month}/${year}`;
   };
 
+  const fetchConcessionDetailsAndRequest = async () => {
+    try {
+      const concessionDetailsCollection = collection(db, 'ConcessionDetails');
+      const concessionRequestRef = collection(db, 'ConcessionRequest');
+
+      const detailsQuery = query(
+        concessionDetailsCollection,
+        where('firstName', '==', request.firstName),
+        where('phoneNum', '==', request.phoneNum)
+      );
+      const detailsSnapshot = await getDocs(detailsQuery);
+
+      let uid = ""
+
+      if (!detailsSnapshot.empty) {
+        const matchingDetailsDoc = detailsSnapshot.docs[0];
+        uid = (matchingDetailsDoc.id);
+
+        // Fetch ConcessionRequest based on uid
+        const requestQuery = query(concessionRequestRef, where('uid', '==', uid));
+        const requestSnapshot = await getDocs(requestQuery);
+
+        if (!requestSnapshot.empty) {
+          const concessionRequest = requestSnapshot.docs[0].data();
+          setStatusMessage(concessionRequest.statusMessage);
+        } else {
+          console.error('No matching ConcessionRequest document found');
+        }
+      } else {
+        console.error('ConcessionDetails document not found');
+      }
+    } catch (error) {
+      console.error('Error fetching ConcessionDetails and ConcessionRequest:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchConcessionDetailsAndRequest();
+  }, [request]);
+
   return (
     <div className={styles.railwayConcessionCard}>
       <div className={styles.railwayConcessionTitle}>
         <p className={styles.nameAndGender}>
-          <span className={styles.name}>{request.name}</span>
+          <span className={styles.name}>{request.firstName} {request.middleName} {request.lastName}</span>
           <span className={styles.gender}>{request.gender}</span>
           <span className={styles.western}>{request.travelLane}</span>
         </p>
@@ -30,13 +71,15 @@ const RailwayUpdateConcessionCard = ({ request }) => {
       <table className={styles.railwayConcessionCardTable}>
         <tbody>
           <tr>
-            <td className={styles.railwayConcessionCardTableCell}>From</td>
-            <td className={styles.railwayConcessionCardTableCell}>To</td>
-            <td className={styles.railwayConcessionCardTableCell}>Class</td>
-            <td className={styles.railwayConcessionCardTableCell}>Mode</td>
+            <td className={styles.railwayConcessionCardTableCell}>From:</td>
+            <td className={styles.railwayConcessionCardTableCell}>To:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Class:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Mode:</td>
             <td className={styles.railwayConcessionCardTableCell}>
-              Date of Issue
+              Date of Issue:
             </td>
+            <td className={styles.railwayConcessionCardTableCell}>Branch:</td>
+            <td className={styles.railwayConcessionCardTableCell}>Current Year:</td>
           </tr>
 
           <tr>
@@ -53,7 +96,13 @@ const RailwayUpdateConcessionCard = ({ request }) => {
               {request.duration}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.lastPassIssued}
+              {request.lastPassIssued && convertDate(request.lastPassIssued)}
+            </td>
+            <td className={styles.railwayConcessionCardTableCell2}>
+              {request.branch}
+            </td>
+            <td className={styles.railwayConcessionCardTableCell2}>
+              {request.gradyear}
             </td>
           </tr>
         </tbody>
@@ -75,6 +124,20 @@ const RailwayUpdateConcessionCard = ({ request }) => {
             {convertDate(request.dob)}
           </p>
         </div>
+
+        <div className={styles.railwayAge}>
+          <p className={styles.railwayConcessionCardTableCell}>Age:</p>
+          <p className={styles.railwayConcessionCardAddress}>
+            {request.ageYears} Years & {request.ageMonths} Months
+          </p>
+        </div>
+
+        <div className={styles.railwayPhoneNumber}>
+          <p className={styles.railwayConcessionCardTableCell}>Phone Number:</p>
+          <p className={styles.railwayConcessionCardAddress}>
+            {request.phoneNum}
+          </p>
+        </div>
       </div>
       <hr className={styles.railwayConcessionCardHr} />
       <div className={styles.railwayConcessionCardFooter}>
@@ -86,6 +149,12 @@ const RailwayUpdateConcessionCard = ({ request }) => {
             <li><a href="#">Additional documents</a></li>
           </ul>
         </div>
+        <p className={styles.railwayConcessionCardTableCell}>
+          Message:
+          <ul className={styles.railwayConcessionCardDocumentsList}>
+            <li style={{ 'color': 'red' }}>{statusMessage}</li>
+          </ul>
+        </p>
       </div>
     </div>
   );

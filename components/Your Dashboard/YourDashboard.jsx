@@ -4,6 +4,7 @@ import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import Link from "next/link";
 import Features from "../Sidebar/link";
+import { userTypes } from "../../constants/userTypes";
 
 function YourDashboard({ user }) {
   const [Notifications, setNotifications] = useState([]);
@@ -56,27 +57,12 @@ function YourDashboard({ user }) {
                 <Link key={id} href={data.mainLink}>
                   <button className={styles.item}>{data.mainTitle}</button>
                 </Link>
-            
+
               )
           )}
         </div>
       </div>
-      {/* <div className={styles.operations}>
-        <div className={styles.twobutton}>
-          {Features.map(
-            (data, id) =>
-              userHasAccess(data) && (
-                <Link href="/CreateReminder">
-  <a className={styles.item}>
-    {data.mainTitle}
-  </a>
-</Link>
-            
-              )
-          )}
-        </div>
-      </div> */}
-      <div className={styles.recent}>
+      {!(user.type == userTypes.RAILWAY) && <div className={styles.recent}>
         <h3>Recent Notifications & Notices</h3>
         <hr className={styles.hr} />
         <table className={styles.table}>
@@ -97,7 +83,7 @@ function YourDashboard({ user }) {
             </tr>
           ))}
         </table>
-      </div>
+      </div>}
     </div>
   );
 }

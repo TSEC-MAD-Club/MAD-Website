@@ -3,27 +3,29 @@ import styles from "./RailwayUpdateConcession.module.css";
 import ExtendDate from "./ExtendDate";
 import CancelConcession from "./CancelConcession";
 
-const RailwayUpdateConcessionCard = ({ request }) => {
+const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
   const [isInfoWindowVisible, setInfoWindowVisibility] = useState(false);
   const [infoWindowText, setInfoWindowText] = useState("");
   const handleCloseInfoWindow = () => {
     setInfoWindowVisibility(false);
   };
-  const handleApproveClick = () => {
+  const handleApproveClick = async () => {
     setInfoWindowText(
       <ExtendDate
         request={request}
         handleCloseInfoWindow={handleCloseInfoWindow}
+        fetchAllEnquiries={fetchAllEnquiries}
       />
     );
     setInfoWindowVisibility(true);
   };
 
-  const handleRejectClick = () => {
+  const handleRejectClick = async () => {
     setInfoWindowText(
       <CancelConcession
         request={request}
         handleCloseInfoWindow={handleCloseInfoWindow}
+        fetchAllEnquiries={fetchAllEnquiries}
       />
     );
     setInfoWindowVisibility(true);
@@ -45,7 +47,7 @@ const RailwayUpdateConcessionCard = ({ request }) => {
     <div className={styles.railwayConcessionCard}>
       <div className={styles.railwayConcessionTitle}>
         <p className={styles.nameAndGender}>
-          <span className={styles.name}>{request.name}</span>
+          <span className={styles.name}>{request.firstName} {request.middleName} {request.lastName}</span>
           <span className={styles.gender}>{request.gender}</span>
           <span className={styles.western}>{request.travelLane}</span>
         </p>
@@ -79,13 +81,13 @@ const RailwayUpdateConcessionCard = ({ request }) => {
               {request.duration}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.lastPassIssued}
+              {request.lastPassIssued && convertDate(request.lastPassIssued)}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
               {request.branch}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.gradYear}
+              {request.gradyear}
             </td>
           </tr>
         </tbody>
@@ -127,9 +129,9 @@ const RailwayUpdateConcessionCard = ({ request }) => {
         <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li><a href={request.idCardURL}>ID Card</a></li>
-            <li><a href={request.previousPassURL}>Previous Pass</a></li>
-            <li><a href="#">Additional documents</a></li>
+            <li><a href={request.idCardURL} target="_blank">ID Card</a></li>
+            <li><a href={request.previousPassURL} target="_blank">Previous Pass</a></li>
+            <li><a href="#" target="_blank">Additional documents</a></li>
           </ul>
         </div>
         <div className={styles.railwayConcessionCardFooterButtonDiv}>
