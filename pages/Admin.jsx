@@ -52,7 +52,6 @@ export default function Admin() {
       }));
       setPendingEvents(pendingEvents);
     } catch (error) {
-      console.log(error);
     }
   };
 

@@ -87,7 +87,6 @@ const Downloads = () => {
             }
             return count;
         } catch (error) {
-            console.error('Error counting approved entries:', error);
         }
     };
 
@@ -96,7 +95,6 @@ const Downloads = () => {
             const count = await countServicedEntries(travelLane);
             setServicedCounts((prevCounts) => ({ ...prevCounts, [travelLane]: count }));
         } catch (error) {
-            console.error(`Error fetching ${travelLane} approved count:`, error);
         }
     };
 

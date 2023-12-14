@@ -122,7 +122,6 @@ const CreateNote = () => {
       toast.notify(`Submitted response`, { type: "success" });
       return;
     } catch (error) {
-      console.log(error);
       toast.notify(`Submit failed`, { type: "error" });
     }
   };

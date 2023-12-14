@@ -44,7 +44,6 @@ const RailwayConcession = () => {
 
       setEnquiries(fetchedEnquiries);
     } catch (error) {
-      console.error("Error fetching recent enquiries:", error);
     } finally {
       setLoading(false);
     }

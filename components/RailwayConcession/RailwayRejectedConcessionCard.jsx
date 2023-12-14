@@ -43,13 +43,10 @@ const RailwayUpdateConcessionCard = ({ request }) => {
           const concessionRequest = requestSnapshot.docs[0].data();
           setStatusMessage(concessionRequest.statusMessage);
         } else {
-          console.error('No matching ConcessionRequest document found');
         }
       } else {
-        console.error('ConcessionDetails document not found');
       }
     } catch (error) {
-      console.error('Error fetching ConcessionDetails and ConcessionRequest:', error);
     }
   };
 
