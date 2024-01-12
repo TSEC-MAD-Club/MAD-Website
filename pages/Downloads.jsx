@@ -95,6 +95,8 @@ const Downloads = () => {
         try {
             const count = await countServicedEntries(travelLane);
             setServicedCounts((prevCounts) => ({ ...prevCounts, [travelLane]: count }));
+            if (count >= 100)
+                await handleClick(travelLane);
         } catch (error) {
             console.error(`Error fetching ${travelLane} approved count:`, error);
         }
