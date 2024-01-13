@@ -62,7 +62,7 @@ function YourDashboard({ user }) {
           )}
         </div>
       </div>
-      {!(user.type == userTypes.RAILWAY) && <div className={styles.recent}>
+      {!(user.type == userTypes.RAILWAY || user.type == userTypes.COMMITTEE) && <div className={styles.recent}>
         <h3>Recent Notifications & Notices</h3>
         <hr className={styles.hr} />
         <table className={styles.table}>
