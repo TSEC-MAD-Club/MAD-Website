@@ -48,27 +48,6 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
     }
   };
 
-  const fetchConcessionDetails = async () => {
-    try {
-      const concessionDetailsCollection = collection(db, "ConcessionDetails");
-      const q = query(
-        concessionDetailsCollection,
-        where("firstName", "==", request.firstName),
-        where("phoneNum", "==", request.phoneNum)
-      );
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const matchingDoc = querySnapshot.docs[0];
-        setUid(matchingDoc.id);
-      } else {
-        console.error("ConcessionDetails document not found");
-      }
-    } catch (error) {
-      console.error("Error fetching ConcessionDetails:", error);
-    }
-  };
-
   const handleReject = async () => {
     try {
       const concessionDetailsCollection = collection(db, "ConcessionDetails");
@@ -85,6 +64,10 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
         const matchingDetailsRef = matchingDetailsDoc.ref;
         uid = matchingDetailsDoc.id;
 
+        /* The code `await updateDoc(matchingDetailsRef, { status: 'rejected', statusMessage: message
+        })` is updating the document in the "ConcessionDetails" collection with the specified
+        `matchingDetailsRef` reference. It sets the `status` field to 'rejected' and the
+        `statusMessage` field to the value of the `message` state variable. */
         await updateDoc(matchingDetailsRef, {
           status: 'rejected',
           statusMessage: message,
@@ -104,6 +87,10 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
         const matchingRequestDoc = requestSnapshot.docs[0];
         const matchingRequestRef = matchingRequestDoc.ref;
 
+        /* The code `await updateDoc(matchingRequestRef, { status: "rejected", statusMessage: message
+        })` is updating the document in the "ConcessionRequest" collection with the specified
+        `matchingRequestRef` reference. It sets the `status` field to 'rejected' and the
+        `statusMessage` field to the value of the `message` state variable. */
         await updateDoc(matchingRequestRef, {
           status: "rejected",
           statusMessage: message,

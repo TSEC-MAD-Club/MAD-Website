@@ -33,6 +33,9 @@ const Downloads = () => {
         const csvCollectionRef = collection(db, 'csvCollection');
         const querySnapshot = await getDocs(csvCollectionRef);
         const data = querySnapshot.docs.map(doc => doc.data());
+        /* `setEnquiries(data)` is updating the state variable `enquiries` with the value of `data`.
+        This means that the `enquiries` state variable will now hold the array of data retrieved
+        from the `csvCollection` collection in the Firebase Firestore. */
         setEnquiries(data);
         setFiltered(data);
     };
@@ -62,6 +65,8 @@ const Downloads = () => {
             const concessionRequestRef = collection(db, 'ConcessionRequest');
             const concessionDetailsRef = collection(db, 'ConcessionDetails');
 
+            /* The filter specifies that the "status" field of the documents should be equal to "approved". The
+            result of the query is stored in the `westernRequestsSnapshot` variable. */
             const westernRequestsSnapshot = await getDocs(
                 query(concessionRequestRef,
                     where('status', '==', 'approved'),
@@ -95,6 +100,10 @@ const Downloads = () => {
         try {
             const count = await countServicedEntries(travelLane);
             setServicedCounts((prevCounts) => ({ ...prevCounts, [travelLane]: count }));
+            /* The code is checking if the `count`
+            variable is greater than or equal to 100. If it is, it calls the `handleClick` function
+            with the `travelLane` parameter. This is likely used to trigger some action when the
+            count of serviced entries reaches a certain threshold (in this case, 100). */
             if (count >= 100)
                 await handleClick(travelLane);
         } catch (error) {

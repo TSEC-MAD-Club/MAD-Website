@@ -23,6 +23,10 @@ const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
         const matchingDetailsRef = matchingDetailsDoc.ref;
         uid = matchingDetailsDoc.id;
 
+        /* The code `await updateDoc(matchingDetailsRef, { status: 'rejected', statusMessage: message
+        })` is updating the document referenced by `matchingDetailsRef` in the "ConcessionDetails"
+        collection in the Firebase Firestore database. It sets the `status` field to 'rejected' and
+        the `statusMessage` field to the value of the `message` variable. */
         await updateDoc(matchingDetailsRef, {
           status: 'rejected',
           statusMessage: message,
@@ -42,6 +46,10 @@ const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
         const matchingRequestDoc = requestSnapshot.docs[0];
         const matchingRequestRef = matchingRequestDoc.ref;
 
+        /* The code `await updateDoc(matchingRequestRef, { status: "rejected", statusMessage: message
+        })` is updating the document referenced by `matchingRequestRef` in the "ConcessionRequest"
+        collection in the Firebase Firestore database. It sets the `status` field to 'rejected' and
+        the `statusMessage` field to the value of the `message` variable. */
         await updateDoc(matchingRequestRef, {
           status: "rejected",
           statusMessage: message,

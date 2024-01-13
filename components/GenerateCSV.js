@@ -9,6 +9,9 @@ const storage = getStorage();
 const getUid = async (request) => {
     try {
         const concessionDetailsCollection = collection(db, 'ConcessionDetails');
+        /* The code is creating a query to fetch documents from the "ConcessionDetails" collection in
+        the Firebase Firestore database. The query specifies two conditions using the `where`
+        function: */
         const detailsQuery = query(
             concessionDetailsCollection,
             where('firstName', '==', request.firstName),
@@ -38,6 +41,10 @@ const uploadCsvToStorage = async (csvContent, fileName) => {
 const getPassNumFromConcessionRequest = async (uid) => {
     try {
         const concessionRequestRef = collection(db, 'ConcessionRequest');
+        /* The code is creating a query to fetch documents from the "ConcessionRequest" collection in
+        the Firebase Firestore database. The query specifies a condition where the "uid" field of
+        the documents should be equal to the provided "uid" value. This query is used to find a
+        specific document in the collection based on the "uid" value. */
         const concessionRequestQuery = query(
             concessionRequestRef,
             where('uid', '==', uid)
@@ -65,6 +72,10 @@ const fetchAllEnquiries = async (travelLane) => {
         const concessionRequestRef = collection(db, 'ConcessionRequest');
         const csvCollectionRef = collection(db, 'csvCollection');
 
+        /* The code is fetching a snapshot of documents from the "ConcessionRequest" collection in the
+        Firebase Firestore database. It is querying for documents where the "status" field is equal
+        to "approved" and limiting the result to 100 documents. The result is stored in the
+        "servicedRequestsSnapshot" variable. */
         const servicedRequestsSnapshot = await getDocs(
             query(concessionRequestRef,
                 where('status', '==', 'approved'),
@@ -85,11 +96,19 @@ const fetchAllEnquiries = async (travelLane) => {
                     doc(concessionDetailsRef, concessionDetailsId)
                 );
 
+                /* The code is checking if the `concessionDetailsDoc` exists in the Firestore database.
+                If it doesn't exist, it means that no approved requests were found for the given
+                `concessionDetailsId`. In this case, a toast notification with an error message is
+                displayed and the function returns, indicating that there are no approved requests
+                found. */
                 if (!concessionDetailsDoc.exists()) {
                     toast.notify("No approved requests found.!!", { type: "error" });
                     return;
                 }
 
+                /* This code block is checking if the `concessionDetailsDoc` exists in the Firestore
+                database and if the `travelLane` value of the document matches the provided
+                `travelLane` parameter. */
                 if (concessionDetailsDoc.exists() && concessionDetailsDoc.data().travelLane === travelLane) {
                     const enquiry = concessionDetailsDoc.data();
                     fetchedEnquiries.push(enquiry);

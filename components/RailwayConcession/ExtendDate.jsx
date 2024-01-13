@@ -85,10 +85,17 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const concessionRequestDoc = concessionRequestSnapshot.docs[0];
       const concessionRequestRef = concessionRequestDoc.ref;
 
+      /* The line `await updateDoc(concessionRequestRef, { time: date, statusMessage: "Your date has
+      been extended!" });` is updating the `ConcessionRequest` document in the Firebase Firestore
+      database. It sets the `time` field to the value of the `date` variable and sets the
+      `statusMessage` field to the string "Your date has been extended!". */
       await updateDoc(concessionRequestRef, { time: date, statusMessage: "Your date has been extended!" });
 
       // Update ConcessionDetails document
       const concessionDetailsRef = matchingConcessionDoc.ref;
+      /* The line `await updateDoc(concessionDetailsRef, { lastPassIssued: firebaseTimestamp }, {
+      statusMessage: "Your date has been extended!" });` is updating the `ConcessionDetails`
+      document in the Firebase Firestore database. */
       await updateDoc(concessionDetailsRef, { lastPassIssued: firebaseTimestamp }, { statusMessage: "Your date has been extended!" });
 
       toast.notify("Extended Request Date", { type: "info" });
