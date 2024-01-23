@@ -32,7 +32,7 @@ const RailwayConcession = () => {
 
       // Get awaiting requests
       const awaitingRequestsSnapshot = await getDocs(
-        query(concessionRequestRef, where("status", "==", "approved"), limit(10))
+        query(concessionRequestRef, where("status", "==", "serviced"), limit(10))
       );
 
       const fetchedEnquiries = [];

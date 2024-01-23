@@ -22,14 +22,14 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => 
         const matchingDetailsDoc = concessionDetailsSnapshot.docs[0];
         const matchingDetailsRef = matchingDetailsDoc.ref;
         /* The code `await updateDoc(matchingDetailsRef, { lastPassIssued: Timestamp.now(), status:
-        'approved', statusMessage: 'Your request has been approved!', });` is updating the
+        'serviced', statusMessage: 'Your request has been serviced!', });` is updating the
         `ConcessionDetails` document in the Firebase Firestore database. It sets the `lastPassIssued`
-        field to the current timestamp, the `status` field to 'approved', and the `statusMessage`
-        field to 'Your request has been approved!'. */
+        field to the current timestamp, the `status` field to 'serviced', and the `statusMessage`
+        field to 'Your request has been serviced!'. */
         await updateDoc(matchingDetailsRef, {
           lastPassIssued: Timestamp.now(),
-          status: 'approved',
-          statusMessage: 'Your request has been approved!',
+          status: 'serviced',
+          statusMessage: 'Your request has been serviced!',
         });
 
         // Update ConcessionRequest document
@@ -45,13 +45,13 @@ const ApprovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => 
           const matchingRequestDoc = concessionRequestSnapshot.docs[0];
           const matchingRequestRef = matchingRequestDoc.ref;
 
-          /* The code `await updateDoc(matchingRequestRef, { status: 'approved', passNum:
-          certificateNumber, statusMessage: 'Your request has been approved!', });` is updating the
+          /* The code `await updateDoc(matchingRequestRef, { status: 'serviced', passNum:
+          certificateNumber, statusMessage: 'Your request has been serviced!', });` is updating the
           `ConcessionRequest` document in the Firebase Firestore database. */
           await updateDoc(matchingRequestRef, {
-            status: 'approved',
+            status: 'serviced',
             passNum: certificateNumber,
-            statusMessage: 'Your request has been approved!',
+            statusMessage: 'Your request has been serviced!',
           });
 
           await fetchAllEnquiries();

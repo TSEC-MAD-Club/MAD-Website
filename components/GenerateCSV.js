@@ -74,11 +74,11 @@ const fetchAllEnquiries = async (travelLane) => {
 
         /* The code is fetching a snapshot of documents from the "ConcessionRequest" collection in the
         Firebase Firestore database. It is querying for documents where the "status" field is equal
-        to "approved" and limiting the result to 100 documents. The result is stored in the
+        to "serviced" and limiting the result to 100 documents. The result is stored in the
         "servicedRequestsSnapshot" variable. */
         const servicedRequestsSnapshot = await getDocs(
             query(concessionRequestRef,
-                where('status', '==', 'approved'),
+                where('status', '==', 'serviced'),
                 limit(100)
             )
         );
@@ -87,7 +87,7 @@ const fetchAllEnquiries = async (travelLane) => {
         const fetchedPassNum = [];
         const batch = writeBatch(db);
 
-        // Iterate through approved requests
+        // Iterate through serviced requests
         for (const requestDoc of servicedRequestsSnapshot.docs) {
             const concessionDetailsId = requestDoc.data().uid;
 
@@ -97,12 +97,12 @@ const fetchAllEnquiries = async (travelLane) => {
                 );
 
                 /* The code is checking if the `concessionDetailsDoc` exists in the Firestore database.
-                If it doesn't exist, it means that no approved requests were found for the given
+                If it doesn't exist, it means that no serviced requests were found for the given
                 `concessionDetailsId`. In this case, a toast notification with an error message is
-                displayed and the function returns, indicating that there are no approved requests
+                displayed and the function returns, indicating that there are no serviced requests
                 found. */
                 if (!concessionDetailsDoc.exists()) {
-                    toast.notify("No approved requests found.!!", { type: "error" });
+                    toast.notify("No serviced requests found.!!", { type: "error" });
                     return;
                 }
 
@@ -118,13 +118,13 @@ const fetchAllEnquiries = async (travelLane) => {
             }
         }
         if (fetchedEnquiries.length === 0) {
-            toast.notify("No approved requests found for this lane and status.", { type: "info" });
+            toast.notify("No serviced requests found for this lane and status.", { type: "info" });
             return;
         }
 
         await batch.commit();
 
-        const columnsToInclude = ['passNum', 'name', 'gender', 'from', 'to', 'class', 'duration', 'address'];
+        const columnsToInclude = ['passNum', 'name', 'gender', 'dob', 'from', 'to', 'class', 'duration', 'lastPassIssued', 'address'];
         const csvContent = await convertJsonToCsv(fetchedEnquiries, columnsToInclude);
         const firstName = await getPassNumFromConcessionRequest(fetchedPassNum[0])
         const lastName = await getPassNumFromConcessionRequest(fetchedPassNum[fetchedEnquiries.length - 1])
@@ -157,8 +157,10 @@ const convertJsonToCsv = async (jsonData, columns) => {
                 const passNum = await getPassNumFromConcessionRequest(uid);
 
                 const name = [enquiry.firstName, enquiry.middleName, enquiry.lastName].filter(Boolean).join(' ');
+                const dob = [enquiry.dob.seconds, enquiry.dob.nanoseconds].filter(Boolean).join(' ');
+                const lastPassIssued = [enquiry.lastPassIssued.seconds, enquiry.lastPassIssued.nanoseconds].filter(Boolean).join(' ');
 
-                return { ...enquiry, passNum, name };
+                return { ...enquiry, passNum, name, dob, lastPassIssued };
             })
         );
 

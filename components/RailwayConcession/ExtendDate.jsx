@@ -49,6 +49,72 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
     }
   };
 
+  //convert alpha numberic to numeric ex, Z123 -> 123
+  const alphaToNum = (inputString) => {
+    const match = inputString.match(/[a-zA-Z]/);
+
+    if (match) {
+      const remainingPart = inputString.substring(1);
+      const result = parseInt(remainingPart, 10);
+      return result;
+    } else {
+      return null;
+    }
+  };
+
+  const handleUpdate = async (passNum, date) => {
+    try {
+      const csvCollectionDetails = collection(db, "csvCollection");
+      const csvCollectionDetailsSnapshot = await getDocs(csvCollectionDetails);
+      const csvData = csvCollectionDetailsSnapshot.docs.map(doc => doc.data());
+
+      if (csvCollectionDetailsSnapshot.empty) {
+        console.error("csvCollectionDetails document not found");
+        return;
+      }
+      // console.log(csvData);
+      for (let i = 0; i < csvData.length; i++) {
+        if (alphaToNum(csvData[i].firstName) <= alphaToNum(passNum) && alphaToNum(csvData[i].lastName) >= alphaToNum(passNum)) {
+          updateEntry(csvData[i].content, passNum, date);
+        }
+      }
+    }
+    catch (error) {
+      console.error("Error updating status and message:", error);
+    }
+  };
+
+  const updateEntry = async (csvUrl, passNumberToUpdate, newDate) => {
+    try {
+      // Fetch CSV data from the URL
+      const response = await fetch(csvUrl);
+      const csvData = await response.text();
+
+      // Parse CSV data
+      const rows = csvData.split('\n');
+      const headers = rows[0].split(',');
+
+      // Iterate through rows to find and update the entry
+      for (let i = 1; i < rows.length; i++) {
+        const values = rows[i].split(',');
+        const currentPassNumber = values[0].trim();
+        if (alphaToNum(currentPassNumber) == alphaToNum(passNumberToUpdate)) {
+          // Update the entry
+          values[headers.indexOf('lastPassIssued')] = newDate;
+
+          rows[i] = values.join(',');
+          const updatedCsvData = rows.join('\n');
+
+          console.log(updatedCsvData);
+
+          break; // Exit the loop once updated
+        }
+      }
+    } catch (error) {
+      console.error('Error updating entry:', error);
+    }
+  };
+
   const handleApprove = async () => {
     try {
       const concessionDetailsCollection = collection(db, "ConcessionDetails");
@@ -97,7 +163,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       statusMessage: "Your date has been extended!" });` is updating the `ConcessionDetails`
       document in the Firebase Firestore database. */
       await updateDoc(concessionDetailsRef, { lastPassIssued: firebaseTimestamp }, { statusMessage: "Your date has been extended!" });
-
+      handleUpdate(passNum, date);
       toast.notify("Extended Request Date", { type: "info" });
       await fetchAllEnquiries();
       handleCloseInfoWindow();
