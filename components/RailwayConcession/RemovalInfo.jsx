@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
 import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { ref, uploadString, getDownloadURL, getStorage } from 'firebase/storage';
 import { db } from "../../firebase";
 import { toast } from "react-nextjs-toast";
 
+const storage = getStorage();
+
 const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
   const [message, setMessage] = useState("");
+
+  const uploadCsvToStorage = async (csvContent, fileName) => {
+    const storageRef = ref(storage, `csvFiles/${fileName}`);
+    await uploadString(storageRef, csvContent, 'raw');
+    return getDownloadURL(storageRef);
+  };
 
   //convert alpha numberic to numeric ex, Z123 -> 123
   const alphaToNum = (inputString) => {
@@ -51,6 +60,9 @@ const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       // Parse CSV data
       const rows = csvData.split('\n');
       const headers = rows[0].split(',');
+      const firstName = rows[1].split(',')[0];
+      const lastName = rows[rows.length - 1].split(',')[0];
+      const fileName = `${firstName}-${lastName}.csv`;
 
       // Iterate through rows to find and update the entry
       for (let i = 1; i < rows.length; i++) {
@@ -63,7 +75,19 @@ const RemovalInfo = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
           rows[i] = values.join(',');
           const updatedCsvData = rows.join('\n');
 
-          console.log(updatedCsvData);
+          const csvLink = await uploadCsvToStorage(updatedCsvData, fileName);
+          const csvCollection = collection(db, 'csvCollection');
+          const csvQuery = query(csvCollection, where('firstName', '==', firstName), where('lastName', '==', lastName));
+          const csvSnapshot = await getDocs(csvQuery);
+
+          if (csvSnapshot.empty) {
+            console.error('csvCollection document not found');
+            return;
+          }
+
+          const matchingCsvDoc = csvSnapshot.docs[0];
+          const matchingCsvRef = matchingCsvDoc.ref;
+          await updateDoc(matchingCsvRef, { content: csvLink });
 
           break; // Exit the loop once updated
         }
