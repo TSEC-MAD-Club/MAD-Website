@@ -30,25 +30,22 @@ const RailwayConcession = () => {
       const concessionDetailsRef = collection(db, "ConcessionDetails");
       const concessionRequestRef = collection(db, "ConcessionRequest");
 
-      // Get awaiting requests
-      const awaitingRequestsSnapshot = await getDocs(
-        query(concessionRequestRef, where("status", "==", "serviced"), limit(10))
+      // Get requests with status "serviced" or "downloaded"
+      const requestsSnapshot = await getDocs(
+        query(concessionRequestRef, where("status", "in", ["serviced", "downloaded"]), limit(10))
       );
 
       const fetchedEnquiries = [];
 
-      // Iterate through awaiting requests
-      for (const requestDoc of awaitingRequestsSnapshot.docs) {
-        // Get the associated ConcessionDetails document
+      // Iterate through requests
+      for (const requestDoc of requestsSnapshot.docs) {
         const concessionDetailsId = requestDoc.data().uid;
-        // Check if the ConcessionDetailsId is valid
 
         if (concessionDetailsId) {
           const concessionDetailsDoc = await getDoc(
             doc(concessionDetailsRef, concessionDetailsId)
           );
 
-          // Check if the ConcessionDetails document exists
           if (concessionDetailsDoc.exists()) {
             const enquiry = concessionDetailsDoc.data();
             fetchedEnquiries.push(enquiry);
