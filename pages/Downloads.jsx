@@ -14,9 +14,8 @@ const Downloads = () => {
     const [filtered, setFiltered] = useState();
     const [queryCSV, setQuery] = useState("");
     const [servicedCounts, setServicedCounts] = useState({
-        western: null,
-        central: null,
-        harbour: null,
+        Western: null,
+        Central: null,
     });
     const router = useRouter();
     const keys = ["fileName", "railway", 'firstName', 'lastName'];
@@ -33,6 +32,9 @@ const Downloads = () => {
         const csvCollectionRef = collection(db, 'csvCollection');
         const querySnapshot = await getDocs(csvCollectionRef);
         const data = querySnapshot.docs.map(doc => doc.data());
+        /* `setEnquiries(data)` is updating the state variable `enquiries` with the value of `data`.
+        This means that the `enquiries` state variable will now hold the array of data retrieved
+        from the `csvCollection` collection in the Firebase Firestore. */
         setEnquiries(data);
         setFiltered(data);
     };
@@ -62,15 +64,17 @@ const Downloads = () => {
             const concessionRequestRef = collection(db, 'ConcessionRequest');
             const concessionDetailsRef = collection(db, 'ConcessionDetails');
 
+            /* The filter specifies that the "status" field of the documents should be equal to "serviced". The
+            result of the query is stored in the `westernRequestsSnapshot` variable. */
             const westernRequestsSnapshot = await getDocs(
                 query(concessionRequestRef,
-                    where('status', '==', 'approved'),
+                    where('status', '==', 'serviced'),
                 )
             );
 
             let count = 0;
 
-            // Iterate through approved requests
+            // Iterate through serviced requests
             for (const requestDoc of westernRequestsSnapshot.docs) {
                 const concessionDetailsId = requestDoc.data().uid;
 
@@ -78,7 +82,6 @@ const Downloads = () => {
                     const concessionDetailsDoc = await getDoc(
                         doc(concessionDetailsRef, concessionDetailsId)
                     );
-
                     // Check if the ConcessionDetails document exists and matches the travelLane
                     if (concessionDetailsDoc.exists() && concessionDetailsDoc.data().travelLane === travelLane) {
                         count++;
@@ -87,7 +90,7 @@ const Downloads = () => {
             }
             return count;
         } catch (error) {
-            console.error('Error counting approved entries:', error);
+            console.error('Error counting serviced entries:', error);
         }
     };
 
@@ -95,8 +98,14 @@ const Downloads = () => {
         try {
             const count = await countServicedEntries(travelLane);
             setServicedCounts((prevCounts) => ({ ...prevCounts, [travelLane]: count }));
+            /* The code is checking if the `count`
+            variable is greater than or equal to 100. If it is, it calls the `handleClick` function
+            with the `travelLane` parameter. This is likely used to trigger some action when the
+            count of serviced entries reaches a certain threshold (in this case, 100). */
+            if (count >= 100)
+                await handleClick(travelLane);
         } catch (error) {
-            console.error(`Error fetching ${travelLane} approved count:`, error);
+            console.error(`Error fetching ${travelLane} serviced count:`, error);
         }
     };
 
@@ -107,14 +116,14 @@ const Downloads = () => {
     };
 
     const buttons = [
-        { region: 'western', label: 'Western' },
-        { region: 'central', label: 'Central' }
+        { region: 'Western', label: 'Western' },
+        { region: 'Central', label: 'Central' }
     ];
 
     useEffect(() => {
         fetchEnquiries();
-        fetchAndSetServicedCount('western');
-        fetchAndSetServicedCount('central')
+        fetchAndSetServicedCount('Western');
+        fetchAndSetServicedCount('Central')
     }, []);
 
     useEffect(() => {

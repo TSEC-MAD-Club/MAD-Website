@@ -41,6 +41,10 @@ const RailwayUpdateConcessionCard = ({ request }) => {
 
         if (!requestSnapshot.empty) {
           const concessionRequest = requestSnapshot.docs[0].data();
+          /* `setStatusMessage(concessionRequest.statusMessage);` is updating the state variable
+          `statusMessage` with the value of `concessionRequest.statusMessage`. This means that the
+          value of `statusMessage` will be set to the value of `concessionRequest.statusMessage`,
+          which can then be used in the component to display the status message. */
           setStatusMessage(concessionRequest.statusMessage);
         } else {
           console.error('No matching ConcessionRequest document found');
