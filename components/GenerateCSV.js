@@ -32,6 +32,17 @@ const getUid = async (request) => {
     }
 }
 
+const convertDate = (seconds, nanoseconds) => {
+    const dobMilliseconds = seconds * 1000 + nanoseconds / 1e6;
+    const dobDate = new Date(dobMilliseconds);
+    const dateObj = new Date(dobDate);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}/${month}/${year}`;
+};
+
 const uploadCsvToStorage = async (csvContent, fileName) => {
     const storageRef = ref(storage, `csvFiles/${fileName}`);
     await uploadString(storageRef, csvContent, 'raw');
@@ -157,8 +168,8 @@ const convertJsonToCsv = async (jsonData, columns) => {
                 const passNum = await getPassNumFromConcessionRequest(uid);
 
                 const name = [enquiry.firstName, enquiry.middleName, enquiry.lastName].filter(Boolean).join(' ');
-                const dob = [enquiry.dob.seconds, enquiry.dob.nanoseconds].filter(Boolean).join(' ');
-                const lastPassIssued = [enquiry.lastPassIssued.seconds, enquiry.lastPassIssued.nanoseconds].filter(Boolean).join(' ');
+                const dob = convertDate(enquiry.dob.seconds, enquiry.dob.nanoseconds);
+                const lastPassIssued = convertDate(enquiry.lastPassIssued.seconds, enquiry.lastPassIssued.nanoseconds);
 
                 return { ...enquiry, passNum, name, dob, lastPassIssued };
             })
