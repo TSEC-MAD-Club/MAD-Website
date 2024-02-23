@@ -247,7 +247,7 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
           ></textarea>
         </div>
         <div className={styles.modalRejectButtonDiv}>
-          <button className={styles.modalRejectButton} onClick={handleReject}>Cancel</button>
+          <button className={styles.modalRejectButton} onClick={handleReject}>Reject</button>
           <button
             className={styles.modalGoBackButton}
             onClick={handleCloseInfoWindow}

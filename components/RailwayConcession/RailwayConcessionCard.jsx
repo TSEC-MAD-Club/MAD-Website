@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./RailwayConcession.module.css";
 import ApprovalInfo from "./ApprovalInfo";
 import RemovalInfo from "./RemovalInfo";
+import DocumentInfo from "./DocumentInfo";
 
 const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
   const [isInfoWindowVisible, setInfoWindowVisibility] = useState(false);
@@ -30,6 +31,42 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
     );
     setInfoWindowVisibility(true);
   };
+
+  const handleIDCardClick = async () => {
+    setInfoWindowText(
+      <DocumentInfo
+        heading="ID Card"
+        documentURL={request.idCardURL}
+        handleCloseInfoWindow={handleCloseInfoWindow}
+        fetchAllEnquiries={fetchAllEnquiries}
+      />
+    );
+    setInfoWindowVisibility(true);
+  }
+
+  const handlePreviousPassClick = async () => {
+    setInfoWindowText(
+      <DocumentInfo
+        heading="Previous Pass"
+        documentURL={request.previousPassURL}
+        handleCloseInfoWindow={handleCloseInfoWindow}
+        fetchAllEnquiries={fetchAllEnquiries}
+      />
+    );
+    setInfoWindowVisibility(true);
+  }
+
+  const handleAdditionalDocumentsClick = async () => {
+    setInfoWindowText(
+      <DocumentInfo
+        heading="Additional Documents"
+        documentURL=""
+        handleCloseInfoWindow={handleCloseInfoWindow}
+        fetchAllEnquiries={fetchAllEnquiries}
+      />
+    );
+    setInfoWindowVisibility(true);
+  }
 
   const convertDate = (date) => {
     const dobTimestamp = date;
@@ -129,9 +166,11 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
         <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li><a href={request.idCardURL} target="_blank">ID Card</a></li>
-            <li><a href={request.previousPassURL} target="_blank">Previous Pass</a></li>
-            <li><a href="#" target="_blank">Additional documents</a></li>
+            {/* <li><a href={request.idCardURL} target="_blank">ID Card</a></li> */}
+            <li onClick={handleIDCardClick}><a href="#">ID Card</a></li>
+            {/* <li><a href={request.previousPassURL} target="_blank">Previous Pass</a></li> */}
+            <li onClick={handlePreviousPassClick}><a href="#">Previous Pass</a></li>
+            <li onClick={handleAdditionalDocumentsClick}><a href="#">Additional documents</a></li>
           </ul>
         </div>
         <div className={styles.railwayConcessionCardFooterButtonDiv}>
