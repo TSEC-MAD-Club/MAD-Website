@@ -1,23 +1,25 @@
-/* eslint-disable @next/next/no-sync-scripts */
+// pages/_app.js
 import "../styles/globals.css";
 import Layout from "../components/Layout/Layout";
 import Head from "next/head";
 import "./css/resources.css";
 import { ToastContainer } from "react-nextjs-toast";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext, ThemeProvider } from "../src/context/ThemeContext";
+import Spinner from "../components/Spinner"; // Import the Spinner component
 
 const UserContext = React.createContext({
   loggedIn: false,
 });
 
 function MyApp({ Component, pageProps }) {
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [user, setUser] = React.useState({
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({
     type: "",
     email: "",
     name: "",
   });
+  const [showSpinner, setShowSpinner] = useState(false); // Add state for controlling spinner visibility
 
   //if user has set remember me
   React.useEffect(() => {
@@ -31,9 +33,9 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider>
       <UserContext.Provider value={{ loggedIn, setLoggedIn, user, setUser }}>
         <Head>
-          {/* // Responsive meta tag */}
+          {/* Responsive meta tag */}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          {/* // bootstrap CDN */}
+          {/* bootstrap CDN */}
           <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -49,7 +51,9 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <ToastContainer />
         <Layout>
-          <Component {...pageProps} />
+          {/* Conditional rendering of the Spinner */}
+          {showSpinner && <Spinner />}
+          <Component {...pageProps} setShowSpinner={setShowSpinner} />
         </Layout>
       </UserContext.Provider>
     </ThemeProvider>
