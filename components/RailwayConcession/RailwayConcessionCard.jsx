@@ -32,37 +32,12 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
     setInfoWindowVisibility(true);
   };
 
-  const handleIDCardClick = async () => {
+  const handleIDCardClick = async ({ heading, url }) => {
     setInfoWindowText(
       <DocumentInfo
-        heading="ID Card"
-        documentURL={request.idCardURL}
+        heading={heading}
+        documentURL={url}
         handleCloseInfoWindow={handleCloseInfoWindow}
-        fetchAllEnquiries={fetchAllEnquiries}
-      />
-    );
-    setInfoWindowVisibility(true);
-  }
-
-  const handlePreviousPassClick = async () => {
-    setInfoWindowText(
-      <DocumentInfo
-        heading="Previous Pass"
-        documentURL={request.previousPassURL}
-        handleCloseInfoWindow={handleCloseInfoWindow}
-        fetchAllEnquiries={fetchAllEnquiries}
-      />
-    );
-    setInfoWindowVisibility(true);
-  }
-
-  const handleAdditionalDocumentsClick = async () => {
-    setInfoWindowText(
-      <DocumentInfo
-        heading="Additional Documents"
-        documentURL=""
-        handleCloseInfoWindow={handleCloseInfoWindow}
-        fetchAllEnquiries={fetchAllEnquiries}
       />
     );
     setInfoWindowVisibility(true);
@@ -166,11 +141,9 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
         <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            {/* <li><a href={request.idCardURL} target="_blank">ID Card</a></li> */}
-            <li onClick={handleIDCardClick}><a href="#">ID Card</a></li>
-            {/* <li><a href={request.previousPassURL} target="_blank">Previous Pass</a></li> */}
-            <li onClick={handlePreviousPassClick}><a href="#">Previous Pass</a></li>
-            <li onClick={handleAdditionalDocumentsClick}><a href="#">Additional documents</a></li>
+            <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: request.previousPassURL })}>Previous Pass</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: '#' })}>Additional documents</li>
           </ul>
         </div>
         <div className={styles.railwayConcessionCardFooterButtonDiv}>
