@@ -16,7 +16,7 @@ import { UserContext } from "../../pages/_app";
 import { useRouter } from "next/router";
 import { userTypes } from "../../constants/userTypes";
 import Sidebar from "../Sidebar/Sidebar";
-
+import Spinner from "../Spinner";
 const EVENT_COMMITTEE_NAME = "Committee Name";
 const EVENT_LOCATION = "Event Location";
 const EVENT_NAME = "Event Name";
@@ -37,6 +37,7 @@ const initialDetails = {
   [EVENT_REGISTRATION_LINK]: "",
   [EVENT_IMAGE_URL]: "",
 };
+false;
 
 function Element(props) {
   return (
@@ -53,6 +54,7 @@ function CreateEventComponent() {
   const [uploadMediaStatus, setMediaUploadStatus] = useState(false);
   const [mediaPath, setMediaPath] = useState("");
   const [media, setMedia] = useState({});
+  const [loading, setLoading] = useState(false);
   const { loggedIn, setLoggedIn, user, setUser } =
     React.useContext(UserContext);
   const router = useRouter();
@@ -130,10 +132,12 @@ function CreateEventComponent() {
   };
 
   const setNotification = async () => {
+    setLoading(true);
     try {
       const docRef = await addDoc(collection(db, FIREBASE_EVENT_COLLECTION), {
         ...eventDetails,
       });
+      setLoading(false);
       toast.notify(`Submitted response`, { type: "success" });
       setEventDetails(initialDetails);
       setMediaUploadStatus(false);
@@ -182,144 +186,149 @@ function CreateEventComponent() {
 
     return;
   };
-  eventDetails[EVENT_COMMITTEE_NAME] = user.name
+  eventDetails[EVENT_COMMITTEE_NAME] = user.name;
 
   return (
     <div className={styles.reminder}>
+      {loading && <Spinner />}
       <div className={styles.reminderContent}>
-      
         <Sidebar user={user} />
-         <div className={styles.reminderEntry}>
+        <div className={styles.reminderEntry}>
           <div className={styles.reminderTitle}>New Event</div>
           <hr />
 
-      <div className={styles.reminderBody}>
-        <div className={styles.reminderBodyLeft}>
-          <Element title="Comittee Name *">
-            <div className={[styles.committeeName]}>
-              <select
-                onChange={handleEventDetails}
-                value={eventDetails[EVENT_COMMITTEE_NAME]}
-                name={EVENT_COMMITTEE_NAME}
-                style={{ minWidth: "100%" }}
-                disabled
-              >
-                <option value={user.name} >{user.name}</option>
-              </select>
-            </div>
-          </Element>
-          <Element title="Event Location *">
-            <input
-              name={EVENT_LOCATION}
-              cols="30"
-              rows="5"
-              placeholder="Enter event location"
-              className={styles.inputText}
-              value={eventDetails[EVENT_LOCATION]}
-              onChange={handleEventDetails}
-            />
-          </Element>
-          <Element title="Event Name *">
-            <input
-              name={EVENT_NAME}
-              cols="30"
-              rows="5"
-              placeholder="Enter event name"
-              className={styles.inputText}
-              value={eventDetails[EVENT_NAME]}
-              onChange={handleEventDetails}
-            />
-          </Element>
-          <Element title="Event description *">
-            <textarea
-              cols="30"
-              rows="5"
-              placeholder="Enter event description"
-              className={styles.inputText}
-              name={EVENT_DESCRIPTION}
-              value={eventDetails[EVENT_DESCRIPTION]}
-              onChange={handleEventDetails}
-            ></textarea>
-          </Element>
-        </div>
-        <div className={styles.reminderBodyRight}>
-          <Element title="Event registration link">
-            <input
-              cols="30"
-              rows="5"
-              placeholder="Enter event registration link"
-              className={styles.inputText}
-              name={EVENT_REGISTRATION_LINK}
-              value={eventDetails[EVENT_REGISTRATION_LINK]}
-              onChange={handleEventDetails}
-            />
-            <p style={{ color: "rgb(255, 12, 19)" }}>
-              Please upload the full url, Don't upload shortened url
-            </p>
-          </Element>
-          <Element title="Select date and time">
-            <div className={styles.inputbox}>
-              <input
-                type="date"
-                name={EVENT_DATE}
-                value={eventDetails[EVENT_DATE]}
-                onChange={handleEventDetails}
-                className="date form-control"
-              />{" "}
-              <input
-                type="time"
-                name={EVENT_TIME}
-                value={eventDetails[EVENT_TIME]}
-                onChange={handleEventDetails}
-                className="time form-control"
-              />
-            </div>
-          </Element>
-
-          <Element title="Add attachments *">
-            <div className={styles.inputbox}>
-              <input
-                type="file"
-                onChange={(e) => {
-                  uploadFile(e.target.files[0]);
-                }}
-                id="actual-btn"
-                name={EVENT_IMAGE_URL}
-                hidden
-              />
-              <label htmlFor="actual-btn" className={styles.label}>
-                +
-              </label>
-              <label>Upload From Device</label>
-            </div>
-            <p style={{ color: "rgb(255, 12, 19)" }}>
-              Image Dimension : 1080x1350, 1080x680, 1080x1080 *
-            </p>
-            {uploadMediaStatus && (
-              <>
-                <p style={{ color: "#fff", marginTop: "5px" }}>
-                  Uploaded {media.name}
-                </p>
-                <div
-                  style={{
-                    background: "white",
-                    width: "180px",
-                    marginTop: "12px",
-                  }}
-                >
-                  <img src={mediaPath} width="100%" height={"100%"} alt="" />
+          <div className={styles.reminderBody}>
+            <div className={styles.reminderBodyLeft}>
+              <Element title="Comittee Name *">
+                <div className={[styles.committeeName]}>
+                  <select
+                    onChange={handleEventDetails}
+                    value={eventDetails[EVENT_COMMITTEE_NAME]}
+                    name={EVENT_COMMITTEE_NAME}
+                    style={{ minWidth: "100%" }}
+                    disabled
+                  >
+                    <option value={user.name}>{user.name}</option>
+                  </select>
                 </div>
-              </>
-            )}
-          </Element>
+              </Element>
+              <Element title="Event Location *">
+                <input
+                  name={EVENT_LOCATION}
+                  cols="30"
+                  rows="5"
+                  placeholder="Enter event location"
+                  className={styles.inputText}
+                  value={eventDetails[EVENT_LOCATION]}
+                  onChange={handleEventDetails}
+                />
+              </Element>
+              <Element title="Event Name *">
+                <input
+                  name={EVENT_NAME}
+                  cols="30"
+                  rows="5"
+                  placeholder="Enter event name"
+                  className={styles.inputText}
+                  value={eventDetails[EVENT_NAME]}
+                  onChange={handleEventDetails}
+                />
+              </Element>
+              <Element title="Event description *">
+                <textarea
+                  cols="30"
+                  rows="5"
+                  placeholder="Enter event description"
+                  className={styles.inputText}
+                  name={EVENT_DESCRIPTION}
+                  value={eventDetails[EVENT_DESCRIPTION]}
+                  onChange={handleEventDetails}
+                ></textarea>
+              </Element>
+            </div>
+            <div className={styles.reminderBodyRight}>
+              <Element title="Event registration link">
+                <input
+                  cols="30"
+                  rows="5"
+                  placeholder="Enter event registration link"
+                  className={styles.inputText}
+                  name={EVENT_REGISTRATION_LINK}
+                  value={eventDetails[EVENT_REGISTRATION_LINK]}
+                  onChange={handleEventDetails}
+                />
+                <p style={{ color: "rgb(255, 12, 19)" }}>
+                  Please upload the full url, Don't upload shortened url
+                </p>
+              </Element>
+              <Element title="Select date and time">
+                <div className={styles.inputbox}>
+                  <input
+                    type="date"
+                    name={EVENT_DATE}
+                    value={eventDetails[EVENT_DATE]}
+                    onChange={handleEventDetails}
+                    className="date form-control"
+                  />{" "}
+                  <input
+                    type="time"
+                    name={EVENT_TIME}
+                    value={eventDetails[EVENT_TIME]}
+                    onChange={handleEventDetails}
+                    className="time form-control"
+                  />
+                </div>
+              </Element>
+
+              <Element title="Add attachments *">
+                <div className={styles.inputbox}>
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      uploadFile(e.target.files[0]);
+                    }}
+                    id="actual-btn"
+                    name={EVENT_IMAGE_URL}
+                    hidden
+                  />
+                  <label htmlFor="actual-btn" className={styles.label}>
+                    +
+                  </label>
+                  <label>Upload From Device</label>
+                </div>
+                <p style={{ color: "rgb(255, 12, 19)" }}>
+                  Image Dimension : 1080x1350, 1080x680, 1080x1080 *
+                </p>
+                {uploadMediaStatus && (
+                  <>
+                    <p style={{ color: "#fff", marginTop: "5px" }}>
+                      Uploaded {media.name}
+                    </p>
+                    <div
+                      style={{
+                        background: "white",
+                        width: "180px",
+                        marginTop: "12px",
+                      }}
+                    >
+                      <img
+                        src={mediaPath}
+                        width="100%"
+                        height={"100%"}
+                        alt=""
+                      />
+                    </div>
+                  </>
+                )}
+              </Element>
+            </div>
+          </div>
+
+          <button onClick={handleSubmit} className={styles.EventSubmitButton}>
+            Submit
+          </button>
         </div>
       </div>
-
-      <button onClick={handleSubmit} className={styles.EventSubmitButton}>
-        Submit
-          </button>
-          </div>
-        </div>
     </div>
   );
 }
