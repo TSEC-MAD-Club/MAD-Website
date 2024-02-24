@@ -132,6 +132,10 @@
   text-align: left;
   padding-left: 0rem;
 }
+.railwayConcessionCardDocumentsList li:hover {
+  color: black;
+  cursor: pointer;
+}
 
 .railwayConcessionCardApproveButton {
   background-color: rgba(0, 199, 32, 1);
@@ -207,12 +211,11 @@
 
 .modal {
   background-color: var(--primary-5);
-  /* padding: 20px 30px; */
   border-radius: 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 101; /* Ensure the modal is above the overlay */
-  width: 50%;
-  height: 50%;
+  z-index: 101;
+  width: 40%;
+  height: 90%;
 }
 
 .modalDiv {
@@ -578,4 +581,45 @@
   margin-left: 100px;
   height: 61px;
   background: #ffffff;
+}
+
+.documentTitleDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.documentTitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.documentCrossButton {
+  border: none;
+  background-color: var(--primary-5);
+}
+
+.documentModalDiv {
+  background-color: var(--primary-5);
+  padding: 20px 30px;
+  border-radius: 24px;
+  font-size: 14px;
+  color: var(--primary-2);
+  width: 100%;
+}
+
+.documentImg {
+  width: 100%;
+  height: 80vh;
+  padding: 1rem;
+  object-fit: contain;
+}
+
+.noDocs {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--primary-2);
+  position: absolute;
+  top: 50%;
+  left: 39%;
 }

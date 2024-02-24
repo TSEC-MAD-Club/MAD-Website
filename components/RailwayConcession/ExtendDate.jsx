@@ -99,6 +99,11 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const response = await fetch(csvUrl);
       const csvData = await response.text();
 
+      //date
+      const day = newDate.getDate();
+      const month = newDate.getMonth() + 1;
+      const year = newDate.getFullYear();
+
       // Parse CSV data
       const rows = csvData.split('\n');
       const headers = rows[0].split(',');
@@ -112,7 +117,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
         const currentPassNumber = values[0].trim();
         if (alphaToNum(currentPassNumber) == alphaToNum(passNumberToUpdate)) {
           // Update the entry
-          values[headers.indexOf('lastPassIssued')] = newDate;
+          values[headers.indexOf('lastPassIssued')] = `${day}/${month}/${year}`;
 
           rows[i] = values.join(',');
           const updatedCsvData = rows.join('\n');

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./RailwayConcession.module.css";
 import ApprovalInfo from "./ApprovalInfo";
 import RemovalInfo from "./RemovalInfo";
+import DocumentInfo from "./DocumentInfo";
 
 const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
   const [isInfoWindowVisible, setInfoWindowVisibility] = useState(false);
@@ -30,6 +31,17 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
     );
     setInfoWindowVisibility(true);
   };
+
+  const handleIDCardClick = async ({ heading, url }) => {
+    setInfoWindowText(
+      <DocumentInfo
+        heading={heading}
+        documentURL={url}
+        handleCloseInfoWindow={handleCloseInfoWindow}
+      />
+    );
+    setInfoWindowVisibility(true);
+  }
 
   const convertDate = (date) => {
     const dobTimestamp = date;
@@ -129,9 +141,9 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
         <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li><a href={request.idCardURL} target="_blank">ID Card</a></li>
-            <li><a href={request.previousPassURL} target="_blank">Previous Pass</a></li>
-            <li><a href="#" target="_blank">Additional documents</a></li>
+            <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: request.previousPassURL })}>Previous Pass</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: '#' })}>Additional documents</li>
           </ul>
         </div>
         <div className={styles.railwayConcessionCardFooterButtonDiv}>
