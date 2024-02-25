@@ -133,6 +133,11 @@
   padding-left: 0rem;
 }
 
+.railwayConcessionCardDocumentsList li:hover {
+  color: black;
+  cursor: pointer;
+}
+
 .railwayConcessionCardApproveButton {
   background-color: rgba(0, 199, 32, 1);
   color: var(--primary-5);
@@ -211,8 +216,8 @@
   border-radius: 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 101; /* Ensure the modal is above the overlay */
-  width: 50%;
-  height: 50%;
+  width: 45%;
+  height: 90%;
 }
 
 .modalDiv {

@@ -57,6 +57,16 @@ const RailwayUpdateConcessionCard = ({ request }) => {
     }
   };
 
+  const handleIDCardClick = async ({ heading, url }) => {
+    setInfoWindowText(
+      <DocumentInfo
+        heading={heading}
+        documentURL={url}
+        handleCloseInfoWindow={handleCloseInfoWindow}
+      />
+    );
+    setInfoWindowVisibility(true);
+  }
 
   useEffect(() => {
     fetchConcessionDetailsAndRequest();
@@ -145,12 +155,12 @@ const RailwayUpdateConcessionCard = ({ request }) => {
       </div>
       <hr className={styles.railwayConcessionCardHr} />
       <div className={styles.railwayConcessionCardFooter}>
-        <div className={styles.Doc}>
+        <div className={styles.noDocs}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li><a href={request.idCardURL}>ID Card</a></li>
-            <li><a href={request.previousPassURL}>Previous Pass</a></li>
-            <li><a href="#">Additional documents</a></li>
+            <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: request.previousPassURL })}>Previous Pass</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: '#' })}>Additional documents</li>
           </ul>
         </div>
         <p className={styles.railwayConcessionCardTableCell}>
