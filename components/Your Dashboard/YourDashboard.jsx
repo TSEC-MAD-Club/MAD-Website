@@ -79,13 +79,15 @@ function YourDashboard({ user }) {
             <div className={styles.twobutton}>
               {Features.map((data, id) =>
                 userHasAccess(data) ? (
-                  <button
-                    key={id}
-                    className={styles.item}
-                    onClick={handleButtonClick}
-                  >
-                    <Link href={data.mainLink}>{data.mainTitle}</Link>
-                  </button>
+                  <Link href={data.mainLink}>
+                    <button
+                      key={id}
+                      className={styles.item}
+                      onClick={handleButtonClick}
+                    >
+                      {data.mainTitle}
+                    </button>
+                  </Link>
                 ) : null
               )}
             </div>
@@ -93,29 +95,29 @@ function YourDashboard({ user }) {
           {!(
             user.type === userTypes.RAILWAY || user.type === userTypes.COMMITTEE
           ) && (
-            <div className={styles.recent}>
-              <h3>Recent Notifications & Notices</h3>
-              <hr className={styles.hr} />
-              <table className={styles.table}>
-                <tr className={styles.tableRow}>
-                  <th className={styles.tableCol}>Subject</th>
-                  <th className={styles.tableCol}>Sent To</th>
-                  <th className={styles.tableCol}>Description</th>
-                  <th className={styles.tableCol}>Date</th>
-                </tr>
-                {Notifications.map((notification, id) => (
-                  <tr key={id} className={styles.tableRow}>
-                    <td className={styles.tableCol}>{notification.title}</td>
-                    <td className={styles.tableCol}>{notification.topic}</td>
-                    <td className={styles.tableCol}>{notification.message}</td>
-                    <td className={styles.tableCol}>
-                      {notification.notificationTime.toDate().toLocaleString()}
-                    </td>
+              <div className={styles.recent}>
+                <h3>Recent Notifications & Notices</h3>
+                <hr className={styles.hr} />
+                <table className={styles.table}>
+                  <tr className={styles.tableRow}>
+                    <th className={styles.tableCol}>Subject</th>
+                    <th className={styles.tableCol}>Sent To</th>
+                    <th className={styles.tableCol}>Description</th>
+                    <th className={styles.tableCol}>Date</th>
                   </tr>
-                ))}
-              </table>
-            </div>
-          )}
+                  {Notifications.map((notification, id) => (
+                    <tr key={id} className={styles.tableRow}>
+                      <td className={styles.tableCol}>{notification.title}</td>
+                      <td className={styles.tableCol}>{notification.topic}</td>
+                      <td className={styles.tableCol}>{notification.message}</td>
+                      <td className={styles.tableCol}>
+                        {notification.notificationTime.toDate().toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
+                </table>
+              </div>
+            )}
         </>
       )}
     </div>

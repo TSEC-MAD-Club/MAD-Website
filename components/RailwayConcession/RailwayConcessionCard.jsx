@@ -138,7 +138,7 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
       </div>
       <hr className={styles.railwayConcessionCardHr} />
       <div className={styles.railwayConcessionCardFooter}>
-        <div className={styles.noDocs}>
+        <div className={styles.Doc}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
             <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
