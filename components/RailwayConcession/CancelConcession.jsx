@@ -1,16 +1,32 @@
 import React, { useEffect, useState } from "react";
 import styles from "../RailwayConcession/RailwayConcession.module.css";
-import { collection, getDocs, query, updateDoc, where } from "firebase/firestore";
-import { ref, uploadString, getDownloadURL, getStorage } from 'firebase/storage';
+import {
+  collection,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import {
+  ref,
+  uploadString,
+  getDownloadURL,
+  getStorage,
+} from "firebase/storage";
 import { db } from "../../firebase";
 import { toast } from "react-nextjs-toast";
+import Spinner from "../Spinner";
 
 const storage = getStorage();
 
-const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
+const CancelConcession = ({
+  request,
+  handleCloseInfoWindow,
+  fetchAllEnquiries,
+}) => {
   const [message, setMessage] = useState("");
   const [passNum, setPassNum] = useState("");
-  const [uid, setUid] = useState('');
+  const [uid, setUid] = useState("");
 
   const getPassNum = async () => {
     try {
@@ -53,7 +69,7 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
 
   const uploadCsvToStorage = async (csvContent, fileName) => {
     const storageRef = ref(storage, `csvFiles/${fileName}`);
-    await uploadString(storageRef, csvContent, 'raw');
+    await uploadString(storageRef, csvContent, "raw");
     return getDownloadURL(storageRef);
   };
 
@@ -74,7 +90,9 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
     try {
       const csvCollectionDetails = collection(db, "csvCollection");
       const csvCollectionDetailsSnapshot = await getDocs(csvCollectionDetails);
-      const csvData = csvCollectionDetailsSnapshot.docs.map(doc => doc.data());
+      const csvData = csvCollectionDetailsSnapshot.docs.map((doc) =>
+        doc.data()
+      );
 
       if (csvCollectionDetailsSnapshot.empty) {
         console.error("csvCollectionDetails document not found");
@@ -82,12 +100,14 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
       }
       // console.log(csvData);
       for (let i = 0; i < csvData.length; i++) {
-        if (alphaToNum(csvData[i].firstName) <= alphaToNum(passNum) && alphaToNum(csvData[i].lastName) >= alphaToNum(passNum)) {
+        if (
+          alphaToNum(csvData[i].firstName) <= alphaToNum(passNum) &&
+          alphaToNum(csvData[i].lastName) >= alphaToNum(passNum)
+        ) {
           updateEntry(csvData[i].content, passNum);
         }
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error updating status and message:", error);
     }
   };
@@ -99,30 +119,34 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
       const csvData = await response.text();
 
       // Parse CSV data
-      const rows = csvData.split('\n');
-      const headers = rows[0].split(',');
-      const firstName = rows[1].split(',')[0];
-      const lastName = rows[rows.length - 1].split(',')[0];
+      const rows = csvData.split("\n");
+      const headers = rows[0].split(",");
+      const firstName = rows[1].split(",")[0];
+      const lastName = rows[rows.length - 1].split(",")[0];
       const fileName = `${firstName}-${lastName}.csv`;
 
       // Iterate through rows to find and update the entry
       for (let i = 1; i < rows.length; i++) {
-        const values = rows[i].split(',');
+        const values = rows[i].split(",");
         const currentPassNumber = values[0].trim();
         if (alphaToNum(currentPassNumber) == alphaToNum(passNumberToUpdate)) {
           // Update the entry
-          values[headers.indexOf('name')] = 'Cancelled';
+          values[headers.indexOf("name")] = "Cancelled";
 
-          rows[i] = values.join(',');
-          const updatedCsvData = rows.join('\n');
+          rows[i] = values.join(",");
+          const updatedCsvData = rows.join("\n");
 
           const csvLink = await uploadCsvToStorage(updatedCsvData, fileName);
-          const csvCollection = collection(db, 'csvCollection');
-          const csvQuery = query(csvCollection, where('firstName', '==', firstName), where('lastName', '==', lastName));
+          const csvCollection = collection(db, "csvCollection");
+          const csvQuery = query(
+            csvCollection,
+            where("firstName", "==", firstName),
+            where("lastName", "==", lastName)
+          );
           const csvSnapshot = await getDocs(csvQuery);
 
           if (csvSnapshot.empty) {
-            console.error('csvCollection document not found');
+            console.error("csvCollection document not found");
             return;
           }
 
@@ -134,12 +158,13 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
         }
       }
     } catch (error) {
-      console.error('Error updating entry:', error);
+      console.error("Error updating entry:", error);
     }
   };
-
+  const [loading, setLoading] = useState(false);
   const handleReject = async () => {
     try {
+      setLoading(true);
       const concessionDetailsCollection = collection(db, "ConcessionDetails");
       const detailsQuery = query(
         concessionDetailsCollection,
@@ -159,7 +184,7 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
         `matchingDetailsRef` reference. It sets the `status` field to 'rejected' and the
         `statusMessage` field to the value of the `message` state variable. */
         await updateDoc(matchingDetailsRef, {
-          status: 'rejected',
+          status: "rejected",
           statusMessage: message,
         });
       } else {
@@ -194,8 +219,10 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
       } else {
         console.error("ConcessionRequest document not found");
       }
+      setLoading(false);
     } catch (error) {
       console.error("Error updating status and message:", error);
+      setLoading(false);
     }
   };
 
@@ -214,6 +241,7 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
         width: "100%",
       }}
     >
+      {loading && <Spinner />}
       <span style={{ fontSize: "1.7rem" }}>Reject Concession Request?</span>
       <div style={{ display: "flex" }}>
         <div className={styles.studentRejectInfo}>
@@ -247,7 +275,9 @@ const CancelConcession = ({ request, handleCloseInfoWindow, fetchAllEnquiries })
           ></textarea>
         </div>
         <div className={styles.modalRejectButtonDiv}>
-          <button className={styles.modalRejectButton} onClick={handleReject}>Reject</button>
+          <button className={styles.modalRejectButton} onClick={handleReject}>
+            Reject
+          </button>
           <button
             className={styles.modalGoBackButton}
             onClick={handleCloseInfoWindow}
