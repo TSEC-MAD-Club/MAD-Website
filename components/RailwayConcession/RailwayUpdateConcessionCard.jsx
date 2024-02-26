@@ -49,6 +49,17 @@ const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
     return `${day}/${month}/${year}`;
   };
 
+  const handleIDCardClick = async ({ heading, url }) => {
+    setInfoWindowText(
+      <DocumentInfo
+        heading={heading}
+        documentURL={url}
+        handleCloseInfoWindow={handleCloseInfoWindow}
+      />
+    );
+    setInfoWindowVisibility(true);
+  }
+
   return (
     <div className={styles.railwayConcessionCard}>
       {loading && <Spinner />}
@@ -140,33 +151,9 @@ const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
         <div className={styles.noDocs}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li
-              onClick={() =>
-                handleIDCardClick({
-                  heading: "Id Card",
-                  url: request.idCardURL,
-                })
-              }
-            >
-              ID Card
-            </li>
-            <li
-              onClick={() =>
-                handleIDCardClick({
-                  heading: "Previous Pass",
-                  url: request.previousPassURL,
-                })
-              }
-            >
-              Previous Pass
-            </li>
-            <li
-              onClick={() =>
-                handleIDCardClick({ heading: "Previous Pass", url: "#" })
-              }
-            >
-              Additional documents
-            </li>
+            <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: request.previousPassURL })}>Previous Pass</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: '#' })}>Additional documents</li>
           </ul>
         </div>
         <div className={styles.railwayConcessionCardFooterButtonDiv}>

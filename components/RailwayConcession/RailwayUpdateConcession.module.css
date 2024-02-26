@@ -134,7 +134,7 @@
 }
 
 .railwayConcessionCardDocumentsList li:hover {
-  color: black;
+  color: var(--primary-1);
   cursor: pointer;
 }
 
