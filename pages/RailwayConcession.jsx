@@ -76,7 +76,7 @@ const RailwayConcession = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', height: '100vh', marginRight: '3rem', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', gap: '2rem', height: '100vh', marginRight: '3rem' }}>
       <SideBar user={user} />
       <div style={{ padding: '16px', marginBottom: '16px' }}>
         <div style={{ display: 'flex', flexDirection: 'row', marginTop: '3rem', marginBottom: '1rem' }}>

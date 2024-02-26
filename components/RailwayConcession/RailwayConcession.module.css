@@ -133,7 +133,7 @@
   padding-left: 0rem;
 }
 .railwayConcessionCardDocumentsList li:hover {
-  color: black;
+  color: var(--primary-1);
   cursor: pointer;
 }
 
@@ -215,7 +215,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 101;
   width: 40%;
-  height: 90%;
+  height: auto;
 }
 
 .modalDiv {
@@ -622,4 +622,10 @@
   position: absolute;
   top: 50%;
   left: 39%;
+}
+
+.documentTitle1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 4em;
 }

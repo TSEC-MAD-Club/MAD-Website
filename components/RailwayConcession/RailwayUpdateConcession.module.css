@@ -3,7 +3,7 @@
   background-color: var(--primary-5);
   border-radius: 30px;
   padding: 3rem;
-  margin-bottom: 10rem;
+  margin-bottom: 2rem;
 }
 
 .nameAndGender {
@@ -217,7 +217,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 101; /* Ensure the modal is above the overlay */
   width: 45%;
-  height: 90%;
+  height: auto;
 }
 
 .modalDiv {
