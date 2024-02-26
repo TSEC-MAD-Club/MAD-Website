@@ -3,13 +3,16 @@ import styles from "./RailwayUpdateConcession.module.css";
 import ExtendDate from "./ExtendDate";
 import CancelConcession from "./CancelConcession";
 import DocumentInfo from "./DocumentInfo";
+import Spinner from "../Spinner";
 
 const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
   const [isInfoWindowVisible, setInfoWindowVisibility] = useState(false);
   const [infoWindowText, setInfoWindowText] = useState("");
   const handleCloseInfoWindow = () => {
     setInfoWindowVisibility(false);
+    setLoading(false);
   };
+
   const handleApproveClick = async () => {
     setInfoWindowText(
       <ExtendDate
@@ -20,8 +23,9 @@ const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
     );
     setInfoWindowVisibility(true);
   };
+  const [loading, setLoading] = useState(false);
 
-  const handleRejectClick = async () => {
+  const handleRejectClick = () => {
     setInfoWindowText(
       <CancelConcession
         request={request}
@@ -32,20 +36,10 @@ const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
     setInfoWindowVisibility(true);
   };
 
-  const handleIDCardClick = async ({ heading, url }) => {
-    setInfoWindowText(
-      <DocumentInfo
-        heading={heading}
-        documentURL={url}
-        handleCloseInfoWindow={handleCloseInfoWindow}
-      />
-    );
-    setInfoWindowVisibility(true);
-  }
-
   const convertDate = (date) => {
     const dobTimestamp = date;
-    const dobMilliseconds = dobTimestamp.seconds * 1000 + dobTimestamp.nanoseconds / 1e6;
+    const dobMilliseconds =
+      dobTimestamp.seconds * 1000 + dobTimestamp.nanoseconds / 1e6;
     const dobDate = new Date(dobMilliseconds);
     const dateObj = new Date(dobDate);
     const day = dateObj.getDate();
@@ -57,9 +51,12 @@ const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
 
   return (
     <div className={styles.railwayConcessionCard}>
+      {loading && <Spinner />}
       <div className={styles.railwayConcessionTitle}>
         <p className={styles.nameAndGender}>
-          <span className={styles.name}>{request.firstName} {request.middleName} {request.lastName}</span>
+          <span className={styles.name}>
+            {request.firstName} {request.middleName} {request.lastName}
+          </span>
           <span className={styles.gender}>{request.gender}</span>
           <span className={styles.western}>{request.travelLane}</span>
         </p>
@@ -76,7 +73,9 @@ const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
               Date of Issue:
             </td>
             <td className={styles.railwayConcessionCardTableCell}>Branch:</td>
-            <td className={styles.railwayConcessionCardTableCell}>Current Year:</td>
+            <td className={styles.railwayConcessionCardTableCell}>
+              Current Year:
+            </td>
           </tr>
 
           <tr>
@@ -141,9 +140,33 @@ const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
         <div className={styles.noDocs}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
-            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: request.previousPassURL })}>Previous Pass</li>
-            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: '#' })}>Additional documents</li>
+            <li
+              onClick={() =>
+                handleIDCardClick({
+                  heading: "Id Card",
+                  url: request.idCardURL,
+                })
+              }
+            >
+              ID Card
+            </li>
+            <li
+              onClick={() =>
+                handleIDCardClick({
+                  heading: "Previous Pass",
+                  url: request.previousPassURL,
+                })
+              }
+            >
+              Previous Pass
+            </li>
+            <li
+              onClick={() =>
+                handleIDCardClick({ heading: "Previous Pass", url: "#" })
+              }
+            >
+              Additional documents
+            </li>
           </ul>
         </div>
         <div className={styles.railwayConcessionCardFooterButtonDiv}>

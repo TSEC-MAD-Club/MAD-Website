@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
 import styles from "../RailwayConcession/RailwayUpdateConcession.module.css";
-import { collection, getDocs, query, updateDoc, where, Timestamp } from "firebase/firestore";
-import { ref, uploadString, getDownloadURL, getStorage } from 'firebase/storage';
+import {
+  collection,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+  Timestamp,
+} from "firebase/firestore";
+import {
+  ref,
+  uploadString,
+  getDownloadURL,
+  getStorage,
+} from "firebase/storage";
 import { db } from "../../firebase";
 import { toast } from "react-nextjs-toast";
+import Spinner from "../Spinner";
 
 const storage = getStorage();
 
 const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
   const [date, setDate] = useState(new Date());
-  const [uid, setUid] = useState('');
-  const [passNum, setPassNum] = useState('');
+  const [uid, setUid] = useState("");
+  const [passNum, setPassNum] = useState("");
   const firebaseTimestamp = Timestamp.fromDate(date);
 
   const getPassNum = async () => {
@@ -54,7 +67,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
 
   const uploadCsvToStorage = async (csvContent, fileName) => {
     const storageRef = ref(storage, `csvFiles/${fileName}`);
-    await uploadString(storageRef, csvContent, 'raw');
+    await uploadString(storageRef, csvContent, "raw");
     return getDownloadURL(storageRef);
   };
 
@@ -75,7 +88,9 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
     try {
       const csvCollectionDetails = collection(db, "csvCollection");
       const csvCollectionDetailsSnapshot = await getDocs(csvCollectionDetails);
-      const csvData = csvCollectionDetailsSnapshot.docs.map(doc => doc.data());
+      const csvData = csvCollectionDetailsSnapshot.docs.map((doc) =>
+        doc.data()
+      );
 
       if (csvCollectionDetailsSnapshot.empty) {
         console.error("csvCollectionDetails document not found");
@@ -83,12 +98,14 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       }
       // console.log(csvData);
       for (let i = 0; i < csvData.length; i++) {
-        if (alphaToNum(csvData[i].firstName) <= alphaToNum(passNum) && alphaToNum(csvData[i].lastName) >= alphaToNum(passNum)) {
+        if (
+          alphaToNum(csvData[i].firstName) <= alphaToNum(passNum) &&
+          alphaToNum(csvData[i].lastName) >= alphaToNum(passNum)
+        ) {
           updateEntry(csvData[i].content, passNum, date);
         }
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error updating status and message:", error);
     }
   };
@@ -105,30 +122,34 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       const year = newDate.getFullYear();
 
       // Parse CSV data
-      const rows = csvData.split('\n');
-      const headers = rows[0].split(',');
-      const firstName = rows[1].split(',')[0];
-      const lastName = rows[rows.length - 1].split(',')[0];
+      const rows = csvData.split("\n");
+      const headers = rows[0].split(",");
+      const firstName = rows[1].split(",")[0];
+      const lastName = rows[rows.length - 1].split(",")[0];
       const fileName = `${firstName}-${lastName}.csv`;
 
       // Iterate through rows to find and update the entry
       for (let i = 1; i < rows.length; i++) {
-        const values = rows[i].split(',');
+        const values = rows[i].split(",");
         const currentPassNumber = values[0].trim();
         if (alphaToNum(currentPassNumber) == alphaToNum(passNumberToUpdate)) {
           // Update the entry
-          values[headers.indexOf('lastPassIssued')] = `${day}/${month}/${year}`;
+          values[headers.indexOf("lastPassIssued")] = `${day}/${month}/${year}`;
 
-          rows[i] = values.join(',');
-          const updatedCsvData = rows.join('\n');
+          rows[i] = values.join(",");
+          const updatedCsvData = rows.join("\n");
 
           const csvLink = await uploadCsvToStorage(updatedCsvData, fileName);
-          const csvCollection = collection(db, 'csvCollection');
-          const csvQuery = query(csvCollection, where('firstName', '==', firstName), where('lastName', '==', lastName));
+          const csvCollection = collection(db, "csvCollection");
+          const csvQuery = query(
+            csvCollection,
+            where("firstName", "==", firstName),
+            where("lastName", "==", lastName)
+          );
           const csvSnapshot = await getDocs(csvQuery);
 
           if (csvSnapshot.empty) {
-            console.error('csvCollection document not found');
+            console.error("csvCollection document not found");
             return;
           }
 
@@ -140,12 +161,14 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
         }
       }
     } catch (error) {
-      console.error('Error updating entry:', error);
+      console.error("Error updating entry:", error);
     }
   };
-
+  const [loading, setLoading] = useState(false);
   const handleApprove = async () => {
+    // setLoading(true);
     try {
+      setLoading(true);
       const concessionDetailsCollection = collection(db, "ConcessionDetails");
       const concessionDetailsQuery = query(
         concessionDetailsCollection,
@@ -184,20 +207,29 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
       been extended!" });` is updating the `ConcessionRequest` document in the Firebase Firestore
       database. It sets the `time` field to the value of the `date` variable and sets the
       `statusMessage` field to the string "Your date has been extended!". */
-      await updateDoc(concessionRequestRef, { time: date, statusMessage: "Your date has been extended!" });
+      await updateDoc(concessionRequestRef, {
+        time: date,
+        statusMessage: "Your date has been extended!",
+      });
 
       // Update ConcessionDetails document
       const concessionDetailsRef = matchingConcessionDoc.ref;
       /* The line `await updateDoc(concessionDetailsRef, { lastPassIssued: firebaseTimestamp }, {
       statusMessage: "Your date has been extended!" });` is updating the `ConcessionDetails`
       document in the Firebase Firestore database. */
-      await updateDoc(concessionDetailsRef, { lastPassIssued: firebaseTimestamp }, { statusMessage: "Your date has been extended!" });
+      await updateDoc(
+        concessionDetailsRef,
+        { lastPassIssued: firebaseTimestamp },
+        { statusMessage: "Your date has been extended!" }
+      );
       handleUpdate(passNum, date);
       toast.notify("Extended Request Date", { type: "info" });
       await fetchAllEnquiries();
+      setLoading(false);
       handleCloseInfoWindow();
     } catch (error) {
       console.error("Error updating status and message:", error);
+      setLoading(false);
     }
   };
 
@@ -215,6 +247,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
         color: "var(--primary-2)",
       }}
     >
+      {loading && <Spinner />}
       <span className={styles.modalTitle}>Extend Date</span>
       <div style={{ display: "flex" }}>
         <div className={styles.studentApproveInfo}>
@@ -250,7 +283,9 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
           ></input>
         </div>
         <div className={styles.modalButtonDiv}>
-          <button className={styles.modalApproveButton} onClick={handleApprove}>Extend Date</button>
+          <button className={styles.modalApproveButton} onClick={handleApprove}>
+            Extend Date
+          </button>
           <button
             className={styles.modalGoBackButton}
             onClick={handleCloseInfoWindow}
