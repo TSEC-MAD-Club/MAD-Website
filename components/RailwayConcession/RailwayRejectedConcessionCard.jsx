@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./RailwayUpdateConcession.module.css";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../../firebase.js";
+import DocumentInfo from "./DocumentInfo";
 
 const RailwayUpdateConcessionCard = ({ request }) => {
   const [statusMessage, setStatusMessage] = useState('');
