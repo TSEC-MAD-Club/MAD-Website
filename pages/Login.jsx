@@ -1,5 +1,5 @@
 // components/Login.js
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { db, app } from "../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
@@ -15,8 +15,8 @@ import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 import styles from "../styles/Login.module.css";
 
-const Login = ({ setLoggedIn, setUser, loggedIn, theme, toggleTheme }) => {
-  // Accept theme as a prop
+const Login = ({ setLoggedIn, setUser, loggedIn }) => {
+  // Accept theme as a prop 
   const [loading, setLoading] = useState(false); // Add loading state
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -24,55 +24,64 @@ const Login = ({ setLoggedIn, setUser, loggedIn, theme, toggleTheme }) => {
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
   const router = useRouter();
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const isMounted = useRef(true);// Use a variable to track whether the component is mounted
 
-  const loginMsg = () => {
-    setLoading(true); // Set loading to true when login process starts
+  useEffect(() => {
+    return () => {
+      // Set isMounted to false when the component is unmounted
+      isMounted.current = false;
+    };
+  }, []);
+
+  const loginMsg = async () => {
+    setLoading(true);
     const auth = getAuth(app);
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        // Signed in
-        const user = userCredential.user;
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-        const facultyRef = collection(db, "Faculty");
-        const querySnapshot = await getDocs(facultyRef);
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
+      const facultyRef = collection(db, "Faculty");
+      const querySnapshot = await getDocs(facultyRef);
 
-          if (doc.id === auth.currentUser.uid) {
-            setUser({
-              name: data.name,
-              email: data.email,
-              type: data.type,
-            });
-            setLoggedIn(true);
-            toast.notify("Successfully logged in!!", { type: "success" });
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
 
-            //remember me logic
-            if (rememberMe) {
-              localStorage.setItem(
-                "user",
-                JSON.stringify({
-                  name: data.name,
-                  email: data.email,
-                  type: data.type,
-                })
-              );
-            }
+        if (doc.id === auth.currentUser.uid) {
+          setUser({
+            name: data.name,
+            email: data.email,
+            type: data.type,
+          });
+          setLoggedIn(true);
+          toast.notify("Successfully logged in!!", { type: "success" });
+
+          if (rememberMe) {
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                name: data.name,
+                email: data.email,
+                type: data.type,
+              })
+            );
           }
-        });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        toast.notify(errorCode + " " + errorMessage, { type: "error" });
-      })
-      .finally(() => {
-        setLoading(false); // Set loading to false after login process finishes
+        }
+      });
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      toast.notify(errorCode + " " + errorMessage, { type: "error" });
+    } finally {
+      // Check if the component is still mounted before updating state
+      if (isMounted.current) {
+        setLoading(false);
         if (loggedIn) {
           toast.notify("User not found!", { type: "error" });
         }
-      });
+      }
+    }
   };
 
   const handleRememberMe = () => {
