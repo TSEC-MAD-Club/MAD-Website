@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "../components/RailwayConcession/RailwayUpdateConcession.module.css";
-import RailwayUpdateConcessionList from "../components/RailwayConcession/RailwayUpdateConcessionList.jsx";
-import { UserContext } from "./_app";
-import SideBar from "../components/Sidebar/Sidebar";
+import { UserContext } from "./_app.js";
+import SideBar from "../components/Sidebar/Sidebar.jsx";
 import { collection, query, limit, getDocs, where, doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase.js";
+import RailwayRejectedConcessionList from "../components/RailwayConcession/RailwayRejectedConcessionList.jsx";
 import { useRouter } from "next/router";
 import { userTypes } from "../constants/userTypes";
 
@@ -30,22 +30,24 @@ const RailwayConcession = () => {
       const concessionDetailsRef = collection(db, "ConcessionDetails");
       const concessionRequestRef = collection(db, "ConcessionRequest");
 
-      // Get requests with status "serviced" or "downloaded"
-      const requestsSnapshot = await getDocs(
-        query(concessionRequestRef, where("status", "in", ["serviced", "downloaded"]), limit(10))
+      // Get awaiting requests
+      const awaitingRequestsSnapshot = await getDocs(
+        query(concessionRequestRef, where("status", "==", "rejected"), limit(10))
       );
-
       const fetchedEnquiries = [];
 
-      // Iterate through requests
-      for (const requestDoc of requestsSnapshot.docs) {
+      // Iterate through awaiting requests
+      for (const requestDoc of awaitingRequestsSnapshot.docs) {
+        // Get the associated ConcessionDetails document
         const concessionDetailsId = requestDoc.data().uid;
+        // Check if the ConcessionDetailsId is valid
 
         if (concessionDetailsId) {
           const concessionDetailsDoc = await getDoc(
             doc(concessionDetailsRef, concessionDetailsId)
           );
 
+          // Check if the ConcessionDetails document exists
           if (concessionDetailsDoc.exists()) {
             const enquiry = concessionDetailsDoc.data();
             fetchedEnquiries.push(enquiry);
@@ -93,7 +95,7 @@ const RailwayConcession = () => {
         >
           <div>
             <h1 style={{ fontSize: "30px", fontWeight: "bold" }}>
-              Update or Cancel a Concession
+              Rejected Concessions
             </h1>
             <div
               className={styles.certificateSection}
@@ -111,7 +113,7 @@ const RailwayConcession = () => {
             </div>
           </div>
         </div>
-        {!loading ? <RailwayUpdateConcessionList Enquiries={Enquiries} fetchAllEnquiries={fetchAllEnquiries} /> : <p>Loading...</p>}
+        {!loading ? <RailwayRejectedConcessionList Enquiries={Enquiries} /> : <p>Loading...</p>}
       </div>
     </div>
   );

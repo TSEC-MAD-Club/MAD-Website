@@ -1,8 +1,9 @@
-"use client";
+// components/Login.js
 import React, { useContext, useState } from "react";
 import { db, app } from "../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "../styles/Login.module.css";
+import { useRouter } from "next/router";
+import Spinner from "../components/Spinner"; // Import the Spinner component
 import { toast } from "react-nextjs-toast";
 import { collection, getDocs } from "firebase/firestore";
 import Switch from "react-switch";
@@ -14,15 +15,18 @@ import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 import styles from "../styles/Login.module.css";
 
-const Login = ({ setLoggedIn, setUser, loggedIn }) => {
+const Login = ({ setLoggedIn, setUser, loggedIn, theme, toggleTheme }) => {
+  // Accept theme as a prop
+  const [loading, setLoading] = useState(false); // Add loading state
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const router = useRouter();
 
   const loginMsg = () => {
+    setLoading(true); // Set loading to true when login process starts
     const auth = getAuth(app);
 
     signInWithEmailAndPassword(auth, email, password)
@@ -43,6 +47,18 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
             });
             setLoggedIn(true);
             toast.notify("Successfully logged in!!", { type: "success" });
+
+            //remember me logic
+            if (rememberMe) {
+              localStorage.setItem(
+                "user",
+                JSON.stringify({
+                  name: data.name,
+                  email: data.email,
+                  type: data.type,
+                })
+              );
+            }
           }
         });
       })
@@ -52,6 +68,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
         toast.notify(errorCode + " " + errorMessage, { type: "error" });
       })
       .finally(() => {
+        setLoading(false); // Set loading to false after login process finishes
         if (loggedIn) {
           toast.notify("User not found!", { type: "error" });
         }
@@ -61,6 +78,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
   const handleRememberMe = () => {
     setRememberMe(!rememberMe);
   };
+
   const handlePasswordToggle = () => {
     if (type == "password") {
       setIcon(eye);
@@ -157,11 +175,16 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
               <label>Remember Me</label>
             </div>
             <button type="submit" className="loginButton">
-              Log In
+              {loading ? <Spinner /> : "Log In"}{" "}
+              {/* Display spinner or button text based on loading state */}
             </button>
             <div>
               Need help with login?{" "}
-              <a style={{ color: "var(--devs-blue)" }} href="https://wa.me/+918104543329?text=Hey,%20Need%20help%20with%20devs%20dashboard%20login" target="_blank">
+              <a
+                style={{ color: "var(--devs-blue)" }}
+                href="https://wa.me/+918104543329?text=Hey,%20Need%20help%20with%20devs%20dashboard%20login"
+                target="_blank"
+              >
                 {" "}
                 Contact Us!
               </a>

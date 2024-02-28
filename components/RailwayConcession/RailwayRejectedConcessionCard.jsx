@@ -1,35 +1,60 @@
-import React, { useState } from "react";
-import styles from "./RailwayConcession.module.css";
-import ApprovalInfo from "./ApprovalInfo";
-import RemovalInfo from "./RemovalInfo";
-import DocumentInfo from "./DocumentInfo";
+import React, { useEffect, useState } from "react";
+import styles from "./RailwayUpdateConcession.module.css";
+import { collection, query, getDocs, where } from "firebase/firestore";
+import { db } from "../../firebase.js";
 
-const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
-  const [isInfoWindowVisible, setInfoWindowVisibility] = useState(false);
-  const [infoWindowText, setInfoWindowText] = useState("");
-  const handleCloseInfoWindow = () => {
-    setInfoWindowVisibility(false);
-  };
-  const handleApproveClick = async () => {
-    setInfoWindowText(
-      <ApprovalInfo
-        request={request}
-        handleCloseInfoWindow={handleCloseInfoWindow}
-        fetchAllEnquiries={fetchAllEnquiries}
-      />
-    );
-    setInfoWindowVisibility(true);
+const RailwayUpdateConcessionCard = ({ request }) => {
+  const [statusMessage, setStatusMessage] = useState('');
+  const convertDate = (date) => {
+    const dobTimestamp = date;
+    const dobMilliseconds = dobTimestamp.seconds * 1000 + dobTimestamp.nanoseconds / 1e6;
+    const dobDate = new Date(dobMilliseconds);
+    const dateObj = new Date(dobDate);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}/${month}/${year}`;
   };
 
-  const handleRejectClick = async () => {
-    setInfoWindowText(
-      <RemovalInfo
-        request={request}
-        handleCloseInfoWindow={handleCloseInfoWindow}
-        fetchAllEnquiries={fetchAllEnquiries}
-      />
-    );
-    setInfoWindowVisibility(true);
+  const fetchConcessionDetailsAndRequest = async () => {
+    try {
+      const concessionDetailsCollection = collection(db, 'ConcessionDetails');
+      const concessionRequestRef = collection(db, 'ConcessionRequest');
+
+      const detailsQuery = query(
+        concessionDetailsCollection,
+        where('firstName', '==', request.firstName),
+        where('phoneNum', '==', request.phoneNum)
+      );
+      const detailsSnapshot = await getDocs(detailsQuery);
+
+      let uid = ""
+
+      if (!detailsSnapshot.empty) {
+        const matchingDetailsDoc = detailsSnapshot.docs[0];
+        uid = (matchingDetailsDoc.id);
+
+        // Fetch ConcessionRequest based on uid
+        const requestQuery = query(concessionRequestRef, where('uid', '==', uid));
+        const requestSnapshot = await getDocs(requestQuery);
+
+        if (!requestSnapshot.empty) {
+          const concessionRequest = requestSnapshot.docs[0].data();
+          /* `setStatusMessage(concessionRequest.statusMessage);` is updating the state variable
+          `statusMessage` with the value of `concessionRequest.statusMessage`. This means that the
+          value of `statusMessage` will be set to the value of `concessionRequest.statusMessage`,
+          which can then be used in the component to display the status message. */
+          setStatusMessage(concessionRequest.statusMessage);
+        } else {
+          console.error('No matching ConcessionRequest document found');
+        }
+      } else {
+        console.error('ConcessionDetails document not found');
+      }
+    } catch (error) {
+      console.error('Error fetching ConcessionDetails and ConcessionRequest:', error);
+    }
   };
 
   const handleIDCardClick = async ({ heading, url }) => {
@@ -43,17 +68,9 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
     setInfoWindowVisibility(true);
   }
 
-  const convertDate = (date) => {
-    const dobTimestamp = date;
-    const dobMilliseconds = dobTimestamp.seconds * 1000 + dobTimestamp.nanoseconds / 1e6;
-    const dobDate = new Date(dobMilliseconds);
-    const dateObj = new Date(dobDate);
-    const day = dateObj.getDate();
-    const month = dateObj.getMonth() + 1;
-    const year = dateObj.getFullYear();
-
-    return `${day}/${month}/${year}`;
-  };
+  useEffect(() => {
+    fetchConcessionDetailsAndRequest();
+  }, [request]);
 
   return (
     <div className={styles.railwayConcessionCard}>
@@ -138,7 +155,7 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
       </div>
       <hr className={styles.railwayConcessionCardHr} />
       <div className={styles.railwayConcessionCardFooter}>
-        <div className={styles.Doc}>
+        <div className={styles.noDocs}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
             <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
@@ -146,34 +163,15 @@ const RailwayConcessionCard = ({ request, fetchAllEnquiries }) => {
             <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: '#' })}>Additional documents</li>
           </ul>
         </div>
-        <div className={styles.railwayConcessionCardFooterButtonDiv}>
-          <button
-            className={styles.railwayConcessionCardApproveButton}
-            onClick={handleApproveClick}
-          >
-            Approve
-          </button>
-          <button
-            className={styles.railwayConcessionCardRejectButton}
-            onClick={handleRejectClick}
-          >
-            Reject
-          </button>
-        </div>
+        <p className={styles.railwayConcessionCardTableCell}>
+          Message:
+          <ul className={styles.railwayConcessionCardDocumentsList}>
+            <li style={{ 'color': 'red' }}>{statusMessage}</li>
+          </ul>
+        </p>
       </div>
-
-      {isInfoWindowVisible && (
-        <div>
-          <div className={styles.overlay}>
-            <div className={styles.modal}>
-              <div>{infoWindowText}</div>
-              {/* <button onClick={handleCloseInfoWindow}>Go Back</button> */}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default RailwayConcessionCard;
+export default RailwayUpdateConcessionCard;

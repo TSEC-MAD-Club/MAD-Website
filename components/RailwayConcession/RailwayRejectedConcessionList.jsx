@@ -1,14 +1,14 @@
-import RailwayConcessionCard from "./RailwayConcessionCard";
+import RailwayRejectedConcessionCard from "./RailwayRejectedConcessionCard";
 import styles from "./RailwayConcession.module.css";
 
-const RailwayConcessionList = ({ Enquiries, fetchAllEnquiries }) => {
+const RailwayRejectedConcessionList = ({ Enquiries }) => {
   const concessionRequest = Enquiries || [];
 
   return (
     <div className={styles.scrollContainer}>
       {concessionRequest.length > 0 ? (
         concessionRequest.map((request, index) => (
-          <RailwayConcessionCard key={index} request={request} fetchAllEnquiries={fetchAllEnquiries} />
+          <RailwayRejectedConcessionCard key={index} request={request} />
         ))
       ) : (
         <h4>No requests found</h4>
@@ -17,5 +17,4 @@ const RailwayConcessionList = ({ Enquiries, fetchAllEnquiries }) => {
   );
 };
 
-
-export default RailwayConcessionList;
+export default RailwayRejectedConcessionList;

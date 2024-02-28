@@ -2,40 +2,74 @@ import React, { useState } from "react";
 import styles from "./RailwayUpdateConcession.module.css";
 import ExtendDate from "./ExtendDate";
 import CancelConcession from "./CancelConcession";
+import DocumentInfo from "./DocumentInfo";
+import Spinner from "../Spinner";
 
-const RailwayUpdateConcessionCard = ({ request }) => {
+const RailwayUpdateConcessionCard = ({ request, fetchAllEnquiries }) => {
   const [isInfoWindowVisible, setInfoWindowVisibility] = useState(false);
   const [infoWindowText, setInfoWindowText] = useState("");
   const handleCloseInfoWindow = () => {
     setInfoWindowVisibility(false);
+    setLoading(false);
   };
-  const handleApproveClick = () => {
+
+  const handleApproveClick = async () => {
     setInfoWindowText(
       <ExtendDate
         request={request}
         handleCloseInfoWindow={handleCloseInfoWindow}
+        fetchAllEnquiries={fetchAllEnquiries}
       />
     );
     setInfoWindowVisibility(true);
   };
+  const [loading, setLoading] = useState(false);
 
   const handleRejectClick = () => {
     setInfoWindowText(
       <CancelConcession
         request={request}
         handleCloseInfoWindow={handleCloseInfoWindow}
+        fetchAllEnquiries={fetchAllEnquiries}
       />
     );
     setInfoWindowVisibility(true);
   };
 
+  const convertDate = (date) => {
+    const dobTimestamp = date;
+    const dobMilliseconds =
+      dobTimestamp.seconds * 1000 + dobTimestamp.nanoseconds / 1e6;
+    const dobDate = new Date(dobMilliseconds);
+    const dateObj = new Date(dobDate);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
+  const handleIDCardClick = async ({ heading, url }) => {
+    setInfoWindowText(
+      <DocumentInfo
+        heading={heading}
+        documentURL={url}
+        handleCloseInfoWindow={handleCloseInfoWindow}
+      />
+    );
+    setInfoWindowVisibility(true);
+  }
+
   return (
     <div className={styles.railwayConcessionCard}>
+      {loading && <Spinner />}
       <div className={styles.railwayConcessionTitle}>
         <p className={styles.nameAndGender}>
-          <span className={styles.name}>{request.name}</span>
+          <span className={styles.name}>
+            {request.firstName} {request.middleName} {request.lastName}
+          </span>
           <span className={styles.gender}>{request.gender}</span>
-          <span className={styles.western}>{request.type}</span>
+          <span className={styles.western}>{request.travelLane}</span>
         </p>
       </div>
       <hr className={styles.railwayConcessionCardHr} />
@@ -50,7 +84,9 @@ const RailwayUpdateConcessionCard = ({ request }) => {
               Date of Issue:
             </td>
             <td className={styles.railwayConcessionCardTableCell}>Branch:</td>
-            <td className={styles.railwayConcessionCardTableCell}>Current Year:</td>
+            <td className={styles.railwayConcessionCardTableCell}>
+              Current Year:
+            </td>
           </tr>
 
           <tr>
@@ -64,16 +100,16 @@ const RailwayUpdateConcessionCard = ({ request }) => {
               {request.class}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.mode}
+              {request.duration}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.dateOfIssue}
+              {request.lastPassIssued && convertDate(request.lastPassIssued)}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
               {request.branch}
             </td>
             <td className={styles.railwayConcessionCardTableCell2}>
-              {request.gradYear}
+              {request.gradyear}
             </td>
           </tr>
         </tbody>
@@ -92,14 +128,14 @@ const RailwayUpdateConcessionCard = ({ request }) => {
             Date of Birth:
           </p>
           <p className={styles.railwayConcessionCardAddress}>
-            {request.dateOfBirth}
+            {convertDate(request.dob)}
           </p>
         </div>
 
         <div className={styles.railwayAge}>
           <p className={styles.railwayConcessionCardTableCell}>Age:</p>
           <p className={styles.railwayConcessionCardAddress}>
-            {request.ageYears} Years
+            {request.ageYears} Years & {request.ageMonths} Months
           </p>
         </div>
 
@@ -112,26 +148,28 @@ const RailwayUpdateConcessionCard = ({ request }) => {
       </div>
       <hr className={styles.railwayConcessionCardHr} />
       <div className={styles.railwayConcessionCardFooter}>
-        <div className={styles.Doc}>
+        <div className={styles.noDocs}>
           <p className={styles.railwayConcessionCardTableCell}>Documents:</p>
           <ul className={styles.railwayConcessionCardDocumentsList}>
-            {request.documents.map((document) => (
-              <li key={document}>{document}</li>
-            ))}
+            <li onClick={() => handleIDCardClick({ heading: 'Id Card', url: request.idCardURL })}>ID Card</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: request.previousPassURL })}>Previous Pass</li>
+            <li onClick={() => handleIDCardClick({ heading: 'Previous Pass', url: '#' })}>Additional documents</li>
           </ul>
         </div>
-        <button
-          className={styles.railwayConcessionCardApproveButton}
-          onClick={handleApproveClick}
-        >
-          Extend Date
-        </button>
-        <button
-          className={styles.railwayConcessionCardRejectButton}
-          onClick={handleRejectClick}
-        >
-          Cancel
-        </button>
+        <div className={styles.railwayConcessionCardFooterButtonDiv}>
+          <button
+            className={styles.railwayConcessionCardApproveButton}
+            onClick={handleApproveClick}
+          >
+            Extend Date
+          </button>
+          <button
+            className={styles.railwayConcessionCardRejectButton}
+            onClick={handleRejectClick}
+          >
+            Reject
+          </button>
+        </div>
       </div>
 
       {isInfoWindowVisible && (

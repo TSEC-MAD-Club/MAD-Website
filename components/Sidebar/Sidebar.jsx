@@ -8,14 +8,21 @@ import Features from "./link";
 import { UserContext } from "../../pages/_app.js";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Spinner from "../Spinner";
 
 function HamburgerMenu({ user }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // State to manage loading spinner
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { loggedIn, setLoggedIn } = React.useContext(UserContext);
   const router = useRouter();
   const today = new Date();
   const day = today.getDate();
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   const getOrdinalIndicator = (day) => {
     if (day >= 11 && day <= 13) {
       return "th";
@@ -34,6 +41,7 @@ function HamburgerMenu({ user }) {
         return "th";
     }
   };
+
   const formattedDate = today
     .toLocaleDateString("en-US", {
       weekday: "long",
@@ -41,15 +49,6 @@ function HamburgerMenu({ user }) {
       month: "long",
     })
     .replace(/\b(\d{1,2})(th|nd|rd|st)\b/, "$1" + getOrdinalIndicator(day));
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-  const userHasAccess = (featureTypes) => {
-    return (
-      featureTypes.length === 0
-      || featureTypes.includes(user.type)
-    );
-  };
 
   useEffect(() => {
     setIsOpen(window.innerWidth > 600);
@@ -63,6 +62,25 @@ function HamburgerMenu({ user }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    const startLoading = () => setIsLoading(true);
+    const stopLoading = () => setIsLoading(false);
+
+    router.events.on("routeChangeStart", startLoading);
+    router.events.on("routeChangeComplete", stopLoading);
+    router.events.on("routeChangeError", stopLoading);
+
+    return () => {
+      router.events.off("routeChangeStart", startLoading);
+      router.events.off("routeChangeComplete", stopLoading);
+      router.events.off("routeChangeError", stopLoading);
+    };
+  }, []);
+
+  const userHasAccess = (featureTypes) => {
+    return featureTypes.length === 0 || featureTypes.includes(user.type);
+  };
 
   return (
     <div className={styles.hamburgerDisplay} style={{ zIndex: 2 }}>
@@ -87,26 +105,33 @@ function HamburgerMenu({ user }) {
               />
             </div>
             <div className={styles.sidebarHeader}>
-              <img className={styles.sidebarLogo} src="assets/images/DP.png" alt="" />
+              <img
+                className={styles.sidebarLogo}
+                src="assets/images/DP.png"
+                alt=""
+              />
             </div>
             <div className={styles.sidebarUser}>
-
               <h5 className={styles.sidebarUsername}>{user.name}</h5>
               <h5 className={styles.sidebarUsermail}>{user.email}</h5>
               <hr className={styles.sidebarHorizontalRule} />
             </div>
             <div className={styles.sidebarFunctions}>
-              {Features.map((data, id) => (
+              {Features.map((data, id) =>
                 userHasAccess(data.type) ? (
                   <Link key={id} href={data.mainLink}>
                     <div className={styles.sidebarline}>
-                      {theme === "light" && <img src={data.lightIconLink} alt="" />}
-                      {theme === "dark" && <img src={data.darkIconLink} alt="" />}
+                      {theme === "light" && (
+                        <img src={data.lightIconLink} alt="" />
+                      )}
+                      {theme === "dark" && (
+                        <img src={data.darkIconLink} alt="" />
+                      )}
                       {data.mainTitle}
                     </div>
                   </Link>
                 ) : null
-              ))}
+              )}
             </div>
 
             <div className={styles.sidebarInformation}>
@@ -137,19 +162,26 @@ function HamburgerMenu({ user }) {
               />
 
               <p>
-                {formattedDate}{getOrdinalIndicator(day)}
+                {formattedDate}
+                {getOrdinalIndicator(day)}
               </p>
               <button
                 onClick={() => {
+                  // if user has set remember me
+                  if (localStorage.getItem("user")) {
+                    localStorage.removeItem("user");
+                  }
                   setLoggedIn(false);
                   router.push("/");
-                }} >
+                }}
+              >
                 Logout
               </button>
             </div>
           </div>
         )}
       </div>
+      {isLoading && <Spinner />} {/* Render spinner when loading */}
     </div>
   );
 }

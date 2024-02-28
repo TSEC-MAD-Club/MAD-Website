@@ -1,9 +1,9 @@
 .railwayConcessionCard {
-  width: 100%;
+  width: 75vw;
   background-color: var(--primary-5);
   border-radius: 30px;
   padding: 3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .nameAndGender {
@@ -91,15 +91,26 @@
 .railwayConcessionCardInfo {
   display: flex;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 1.3rem;
+  width: 100%;
   /* Add any additional styling as needed */
 }
 .railwayAdress {
-  width: 70%;
+  width: 45%;
 }
+
 .railwayDOB {
-  width: 50%;
+  width: 13%;
 }
+
+.railwayAge {
+  width: 20%;
+}
+
+.railwayPhoneNumber {
+  width: 18%;
+}
+
 .railwayConcessionCardAddress {
   /* font-family: Poppins; */
   font-size: 20px;
@@ -119,10 +130,16 @@
   line-height: 35px;
   letter-spacing: 0em;
   text-align: left;
+  padding-left: 0rem;
+}
+
+.railwayConcessionCardDocumentsList li:hover {
+  color: var(--primary-1);
+  cursor: pointer;
 }
 
 .railwayConcessionCardApproveButton {
-  background-color: #1847ed;
+  background-color: rgba(0, 199, 32, 1);
   color: var(--primary-5);
   padding: 6px;
   border: none;
@@ -140,12 +157,19 @@
 }
 .railwayConcessionCardFooter {
   display: flex;
-  gap: 3rem;
+  gap: 5rem;
   margin-top: 20px;
 }
 
+.railwayConcessionCardFooterButtonDiv {
+  display: flex;
+  gap: 2rem;
+  margin-top: 20px;
+  margin-left: 15vw;
+}
+
 .railwayConcessionCardRejectButton {
-  background-color: #db6c6c;
+  background-color: rgba(219, 108, 108, 1);
   color: var(--primary-5);
   padding: 10px;
   border: none;
@@ -192,8 +216,17 @@
   border-radius: 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 101; /* Ensure the modal is above the overlay */
-  width: 50%;
-  height: 50%;
+  width: 45%;
+  height: auto;
+}
+
+.modalDiv {
+  background-color: var(--primary-5);
+  padding: 20px 30px;
+  border-radius: 24px;
+  font-size: 14px;
+  color: var(--primary-2);
+  width: 100%;
 }
 
 .modalTitle {
@@ -201,8 +234,24 @@
   font-weight: 400;
 }
 
+.modalUpperDiv,
+.modalLowerDiv {
+  display: flex;
+}
+
+.modalFromToDiv {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+
+.modalInformationTitle {
+  font-size: 1rem;
+}
+
 .modalInformation {
   font-size: 1rem;
+  font-weight: 600;
 }
 
 .studentApproveInfo {
@@ -221,10 +270,22 @@
   width: 50%;
 }
 
+.modalRejectMessageDiv {
+  display: flex;
+  flex-direction: column;
+}
+
 .certificateSection {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
+  gap: 0.25rem;
+}
+
+.messageSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   gap: 0.25rem;
 }
 
@@ -236,7 +297,7 @@
   padding: 0.7rem;
 }
 
-.certificateSection textarea {
+.messageSection textarea {
   width: 100%;
   height: 4rem;
   border: 0.75px solid var(--grey);
@@ -251,6 +312,10 @@
   padding: 1rem 0;
 }
 
+.modalRejectTitle {
+  font-size: 1.7rem;
+}
+
 .modalRejectButtonDiv {
   display: flex;
   gap: 1rem;
@@ -259,7 +324,7 @@
 }
 
 .modalApproveButton {
-  background-color: #1847ed;
+  background-color: rgba(0, 199, 32, 1);
   color: var(--primary-5);
   padding: 6px;
   border: none;
@@ -418,4 +483,104 @@
   background-color: antiquewhite;
 
   padding: 14px 20px;
+}
+
+.dash_nav {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding-top: 3%;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.toggle_icon_style {
+  margin-top: -6px;
+  margin-top: -6px;
+}
+
+.dash_nav_container {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  margin-top: 2%;
+  margin: 0 auto;
+  padding-left: 14%;
+  gap: 25px;
+}
+
+.concession_header {
+  margin-left: 8%;
+  padding-top: 3%;
+  color: #000000;
+  font-family: "Inter";
+}
+
+.table_col {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 65px;
+  font-size: 20px;
+  color: #717171;
+}
+
+.table_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 64px;
+}
+
+.line_img_style {
+  width: 90%;
+  margin-left: 4%;
+}
+
+.download_btn {
+  background-color: #00c720;
+  width: 120px;
+  height: 37px;
+}
+
+.view_csv {
+  font-size: 36px;
+  font-weight: 200;
+  display: flex;
+}
+
+.view_csv_description {
+  font-size: 16px;
+  font-weight: 400;
+  color: #717171;
+}
+
+.certificate_no_input {
+  margin-top: 8px;
+  align-items: center;
+  width: 295px;
+  height: 45px;
+  padding-left: 20px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.search_icon {
+  position: absolute;
+  right: 11px;
+  top: 35%;
+  transform: translateY(-50%);
+  font-size: 24px;
+}
+
+.toggle_btn {
+  display: flex;
+  align-items: center;
+  border: 1px solid #a09c9c;
+  width: 200px;
+  border-radius: 50px;
+  margin-left: 100px;
+  height: 61px;
+  background: #ffffff;
 }
