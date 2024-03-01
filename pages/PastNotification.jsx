@@ -59,7 +59,7 @@ const Dashboard = () => {
                         <td className={styles.tableCol}>{notification.topic}</td>
                         <td className={styles.tableCol}>{notification.message}</td>
                         <td className={styles.tableCol}>
-                            <a href={notification.attachments} className={styles.attachmentLink} target="_blank" rel="noopener noreferrer">View Attachment</a>
+                            <a href={notification.attachments} className={styles.attachmentLink}>View Attachment</a>
                         </td>
                         <td className={styles.tableCol}>{notification.notificationTime.toDate().toLocaleString()}</td>
                     </tr>

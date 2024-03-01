@@ -191,7 +191,7 @@ const Downloads = () => {
                 <td className={styles.tableCol}>{enquiry.fileName}</td>
                 <td className={styles.tableCol}>{enquiry.railway}</td>
                 <td className={styles.tableCol}>
-                  <a href={enquiry.content} target="_blank">
+                  <a href={enquiry.content}>
                     Link
                   </a>
                 </td>

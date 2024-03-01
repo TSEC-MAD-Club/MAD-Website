@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useRouter } from "next/router";
-// import Spinner from "../components/Spinner";
+import Spinner from "../components/Spinner";
 
 const RailwayConcession = () => {
   const { user } = React.useContext(UserContext);

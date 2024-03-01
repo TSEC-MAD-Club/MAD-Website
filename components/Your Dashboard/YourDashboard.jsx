@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./DashboardNew.module.css";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -10,6 +10,7 @@ import Spinner from "../Spinner";
 function YourDashboard({ user }) {
   const [loading, setLoading] = useState(false);
   const [Notifications, setNotifications] = useState([]);
+  const isMounted = useRef(true);
 
   const fetchRecentNotifications = async () => {
     setLoading(true);
@@ -37,12 +38,19 @@ function YourDashboard({ user }) {
     } catch (error) {
       console.error("Error fetching recent notifications:", error);
     } finally {
-      setLoading(false);
+      if (isMounted.current) {
+        setLoading(false);
+      }
     }
   };
 
   useEffect(() => {
     fetchRecentNotifications();
+
+    // Cleanup function to set isMounted to false when component is unmounted
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   const userHasAccess = (data) => {
@@ -51,6 +59,10 @@ function YourDashboard({ user }) {
   };
 
   const handleButtonClick = async () => {
+    if (!isMounted.current) {
+      return; // Component is unmounted, exit early
+    }
+
     setLoading(true); // Set loading state to true
 
     try {
@@ -61,7 +73,9 @@ function YourDashboard({ user }) {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false); // Reset loading state after the operation is completed
+      if (isMounted.current) {
+        setLoading(false); // Reset loading state after the operation is completed
+      }
     }
   };
 
@@ -79,9 +93,8 @@ function YourDashboard({ user }) {
             <div className={styles.twobutton}>
               {Features.map((data, id) =>
                 userHasAccess(data) ? (
-                  <Link href={data.mainLink}>
+                  <Link href={data.mainLink} key={id}>
                     <button
-                      key={id}
                       className={styles.item}
                       onClick={handleButtonClick}
                     >
