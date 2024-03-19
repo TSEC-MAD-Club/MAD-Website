@@ -7,6 +7,7 @@ import {
   updateDoc,
   where,
   Timestamp,
+  addDoc,
 } from "firebase/firestore";
 import {
   ref,
@@ -170,59 +171,23 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
     try {
       setLoading(true);
       const concessionDetailsCollection = collection(db, "ConcessionDetails");
-      const concessionDetailsQuery = query(
+
+      const newConcessionDetailsDocRef = await addDoc(
         concessionDetailsCollection,
-        where("firstName", "==", request.firstName),
-        where("phoneNum", "==", request.phoneNum)
+        {
+          firstName: request.firstName,
+          phoneNum: request.phoneNum,
+          time: date,
+          lastPassIssued: firebaseTimestamp,
+          statusMessage: "Your date has been extended!",
+        }
       );
 
-      const concessionDetailsSnapshot = await getDocs(concessionDetailsQuery);
-
-      if (concessionDetailsSnapshot.empty) {
-        console.error("ConcessionDetails document not found");
-        return;
-      }
-
-      const matchingConcessionDoc = concessionDetailsSnapshot.docs[0];
-      setUid(matchingConcessionDoc.id);
-
-      // Update ConcessionRequest document
-      const concessionRequestCollection = collection(db, "ConcessionRequest");
-      const concessionRequestQuery = query(
-        concessionRequestCollection,
-        where("uid", "==", uid)
+      console.log(
+        "New ConcessionDetails document ID:",
+        newConcessionDetailsDocRef.id
       );
-
-      const concessionRequestSnapshot = await getDocs(concessionRequestQuery);
-
-      if (concessionRequestSnapshot.empty) {
-        console.error("ConcessionRequest document not found");
-        return;
-      }
-
-      const concessionRequestDoc = concessionRequestSnapshot.docs[0];
-      const concessionRequestRef = concessionRequestDoc.ref;
-
-      /* The line `await updateDoc(concessionRequestRef, { time: date, statusMessage: "Your date has
-      been extended!" });` is updating the `ConcessionRequest` document in the Firebase Firestore
-      database. It sets the `time` field to the value of the `date` variable and sets the
-      `statusMessage` field to the string "Your date has been extended!". */
-      await updateDoc(concessionRequestRef, {
-        time: date,
-        statusMessage: "Your date has been extended!",
-      });
-
-      // Update ConcessionDetails document
-      const concessionDetailsRef = matchingConcessionDoc.ref;
-      /* The line `await updateDoc(concessionDetailsRef, { lastPassIssued: firebaseTimestamp }, {
-      statusMessage: "Your date has been extended!" });` is updating the `ConcessionDetails`
-      document in the Firebase Firestore database. */
-      await updateDoc(
-        concessionDetailsRef,
-        { lastPassIssued: firebaseTimestamp },
-        { statusMessage: "Your date has been extended!" }
-      );
-      handleUpdate(passNum, date);
+      // handleUpdate(passNum, date);
       toast.notify("Extended Request Date", { type: "info" });
       await fetchAllEnquiries();
       setLoading(false);
