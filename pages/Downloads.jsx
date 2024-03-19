@@ -122,13 +122,6 @@ const Downloads = () => {
     }
   };
   const [loading, setLoading] = useState(false);
-  const handleClick = async (region) => {
-    setLoading(true);
-    await fetchAllEnquiries(region);
-    await fetchEnquiries();
-    await fetchAndSetServicedCount(region);
-    setLoading(false);
-  };
 
   const buttons = [
     { region: "Western", label: "Western" },
@@ -158,8 +151,7 @@ const Downloads = () => {
               <button
                 key={button.region}
                 className={styles.item}
-                style={{ width: "36.5vw", height: "16vh" }}
-                onClick={() => handleClick(button.region)}
+                style={{ width: "36.5vw", height: "16vh", cursor: "default" }}
               >
                 {button.label}:{" "}
                 {servicedCounts[button.region] !== null
@@ -191,9 +183,7 @@ const Downloads = () => {
                 <td className={styles.tableCol}>{enquiry.fileName}</td>
                 <td className={styles.tableCol}>{enquiry.railway}</td>
                 <td className={styles.tableCol}>
-                  <a href={enquiry.content}>
-                    Link
-                  </a>
+                  <a href={enquiry.content}>Link</a>
                 </td>
                 <td className={styles.tableCol}>
                   {convertDate(enquiry.timestamp)}
