@@ -158,13 +158,14 @@
   display: flex;
   gap: 5rem;
   margin-top: 20px;
+  justify-content: space-between;
 }
 
 .railwayConcessionCardFooterButtonDiv {
   display: flex;
   gap: 2rem;
   margin-top: 20px;
-  margin-left: 15vw;
+  /* margin-left: 15vw; */
 }
 
 .railwayConcessionCardRejectButton {
