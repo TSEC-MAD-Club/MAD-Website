@@ -24,6 +24,7 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
   const [date, setDate] = useState(new Date());
   const [uid, setUid] = useState("");
   const [passNum, setPassNum] = useState("");
+  const [duration, setDuration] = useState(request.duration);
   const firebaseTimestamp = Timestamp.fromDate(date);
 
   const getPassNum = async () => {
@@ -222,6 +223,13 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
         { lastPassIssued: firebaseTimestamp },
         { statusMessage: "Your date has been extended!" }
       );
+
+      await updateDoc(
+        concessionDetailsRef,
+        { duration },
+        { statusMessage: "Your mode has been updated!" }
+      )
+
       handleUpdate(passNum, date);
       toast.notify("Extended Request Date", { type: "info" });
       await fetchAllEnquiries();
@@ -268,6 +276,19 @@ const ExtendDate = ({ request, handleCloseInfoWindow, fetchAllEnquiries }) => {
             >
               {passNum}
             </span>
+          </div>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", width: "50%" }}>
+          <div className={styles.studentApproveInfo} style={{ width: "100%" }}>
+            <span className={styles.modalInformation}>Change Mode:</span>
+            <select
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
+              className={styles.modeDropdown}
+            >
+              <option value="Monthly">Monthly</option>
+              <option value="Quarterly">Quarterly</option>
+            </select>
           </div>
         </div>
       </div>

@@ -131,6 +131,7 @@
   letter-spacing: 0em;
   text-align: left;
   padding-left: 0rem;
+  flex-wrap: nowrap;
 }
 
 .railwayConcessionCardDocumentsList li:hover {
@@ -159,13 +160,14 @@
   display: flex;
   gap: 5rem;
   margin-top: 20px;
+  justify-content: space-between;
 }
 
 .railwayConcessionCardFooterButtonDiv {
   display: flex;
   gap: 2rem;
   margin-top: 20px;
-  margin-left: 15vw;
+  /* margin-left: 15vw; */
 }
 
 .railwayConcessionCardRejectButton {
@@ -583,4 +585,15 @@
   margin-left: 100px;
   height: 61px;
   background: #ffffff;
+}
+
+.modeDropdown {
+  width: 80%;
+  height: 2.2rem;
+  border: 0.75px solid var(--grey);
+  border-radius: 8px;
+  padding: 0 0.6rem 0 0.3rem;
+  font-size: 1rem;
+  font-weight: 400;
+  /* appearance: none; */
 }
