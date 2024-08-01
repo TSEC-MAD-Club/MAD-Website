@@ -42,7 +42,7 @@ const Login = ({ setLoggedIn, setUser, loggedIn }) => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      const facultyRef = collection(db, "OfficialLogin");
+      const facultyRef = collection(db, "Faculty");
       const querySnapshot = await getDocs(facultyRef);
 
       querySnapshot.forEach((doc) => {
