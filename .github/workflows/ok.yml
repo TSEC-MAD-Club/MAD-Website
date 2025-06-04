@@ -3,10 +3,10 @@ name: MAD-Website CI
 on:
   pull_request:
     branches:
-      - main
+      - dashboard
   push:
     branches:
-      - main
+      - dashboard
 
 jobs:
   build-check:
